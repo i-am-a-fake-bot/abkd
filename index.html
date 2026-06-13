@@ -57,6 +57,7 @@
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-gray-50 border-b border-gray-100 text-gray-600 font-semibold text-sm">
+                            <th class="p-4 w-16">Photo</th>
                             <th class="p-4">Item Name</th>
                             <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition" onclick="toggleCategorySort()">
                                 Category <span id="sort-icon" class="text-indigo-600 ml-1"></span>
@@ -115,15 +116,26 @@
         </section>
     </main>
 
-    <div id="item-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
+    <div id="item-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 my-8">
             <h3 id="modal-title" class="text-xl font-bold text-gray-800 mb-4">Add New Item</h3>
             <form id="item-form" onsubmit="saveItem(event)" class="space-y-4">
                 <input type="hidden" id="item-id">
+                <input type="hidden" id="item-image-base64">
                 
+                <div class="bg-gray-50 border border-dashed border-gray-300 rounded-lg p-3 text-center">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Item Image (Optional)</label>
+                    <div class="flex items-center justify-center gap-4">
+                        <div id="image-preview-container" class="w-16 h-16 bg-gray-200 border rounded overflow-hidden flex items-center justify-center text-gray-400 text-xs">
+                            No Img
+                        </div>
+                        <input type="file" id="item-image-input" accept="image/*" onchange="processImageUpload(this)" class="text-xs text-gray-600 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Item Name</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">1. Item Name</label>
                         <input type="text" id="item-name" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required>
                     </div>
                     <div>
@@ -134,33 +146,33 @@
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Supplier Cost (₱)</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">2. Supplier Cost (₱)</label>
                         <input type="number" id="item-cost" step="0.01" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required min="0" oninput="calculateSRP(false)">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Units in Pack</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">3. Units in Pack</label>
                         <input type="number" id="item-units" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="1" required min="1" oninput="calculateSRP(false)">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Mark Up (%)</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">4. Mark Up (%)</label>
                         <input type="number" id="item-markup" step="0.1" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="12" required min="0" oninput="calculateSRP(false)">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-500 mb-1">Recommended Price</label>
+                        <label class="block text-sm font-medium text-gray-500 mb-1">5. Recommended Price</label>
                         <input type="text" id="item-rec-price" class="w-full p-2 border border-gray-200 rounded bg-gray-50 font-mono font-bold text-gray-600" readonly value="0.00">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Current Stock</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">6. Current Stock</label>
                         <input type="number" id="item-qty" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required min="0">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-indigo-700 mb-1">Price (SRP)</label>
+                        <label class="block text-sm font-semibold text-indigo-700 mb-1">7. Price (SRP)</label>
                         <input type="number" id="item-price" step="0.01" class="w-full p-2 border border-indigo-300 rounded ring-2 ring-indigo-100 font-bold text-indigo-700 outline-none focus:ring-indigo-400" required min="0">
                     </div>
                 </div>
@@ -176,9 +188,7 @@
     <script>
         let db = { inventory: [], history: [] };
         let githubSha = null;
-        
-        // Sorting State Controllers
-        let currentSortDirection = 'none'; // values: 'none', 'asc', 'desc'
+        let currentSortDirection = 'none';
 
         function getConfigs() {
             return {
@@ -270,7 +280,43 @@
             }
         }
 
-        // Modified function to support conditional overwrites of actual SRP field
+        // Reads uploaded image file, automatically resizes it to preserve JSON memory footprint
+        function processImageUpload(element) {
+            const file = element.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function() {
+                    // Set a maximum bound constraint dimension for down-scaling
+                    const maxDim = 120; 
+                    let w = img.width;
+                    let h = img.height;
+                    
+                    if (w > h) {
+                        if (w > maxDim) { h = Math.round(h * (maxDim / w)); w = maxDim; }
+                    } else {
+                        if (h > maxDim) { w = Math.round(w * (maxDim / h)); h = maxDim; }
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, w, h);
+                    
+                    // Compress quality variable to limit extreme data string lengths
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                    
+                    document.getElementById('item-image-base64').value = compressedBase64;
+                    document.getElementById('image-preview-container').innerHTML = `<img src="${compressedBase64}" class="w-full h-full object-cover">`;
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
         function calculateSRP(keepCurrentSRP = false) {
             const cost = parseFloat(document.getElementById('item-cost').value) || 0;
             const units = parseInt(document.getElementById('item-units').value) || 1;
@@ -282,8 +328,6 @@
             const recommendedPrice = baseUnitCost + (baseUnitCost * (markup / 100));
 
             document.getElementById('item-rec-price').value = "₱" + recommendedPrice.toFixed(2);
-            
-            // Only update active choice if we are explicitly requested to overwrite it
             if (!keepCurrentSRP) {
                 document.getElementById('item-price').value = recommendedPrice.toFixed(2);
             }
@@ -319,8 +363,15 @@
             const tbody = document.getElementById('inventory-table-body');
             tbody.innerHTML = displayItems.map(item => {
                 const safeId = item.id.replace(/'/g, "\\'");
+                
+                // Fallback icon markup wrapper if an item has no upload profile image yet
+                const imageTag = item.image 
+                    ? `<img src="${item.image}" class="w-10 h-10 object-cover rounded-md shadow-inner border border-gray-100">`
+                    : `<div class="w-10 h-10 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-lg shadow-inner">📦</div>`;
+
                 return `
                     <tr class="hover:bg-gray-50 border-b border-gray-100">
+                        <td class="p-4">${imageTag}</td>
                         <td class="p-4 font-medium text-gray-900">${item.name}</td>
                         <td class="p-4 text-sm text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
                         <td class="p-4"><span class="px-2 py-1 rounded text-sm ${item.qty < 5 ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${item.qty}</span></td>
@@ -349,6 +400,8 @@
 
         function openModal(id = null) {
             document.getElementById('item-modal').classList.remove('hidden');
+            document.getElementById('item-image-input').value = ""; // Reset input choice control reference
+            
             if (id) {
                 const item = db.inventory.find(i => i.id === id);
                 if (!item) return;
@@ -361,14 +414,23 @@
                 document.getElementById('item-units').value = item.units || 1;
                 document.getElementById('item-markup').value = item.markup !== undefined ? item.markup : 12;
                 document.getElementById('item-qty').value = item.qty;
-                
-                // Keep saved SRP calculation locked down here
                 document.getElementById('item-price').value = item.price;
-                calculateSRP(true); // Passed 'true' to protect 'item-price' from being overwritten
+                
+                // Bind existing item image variables back to view parameters safely
+                document.getElementById('item-image-base64').value = item.image || '';
+                if (item.image) {
+                    document.getElementById('image-preview-container').innerHTML = `<img src="${item.image}" class="w-full h-full object-cover">`;
+                } else {
+                    document.getElementById('image-preview-container').innerHTML = "No Img";
+                }
+
+                calculateSRP(true);
             } else {
                 document.getElementById('modal-title').innerText = "Add New Item";
                 document.getElementById('item-form').reset();
                 document.getElementById('item-id').value = '';
+                document.getElementById('item-image-base64').value = '';
+                document.getElementById('image-preview-container').innerHTML = "No Img";
                 document.getElementById('item-markup').value = 12; 
                 document.getElementById('item-units').value = 1;
                 document.getElementById('item-rec-price').value = "₱0.00";
@@ -389,6 +451,7 @@
             const markup = parseFloat(document.getElementById('item-markup').value) || 0;
             const qty = parseInt(document.getElementById('item-qty').value) || 0;
             const price = parseFloat(document.getElementById('item-price').value) || 0;
+            const image = document.getElementById('item-image-base64').value; // Captured image base64 value
         
             if (id) {
                 const index = db.inventory.findIndex(i => i.id === id);
@@ -400,8 +463,9 @@
                 if (originalItem.category !== category) changeNotes.push(`Category changed`);
                 if (Number(originalItem.price) !== price) changeNotes.push(`Price changed to ₱${price.toFixed(2)}`);
                 if (Number(originalItem.qty) !== qty) changeNotes.push(`Stock adjusted from ${originalItem.qty} to ${qty}`);
+                if (originalItem.image !== image) changeNotes.push(`Image updated`);
         
-                db.inventory[index] = { id, name, category, cost, units, markup, qty, price };
+                db.inventory[index] = { id, name, category, cost, units, markup, qty, price, image };
                 
                 if (changeNotes.length > 0) {
                     db.history.push({ 
@@ -415,7 +479,7 @@
                 pushDataToGitHub(`Updated item: ${name}`);
             } else {
                 const newId = 'id_' + Math.random().toString(36).substr(2, 9);
-                db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price });
+                db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price, image });
                 db.history.push({ 
                     time: Date.now(), 
                     name, 
@@ -436,7 +500,6 @@
             const actionText = isRestock ? 'add to' : 'remove from';
             
             const userInput = prompt(`Current stock for "${item.name}": ${item.qty}\n\nEnter the quantity you want to ${actionText} stock:`);
-            
             if (userInput === null) return;
 
             const amount = parseInt(userInput);
