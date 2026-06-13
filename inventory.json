@@ -7,7 +7,7 @@
       "cost": 140,
       "units": 1,
       "markup": 12,
-      "qty": 15,
+      "qty": 5,
       "price": 160
     },
     {
@@ -119,6 +119,13 @@
       "type": "Restock",
       "change": 12,
       "notes": "Bulk restock transaction."
+    },
+    {
+      "time": 1781386953941,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Sale / Usage",
+      "change": -10,
+      "notes": "Bulk reduction transaction."
     }
   ]
 }
