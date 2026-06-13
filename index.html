@@ -64,6 +64,7 @@
                             </th>
                             <th class="p-4">Current Stock</th>
                             <th class="p-4">Price (SRP)</th>
+                            <th class="p-4">Expiration Date</th>
                             <th class="p-4 text-right">Actions</th>
                         </tr>
                     </thead>
@@ -177,6 +178,11 @@
                     </div>
                 </div>
 
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Expiration Date (Leave blank for N/A)</label>
+                    <input type="date" id="item-expiry" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+
                 <div class="flex justify-end space-x-2 pt-2">
                     <button type="button" onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition">Cancel</button>
                     <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded transition">Save</button>
@@ -280,7 +286,6 @@
             }
         }
 
-        // Reads uploaded image file, automatically resizes it to preserve JSON memory footprint
         function processImageUpload(element) {
             const file = element.files[0];
             if (!file) return;
@@ -289,7 +294,6 @@
             reader.onload = function (e) {
                 const img = new Image();
                 img.onload = function() {
-                    // Set a maximum bound constraint dimension for down-scaling
                     const maxDim = 120; 
                     let w = img.width;
                     let h = img.height;
@@ -306,7 +310,6 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, w, h);
                     
-                    // Compress quality variable to limit extreme data string lengths
                     const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
                     
                     document.getElementById('item-image-base64').value = compressedBase64;
@@ -331,6 +334,38 @@
             if (!keepCurrentSRP) {
                 document.getElementById('item-price').value = recommendedPrice.toFixed(2);
             }
+        }
+
+        // Helper function to format ISO date (YYYY-MM-DD) into custom DD-MMM-YYYY format
+        function formatExpiryDisplay(dateString) {
+            if (!dateString) return 'N/A';
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return 'N/A';
+            
+            const day = String(date.getDate()).padStart(2, '0');
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            
+            return `${day}-${month}-${year}`;
+        }
+
+        // Helper function to return dynamic style badges depending on proximity to expiry threshold
+        function getExpiryBadgeStyle(dateString) {
+            if (!dateString) return 'text-gray-400 font-medium';
+            const expiryDate = new Date(dateString);
+            const today = new Date();
+            
+            // Calculate time difference in days
+            const diffTime = expiryDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays <= 0) {
+                return 'bg-rose-100 text-rose-800 px-2 py-0.5 rounded text-xs font-bold border border-rose-200'; // Expired
+            } else if (diffDays <= 30) {
+                return 'bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-bold border border-amber-200'; // Nearing Expiry (under 30 days)
+            }
+            return 'text-gray-700 font-mono font-medium'; // Safe distance
         }
 
         function toggleCategorySort() {
@@ -363,11 +398,13 @@
             const tbody = document.getElementById('inventory-table-body');
             tbody.innerHTML = displayItems.map(item => {
                 const safeId = item.id.replace(/'/g, "\\'");
-                
-                // Fallback icon markup wrapper if an item has no upload profile image yet
                 const imageTag = item.image 
                     ? `<img src="${item.image}" class="w-10 h-10 object-cover rounded-md shadow-inner border border-gray-100">`
                     : `<div class="w-10 h-10 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-lg shadow-inner">📦</div>`;
+
+                // Handle string configuration variations for the newly added column element 
+                const expiryText = formatExpiryDisplay(item.expiry);
+                const expiryStyle = getExpiryBadgeStyle(item.expiry);
 
                 return `
                     <tr class="hover:bg-gray-50 border-b border-gray-100">
@@ -376,6 +413,7 @@
                         <td class="p-4 text-sm text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
                         <td class="p-4"><span class="px-2 py-1 rounded text-sm ${item.qty < 5 ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${item.qty}</span></td>
                         <td class="p-4 text-sm font-mono font-bold text-indigo-600">₱${Number(item.price).toFixed(2)}</td>
+                        <td class="p-4 text-sm"><span class="${expiryStyle}">${expiryText}</span></td>
                         <td class="p-4 text-right space-x-2 whitespace-nowrap">
                             <button onclick="handleStockAdjust('${safeId}', 'restock')" class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 px-2 py-1 rounded text-xs font-bold">Restock</button>
                             <button onclick="handleStockAdjust('${safeId}', 'reduce')" class="bg-amber-50 text-amber-700 hover:bg-amber-100 px-2 py-1 rounded text-xs font-bold">Reduce</button>
@@ -400,7 +438,7 @@
 
         function openModal(id = null) {
             document.getElementById('item-modal').classList.remove('hidden');
-            document.getElementById('item-image-input').value = ""; // Reset input choice control reference
+            document.getElementById('item-image-input').value = ""; 
             
             if (id) {
                 const item = db.inventory.find(i => i.id === id);
@@ -416,7 +454,9 @@
                 document.getElementById('item-qty').value = item.qty;
                 document.getElementById('item-price').value = item.price;
                 
-                // Bind existing item image variables back to view parameters safely
+                // Load saved expiration data date structure safely inside form fields
+                document.getElementById('item-expiry').value = item.expiry || '';
+
                 document.getElementById('item-image-base64').value = item.image || '';
                 if (item.image) {
                     document.getElementById('image-preview-container').innerHTML = `<img src="${item.image}" class="w-full h-full object-cover">`;
@@ -431,6 +471,7 @@
                 document.getElementById('item-id').value = '';
                 document.getElementById('item-image-base64').value = '';
                 document.getElementById('image-preview-container').innerHTML = "No Img";
+                document.getElementById('item-expiry').value = ''; // Ensure blank default translates to N/A context
                 document.getElementById('item-markup').value = 12; 
                 document.getElementById('item-units').value = 1;
                 document.getElementById('item-rec-price').value = "₱0.00";
@@ -451,7 +492,8 @@
             const markup = parseFloat(document.getElementById('item-markup').value) || 0;
             const qty = parseInt(document.getElementById('item-qty').value) || 0;
             const price = parseFloat(document.getElementById('item-price').value) || 0;
-            const image = document.getElementById('item-image-base64').value; // Captured image base64 value
+            const image = document.getElementById('item-image-base64').value;
+            const expiry = document.getElementById('item-expiry').value; // Saved values: "YYYY-MM-DD" string or ""
         
             if (id) {
                 const index = db.inventory.findIndex(i => i.id === id);
@@ -464,8 +506,11 @@
                 if (Number(originalItem.price) !== price) changeNotes.push(`Price changed to ₱${price.toFixed(2)}`);
                 if (Number(originalItem.qty) !== qty) changeNotes.push(`Stock adjusted from ${originalItem.qty} to ${qty}`);
                 if (originalItem.image !== image) changeNotes.push(`Image updated`);
+                if ((originalItem.expiry || '') !== expiry) {
+                    changeNotes.push(`Expiry date updated to ${expiry ? formatExpiryDisplay(expiry) : 'N/A'}`);
+                }
         
-                db.inventory[index] = { id, name, category, cost, units, markup, qty, price, image };
+                db.inventory[index] = { id, name, category, cost, units, markup, qty, price, image, expiry };
                 
                 if (changeNotes.length > 0) {
                     db.history.push({ 
@@ -479,13 +524,13 @@
                 pushDataToGitHub(`Updated item: ${name}`);
             } else {
                 const newId = 'id_' + Math.random().toString(36).substr(2, 9);
-                db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price, image });
+                db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price, image, expiry });
                 db.history.push({ 
                     time: Date.now(), 
                     name, 
                     type: 'Addition', 
                     change: qty, 
-                    notes: `Initial stock addition under category: ${category || 'None'}.` 
+                    notes: `Initial stock addition under category: ${category || 'None'}. Expiry: ${expiry ? formatExpiryDisplay(expiry) : 'N/A'}.` 
                 });
                 pushDataToGitHub(`Added new item: ${name}`);
             }
