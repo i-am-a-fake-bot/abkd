@@ -19,6 +19,16 @@
       "markup": 12,
       "qty": 11,
       "price": 28
+    },
+    {
+      "id": "id_n43aidhik",
+      "name": "Test Widget",
+      "category": "Test 1",
+      "cost": 100,
+      "units": 10,
+      "markup": 12,
+      "qty": 10,
+      "price": 12
     }
   ],
   "history": [
@@ -133,6 +143,13 @@
       "type": "Restock",
       "change": 5,
       "notes": "Bulk restock transaction."
+    },
+    {
+      "time": 1781388020530,
+      "name": "Test Widget",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition under category: Test 1."
     }
   ]
 }
