@@ -18,7 +18,7 @@
       "cost": 150,
       "units": 6,
       "markup": 12,
-      "qty": 3,
+      "qty": 4,
       "price": 28
     }
   ],
@@ -162,6 +162,13 @@
       "type": "Sale / Usage",
       "change": -8,
       "notes": "Bulk reduction transaction."
+    },
+    {
+      "time": 1781388752313,
+      "name": "Test",
+      "type": "Restock",
+      "change": 1,
+      "notes": "Bulk restock transaction."
     }
   ]
 }
