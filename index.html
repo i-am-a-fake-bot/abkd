@@ -320,10 +320,11 @@
                     <td class="p-4 text-sm text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
                     <td class="p-4"><span class="px-2 py-1 rounded text-sm ${item.qty < 5 ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${item.qty}</span></td>
                     <td class="p-4 text-sm font-mono font-bold text-indigo-600">₱${Number(item.price).toFixed(2)}</td>
-                    <td class="p-4 text-right space-x-2">
+                    <td class="p-4 text-right space-x-2 whitespace-nowrap">
                         <button onclick="adjustQty('${item.id}', 1)" class="bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-xs font-bold font-mono">+1</button>
                         <button onclick="adjustQty('${item.id}', -1)" class="bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-xs font-bold font-mono">-1</button>
-                        <button onclick="openModal('${item.id}')" class="text-indigo-600 hover:text-indigo-900 text-sm ml-2">Edit</button>
+                        <button onclick="openModal('${item.id}')" class="text-indigo-600 hover:text-indigo-900 text-sm ml-2 font-medium">Edit</button>
+                        <button onclick="deleteItem('${item.id}')" class="text-rose-600 hover:text-rose-900 text-sm ml-2 font-medium">Delete</button>
                     </td>
                 </tr>
             `).join('');
@@ -333,7 +334,7 @@
                 <tr class="border-b border-gray-50">
                     <td class="p-4 text-xs font-mono text-gray-400">${new Date(log.time).toLocaleString()}</td>
                     <td class="p-4 font-medium">${log.name}</td>
-                    <td class="p-4"><span class="text-xs uppercase font-bold tracking-wider ${log.type === 'Addition' || log.type === 'Restock' ? 'text-emerald-600' : 'text-amber-600'}">${log.type}</span></td>
+                    <td class="p-4"><span class="text-xs uppercase font-bold tracking-wider ${log.type === 'Addition' || log.type === 'Restock' ? 'text-emerald-600' : log.type === 'Deletion' ? 'text-rose-600' : 'text-amber-600'}">${log.type}</span></td>
                     <td class="p-4 font-mono font-bold">${log.change > 0 ? '+' + log.change : log.change}</td>
                     <td class="p-4 text-xs italic text-gray-500">${log.notes}</td>
                 </tr>
@@ -379,19 +380,44 @@
             const markup = parseFloat(document.getElementById('item-markup').value) || 0;
             const qty = parseInt(document.getElementById('item-qty').value) || 0;
             const price = parseFloat(document.getElementById('item-price').value) || 0;
-
+        
             if (id) {
+                // --- EDIT EXISTING ITEM ---
                 const index = db.inventory.findIndex(i => i.id === id);
-                const oldQty = db.inventory[index].qty;
+                const originalItem = db.inventory[index];
+                
+                // Track adjustments for historical logs
+                let changeNotes = [];
+                if (originalItem.name !== name) changeNotes.push(`Name changed`);
+                if (originalItem.category !== category) changeNotes.push(`Category changed`);
+                if (Number(originalItem.price) !== price) changeNotes.push(`Price changed to ₱${price.toFixed(2)}`);
+                if (Number(originalItem.qty) !== qty) changeNotes.push(`Stock adjusted from ${originalItem.qty} to ${qty}`);
+        
+                // Update database item state
                 db.inventory[index] = { id, name, category, cost, units, markup, qty, price };
-                if (oldQty !== qty) {
-                    db.history.push({ time: Date.now(), name, type: 'Manual Edit', change: qty - oldQty, notes: 'Modified item details.' });
+                
+                // Log to history if anything at all changed!
+                if (changeNotes.length > 0) {
+                    db.history.push({ 
+                        time: Date.now(), 
+                        name: name, // Uses latest name variant
+                        type: 'Manual Edit', 
+                        change: qty - Number(originalItem.qty), 
+                        notes: changeNotes.join(', ') + '.' 
+                    });
                 }
                 pushDataToGitHub(`Updated item: ${name}`);
             } else {
+                // --- CREATE NEW ITEM ---
                 const newId = 'id_' + Math.random().toString(36).substr(2, 9);
                 db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price });
-                db.history.push({ time: Date.now(), name, type: 'Addition', change: qty, notes: 'Initial stock addition.' });
+                db.history.push({ 
+                    time: Date.now(), 
+                    name, 
+                    type: 'Addition', 
+                    change: qty, 
+                    notes: `Initial stock addition under category: ${category || 'None'}.` 
+                });
                 pushDataToGitHub(`Added new item: ${name}`);
             }
             closeModal();
@@ -411,6 +437,40 @@
                 notes: delta > 0 ? 'Incremental quick update' : 'Decremental quick update'
             });
             pushDataToGitHub(`Adjusted stock for ${item.name} (${delta > 0 ? '+' : ''}${delta})`);
+        }
+
+        function deleteItem(id) {
+            const index = db.inventory.findIndex(i => i.id === id);
+            if (index === -1) return;
+
+            const item = db.inventory[index];
+            
+            // Popup asking for confirmation and reason
+            const reason = prompt(`Are you sure you want to delete "${item.name}"?\n\nPlease enter the reason for deletion:`);
+            
+            // Abort if cancel clicked
+            if (reason === null) return; 
+            
+            const formattedReason = reason.trim();
+            if (formattedReason === "") {
+                alert("Deletion cancelled. A valid reason is required to delete an item.");
+                return;
+            }
+
+            // Log the deletion state to transaction history
+            db.history.push({
+                time: Date.now(),
+                name: item.name,
+                type: 'Deletion',
+                change: -Math.abs(Number(item.qty)), // Removes remaining stock units from tracking
+                notes: `Item permanently removed. Reason: ${formattedReason}`
+            });
+
+            // Splice item out of internal database array
+            db.inventory.splice(index, 1);
+
+            // Push state array updates to GitHub
+            pushDataToGitHub(`Deleted item: ${item.name}`);
         }
 
         window.onload = init;
