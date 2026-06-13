@@ -7,7 +7,7 @@
       "cost": 100,
       "units": 12,
       "markup": 12,
-      "qty": 10,
+      "qty": 9,
       "price": 10
     },
     {
@@ -42,6 +42,13 @@
       "type": "Restock",
       "change": 1,
       "notes": "Incremental quick update"
+    },
+    {
+      "time": 1781384899719,
+      "name": "Test Widget",
+      "type": "Sale / Usage",
+      "change": -1,
+      "notes": "Decremental quick update"
     }
   ]
 }
