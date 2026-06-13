@@ -1,16 +1,6 @@
 {
   "inventory": [
     {
-      "id": "id_qeg1ee4f9",
-      "name": "Test Widget",
-      "category": "Test",
-      "cost": 100,
-      "units": 12,
-      "markup": 12,
-      "qty": 8,
-      "price": 10
-    },
-    {
       "id": "id_22ibp7oeh",
       "name": "Gin - Kwatro Kantos",
       "category": "Alak",
@@ -63,6 +53,13 @@
       "type": "Restock",
       "change": 1,
       "notes": "Incremental quick update"
+    },
+    {
+      "time": 1781386180426,
+      "name": "Test Widget",
+      "type": "Deletion",
+      "change": -8,
+      "notes": "Item permanently removed. Reason: test"
     }
   ]
 }
