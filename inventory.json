@@ -18,7 +18,7 @@
       "cost": 150,
       "units": 6,
       "markup": 12,
-      "qty": 11,
+      "qty": 3,
       "price": 28
     }
   ],
@@ -155,6 +155,13 @@
       "type": "Manual Edit",
       "change": 0,
       "notes": "Image updated."
+    },
+    {
+      "time": 1781388747220,
+      "name": "Test",
+      "type": "Sale / Usage",
+      "change": -8,
+      "notes": "Bulk reduction transaction."
     }
   ]
 }
