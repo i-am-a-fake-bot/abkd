@@ -245,7 +245,7 @@
             
             const payload = {
                 message: commitMessage,
-                content: btoa(JSON.stringify(db, null, 2)),
+                content: btoa(unescape(encodeURIComponent(JSON.stringify(db, null, 2)))),
             };
             if (githubSha) payload.sha = githubSha;
 
@@ -284,7 +284,6 @@
             document.getElementById('item-price').value = recommendedPrice.toFixed(2);
         }
 
-        // Toggles Sorting Parameters on UI trigger
         function toggleCategorySort() {
             if (currentSortDirection === 'none' || currentSortDirection === 'desc') {
                 currentSortDirection = 'asc';
@@ -299,7 +298,6 @@
             document.getElementById('stat-total-stock').innerText = db.inventory.reduce((acc, curr) => acc + Number(curr.qty), 0);
             document.getElementById('stat-low-stock').innerText = db.inventory.filter(i => i.qty < 5).length;
 
-            // Handle sorting processing safely without mutating core array reference values
             let displayItems = [...db.inventory];
             const iconEl = document.getElementById('sort-icon');
             
@@ -314,20 +312,24 @@
             }
 
             const tbody = document.getElementById('inventory-table-body');
-            tbody.innerHTML = displayItems.map(item => `
-                <tr class="hover:bg-gray-50 border-b border-gray-100">
-                    <td class="p-4 font-medium text-gray-900">${item.name}</td>
-                    <td class="p-4 text-sm text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
-                    <td class="p-4"><span class="px-2 py-1 rounded text-sm ${item.qty < 5 ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${item.qty}</span></td>
-                    <td class="p-4 text-sm font-mono font-bold text-indigo-600">₱${Number(item.price).toFixed(2)}</td>
-                    <td class="p-4 text-right space-x-2 whitespace-nowrap">
-                        <button onclick="adjustQty('${item.id}', 1)" class="bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-xs font-bold font-mono">+1</button>
-                        <button onclick="adjustQty('${item.id}', -1)" class="bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-xs font-bold font-mono">-1</button>
-                        <button onclick="openModal('${item.id}')" class="text-indigo-600 hover:text-indigo-900 text-sm ml-2 font-medium">Edit</button>
-                        <button onclick="deleteItem('${item.id}')" class="text-rose-600 hover:text-rose-900 text-sm ml-2 font-medium">Delete</button>
-                    </td>
-                </tr>
-            `).join('');
+            tbody.innerHTML = displayItems.map(item => {
+                // Safely sanitize and prepare string variables for literal context placement
+                const safeId = item.id.replace(/'/g, "\\'");
+                return `
+                    <tr class="hover:bg-gray-50 border-b border-gray-100">
+                        <td class="p-4 font-medium text-gray-900">${item.name}</td>
+                        <td class="p-4 text-sm text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
+                        <td class="p-4"><span class="px-2 py-1 rounded text-sm ${item.qty < 5 ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${item.qty}</span></td>
+                        <td class="p-4 text-sm font-mono font-bold text-indigo-600">₱${Number(item.price).toFixed(2)}</td>
+                        <td class="p-4 text-right space-x-2 whitespace-nowrap">
+                            <button onclick="adjustQty('${safeId}', 1)" class="bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-xs font-bold font-mono">+1</button>
+                            <button onclick="adjustQty('${safeId}', -1)" class="bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-xs font-bold font-mono">-1</button>
+                            <button onclick="openModal('${safeId}')" class="text-indigo-600 hover:text-indigo-900 text-sm ml-2 font-medium">Edit</button>
+                            <button onclick="deleteItem('${safeId}')" class="text-rose-600 hover:text-rose-900 text-sm ml-2 font-medium">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
 
             const hbody = document.getElementById('history-table-body');
             hbody.innerHTML = [...db.history].reverse().map(log => `
@@ -345,6 +347,7 @@
             document.getElementById('item-modal').classList.remove('hidden');
             if (id) {
                 const item = db.inventory.find(i => i.id === id);
+                if (!item) return;
                 document.getElementById('modal-title').innerText = "Edit Item";
                 document.getElementById('item-id').value = item.id;
                 document.getElementById('item-name').value = item.name;
@@ -382,25 +385,22 @@
             const price = parseFloat(document.getElementById('item-price').value) || 0;
         
             if (id) {
-                // --- EDIT EXISTING ITEM ---
                 const index = db.inventory.findIndex(i => i.id === id);
+                if (index === -1) return;
                 const originalItem = db.inventory[index];
                 
-                // Track adjustments for historical logs
                 let changeNotes = [];
                 if (originalItem.name !== name) changeNotes.push(`Name changed`);
                 if (originalItem.category !== category) changeNotes.push(`Category changed`);
                 if (Number(originalItem.price) !== price) changeNotes.push(`Price changed to ₱${price.toFixed(2)}`);
                 if (Number(originalItem.qty) !== qty) changeNotes.push(`Stock adjusted from ${originalItem.qty} to ${qty}`);
         
-                // Update database item state
                 db.inventory[index] = { id, name, category, cost, units, markup, qty, price };
                 
-                // Log to history if anything at all changed!
                 if (changeNotes.length > 0) {
                     db.history.push({ 
                         time: Date.now(), 
-                        name: name, // Uses latest name variant
+                        name: name, 
                         type: 'Manual Edit', 
                         change: qty - Number(originalItem.qty), 
                         notes: changeNotes.join(', ') + '.' 
@@ -408,7 +408,6 @@
                 }
                 pushDataToGitHub(`Updated item: ${name}`);
             } else {
-                // --- CREATE NEW ITEM ---
                 const newId = 'id_' + Math.random().toString(36).substr(2, 9);
                 db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price });
                 db.history.push({ 
@@ -444,11 +443,8 @@
             if (index === -1) return;
 
             const item = db.inventory[index];
-            
-            // Popup asking for confirmation and reason
             const reason = prompt(`Are you sure you want to delete "${item.name}"?\n\nPlease enter the reason for deletion:`);
             
-            // Abort if cancel clicked
             if (reason === null) return; 
             
             const formattedReason = reason.trim();
@@ -457,19 +453,15 @@
                 return;
             }
 
-            // Log the deletion state to transaction history
             db.history.push({
                 time: Date.now(),
                 name: item.name,
                 type: 'Deletion',
-                change: -Math.abs(Number(item.qty)), // Removes remaining stock units from tracking
+                change: -Math.abs(Number(item.qty)), 
                 notes: `Item permanently removed. Reason: ${formattedReason}`
             });
 
-            // Splice item out of internal database array
             db.inventory.splice(index, 1);
-
-            // Push state array updates to GitHub
             pushDataToGitHub(`Deleted item: ${item.name}`);
         }
 
