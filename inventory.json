@@ -9,6 +9,16 @@
       "markup": 12,
       "qty": 3,
       "price": 160
+    },
+    {
+      "id": "id_o2kafjzov",
+      "name": "Test Widget",
+      "category": "Test",
+      "cost": 150,
+      "units": 6,
+      "markup": 12,
+      "qty": 6,
+      "price": 28
     }
   ],
   "history": [
@@ -60,6 +70,13 @@
       "type": "Deletion",
       "change": -8,
       "notes": "Item permanently removed. Reason: test"
+    },
+    {
+      "time": 1781386233641,
+      "name": "Test Widget",
+      "type": "Addition",
+      "change": 6,
+      "notes": "Initial stock addition under category: Test."
     }
   ]
 }
