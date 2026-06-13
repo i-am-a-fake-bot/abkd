@@ -53,9 +53,8 @@
                 </button>
             </div>
             
-            <!-- CHANGED HERE: Added 'overflow-x-auto' wrapper to make the table gracefully scrollable on portrait tablet/mobile screens -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
-                <table class="w-full text-left border-collapse min-w-[800px]">
+                <table class="w-full text-left border-collapse min-w-[720px]">
                     <thead>
                         <tr class="bg-gray-50 border-b border-gray-100 text-gray-600 font-semibold text-sm">
                             <th class="p-4 w-16">Photo</th>
@@ -70,7 +69,7 @@
                             <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition" onclick="toggleSort('expiry')">
                                 Expiration Date <span id="sort-icon-expiry" class="text-indigo-600 ml-1"></span>
                             </th>
-                            <th class="p-4 text-right">Actions</th>
+                            <th class="p-4 text-center w-40">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="inventory-table-body" class="divide-y divide-gray-50 text-gray-700">
@@ -343,6 +342,7 @@
             }
         }
 
+        // Helper date formatter
         function formatExpiryDisplay(dateString) {
             if (!dateString) return 'N/A';
             const date = new Date(dateString);
@@ -356,6 +356,7 @@
             return `${day}-${month}-${year}`;
         }
 
+        // Helper style contextual selector
         function getExpiryBadgeStyle(dateString) {
             if (!dateString) return 'text-gray-400 font-medium';
             const expiryDate = new Date(dateString);
@@ -442,11 +443,15 @@
                         <td class="p-4"><span class="px-2 py-1 rounded text-sm ${item.qty < 5 ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${item.qty}</span></td>
                         <td class="p-4 text-sm font-mono font-bold text-indigo-600">₱${Number(item.price).toFixed(2)}</td>
                         <td class="p-4 text-sm"><span class="${expiryStyle}">${expiryText}</span></td>
-                        <td class="p-4 text-right space-x-2 whitespace-nowrap">
-                            <button onclick="handleStockAdjust('${safeId}', 'restock')" class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 px-2 py-1 rounded text-xs font-bold">Restock</button>
-                            <button onclick="handleStockAdjust('${safeId}', 'reduce')" class="bg-amber-50 text-amber-700 hover:bg-amber-100 px-2 py-1 rounded text-xs font-bold">Reduce</button>
-                            <button onclick="openModal('${safeId}')" class="text-indigo-600 hover:text-indigo-900 text-sm ml-2 font-medium">Edit</button>
-                            <button onclick="deleteItem('${safeId}')" class="text-rose-600 hover:text-rose-900 text-sm ml-2 font-medium">Delete</button>
+                        
+                        <!-- CHANGED HERE: Transformed Actions into a compact 2x2 grid (Four Quadrants) layout -->
+                        <td class="p-2 text-center">
+                            <div class="grid grid-cols-2 gap-1.5 max-w-[150px] mx-auto">
+                                <button onclick="handleStockAdjust('${safeId}', 'restock')" class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 p-1 rounded text-[11px] font-bold transition">Add</button>
+                                <button onclick="handleStockAdjust('${safeId}', 'reduce')" class="bg-amber-50 text-amber-700 hover:bg-amber-100 p-1 rounded text-[11px] font-bold transition">Less</button>
+                                <button onclick="openModal('${safeId}')" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 p-1 rounded text-[11px] font-medium transition">Edit</button>
+                                <button onclick="deleteItem('${safeId}')" class="bg-rose-50 text-rose-600 hover:bg-rose-100 p-1 rounded text-[11px] font-medium transition">Del</button>
+                            </div>
                         </td>
                     </tr>
                 `;
