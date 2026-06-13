@@ -4,11 +4,11 @@
       "id": "id_qeg1ee4f9",
       "name": "Test Widget",
       "category": "Test",
-      "cost": 0,
-      "units": 1,
+      "cost": 100,
+      "units": 12,
       "markup": 12,
       "qty": 10,
-      "price": 0
+      "price": 9.33
     },
     {
       "id": "id_22ibp7oeh",
