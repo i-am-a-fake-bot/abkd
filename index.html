@@ -342,12 +342,17 @@
             pushDataToGitHub(`Adjusted stock for ${item.name} (${delta > 0 ? '+' : ''}${delta})`);
         }
 
+        // Initialize the app when the window loads
         window.onload = init;
 
-            if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
-}
-        
+        // Register Service Worker for PWA compliance after page load
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registered successfully!', reg))
+                    .catch(err => console.error('Service Worker registration failed:', err));
+            });
+        }
     </script>
 </body>
 </html>
