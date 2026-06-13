@@ -13,12 +13,12 @@
     {
       "id": "id_22ibp7oeh",
       "name": "Gin - Kwatro Kantos",
-      "sku": "123",
+      "category": "Alak",
       "cost": 140,
       "units": 1,
       "markup": 12,
       "qty": 1,
-      "price": 160
+      "price": 156.8
     }
   ],
   "history": [
