@@ -135,18 +135,18 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Supplier Cost (₱)</label>
-                        <input type="number" id="item-cost" step="0.01" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required min="0" oninput="calculateSRP()">
+                        <input type="number" id="item-cost" step="0.01" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required min="0" oninput="calculateSRP(false)">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Units in Pack</label>
-                        <input type="number" id="item-units" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="1" required min="1" oninput="calculateSRP()">
+                        <input type="number" id="item-units" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="1" required min="1" oninput="calculateSRP(false)">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Mark Up (%)</label>
-                        <input type="number" id="item-markup" step="0.1" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="12" required min="0" oninput="calculateSRP()">
+                        <input type="number" id="item-markup" step="0.1" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="12" required min="0" oninput="calculateSRP(false)">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-500 mb-1">Recommended Price</label>
@@ -270,7 +270,8 @@
             }
         }
 
-        function calculateSRP() {
+        // Modified function to support conditional overwrites of actual SRP field
+        function calculateSRP(keepCurrentSRP = false) {
             const cost = parseFloat(document.getElementById('item-cost').value) || 0;
             const units = parseInt(document.getElementById('item-units').value) || 1;
             const markup = parseFloat(document.getElementById('item-markup').value) || 0;
@@ -281,7 +282,11 @@
             const recommendedPrice = baseUnitCost + (baseUnitCost * (markup / 100));
 
             document.getElementById('item-rec-price').value = "₱" + recommendedPrice.toFixed(2);
-            document.getElementById('item-price').value = recommendedPrice.toFixed(2);
+            
+            // Only update active choice if we are explicitly requested to overwrite it
+            if (!keepCurrentSRP) {
+                document.getElementById('item-price').value = recommendedPrice.toFixed(2);
+            }
         }
 
         function toggleCategorySort() {
@@ -356,8 +361,10 @@
                 document.getElementById('item-units').value = item.units || 1;
                 document.getElementById('item-markup').value = item.markup !== undefined ? item.markup : 12;
                 document.getElementById('item-qty').value = item.qty;
+                
+                // Keep saved SRP calculation locked down here
                 document.getElementById('item-price').value = item.price;
-                calculateSRP();
+                calculateSRP(true); // Passed 'true' to protect 'item-price' from being overwritten
             } else {
                 document.getElementById('modal-title').innerText = "Add New Item";
                 document.getElementById('item-form').reset();
@@ -430,7 +437,6 @@
             
             const userInput = prompt(`Current stock for "${item.name}": ${item.qty}\n\nEnter the quantity you want to ${actionText} stock:`);
             
-            // Abort if cancel clicked
             if (userInput === null) return;
 
             const amount = parseInt(userInput);
@@ -447,10 +453,8 @@
                 return;
             }
 
-            // Apply stock change
             item.qty = currentQty + finalDelta;
 
-            // Log entry creation
             db.history.push({
                 time: Date.now(),
                 name: item.name,
