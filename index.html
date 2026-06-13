@@ -53,8 +53,9 @@
                 </button>
             </div>
             
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                <table class="w-full text-left border-collapse">
+            <!-- CHANGED HERE: Added 'overflow-x-auto' wrapper to make the table gracefully scrollable on portrait tablet/mobile screens -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[800px]">
                     <thead>
                         <tr class="bg-gray-50 border-b border-gray-100 text-gray-600 font-semibold text-sm">
                             <th class="p-4 w-16">Photo</th>
@@ -80,8 +81,8 @@
 
         <section id="tab-history" class="tab-content hidden">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Transaction History</h2>
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                <table class="w-full text-left border-collapse">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[600px]">
                     <thead>
                         <tr class="bg-gray-50 border-b border-gray-100 text-gray-600 font-semibold text-sm">
                             <th class="p-4">Timestamp</th>
@@ -199,9 +200,8 @@
         let db = { inventory: [], history: [] };
         let githubSha = null;
         
-        // Unified Sorting States Group Config
-        let currentSortColumn = 'none'; // 'none', 'category', 'stock', 'expiry'
-        let currentSortDirection = 'none'; // 'none', 'asc', 'desc'
+        let currentSortColumn = 'none'; 
+        let currentSortDirection = 'none'; 
 
         function getConfigs() {
             return {
@@ -372,7 +372,6 @@
             return 'text-gray-700 font-mono font-medium'; 
         }
 
-        // Unified multi-column toggle controller
         function toggleSort(columnKey) {
             if (currentSortColumn === columnKey) {
                 if (currentSortDirection === 'asc') {
@@ -395,12 +394,10 @@
 
             let displayItems = [...db.inventory];
             
-            // Clear all structural sort icons initially
             document.getElementById('sort-icon-category').innerHTML = '';
             document.getElementById('sort-icon-stock').innerHTML = '';
             document.getElementById('sort-icon-expiry').innerHTML = '';
 
-            // Handle active structural sorting loops
             if (currentSortColumn !== 'none' && currentSortDirection !== 'none') {
                 const arrowIndicator = currentSortDirection === 'asc' ? '▲' : '▼';
                 document.getElementById(`sort-icon-${currentSortColumn}`).innerHTML = arrowIndicator;
@@ -417,7 +414,6 @@
                     }
                     
                     if (currentSortColumn === 'expiry') {
-                        // Push blanks / N/A values to the bottom regardless of sorting direction
                         if (!a.expiry && !b.expiry) return 0;
                         if (!a.expiry) return 1; 
                         if (!b.expiry) return -1;
