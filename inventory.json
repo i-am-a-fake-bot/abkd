@@ -1,4 +1,20 @@
 {
-  "inventory": [],
-  "history": []
+  "inventory": [
+    {
+      "id": "id_qeg1ee4f9",
+      "name": "Test Widget",
+      "sku": "123",
+      "qty": 10,
+      "price": 5
+    }
+  ],
+  "history": [
+    {
+      "time": 1781382439395,
+      "name": "Test Widget",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition."
+    }
+  ]
 }
