@@ -7,7 +7,7 @@
       "cost": 140,
       "units": 1,
       "markup": 12,
-      "qty": 4,
+      "qty": 3,
       "price": 160
     },
     {
@@ -94,6 +94,13 @@
     },
     {
       "time": 1781386247500,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Sale / Usage",
+      "change": -1,
+      "notes": "Decremental quick update"
+    },
+    {
+      "time": 1781386254309,
       "name": "Gin - Kwatro Kantos",
       "type": "Sale / Usage",
       "change": -1,
