@@ -3,9 +3,12 @@
     {
       "id": "id_qeg1ee4f9",
       "name": "Test Widget",
-      "sku": "123",
+      "category": "Test",
+      "cost": 0,
+      "units": 1,
+      "markup": 12,
       "qty": 10,
-      "price": 5
+      "price": 0
     },
     {
       "id": "id_22ibp7oeh",
