@@ -59,12 +59,16 @@
                         <tr class="bg-gray-50 border-b border-gray-100 text-gray-600 font-semibold text-sm">
                             <th class="p-4 w-16">Photo</th>
                             <th class="p-4">Item Name</th>
-                            <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition" onclick="toggleCategorySort()">
-                                Category <span id="sort-icon" class="text-indigo-600 ml-1"></span>
+                            <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition" onclick="toggleSort('category')">
+                                Category <span id="sort-icon-category" class="text-indigo-600 ml-1"></span>
                             </th>
-                            <th class="p-4">Current Stock</th>
+                            <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition" onclick="toggleSort('stock')">
+                                Current Stock <span id="sort-icon-stock" class="text-indigo-600 ml-1"></span>
+                            </th>
                             <th class="p-4">Price (SRP)</th>
-                            <th class="p-4">Expiration Date</th>
+                            <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition" onclick="toggleSort('expiry')">
+                                Expiration Date <span id="sort-icon-expiry" class="text-indigo-600 ml-1"></span>
+                            </th>
                             <th class="p-4 text-right">Actions</th>
                         </tr>
                     </thead>
@@ -194,7 +198,10 @@
     <script>
         let db = { inventory: [], history: [] };
         let githubSha = null;
-        let currentSortDirection = 'none';
+        
+        // Unified Sorting States Group Config
+        let currentSortColumn = 'none'; // 'none', 'category', 'stock', 'expiry'
+        let currentSortDirection = 'none'; // 'none', 'asc', 'desc'
 
         function getConfigs() {
             return {
@@ -336,7 +343,6 @@
             }
         }
 
-        // Helper function to format ISO date (YYYY-MM-DD) into custom DD-MMM-YYYY format
         function formatExpiryDisplay(dateString) {
             if (!dateString) return 'N/A';
             const date = new Date(dateString);
@@ -350,29 +356,34 @@
             return `${day}-${month}-${year}`;
         }
 
-        // Helper function to return dynamic style badges depending on proximity to expiry threshold
         function getExpiryBadgeStyle(dateString) {
             if (!dateString) return 'text-gray-400 font-medium';
             const expiryDate = new Date(dateString);
             const today = new Date();
             
-            // Calculate time difference in days
             const diffTime = expiryDate - today;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             
             if (diffDays <= 0) {
-                return 'bg-rose-100 text-rose-800 px-2 py-0.5 rounded text-xs font-bold border border-rose-200'; // Expired
+                return 'bg-rose-100 text-rose-800 px-2 py-0.5 rounded text-xs font-bold border border-rose-200'; 
             } else if (diffDays <= 30) {
-                return 'bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-bold border border-amber-200'; // Nearing Expiry (under 30 days)
+                return 'bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-bold border border-amber-200'; 
             }
-            return 'text-gray-700 font-mono font-medium'; // Safe distance
+            return 'text-gray-700 font-mono font-medium'; 
         }
 
-        function toggleCategorySort() {
-            if (currentSortDirection === 'none' || currentSortDirection === 'desc') {
-                currentSortDirection = 'asc';
+        // Unified multi-column toggle controller
+        function toggleSort(columnKey) {
+            if (currentSortColumn === columnKey) {
+                if (currentSortDirection === 'asc') {
+                    currentSortDirection = 'desc';
+                } else if (currentSortDirection === 'desc') {
+                    currentSortColumn = 'none';
+                    currentSortDirection = 'none';
+                }
             } else {
-                currentSortDirection = 'desc';
+                currentSortColumn = columnKey;
+                currentSortDirection = 'asc';
             }
             renderApp();
         }
@@ -383,16 +394,38 @@
             document.getElementById('stat-low-stock').innerText = db.inventory.filter(i => i.qty < 5).length;
 
             let displayItems = [...db.inventory];
-            const iconEl = document.getElementById('sort-icon');
             
-            if (currentSortDirection === 'asc') {
-                iconEl.innerHTML = '▲';
-                displayItems.sort((a, b) => (a.category || '').localeCompare(b.category || ''));
-            } else if (currentSortDirection === 'desc') {
-                iconEl.innerHTML = '▼';
-                displayItems.sort((a, b) => (b.category || '').localeCompare(a.category || ''));
-            } else {
-                iconEl.innerHTML = '';
+            // Clear all structural sort icons initially
+            document.getElementById('sort-icon-category').innerHTML = '';
+            document.getElementById('sort-icon-stock').innerHTML = '';
+            document.getElementById('sort-icon-expiry').innerHTML = '';
+
+            // Handle active structural sorting loops
+            if (currentSortColumn !== 'none' && currentSortDirection !== 'none') {
+                const arrowIndicator = currentSortDirection === 'asc' ? '▲' : '▼';
+                document.getElementById(`sort-icon-${currentSortColumn}`).innerHTML = arrowIndicator;
+
+                displayItems.sort((a, b) => {
+                    let modifier = currentSortDirection === 'asc' ? 1 : -1;
+                    
+                    if (currentSortColumn === 'category') {
+                        return (a.category || '').localeCompare(b.category || '') * modifier;
+                    }
+                    
+                    if (currentSortColumn === 'stock') {
+                        return (Number(a.qty) - Number(b.qty)) * modifier;
+                    }
+                    
+                    if (currentSortColumn === 'expiry') {
+                        // Push blanks / N/A values to the bottom regardless of sorting direction
+                        if (!a.expiry && !b.expiry) return 0;
+                        if (!a.expiry) return 1; 
+                        if (!b.expiry) return -1;
+                        
+                        return (new Date(a.expiry) - new Date(b.expiry)) * modifier;
+                    }
+                    return 0;
+                });
             }
 
             const tbody = document.getElementById('inventory-table-body');
@@ -402,7 +435,6 @@
                     ? `<img src="${item.image}" class="w-10 h-10 object-cover rounded-md shadow-inner border border-gray-100">`
                     : `<div class="w-10 h-10 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-lg shadow-inner">📦</div>`;
 
-                // Handle string configuration variations for the newly added column element 
                 const expiryText = formatExpiryDisplay(item.expiry);
                 const expiryStyle = getExpiryBadgeStyle(item.expiry);
 
@@ -454,7 +486,6 @@
                 document.getElementById('item-qty').value = item.qty;
                 document.getElementById('item-price').value = item.price;
                 
-                // Load saved expiration data date structure safely inside form fields
                 document.getElementById('item-expiry').value = item.expiry || '';
 
                 document.getElementById('item-image-base64').value = item.image || '';
@@ -471,7 +502,7 @@
                 document.getElementById('item-id').value = '';
                 document.getElementById('item-image-base64').value = '';
                 document.getElementById('image-preview-container').innerHTML = "No Img";
-                document.getElementById('item-expiry').value = ''; // Ensure blank default translates to N/A context
+                document.getElementById('item-expiry').value = '';
                 document.getElementById('item-markup').value = 12; 
                 document.getElementById('item-units').value = 1;
                 document.getElementById('item-rec-price').value = "₱0.00";
@@ -493,7 +524,7 @@
             const qty = parseInt(document.getElementById('item-qty').value) || 0;
             const price = parseFloat(document.getElementById('item-price').value) || 0;
             const image = document.getElementById('item-image-base64').value;
-            const expiry = document.getElementById('item-expiry').value; // Saved values: "YYYY-MM-DD" string or ""
+            const expiry = document.getElementById('item-expiry').value;
         
             if (id) {
                 const index = db.inventory.findIndex(i => i.id === id);
