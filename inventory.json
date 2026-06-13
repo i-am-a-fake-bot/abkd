@@ -7,7 +7,7 @@
       "cost": 140,
       "units": 1,
       "markup": 12,
-      "qty": 5,
+      "qty": 4,
       "price": 160
     },
     {
@@ -91,6 +91,13 @@
       "type": "Restock",
       "change": 1,
       "notes": "Incremental quick update"
+    },
+    {
+      "time": 1781386247500,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Sale / Usage",
+      "change": -1,
+      "notes": "Decremental quick update"
     }
   ]
 }
