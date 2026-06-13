@@ -6,6 +6,16 @@
       "sku": "123",
       "qty": 10,
       "price": 5
+    },
+    {
+      "id": "id_22ibp7oeh",
+      "name": "Gin - Kwatro Kantos",
+      "sku": "123",
+      "cost": 140,
+      "units": 1,
+      "markup": 12,
+      "qty": 1,
+      "price": 160
     }
   ],
   "history": [
@@ -14,6 +24,13 @@
       "name": "Test Widget",
       "type": "Addition",
       "change": 10,
+      "notes": "Initial stock addition."
+    },
+    {
+      "time": 1781383992890,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Addition",
+      "change": 1,
       "notes": "Initial stock addition."
     }
   ]
