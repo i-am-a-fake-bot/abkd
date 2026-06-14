@@ -494,8 +494,8 @@
     },
     {
       "id": "id_1tmz8473v",
-      "name": "Condiments - Del Monte Tomato Sauce - Original - 115g",
-      "category": "Condiments",
+      "name": "Del Monte Tomato Sauce - Original - 115g",
+      "category": "Pantry",
       "cost": 213,
       "units": 10,
       "markup": 12,
@@ -1359,6 +1359,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Coco Mama - Gata\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434009826,
+      "name": "Del Monte Tomato Sauce - Original - 115g",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Del Monte Tomato Sauce - Original - 115g\", category updated to \"Pantry\"."
     }
   ],
   "config": {
