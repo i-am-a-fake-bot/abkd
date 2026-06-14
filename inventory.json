@@ -18,7 +18,7 @@
       "cost": 150,
       "units": 10,
       "markup": 12,
-      "qty": 4,
+      "qty": 3,
       "price": 17,
       "image": "",
       "expiry": "2026-12-31"
@@ -198,6 +198,13 @@
       "name": "Test Widget",
       "type": "Sale / Usage",
       "change": -6,
+      "notes": "Bulk reduction transaction."
+    },
+    {
+      "time": 1781402819893,
+      "name": "Test Widget",
+      "type": "Sale / Usage",
+      "change": -1,
       "notes": "Bulk reduction transaction."
     }
   ]
