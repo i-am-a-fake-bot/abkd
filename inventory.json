@@ -70,6 +70,18 @@
       "price": 5,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_e960tuxxm",
+      "name": "Atbp - Steel Wool",
+      "category": "Atbp",
+      "cost": 99.75,
+      "units": 3,
+      "markup": 12,
+      "qty": 3,
+      "price": 37,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -300,6 +312,13 @@
     {
       "time": 1781413661247,
       "name": "Atbp - Posporo",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
+    },
+    {
+      "time": 1781413749226,
+      "name": "Atbp - Steel Wool",
       "type": "Addition",
       "change": 3,
       "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
