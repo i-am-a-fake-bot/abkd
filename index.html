@@ -658,7 +658,7 @@
             form.reset();
 
             document.getElementById('item-id').value = '';
-            document.getElementById('item-is-clone').value = 'true'; // Force true context flag tag
+            document.getElementById('item-is-clone').value = 'true';
             
             document.getElementById('modal-title').innerText = `Clone: ${item.name}`;
             document.getElementById('item-name').value = (item.name || '') + ' (Copy)';
@@ -724,7 +724,7 @@
                     db.history.push({
                         time: Date.now(),
                         name: name,
-                        type: "Product Update",
+                        type: "Modified",
                         change: qty - oldQty,
                         notes: logNotes
                     });
@@ -735,8 +735,7 @@
                 const newId = "id_" + Math.random().toString(36).substr(2, 9);
                 db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price, expiry, image });
                 
-                // Uses explicit internal flag tag instead of checking name text strings
-                const operationType = isClone ? "Clone / Copy" : "Addition";
+                const operationType = isClone ? "Copy" : "New Product";
                 const logNotes = isClone
                     ? `Cloned line layout generated at zero balance base matrix state. Price: ₱${price.toFixed(2)}.`
                     : `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`;
@@ -786,7 +785,7 @@
                 db.history.push({
                     time: Date.now(),
                     name: item.name,
-                    type: "Sale / Usage",
+                    type: "Destock",
                     change: -change,
                     notes: "Bulk reduction transaction."
                 });
@@ -939,7 +938,6 @@
                 }).join('');
             }
 
-            // Apply Smart Search Filter Logic 
             let query = (document.getElementById('inventory-search')?.value || '').trim().toLowerCase();
             let displayItems = inventoryList.filter(item => {
                 let nameMatch = (item.name || '').toLowerCase().includes(query);
@@ -1014,10 +1012,13 @@
             } else {
                 hbody.innerHTML = [...historyList].reverse().map(log => {
                     let badgeColor = "text-amber-600";
-                    if (log.type === 'Addition' || log.type === 'Restock') badgeColor = "text-emerald-600";
+                    
+                    // Maps lookups nicely to support backward compatibility while prioritizing your new simplified label tags
+                    if (log.type === 'New Product' || log.type === 'Addition' || log.type === 'Restock') badgeColor = "text-emerald-600";
                     if (log.type === 'Deletion') badgeColor = "text-rose-600";
-                    if (log.type === 'Clone / Copy') badgeColor = "text-sky-600";
-                    if (log.type === 'Product Update') badgeColor = "text-indigo-600";
+                    if (log.type === 'Copy' || log.type === 'Clone / Copy') badgeColor = "text-sky-600";
+                    if (log.type === 'Modified' || log.type === 'Product Update') badgeColor = "text-indigo-600";
+                    if (log.type === 'Destock' || log.type === 'Sale / Usage') badgeColor = "text-rose-500";
 
                     return `
                         <tr class="border-b border-gray-50">
