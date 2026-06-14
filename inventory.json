@@ -106,6 +106,18 @@
       "price": 9,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_zk7yuf4kq",
+      "name": "Biskwit - Cream-O - Choco",
+      "category": "Biskwit",
+      "cost": 74.25,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 9,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -357,6 +369,13 @@
     {
       "time": 1781413890933,
       "name": "Biskwit - Combi",
+      "type": "Addition",
+      "change": 4,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781413973864,
+      "name": "Biskwit - Cream-O - Choco",
       "type": "Addition",
       "change": 4,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
