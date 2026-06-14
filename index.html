@@ -334,7 +334,6 @@
         };
         let githubSha = null;
         
-        // Default base tracking configuration sets sorting alphabetical by default
         let currentSortColumn = 'name'; 
         let currentSortDirection = 'asc'; 
 
@@ -545,7 +544,6 @@
 
             if (units <= 0) return;
 
-            // Metric 1: Clean calculated Unit Cost tracking
             const baseUnitCost = cost / units;
             document.getElementById('item-unit-cost').value = "₱" + baseUnitCost.toFixed(2);
 
@@ -556,7 +554,6 @@
                 document.getElementById('item-price').value = recommendedPrice.toFixed(2);
             }
 
-            // Metric 2: Live calculated net profit generation logic per item tracking row
             const currentSRP = parseFloat(document.getElementById('item-price').value) || 0;
             const pureNetProfit = currentSRP - baseUnitCost;
             document.getElementById('item-unit-profit').value = "₱" + pureNetProfit.toFixed(2);
@@ -654,14 +651,14 @@
             document.getElementById('item-id').value = '';
             
             document.getElementById('modal-title').innerText = `Clone: ${item.name}`;
-            document.getElementById('item-name').value = item.name || '';
+            document.getElementById('item-name').value = (item.name || '') + ' (Copy)';
             document.getElementById('item-category').value = item.category || '';
             document.getElementById('item-cost').value = item.cost || 0;
             document.getElementById('item-units').value = item.units || 1;
             document.getElementById('item-markup').value = item.markup || 12;
             document.getElementById('item-price').value = item.price || 0;
             document.getElementById('item-expiry').value = item.expiry || '';
-            document.getElementById('item-qty').value = 0;
+            document.getElementById('item-qty').value = 0; // Clones start at 0 stock volume until replenished
 
             if (item.image) {
                 document.getElementById('item-image-base64').value = item.image;
@@ -696,33 +693,56 @@
             if (!db.history) db.history = [];
 
             if (id) {
+                // Item details are being edited
                 const idx = db.inventory.findIndex(i => i.id === id);
                 if (idx !== -1) {
-                    const oldQty = db.inventory[idx].qty || 0;
+                    const oldItem = db.inventory[idx];
+                    const oldQty = oldItem.qty || 0;
+                    
+                    // Track structural changes for the history slip notes text block
+                    let changesMade = [];
+                    if (oldItem.name !== name) changesMade.push(`renamed to "${name}"`);
+                    if (oldItem.price !== price) changesMade.push(`price updated to ₱${price.toFixed(2)}`);
+                    if (oldQty !== qty) changesMade.push(`stock adjusted from ${oldQty} to ${qty}`);
+                    if (oldItem.category !== category) changesMade.push(`category updated to "${category}"`);
+                    
+                    const logNotes = changesMade.length > 0 
+                        ? `Modified attributes: ${changesMade.join(', ')}.`
+                        : "Saved item modifications without profile value adjustments.";
+
                     db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry, image };
                     
-                    if (oldQty !== qty) {
-                        db.history.push({
-                            time: Date.now(),
-                            name,
-                            type: "Manual Edit",
-                            change: qty - oldQty,
-                            notes: `Stock updated directly from ${oldQty} to ${qty}.`
-                        });
-                    }
+                    // Log the structural product modification directly into the ledger grid stream
+                    db.history.push({
+                        time: Date.now(),
+                        name: name,
+                        type: "Product Update",
+                        change: qty - oldQty,
+                        notes: logNotes
+                    });
+
                     pushDataToGitHub(`Modified details for product: ${name}`);
                 }
             } else {
+                // This covers BOTH fresh entries and cloned item generation workflows
                 const newId = "id_" + Math.random().toString(36).substr(2, 9);
                 db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price, expiry, image });
+                
+                // Inspect item text string context to categorize as standard Addition vs structural Clone ledger slip
+                const operationType = name.endsWith('(Copy)') ? "Clone / Copy" : "Addition";
+                const logNotes = operationType === "Clone / Copy"
+                    ? `Cloned line layout generated at zero balance base matrix state. Price: ₱${price.toFixed(2)}.`
+                    : `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`;
+
                 db.history.push({
                     time: Date.now(),
                     name,
-                    type: "Addition",
+                    type: operationType,
                     change: qty,
-                    notes: `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`
+                    notes: logNotes
                 });
-                pushDataToGitHub(`Added fresh inventory item: ${name}`);
+                
+                pushDataToGitHub(`Added fresh inventory item line profile: ${name}`);
             }
             closeModal();
         }
@@ -979,15 +999,23 @@
             if (historyList.length === 0) {
                 hbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400 italic">No transactions recorded yet.</td></tr>`;
             } else {
-                hbody.innerHTML = [...historyList].reverse().map(log => `
-                    <tr class="border-b border-gray-50">
-                        <td class="p-4 text-xs font-mono text-gray-400">${log.time ? new Date(log.time).toLocaleString() : 'N/A'}</td>
-                        <td class="p-4 font-medium">${log.name || 'Unknown'}</td>
-                        <td class="p-4"><span class="text-xs uppercase font-bold tracking-wider ${log.type === 'Addition' || log.type === 'Restock' ? 'text-emerald-600' : log.type === 'Deletion' ? 'text-rose-600' : 'text-amber-600'}">${log.type || 'Transaction'}</span></td>
-                        <td class="p-4 font-mono font-bold">${(Number(log.change) || 0) > 0 ? '+' + log.change : log.change}</td>
-                        <td class="p-4 text-xs italic text-gray-500">${log.notes || ''}</td>
-                    </tr>
-                `).join('');
+                hbody.innerHTML = [...historyList].reverse().map(log => {
+                    let badgeColor = "text-amber-600";
+                    if (log.type === 'Addition' || log.type === 'Restock') badgeColor = "text-emerald-600";
+                    if (log.type === 'Deletion') badgeColor = "text-rose-600";
+                    if (log.type === 'Clone / Copy') badgeColor = "text-sky-600";
+                    if (log.type === 'Product Update') badgeColor = "text-indigo-600";
+
+                    return `
+                        <tr class="border-b border-gray-50">
+                            <td class="p-4 text-xs font-mono text-gray-400">${log.time ? new Date(log.time).toLocaleString() : 'N/A'}</td>
+                            <td class="p-4 font-medium">${log.name || 'Unknown'}</td>
+                            <td class="p-4"><span class="text-xs uppercase font-bold tracking-wider ${badgeColor}">${log.type || 'Transaction'}</span></td>
+                            <td class="p-4 font-mono font-bold">${(Number(log.change) || 0) > 0 ? '+' + log.change : log.change}</td>
+                            <td class="p-4 text-xs italic text-gray-500">${log.notes || ''}</td>
+                        </tr>
+                    `;
+                }).join('');
             }
         }
 
