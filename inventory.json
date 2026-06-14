@@ -130,6 +130,18 @@
       "price": 9,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_tys2atsrh",
+      "name": "Biskwit - Fita - Crackers",
+      "category": "Biskwit",
+      "cost": 50.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 8,
+      "price": 8,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -405,6 +417,13 @@
       "type": "Sale / Usage",
       "change": -4,
       "notes": "Bulk reduction transaction."
+    },
+    {
+      "time": 1781414128504,
+      "name": "Biskwit - Fita - Crackers",
+      "type": "Addition",
+      "change": 8,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
     }
   ],
   "config": {
