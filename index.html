@@ -82,7 +82,7 @@
                             <tbody id="dash-lowstock-tbody" class="divide-y divide-gray-50 text-gray-700">
                                 <tr>
                                     <td colspan="3" class="p-4 text-center text-gray-400 italic">No low stock items detected. All products clear!</td>
-                                end	</tr>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -548,7 +548,7 @@
             document.getElementById('stat-inventory-cost').innerText = "₱" + totalInventoryCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('stat-potential-profit').innerText = "₱" + totalPotentialProfit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-            // Render Low Stock Items Table (Strictly greater than 0, up to threshold)
+            // Render Low Stock Items Table
             const dashLowStockTbody = document.getElementById('dash-lowstock-tbody');
             if (lowStockItems.length === 0) {
                 dashLowStockTbody.innerHTML = `
@@ -570,7 +570,7 @@
                 `).join('');
             }
 
-            // Render Out of Stock Items Table (New Matrix Generator Logic)
+            // Render Out of Stock Items Table
             const dashOutOfStockTbody = document.getElementById('dash-outofstock-tbody');
             if (outOfStockItems.length === 0) {
                 dashOutOfStockTbody.innerHTML = `
