@@ -46,6 +46,18 @@
       "price": 6.02,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_9ag2jya41",
+      "name": "Atbp - Kandila - Small",
+      "category": "Atbp",
+      "cost": 55,
+      "units": 20,
+      "markup": 12,
+      "qty": 5,
+      "price": 3.08,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -264,6 +276,13 @@
       "name": "Atbp - Kandila - Medium",
       "type": "Addition",
       "change": 10,
+      "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
+    },
+    {
+      "time": 1781411810122,
+      "name": "Atbp - Kandila - Small",
+      "type": "Addition",
+      "change": 5,
       "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
     }
   ],
