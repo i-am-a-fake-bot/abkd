@@ -515,6 +515,18 @@
       "price": 7,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_0sgcv00q9",
+      "name": "Condiments - Knorr - Chicken Cube",
+      "category": "Condiments",
+      "cost": 67.5,
+      "units": 12,
+      "markup": 12,
+      "qty": 8,
+      "price": 7,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1027,6 +1039,13 @@
       "name": "Condiments - Knorr - Beef Cube",
       "type": "Addition",
       "change": 6,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432571246,
+      "name": "Condiments - Knorr - Chicken Cube",
+      "type": "Addition",
+      "change": 8,
       "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
     }
   ],
