@@ -139,6 +139,7 @@
                 </button>
             </div>
 
+            <!-- Smart Search Bar -->
             <div class="mb-4">
                 <div class="relative max-w-md">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">🔍</span>
@@ -254,7 +255,7 @@
             <form id="item-form" onsubmit="saveItem(event)" class="space-y-4">
                 <input type="hidden" id="item-id">
                 <input type="hidden" id="item-image-base64">
-                <input type="hidden" id="item-is-clone" value="false">
+                <input type="hidden" id="item-original-name">
                 
                 <div class="bg-gray-50 border border-dashed border-gray-300 rounded-lg p-3 text-center">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Item Image (Optional)</label>
@@ -617,7 +618,7 @@
             form.reset();
             document.getElementById('item-id').value = '';
             document.getElementById('item-image-base64').value = '';
-            document.getElementById('item-is-clone').value = 'false';
+            document.getElementById('item-original-name').value = '';
             document.getElementById('image-preview-container').innerHTML = 'No Img';
             
             if (id) {
@@ -658,7 +659,7 @@
             form.reset();
 
             document.getElementById('item-id').value = '';
-            document.getElementById('item-is-clone').value = 'true';
+            document.getElementById('item-original-name').value = item.name || '';
             
             document.getElementById('modal-title').innerText = `Clone: ${item.name}`;
             document.getElementById('item-name').value = (item.name || '') + ' (Copy)';
@@ -698,7 +699,7 @@
             const price = parseFloat(document.getElementById('item-price').value) || 0;
             const expiry = document.getElementById('item-expiry').value;
             const image = document.getElementById('item-image-base64').value;
-            const isClone = document.getElementById('item-is-clone').value === 'true';
+            const originalName = document.getElementById('item-original-name').value;
 
             if (!db.inventory) db.inventory = [];
             if (!db.history) db.history = [];
@@ -717,7 +718,7 @@
                     
                     const logNotes = changesMade.length > 0 
                         ? `Modified attributes: ${changesMade.join(', ')}.`
-                        : "Saved item modifications without profile value adjustments.";
+                        : "Saved item without changes.";
 
                     db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry, image };
                     
@@ -735,9 +736,9 @@
                 const newId = "id_" + Math.random().toString(36).substr(2, 9);
                 db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price, expiry, image });
                 
-                const operationType = isClone ? "Copy" : "New Product";
-                const logNotes = isClone
-                    ? `Cloned line layout generated at zero balance base matrix state. Price: ₱${price.toFixed(2)}.`
+                const operationType = originalName ? "Copy" : "New Product";
+                const logNotes = originalName
+                    ? `Copied the metrics of ${originalName}`
                     : `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`;
 
                 db.history.push({
@@ -1013,7 +1014,6 @@
                 hbody.innerHTML = [...historyList].reverse().map(log => {
                     let badgeColor = "text-amber-600";
                     
-                    // Maps lookups nicely to support backward compatibility while prioritizing your new simplified label tags
                     if (log.type === 'New Product' || log.type === 'Addition' || log.type === 'Restock') badgeColor = "text-emerald-600";
                     if (log.type === 'Deletion') badgeColor = "text-rose-600";
                     if (log.type === 'Copy' || log.type === 'Clone / Copy') badgeColor = "text-sky-600";
