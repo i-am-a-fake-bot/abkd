@@ -779,6 +779,18 @@
       "price": 26,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_xzceffks6",
+      "name": "Bear Brand - Choco",
+      "category": "Beverage",
+      "cost": 99,
+      "units": 8,
+      "markup": 12,
+      "qty": 2,
+      "price": 14,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1915,6 +1927,13 @@
       "type": "Clone / Copy",
       "change": 1,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱26.00."
+    },
+    {
+      "time": 1781436848541,
+      "name": "Bear Brand - Choco",
+      "type": "Addition",
+      "change": 2,
+      "notes": "Initial stock addition under category: Beverage. Expiry: N/A."
     }
   ],
   "config": {
