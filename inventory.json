@@ -1031,6 +1031,18 @@
       "price": 12,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_swvu1cubg",
+      "name": "Joy - Dishwashing Liquid",
+      "category": "Household",
+      "cost": 120,
+      "units": 12,
+      "markup": 12,
+      "qty": 4,
+      "price": 13,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2335,6 +2347,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Saved item modifications without profile value adjustments."
+    },
+    {
+      "time": 1781438117098,
+      "name": "Joy - Dishwashing Liquid",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱13.00."
     }
   ],
   "config": {
