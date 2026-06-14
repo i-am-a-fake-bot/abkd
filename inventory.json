@@ -506,8 +506,8 @@
     },
     {
       "id": "id_h6b8lrye7",
-      "name": "Condiments - Knorr Cube - Beef",
-      "category": "Condiments",
+      "name": "Knorr Cube - Beef",
+      "category": "Pantry",
       "cost": 34.5,
       "units": 6,
       "markup": 12,
@@ -1387,6 +1387,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Knorr Cube - Shrimp\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434052530,
+      "name": "Knorr Cube - Beef",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Knorr Cube - Beef\", category updated to \"Pantry\"."
     }
   ],
   "config": {
