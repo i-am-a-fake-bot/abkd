@@ -144,7 +144,9 @@
                     <thead>
                         <tr class="bg-gray-50 border-b border-gray-100 text-gray-600 font-semibold text-sm">
                             <th class="p-4 w-16">Photo</th>
-                            <th class="p-4">Item Name</th>
+                            <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition w-1/3" onclick="toggleSort('name')">
+                                Item Name <span id="sort-icon-name" class="text-indigo-600 ml-1"></span>
+                            </th>
                             <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition" onclick="toggleSort('category')">
                                 Category <span id="sort-icon-category" class="text-indigo-600 ml-1"></span>
                             </th>
@@ -267,7 +269,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-3 gap-3">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Supplier Cost (₱)</label>
                         <input type="number" id="item-cost" step="0.01" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required min="0" oninput="calculateSRP(false)">
@@ -275,6 +277,10 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Units in Pack</label>
                         <input type="number" id="item-units" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="1" required min="1" oninput="calculateSRP(false)">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-emerald-700 font-semibold mb-1">Unit Cost</label>
+                        <input type="text" id="item-unit-cost" class="w-full p-2 border border-emerald-200 rounded bg-emerald-50/50 font-mono font-bold text-emerald-700 text-sm" readonly value="₱0.00">
                     </div>
                 </div>
 
@@ -289,14 +295,18 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-3 gap-3">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Current Stock</label>
                         <input type="number" id="item-qty" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required min="0">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-indigo-700 mb-1">Price (SRP)</label>
-                        <input type="number" id="item-price" step="0.01" class="w-full p-2 border border-indigo-300 rounded font-bold text-indigo-700 outline-none focus:ring-indigo-400" required min="0">
+                        <input type="number" id="item-price" step="0.01" class="w-full p-2 border border-indigo-300 rounded font-bold text-indigo-700 outline-none focus:ring-indigo-400" required min="0" oninput="calculateSRP(true)">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-teal-700 mb-1">Profit / Piece</label>
+                        <input type="text" id="item-unit-profit" class="w-full p-2 border border-teal-200 rounded bg-teal-50/60 font-mono font-bold text-teal-700 text-sm" readonly value="₱0.00">
                     </div>
                 </div>
 
@@ -324,8 +334,9 @@
         };
         let githubSha = null;
         
-        let currentSortColumn = 'none'; 
-        let currentSortDirection = 'none'; 
+        // Default base tracking configuration sets sorting alphabetical by default
+        let currentSortColumn = 'name'; 
+        let currentSortDirection = 'asc'; 
 
         function getGitHubCredentials() {
             return {
@@ -395,7 +406,6 @@
             alert('Application configurations updated and synced globally via GitHub!');
         }
 
-        // Native Unicode (UTF-8) Base64 Decoding Pipeline Implementation
         function safeDecodeBase64(base64String) {
             const binaryString = atob(base64String);
             const bytes = new Uint8Array(binaryString.length);
@@ -405,7 +415,6 @@
             return new TextDecoder('utf-8').decode(bytes);
         }
 
-        // Native Unicode (UTF-8) Base64 Encoding Pipeline Implementation
         function safeEncodeBase64(unicodeString) {
             const bytes = new TextEncoder().encode(unicodeString);
             let binaryString = '';
@@ -427,7 +436,6 @@
                 if (res.status === 200) {
                     const data = await res.json();
                     githubSha = data.sha;
-                    // Switch decoding from legacy atob to the Unicode safe text decoder stream
                     db = JSON.parse(safeDecodeBase64(data.content.replace(/\s/g, '')));
                 } else if (res.status === 404) {
                     db = { 
@@ -468,7 +476,6 @@
             const creds = getGitHubCredentials();
             const url = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
             
-            // Switch encoding payload generation to the safe Unicode byte stream
             const jsonString = JSON.stringify(db, null, 2);
             const payload = {
                 message: commitMessage,
@@ -538,13 +545,21 @@
 
             if (units <= 0) return;
 
+            // Metric 1: Clean calculated Unit Cost tracking
             const baseUnitCost = cost / units;
-            const recommendedPrice = baseUnitCost + (baseUnitCost * (markup / 100));
+            document.getElementById('item-unit-cost').value = "₱" + baseUnitCost.toFixed(2);
 
+            const recommendedPrice = baseUnitCost + (baseUnitCost * (markup / 100));
             document.getElementById('item-rec-price').value = "₱" + recommendedPrice.toFixed(2);
+            
             if (!keepCurrentSRP) {
                 document.getElementById('item-price').value = recommendedPrice.toFixed(2);
             }
+
+            // Metric 2: Live calculated net profit generation logic per item tracking row
+            const currentSRP = parseFloat(document.getElementById('item-price').value) || 0;
+            const pureNetProfit = currentSRP - baseUnitCost;
+            document.getElementById('item-unit-profit').value = "₱" + pureNetProfit.toFixed(2);
         }
 
         function formatExpiryDisplay(dateString) {
@@ -899,6 +914,7 @@
 
             let displayItems = [...inventoryList];
             
+            document.getElementById('sort-icon-name').innerHTML = '';
             document.getElementById('sort-icon-category').innerHTML = '';
             document.getElementById('sort-icon-stock').innerHTML = '';
             document.getElementById('sort-icon-expiry').innerHTML = '';
@@ -909,6 +925,7 @@
 
                 displayItems.sort((a, b) => {
                     let modifier = currentSortDirection === 'asc' ? 1 : -1;
+                    if (currentSortColumn === 'name') return (a.name || '').localeCompare(b.name || '') * modifier;
                     if (currentSortColumn === 'category') return (a.category || '').localeCompare(b.category || '') * modifier;
                     if (currentSortColumn === 'stock') return ((Number(a.qty) || 0) - (Number(b.qty) || 0)) * modifier;
                     if (currentSortColumn === 'expiry') {
