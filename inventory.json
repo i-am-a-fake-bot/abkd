@@ -22,6 +22,18 @@
       "price": 35,
       "image": "",
       "expiry": ""
+    },
+    {
+      "id": "id_be8p4bsvd",
+      "name": "Asukal - Segunda - 1/4 kg",
+      "category": "Condiments",
+      "cost": 136,
+      "units": 8,
+      "markup": 12,
+      "qty": 0,
+      "price": 22,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -224,6 +236,13 @@
     {
       "time": 1781409116963,
       "name": "Asukal - Segunda - 1/2",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781411628580,
+      "name": "Asukal - Segunda - 1/4 kg",
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
