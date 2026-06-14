@@ -578,8 +578,8 @@
     },
     {
       "id": "id_fj3pizt4a",
-      "name": "Condiments - Mama Sita's - Oyster Sauce",
-      "category": "Condiments",
+      "name": "Mama Sita's - Oyster Sauce",
+      "category": "Pantry",
       "cost": 72.35,
       "units": 12,
       "markup": 12,
@@ -1408,6 +1408,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Magic Sarap\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434084540,
+      "name": "Mama Sita's - Oyster Sauce",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Mama Sita's - Oyster Sauce\", category updated to \"Pantry\"."
     }
   ],
   "config": {
