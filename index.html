@@ -214,22 +214,33 @@
                     </form>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h3 class="text-base font-bold text-slate-800 border-b border-slate-50 pb-2 mb-4">🎨 Store Branding & Thresholds</h3>
-                    <form id="app-config-form" onsubmit="saveAppPreferences(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Store Display Name</label>
-                            <input type="text" id="cfg-store-name" placeholder="📦 ABKD Inventory" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Low Stock Alert Level (Units)</label>
-                            <input type="number" id="cfg-low-threshold" min="1" max="100" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                            <p class="text-[11px] text-gray-400 mt-1">Products with stock volumes less than or equal to this limit appear automatically inside the low alert matrix.</p>
-                        </div>
-                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded font-medium transition shadow">
-                            Apply View Adjustments
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-base font-bold text-slate-800 border-b border-slate-50 pb-2 mb-4">🎨 Store Branding & Thresholds</h3>
+                        <form id="app-config-form" onsubmit="saveAppPreferences(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Store Display Name</label>
+                                <input type="text" id="cfg-store-name" placeholder="📦 ABKD Inventory" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Low Stock Alert Level (Units)</label>
+                                <input type="number" id="cfg-low-threshold" min="1" max="100" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                                <p class="text-[11px] text-gray-400 mt-1">Products with stock volumes less than or equal to this limit appear automatically inside the low alert matrix.</p>
+                            </div>
+                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded font-medium transition shadow">
+                                Apply View Adjustments
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Force Sync Trigger Section -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-rose-100 bg-gradient-to-br from-white to-rose-50/20">
+                        <h3 class="text-base font-bold text-rose-800 border-b border-rose-100/50 pb-2 mb-2">🔄 Manual Live Sync</h3>
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">If updates saved from another mobile device or window are not appearing immediately, tap below to force clear local memory and stream the fresh repository matrix instantly.</p>
+                        <button onclick="forceSyncData()" id="btn-force-sync" class="w-full bg-white hover:bg-rose-50 text-rose-600 border border-rose-300 p-2.5 rounded-lg font-semibold tracking-wide text-sm transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
+                            ⚡ Force Sync Database
                         </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -310,7 +321,7 @@
     </div>
 
     <script>
-        // Default structure fallback incorporating synchronized metadata variables
+        // Default structure fallback
         let db = { 
             inventory: [], 
             history: [],
@@ -339,8 +350,6 @@
                 document.getElementById('setup-alert').classList.remove('hidden');
                 switchTab('settings');
                 document.getElementById('cfg-repo').value = creds.repo || 'abkd';
-                
-                // Fallback default rendering if credentials aren't saved yet
                 applyDatabasePreferences();
             } else {
                 document.getElementById('setup-alert').classList.add('hidden');
@@ -352,7 +361,6 @@
         }
 
         function applyDatabasePreferences() {
-            // Check if configurations exist inside the downloaded DB shell, otherwise load default properties
             if (!db.config) {
                 db.config = {
                     storeName: "📦 ABKD Inventory",
@@ -385,7 +393,6 @@
             const chosenName = document.getElementById('cfg-store-name').value.trim();
             const chosenThreshold = parseInt(document.getElementById('cfg-low-threshold').value) || 5;
 
-            // Save variables inside database object structure to initiate repository synchronization across endpoints
             db.config = {
                 storeName: chosenName,
                 lowThreshold: chosenThreshold
@@ -396,9 +403,11 @@
             alert('Application configurations updated and synced globally via GitHub!');
         }
 
-        async function fetchDataFromGitHub() {
+        async function fetchDataFromGitHub(bypassCache = false) {
             const creds = getGitHubCredentials();
-            const url = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
+            // If bypassCache flag is toggled, generate a timestamp query parameter to beat server/CDN nodes
+            const cacheBuster = bypassCache ? `?t=${Date.now()}` : '';
+            const url = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json${cacheBuster}`;
             
             try {
                 const res = await fetch(url, {
@@ -423,6 +432,26 @@
                 alert('Error fetching data from GitHub. Verify token and repository settings.');
                 console.error(err);
             }
+        }
+
+        async function forceSyncData() {
+            const syncBtn = document.getElementById('btn-force-sync');
+            const originalText = syncBtn.innerHTML;
+            
+            // Visual loading states
+            syncBtn.disabled = true;
+            syncBtn.innerHTML = "⏳ Fetching Live Matrix...";
+            syncBtn.classList.add('opacity-60');
+
+            // Force dynamic load bypassing CDN locks
+            await fetchDataFromGitHub(true);
+
+            setTimeout(() => {
+                syncBtn.disabled = false;
+                syncBtn.innerHTML = originalText;
+                syncBtn.classList.remove('opacity-60');
+                alert('Database refreshed! The absolute latest server modifications have been populated.');
+            }, 500);
         }
 
         async function pushDataToGitHub(commitMessage = "Inventory state updated") {
@@ -581,7 +610,6 @@
             document.getElementById('stat-inventory-cost').innerText = "₱" + totalInventoryCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('stat-potential-profit').innerText = "₱" + totalPotentialProfit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-            // Render Low Stock Items Table
             const dashLowStockTbody = document.getElementById('dash-lowstock-tbody');
             if (lowStockItems.length === 0) {
                 dashLowStockTbody.innerHTML = `
@@ -603,7 +631,6 @@
                 `).join('');
             }
 
-            // Render Out of Stock Items Table
             const dashOutOfStockTbody = document.getElementById('dash-outofstock-tbody');
             if (outOfStockItems.length === 0) {
                 dashOutOfStockTbody.innerHTML = `
