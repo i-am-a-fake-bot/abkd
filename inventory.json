@@ -230,8 +230,8 @@
     },
     {
       "id": "id_8uffvkwcb",
-      "name": "Biskwit - Skyflakes - Crackers",
-      "category": "Biskwit",
+      "name": "Skyflakes - Crackers",
+      "category": "Meryenda",
       "cost": 132,
       "units": 24,
       "markup": 12,
@@ -1296,6 +1296,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Rebisco - Strawberry Fill\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433857078,
+      "name": "Skyflakes - Crackers",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Skyflakes - Crackers\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
