@@ -27,7 +27,6 @@
             <p class="text-amber-700 font-medium">Action Required: Please head to the Settings tab (⚙️) to configure your GitHub Token and Repository details.</p>
         </div>
 
-        <!-- DASHBOARD TAB -->
         <section id="tab-dashboard" class="tab-content">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Summary</h2>
             
@@ -132,7 +131,6 @@
             </div>
         </section>
 
-        <!-- INVENTORY CATALOG TAB -->
         <section id="tab-inventory" class="tab-content hidden">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                 <h2 class="text-2xl font-bold text-gray-800">Inventory Catalog</h2>
@@ -141,7 +139,6 @@
                 </button>
             </div>
 
-            <!-- Filter Controls Container -->
             <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center mb-6">
                 <div class="relative flex-1 max-w-md flex items-center">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">🔍</span>
@@ -164,13 +161,10 @@
                 </div>
             </div>
             
-            <!-- Dynamic Grid Matrix for Inventory Cards -->
             <div id="inventory-card-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!-- Appended dynamically via JS execution -->
-            </div>
+                </div>
         </section>
 
-        <!-- TRANSACTION HISTORY TAB -->
         <section id="tab-history" class="tab-content hidden">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Transaction History</h2>
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
@@ -190,7 +184,6 @@
             </div>
         </section>
 
-        <!-- CONFIGURATION AND SYNC SETTINGS -->
         <section id="tab-settings" class="tab-content hidden">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Application Settings</h2>
             
@@ -247,7 +240,6 @@
         </section>
     </main>
 
-    <!-- NEW OR UPDATE PROFILE CONTEXT MODAL -->
     <div id="item-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto">
         <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 my-8">
             <h3 id="modal-title" class="text-xl font-bold text-gray-800 mb-4">Add New Item</h3>
@@ -331,7 +323,6 @@
         </div>
     </div>
 
-    <!-- MAIN APP CONFIGURATION ENGINE -->
     <script>
         let db = { 
             inventory: [], 
@@ -427,7 +418,7 @@
             const bytes = new TextEncoder().encode(unicodeString);
             let binaryString = '';
             for (let i = 0; i < bytes.length; i++) {
-                binaryString += String.fromCharCode(bytes[i]);
+                bytes[i] = binaryString.charCodeAt(i);
             }
             return btoa(binaryString);
         }
@@ -975,7 +966,7 @@
                 });
             }
 
-            // RENDERING CARDS WITH TEXT-ONLY BLOCK ACTION MATRIX
+            // RENDERING CARDS WITH IMPROVED RUBBER STAMP GRAPHIC Style
             const cardGrid = document.getElementById('inventory-card-grid');
             if (displayItems.length === 0) {
                 cardGrid.className = "block text-center p-12 bg-white rounded-xl border border-dashed text-gray-400 italic";
@@ -989,13 +980,16 @@
                     const isOOS = qtyVal === 0;
 
                     const imageTag = item.image 
-                        ? `<img src="${item.image}" class="w-full h-full object-cover transition duration-300 ${isOOS ? 'blur-[2px]' : ''}">`
+                        ? `<img src="${item.image}" class="w-full h-full object-cover transition duration-300 ${isOOS ? 'blur-[1.5px] opacity-80' : ''}">`
                         : `<div class="w-full h-full bg-slate-100 flex items-center justify-center text-3xl select-none">📦</div>`;
 
+                    // OUT OF STOCK STAMP TRANSLATED INTO AUTHENTIC RUBBER LOOK
                     const oosStamp = isOOS 
-                        ? `<div class="absolute inset-0 bg-white/30 flex items-center justify-center p-2 backdrop-blur-[0.5px] z-10">
-                                <div class="border-4 border-rose-600 text-rose-600 font-black text-[15px] uppercase px-2 py-1 rounded transform -rotate-12 bg-white/90 shadow-md select-none tracking-widest animate-pulse">
-                                    Out of Stock
+                        ? `<div class="absolute inset-0 bg-white/20 flex items-center justify-center p-2 z-10 select-none">
+                                <div class="border-2 border-double border-red-600 text-red-600 bg-white/80 font-black tracking-widest text-[11px] uppercase px-2 py-0.5 rounded shadow-sm transform -rotate-12 font-mono mix-blend-multiply opacity-90">
+                                    <div class="border border-red-600/30 px-1 py-0.5 font-extrabold">
+                                        OUT OF STOCK
+                                    </div>
                                 </div>
                            </div>`
                         : '';
@@ -1004,7 +998,7 @@
                     if (isOOS) {
                         stockBadgeClass = "bg-rose-100 text-rose-800 font-extrabold";
                     } else if (qtyVal <= lowStockThreshold) {
-                        stockBadgeClass = "bg-amber-100 text-amber-800 font-bold animate-pulse";
+                        stockBadgeClass = "bg-amber-100 text-amber-800 font-bold";
                     }
 
                     const expiryText = formatExpiryDisplay(item.expiry);
@@ -1013,7 +1007,6 @@
                     return `
                         <div class="relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition group">
                             
-                            <!-- COVER/IMAGE TOP SECTION -->
                             <div class="relative h-32 w-full bg-gray-50 flex items-center justify-center overflow-hidden border-b border-gray-100">
                                 ${imageTag}
                                 ${oosStamp}
@@ -1022,7 +1015,6 @@
                                 </span>
                             </div>
 
-                            <!-- SPEC DATA MIDDLE SECTION -->
                             <div class="p-3 flex-1 flex flex-col justify-between">
                                 <div>
                                     <h3 class="font-bold text-gray-800 text-sm tracking-tight line-clamp-2 leading-tight min-h-[2.5rem]" title="${item.name || 'Unnamed Item'}">
@@ -1043,9 +1035,7 @@
                                 </div>
                             </div>
 
-                            <!-- TEXT-ONLY BLOCK ACTION MATRIX -->
                             <div class="border-t border-gray-100 divide-y divide-gray-100 text-center text-xs font-semibold">
-                                <!-- ROW 1: RESTOCK | DESTOCK -->
                                 <div class="grid grid-cols-2 divide-x divide-gray-100">
                                     <button onclick="handleStockAdjust('${safeId}', 'restock')" class="py-2.5 bg-white text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 transition">
                                         Restock
@@ -1054,7 +1044,6 @@
                                         Destock
                                     </button>
                                 </div>
-                                <!-- ROW 2: EDIT | COPY -->
                                 <div class="grid grid-cols-2 divide-x divide-gray-100">
                                     <button onclick="openModal('${safeId}')" class="py-2.5 bg-white text-gray-600 hover:bg-gray-50 active:bg-gray-100 transition">
                                         Edit
@@ -1063,7 +1052,6 @@
                                         Copy
                                     </button>
                                 </div>
-                                <!-- ROW 3: DELETE -->
                                 <button onclick="deleteItem('${safeId}')" class="w-full py-2 bg-white text-rose-500 hover:bg-rose-50 active:bg-rose-100 transition text-[11px] font-medium tracking-wide">
                                     Delete
                                 </button>
