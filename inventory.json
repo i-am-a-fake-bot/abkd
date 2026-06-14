@@ -98,7 +98,7 @@
     },
     {
       "id": "id_t7qcxoc7z",
-      "name": "Combi - Choco",
+      "name": "Combi - Choco Fill",
       "category": "Meryenda",
       "cost": 60.75,
       "units": 10,
@@ -1345,6 +1345,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"V Fresh - 3 for ₱5\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433945422,
+      "name": "Combi - Choco Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Combi - Choco Fill\"."
     }
   ],
   "config": {
