@@ -86,7 +86,7 @@
     },
     {
       "id": "id_ekuw4nmkx",
-      "name": "Biskwit - Choco Mucho",
+      "name": "Choco Mucho Biscuit",
       "category": "Biskwit",
       "cost": 73.95,
       "units": 10,
@@ -1205,6 +1205,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433655472,
+      "name": "Choco Mucho Biscuit",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Choco Mucho Biscuit\"."
     }
   ],
   "config": {
