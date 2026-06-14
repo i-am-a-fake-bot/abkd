@@ -146,8 +146,8 @@
     },
     {
       "id": "id_laa54qbbv",
-      "name": "Biskwit - Hansel - Choco",
-      "category": "Biskwit",
+      "name": "Hansel - Choco",
+      "category": "Meryenda",
       "cost": 61.25,
       "units": 10,
       "markup": 12,
@@ -1240,6 +1240,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Fita - Crackers\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433742670,
+      "name": "Hansel - Choco",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Hansel - Choco\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
