@@ -611,6 +611,18 @@
       "price": 11,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_vgz6jj51m",
+      "name": "UFC Ketchup",
+      "category": "Pantry",
+      "cost": 10.75,
+      "units": 1,
+      "markup": 12,
+      "qty": 0,
+      "price": 12,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1607,6 +1619,13 @@
       "type": "Clone / Copy",
       "change": 2,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱11.00."
+    },
+    {
+      "time": 1781436031539,
+      "name": "UFC Ketchup",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Pantry. Expiry: N/A."
     }
   ],
   "config": {
