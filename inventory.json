@@ -122,7 +122,7 @@
     },
     {
       "id": "id_1lgc0aikk",
-      "name": "Biskwit - Cream-O - Vanilla",
+      "name": "Cream-O - Vanilla",
       "category": "Meryenda",
       "cost": 69.75,
       "units": 10,
@@ -1226,6 +1226,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Cream-O - Choco\"."
+    },
+    {
+      "time": 1781433711982,
+      "name": "Cream-O - Vanilla",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Cream-O - Vanilla\"."
     }
   ],
   "config": {
