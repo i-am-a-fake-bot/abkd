@@ -947,6 +947,18 @@
       "price": 15,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_r4ls2wnns",
+      "name": "Nescafe - Latte",
+      "category": "Beverage",
+      "cost": 119.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 15,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2187,6 +2199,13 @@
       "name": "Nescafe - Creamy White",
       "type": "Clone / Copy",
       "change": 6,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱15.00."
+    },
+    {
+      "time": 1781437548241,
+      "name": "Nescafe - Latte",
+      "type": "Clone / Copy",
+      "change": 4,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱15.00."
     }
   ],
