@@ -716,7 +716,7 @@
       "units": 6,
       "markup": 12,
       "qty": 3,
-      "price": 26,
+      "price": 25,
       "expiry": "",
       "image": ""
     }
@@ -1813,6 +1813,13 @@
       "type": "Clone / Copy",
       "change": 3,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱26.00."
+    },
+    {
+      "time": 1781436627159,
+      "name": "Mega Sardines - Green",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: price updated to ₱25.00."
     }
   ],
   "config": {
