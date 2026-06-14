@@ -132,11 +132,18 @@
         </section>
 
         <section id="tab-inventory" class="tab-content hidden">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                 <h2 class="text-2xl font-bold text-gray-800">Inventory Items</h2>
                 <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium shadow transition">
                     + Add New Item
                 </button>
+            </div>
+
+            <div class="mb-4">
+                <div class="relative max-w-md">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">🔍</span>
+                    <input type="text" id="inventory-search" oninput="renderApp()" placeholder="Search item name or category..." class="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
+                </div>
             </div>
             
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
@@ -247,6 +254,7 @@
             <form id="item-form" onsubmit="saveItem(event)" class="space-y-4">
                 <input type="hidden" id="item-id">
                 <input type="hidden" id="item-image-base64">
+                <input type="hidden" id="item-is-clone" value="false">
                 
                 <div class="bg-gray-50 border border-dashed border-gray-300 rounded-lg p-3 text-center">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Item Image (Optional)</label>
@@ -609,6 +617,7 @@
             form.reset();
             document.getElementById('item-id').value = '';
             document.getElementById('item-image-base64').value = '';
+            document.getElementById('item-is-clone').value = 'false';
             document.getElementById('image-preview-container').innerHTML = 'No Img';
             
             if (id) {
@@ -649,6 +658,7 @@
             form.reset();
 
             document.getElementById('item-id').value = '';
+            document.getElementById('item-is-clone').value = 'true'; // Force true context flag tag
             
             document.getElementById('modal-title').innerText = `Clone: ${item.name}`;
             document.getElementById('item-name').value = (item.name || '') + ' (Copy)';
@@ -658,7 +668,7 @@
             document.getElementById('item-markup').value = item.markup || 12;
             document.getElementById('item-price').value = item.price || 0;
             document.getElementById('item-expiry').value = item.expiry || '';
-            document.getElementById('item-qty').value = 0; // Clones start at 0 stock volume until replenished
+            document.getElementById('item-qty').value = 0;
 
             if (item.image) {
                 document.getElementById('item-image-base64').value = item.image;
@@ -688,18 +698,17 @@
             const price = parseFloat(document.getElementById('item-price').value) || 0;
             const expiry = document.getElementById('item-expiry').value;
             const image = document.getElementById('item-image-base64').value;
+            const isClone = document.getElementById('item-is-clone').value === 'true';
 
             if (!db.inventory) db.inventory = [];
             if (!db.history) db.history = [];
 
             if (id) {
-                // Item details are being edited
                 const idx = db.inventory.findIndex(i => i.id === id);
                 if (idx !== -1) {
                     const oldItem = db.inventory[idx];
                     const oldQty = oldItem.qty || 0;
                     
-                    // Track structural changes for the history slip notes text block
                     let changesMade = [];
                     if (oldItem.name !== name) changesMade.push(`renamed to "${name}"`);
                     if (oldItem.price !== price) changesMade.push(`price updated to ₱${price.toFixed(2)}`);
@@ -712,7 +721,6 @@
 
                     db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry, image };
                     
-                    // Log the structural product modification directly into the ledger grid stream
                     db.history.push({
                         time: Date.now(),
                         name: name,
@@ -724,13 +732,12 @@
                     pushDataToGitHub(`Modified details for product: ${name}`);
                 }
             } else {
-                // This covers BOTH fresh entries and cloned item generation workflows
                 const newId = "id_" + Math.random().toString(36).substr(2, 9);
                 db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price, expiry, image });
                 
-                // Inspect item text string context to categorize as standard Addition vs structural Clone ledger slip
-                const operationType = name.endsWith('(Copy)') ? "Clone / Copy" : "Addition";
-                const logNotes = operationType === "Clone / Copy"
+                // Uses explicit internal flag tag instead of checking name text strings
+                const operationType = isClone ? "Clone / Copy" : "Addition";
+                const logNotes = isClone
                     ? `Cloned line layout generated at zero balance base matrix state. Price: ₱${price.toFixed(2)}.`
                     : `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`;
 
@@ -932,7 +939,13 @@
                 }).join('');
             }
 
-            let displayItems = [...inventoryList];
+            // Apply Smart Search Filter Logic 
+            let query = (document.getElementById('inventory-search')?.value || '').trim().toLowerCase();
+            let displayItems = inventoryList.filter(item => {
+                let nameMatch = (item.name || '').toLowerCase().includes(query);
+                let catMatch = (item.category || '').toLowerCase().includes(query);
+                return nameMatch || catMatch;
+            });
             
             document.getElementById('sort-icon-name').innerHTML = '';
             document.getElementById('sort-icon-category').innerHTML = '';
@@ -960,7 +973,7 @@
 
             const tbody = document.getElementById('inventory-table-body');
             if (displayItems.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-gray-400 italic">No inventory items found. Click "+ Add New Item" to start!</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-gray-400 italic">No matching products found. Filter values or clear the query!</td></tr>`;
             } else {
                 tbody.innerHTML = displayItems.map(item => {
                     const itemId = item.id || 'err_' + Math.random().toString(36).substr(2, 5);
