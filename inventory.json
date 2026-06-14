@@ -34,6 +34,18 @@
       "price": 22,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_0zoas22c6",
+      "name": "Atbp - Kandila - Medium",
+      "category": "Atbp",
+      "cost": 53.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 10,
+      "price": 6.02,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -246,6 +258,13 @@
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781411692144,
+      "name": "Atbp - Kandila - Medium",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
     }
   ],
   "config": {
