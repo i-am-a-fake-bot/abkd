@@ -194,8 +194,8 @@
     },
     {
       "id": "id_w16nwla60",
-      "name": "Biskwit - Nissin Choco - Wafer",
-      "category": "Biskwit",
+      "name": "Nissin Choco - Wafer",
+      "category": "Meryenda",
       "cost": 54.25,
       "units": 25,
       "markup": 12,
@@ -1268,6 +1268,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Hello - Wafer - Choco\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433800302,
+      "name": "Nissin Choco - Wafer",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Nissin Choco - Wafer\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
