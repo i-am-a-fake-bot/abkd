@@ -214,5 +214,9 @@
       "change": 1,
       "notes": "Bulk restock transaction."
     }
-  ]
+  ],
+  "config": {
+    "storeName": "📦 ABKD Inventory",
+    "lowThreshold": 3
+  }
 }
