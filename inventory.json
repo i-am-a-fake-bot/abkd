@@ -134,8 +134,8 @@
     },
     {
       "id": "id_tys2atsrh",
-      "name": "Biskwit - Fita - Crackers",
-      "category": "Biskwit",
+      "name": "Fita - Crackers",
+      "category": "Meryenda",
       "cost": 50.5,
       "units": 10,
       "markup": 12,
@@ -1233,6 +1233,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Cream-O - Vanilla\"."
+    },
+    {
+      "time": 1781433732767,
+      "name": "Fita - Crackers",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Fita - Crackers\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
