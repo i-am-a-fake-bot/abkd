@@ -87,7 +87,7 @@
     {
       "id": "id_ekuw4nmkx",
       "name": "Choco Mucho Biscuit",
-      "category": "Biskwit",
+      "category": "Meryenda",
       "cost": 73.95,
       "units": 10,
       "markup": 12,
@@ -1562,6 +1562,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Victoria - Segunda - 1/4\"."
+    },
+    {
+      "time": 1781434564301,
+      "name": "Choco Mucho Biscuit",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Meryenda\"."
     }
   ],
   "config": {
