@@ -743,6 +743,18 @@
       "price": 40,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_2a14spm80",
+      "name": "San Marino - Chili",
+      "category": "De Lata",
+      "cost": 36.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 40,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1855,6 +1867,13 @@
     {
       "time": 1781436690496,
       "name": "San Marino - Red",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱40.00."
+    },
+    {
+      "time": 1781436707873,
+      "name": "San Marino - Chili",
       "type": "Clone / Copy",
       "change": 3,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱40.00."
