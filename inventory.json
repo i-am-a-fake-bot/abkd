@@ -410,8 +410,8 @@
     },
     {
       "id": "id_ib7ygi9tr",
-      "name": "Snacks - Peewee - BBQ",
-      "category": "Snacks",
+      "name": "Peewee - BBQ",
+      "category": "Meryenda",
       "cost": 7,
       "units": 1,
       "markup": 12,
@@ -1541,6 +1541,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Steel Wool\"."
+    },
+    {
+      "time": 1781434431807,
+      "name": "Peewee - BBQ",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Peewee - BBQ\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
