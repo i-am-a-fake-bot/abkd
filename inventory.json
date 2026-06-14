@@ -206,8 +206,8 @@
     },
     {
       "id": "id_vvyz546og",
-      "name": "Biskwit - Rebisco - Butter",
-      "category": "Biskwit",
+      "name": "Rebisco - Butter Fill",
+      "category": "Meryenda",
       "cost": 61.25,
       "units": 10,
       "markup": 12,
@@ -1275,6 +1275,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Nissin Choco - Wafer\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433813463,
+      "name": "Rebisco - Butter Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Rebisco - Butter Fill\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
