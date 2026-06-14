@@ -386,7 +386,7 @@
     },
     {
       "id": "id_z3v9ymc3u",
-      "name": "Wings Detergent",
+      "name": "Wings Detergent - Powder",
       "category": "Panlaba",
       "cost": 38,
       "units": 6,
@@ -1492,6 +1492,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Mighty - Green\"."
+    },
+    {
+      "time": 1781434302360,
+      "name": "Wings Detergent - Powder",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Wings Detergent - Powder\"."
     }
   ],
   "config": {
