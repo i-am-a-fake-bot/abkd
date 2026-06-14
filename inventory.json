@@ -114,7 +114,7 @@
       "cost": 74.25,
       "units": 10,
       "markup": 12,
-      "qty": 4,
+      "qty": 0,
       "price": 9,
       "expiry": "",
       "image": ""
@@ -398,6 +398,13 @@
       "type": "Addition",
       "change": 4,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414021329,
+      "name": "Biskwit - Cream-O - Choco",
+      "type": "Sale / Usage",
+      "change": -4,
+      "notes": "Bulk reduction transaction."
     }
   ],
   "config": {
