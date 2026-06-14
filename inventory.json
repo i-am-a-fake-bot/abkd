@@ -446,7 +446,7 @@
     },
     {
       "id": "id_jzlffg4v5",
-      "name": "Panligo - Head & Shoulders - Green",
+      "name": "Head & Shoulders - Green",
       "category": "Panligo",
       "cost": 90,
       "units": 12,
@@ -1457,6 +1457,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Wings Detergent\"."
+    },
+    {
+      "time": 1781434231928,
+      "name": "Head & Shoulders - Green",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Head & Shoulders - Green\"."
     }
   ],
   "config": {
