@@ -302,8 +302,8 @@
     },
     {
       "id": "id_iez9uu61t",
-      "name": "Candy - V Fresh - 3 for ₱5",
-      "category": "Candy",
+      "name": "V Fresh - 3 for ₱5",
+      "category": "Meryenda",
       "cost": 39.4,
       "units": 24,
       "markup": 12,
@@ -1338,6 +1338,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Potchii - 3 for ₱5\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433933985,
+      "name": "V Fresh - 3 for ₱5",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"V Fresh - 3 for ₱5\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
