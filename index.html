@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store Inventory PWA</title>
-    <!-- Restored rock-solid styling engine layout to prevent initialization blocks -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="manifest" href="manifest.json">
+    <link class="manifest" href="manifest.json">
     <meta name="theme-color" content="#4f46e5">
 </head>
 <body class="bg-gray-50 font-sans min-h-screen pb-12">
@@ -31,7 +30,6 @@
         <section id="tab-dashboard" class="tab-content">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Summary</h2>
             
-            <!-- Financial Summary Matrix Row -->
             <div class="grid grid-cols-3 gap-4 mb-4">
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Retail Value</p>
@@ -47,7 +45,6 @@
                 </div>
             </div>
 
-            <!-- Stock Metrics Nested Layout Block -->
             <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 mb-6">
                 <p class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2 mb-4">📦 Stock Metrics</p>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -70,9 +67,7 @@
                 </div>
             </div>
 
-            <!-- Side-by-Side Critical Stock Monitors Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <!-- Low Stock Items Live Monitor Viewport -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                     <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⚠️ Low Stock Items</h3>
                     <div class="overflow-x-auto">
@@ -93,7 +88,6 @@
                     </div>
                 </div>
 
-                <!-- Out of Stock Items Live Monitor Viewport -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                     <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">🚨 Out of Stock Items</h3>
                     <div class="overflow-x-auto">
@@ -115,7 +109,6 @@
                 </div>
             </div>
 
-            <!-- Expiring Soon Panel Monitor -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                 <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⏳ Expiring Soon (Next 30 Days)</h3>
                 <div class="overflow-x-auto">
@@ -234,7 +227,6 @@
                         </form>
                     </div>
 
-                    <!-- Force Sync Trigger Section -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-rose-100 bg-gradient-to-br from-white to-rose-50/20">
                         <h3 class="text-base font-bold text-rose-800 border-b border-rose-100/50 pb-2 mb-2">🔄 Manual Live Sync</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">If updates saved from another mobile device or window are not appearing immediately, tap below to force clear local memory and stream the fresh repository matrix instantly.</p>
@@ -322,7 +314,6 @@
     </div>
 
     <script>
-        // Data structural setup
         let db = { 
             inventory: [], 
             history: [],
@@ -614,6 +605,43 @@
             modal.classList.remove('hidden');
         }
 
+        // Fresh Cloner Layout Controller Block
+        function cloneItemToNewForm(id) {
+            const item = db.inventory.find(i => i.id === id);
+            if (!item) return;
+
+            const modal = document.getElementById('item-modal');
+            const form = document.getElementById('item-form');
+            form.reset();
+
+            // Explicitly leave the item-id hidden parameter BLANK so the app saves it as an addition
+            document.getElementById('item-id').value = '';
+            
+            // Duplicate original catalog specs to simplify multi-variant registration
+            document.getElementById('modal-title').innerText = `Clone: ${item.name}`;
+            document.getElementById('item-name').value = item.name || '';
+            document.getElementById('item-category').value = item.category || '';
+            document.getElementById('item-cost').value = item.cost || 0;
+            document.getElementById('item-units').value = item.units || 1;
+            document.getElementById('item-markup').value = item.markup || 12;
+            document.getElementById('item-price').value = item.price || 0;
+            document.getElementById('item-expiry').value = item.expiry || '';
+            
+            // Set stock to 0 by default so you don't accidentally inherit inventory tallies
+            document.getElementById('item-qty').value = 0;
+
+            if (item.image) {
+                document.getElementById('item-image-base64').value = item.image;
+                document.getElementById('image-preview-container').innerHTML = `<img src="${item.image}" class="w-full h-full object-cover">`;
+            } else {
+                document.getElementById('item-image-base64').value = '';
+                document.getElementById('image-preview-container').innerHTML = 'No Img';
+            }
+
+            calculateSRP(true);
+            modal.classList.remove('hidden');
+        }
+
         function closeModal() {
             document.getElementById('item-modal').classList.add('hidden');
         }
@@ -890,6 +918,7 @@
                     const expiryStyle = getExpiryBadgeStyle(item.expiry);
                     const qtyVal = Number(item.qty) || 0;
 
+                    // Expanded action button framework matrix layout block
                     return `
                         <tr class="hover:bg-gray-50 border-b border-gray-100">
                             <td class="p-4">${imageTag}</td>
@@ -899,11 +928,12 @@
                             <td class="p-4 text-sm font-mono font-bold text-indigo-600">₱${(Number(item.price) || 0).toFixed(2)}</td>
                             <td class="p-4 text-sm"><span class="${expiryStyle}">${expiryText}</span></td>
                             <td class="p-2 text-center">
-                                <div class="grid grid-cols-2 gap-1.5 max-w-[150px] mx-auto">
+                                <div class="grid grid-cols-2 gap-1.5 max-w-[160px] mx-auto">
                                     <button onclick="handleStockAdjust('${safeId}', 'restock')" class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 p-1 rounded text-[11px] font-bold transition">Add</button>
                                     <button onclick="handleStockAdjust('${safeId}', 'reduce')" class="bg-amber-50 text-amber-700 hover:bg-amber-100 p-1 rounded text-[11px] font-bold transition">Less</button>
                                     <button onclick="openModal('${safeId}')" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 p-1 rounded text-[11px] font-medium transition">Edit</button>
-                                    <button onclick="deleteItem('${safeId}')" class="bg-rose-50 text-rose-600 hover:bg-rose-100 p-1 rounded text-[11px] font-medium transition">Del</button>
+                                    <button onclick="cloneItemToNewForm('${safeId}')" class="bg-sky-50 text-sky-700 hover:bg-sky-100 p-1 rounded text-[11px] font-bold transition">Copy</button>
+                                    <button onclick="deleteItem('${safeId}')" class="bg-rose-50 text-rose-600 hover:bg-rose-100 p-1 rounded text-[11px] font-medium transition col-span-2">Delete Item</button>
                                 </div>
                             </td>
                         </tr>
