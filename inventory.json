@@ -1000,8 +1000,8 @@
       "id": "id_pgb5lz5vf",
       "name": "Lucky Me - Noodles - Beef - Spicy Labuyo",
       "category": "Pantry",
-      "cost": 10.25,
-      "units": 1,
+      "cost": 61.5,
+      "units": 6,
       "markup": 12,
       "qty": 3,
       "price": 12,
@@ -2328,6 +2328,13 @@
       "type": "Clone / Copy",
       "change": 0,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱12.00."
+    },
+    {
+      "time": 1781438041992,
+      "name": "Lucky Me - Noodles - Beef - Spicy Labuyo",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Saved item modifications without profile value adjustments."
     }
   ],
   "config": {
