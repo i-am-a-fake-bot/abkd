@@ -326,7 +326,7 @@
     },
     {
       "id": "id_5nmvq5nao",
-      "name": "Yosi - Marlboro - Red",
+      "name": "Marlboro - Red",
       "category": "Yosi",
       "cost": 177,
       "units": 20,
@@ -1478,6 +1478,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Fortune - Green\"."
+    },
+    {
+      "time": 1781434281410,
+      "name": "Marlboro - Red",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Marlboro - Red\"."
     }
   ],
   "config": {
