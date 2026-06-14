@@ -899,6 +899,18 @@
       "price": 16,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_ksmvpw2ab",
+      "name": "Kopiko - Blanca",
+      "category": "Beverage",
+      "cost": 271.5,
+      "units": 20,
+      "markup": 12,
+      "qty": 6,
+      "price": 16,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2111,6 +2123,13 @@
       "name": "Great Taste - White",
       "type": "Clone / Copy",
       "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
+    },
+    {
+      "time": 1781437422488,
+      "name": "Kopiko - Blanca",
+      "type": "Clone / Copy",
+      "change": 6,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
     }
   ],
