@@ -30,6 +30,7 @@
         <section id="tab-dashboard" class="tab-content">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Summary</h2>
             
+            <!-- Financial Summary Matrix Row -->
             <div class="grid grid-cols-3 gap-4 mb-4">
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Retail Value</p>
@@ -45,6 +46,7 @@
                 </div>
             </div>
 
+            <!-- Stock Metrics Nested Layout Block -->
             <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 mb-6">
                 <p class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2 mb-4">📦 Stock Metrics</p>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -67,7 +69,9 @@
                 </div>
             </div>
 
+            <!-- Side-by-Side Critical Stock Monitors Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- Low Stock Items Live Monitor Viewport -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                     <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⚠️ Low Stock Items</h3>
                     <div class="overflow-x-auto">
@@ -88,6 +92,7 @@
                     </div>
                 </div>
 
+                <!-- Out of Stock Items Live Monitor Viewport -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                     <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">🚨 Out of Stock Items</h3>
                     <div class="overflow-x-auto">
@@ -109,6 +114,7 @@
                 </div>
             </div>
 
+            <!-- Expiring Soon Panel Monitor -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                 <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⏳ Expiring Soon (Next 30 Days)</h3>
                 <div class="overflow-x-auto">
@@ -213,7 +219,7 @@
                     <form id="app-config-form" onsubmit="saveAppPreferences(event)" class="space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Store Display Name</label>
-                            <input type="text" id="cfg-store-name" placeholder="e.g. 📦 ABKD Inventory" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                            <input type="text" id="cfg-store-name" placeholder="📦 ABKD Inventory" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Low Stock Alert Level (Units)</label>
@@ -304,42 +310,61 @@
     </div>
 
     <script>
-        let db = { inventory: [], history: [] };
+        // Default structure fallback incorporating synchronized metadata variables
+        let db = { 
+            inventory: [], 
+            history: [],
+            config: {
+                storeName: "📦 ABKD Inventory",
+                lowThreshold: 5
+            }
+        };
         let githubSha = null;
         
         let currentSortColumn = 'none'; 
         let currentSortDirection = 'none'; 
 
-        function getConfigs() {
+        function getGitHubCredentials() {
             return {
                 token: localStorage.getItem('gh_token'),
                 user: localStorage.getItem('gh_user'),
-                repo: localStorage.getItem('gh_repo') || 'abkd',
-                storeName: localStorage.getItem('app_store_name') || '📦 ABKD Inventory',
-                lowThreshold: parseInt(localStorage.getItem('app_low_threshold')) || 5
+                repo: localStorage.getItem('gh_repo') || 'abkd'
             };
         }
 
         function init() {
-            const cfg = getConfigs();
-            
-            document.getElementById('app-store-title').innerText = cfg.storeName;
-            document.getElementById('lbl-low-threshold').innerText = cfg.lowThreshold;
-            
-            document.getElementById('cfg-store-name').value = cfg.storeName;
-            document.getElementById('cfg-low-threshold').value = cfg.lowThreshold;
+            const creds = getGitHubCredentials();
 
-            if (!cfg.token || !cfg.user) {
+            if (!creds.token || !creds.user) {
                 document.getElementById('setup-alert').classList.remove('hidden');
                 switchTab('settings');
-                document.getElementById('cfg-repo').value = cfg.repo || 'abkd';
+                document.getElementById('cfg-repo').value = creds.repo || 'abkd';
+                
+                // Fallback default rendering if credentials aren't saved yet
+                applyDatabasePreferences();
             } else {
                 document.getElementById('setup-alert').classList.add('hidden');
-                document.getElementById('cfg-token').value = cfg.token;
-                document.getElementById('cfg-username').value = cfg.user;
-                document.getElementById('cfg-repo').value = cfg.repo;
+                document.getElementById('cfg-token').value = creds.token;
+                document.getElementById('cfg-username').value = creds.user;
+                document.getElementById('cfg-repo').value = creds.repo;
                 fetchDataFromGitHub();
             }
+        }
+
+        function applyDatabasePreferences() {
+            // Check if configurations exist inside the downloaded DB shell, otherwise load default properties
+            if (!db.config) {
+                db.config = {
+                    storeName: "📦 ABKD Inventory",
+                    lowThreshold: 5
+                };
+            }
+
+            document.getElementById('app-store-title').innerText = db.config.storeName;
+            document.getElementById('lbl-low-threshold').innerText = db.config.lowThreshold;
+            
+            document.getElementById('cfg-store-name').value = db.config.storeName;
+            document.getElementById('cfg-low-threshold').value = db.config.lowThreshold;
         }
 
         function switchTab(tabId) {
@@ -360,30 +385,39 @@
             const chosenName = document.getElementById('cfg-store-name').value.trim();
             const chosenThreshold = parseInt(document.getElementById('cfg-low-threshold').value) || 5;
 
-            localStorage.setItem('app_store_name', chosenName);
-            localStorage.setItem('app_low_threshold', chosenThreshold);
+            // Save variables inside database object structure to initiate repository synchronization across endpoints
+            db.config = {
+                storeName: chosenName,
+                lowThreshold: chosenThreshold
+            };
             
-            init();
-            renderApp();
-            alert('Application configurations updated successfully!');
+            applyDatabasePreferences();
+            pushDataToGitHub("Updated application threshold configurations globally");
+            alert('Application configurations updated and synced globally via GitHub!');
         }
 
         async function fetchDataFromGitHub() {
-            const cfg = getConfigs();
-            const url = `https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/inventory.json`;
+            const creds = getGitHubCredentials();
+            const url = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
             
             try {
                 const res = await fetch(url, {
-                    headers: { 'Authorization': `token ${cfg.token}` }
+                    headers: { 'Authorization': `token ${creds.token}` }
                 });
                 if (res.status === 200) {
                     const data = await res.json();
                     githubSha = data.sha;
                     db = JSON.parse(atob(data.content));
                 } else if (res.status === 404) {
-                    db = { inventory: [], history: [] };
+                    db = { 
+                        inventory: [], 
+                        history: [],
+                        config: { storeName: "📦 ABKD Inventory", lowThreshold: 5 }
+                    };
                     githubSha = null;
                 }
+                
+                applyDatabasePreferences();
                 renderApp();
             } catch (err) {
                 alert('Error fetching data from GitHub. Verify token and repository settings.');
@@ -392,8 +426,8 @@
         }
 
         async function pushDataToGitHub(commitMessage = "Inventory state updated") {
-            const cfg = getConfigs();
-            const url = `https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/inventory.json`;
+            const creds = getGitHubCredentials();
+            const url = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
             
             const payload = {
                 message: commitMessage,
@@ -405,7 +439,7 @@
                 const res = await fetch(url, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${cfg.token}`,
+                        'Authorization': `token ${creds.token}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(payload)
@@ -517,8 +551,7 @@
         }
 
         function renderApp() {
-            const cfg = getConfigs();
-            const lowStockThreshold = cfg.lowThreshold;
+            const lowStockThreshold = db.config?.lowThreshold || 5;
 
             const totalItems = db.inventory.length;
             const totalStock = db.inventory.reduce((acc, curr) => acc + Number(curr.qty), 0);
