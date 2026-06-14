@@ -190,6 +190,18 @@
       "price": 7,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_w16nwla60",
+      "name": "Biskwit - Nissin Choco - Wafer",
+      "category": "Biskwit",
+      "cost": 54.25,
+      "units": 25,
+      "markup": 12,
+      "qty": 0,
+      "price": 5,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -497,6 +509,13 @@
     {
       "time": 1781414324194,
       "name": "Biskwit - Nissin Butter Coconut",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414366739,
+      "name": "Biskwit - Nissin Choco - Wafer",
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
