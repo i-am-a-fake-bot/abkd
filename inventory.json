@@ -575,6 +575,18 @@
       "price": 6,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_fj3pizt4a",
+      "name": "Condiments - Mama Sita's - Oyster Sauce",
+      "category": "Condiments",
+      "cost": 72.35,
+      "units": 12,
+      "markup": 12,
+      "qty": 12,
+      "price": 8,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1150,6 +1162,13 @@
       "name": "Condiments - Magic Sarap",
       "type": "Addition",
       "change": 10,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781433101309,
+      "name": "Condiments - Mama Sita's - Oyster Sauce",
+      "type": "Addition",
+      "change": 12,
       "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
     }
   ],
