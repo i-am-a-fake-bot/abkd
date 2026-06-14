@@ -12,7 +12,8 @@
 
     <nav class="bg-indigo-600 text-white p-4 shadow-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-tight">📦 ABKD Inventory</h1>
+            <!-- Dynamic Store Title Label -->
+            <h1 id="app-store-title" class="text-xl font-bold tracking-tight">📦 ABKD Inventory</h1>
             <div class="space-x-2">
                 <button onclick="switchTab('dashboard')" class="px-3 py-1.5 rounded hover:bg-indigo-700 transition">Dashboard</button>
                 <button onclick="switchTab('inventory')" class="px-3 py-1.5 rounded hover:bg-indigo-700 transition">Items</button>
@@ -30,6 +31,7 @@
         <section id="tab-dashboard" class="tab-content">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Summary</h2>
             
+            <!-- Financial Summary Matrix Row -->
             <div class="grid grid-cols-3 gap-4 mb-4">
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Retail Value</p>
@@ -45,6 +47,7 @@
                 </div>
             </div>
 
+            <!-- Stock Metrics Nested Layout Block -->
             <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 mb-8">
                 <p class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2 mb-4">📦 Stock Metrics</p>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -57,7 +60,8 @@
                         <p id="stat-total-stock" class="text-xl font-black text-slate-700 mt-1">0</p>
                     </div>
                     <div>
-                        <p class="text-xs font-medium text-gray-500">Low Stock (&lt; 5)</p>
+                        <!-- Dynamic Label Threshold View -->
+                        <p class="text-xs font-medium text-gray-500">Low Stock (<span id="lbl-low-threshold">5</span>)</p>
                         <p id="stat-low-stock" class="text-xl font-black text-amber-500 mt-1">0</p>
                     </div>
                     <div>
@@ -67,6 +71,7 @@
                 </div>
             </div>
 
+            <!-- Low Stock Items Live Monitor Viewport -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 mb-6">
                 <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⚠️ Low Stock Items</h3>
                 <div class="overflow-x-auto">
@@ -87,6 +92,7 @@
                 </div>
             </div>
 
+            <!-- Expiring Soon Panel Monitor -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                 <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⏳ Expiring Soon (Next 30 Days)</h3>
                 <div class="overflow-x-auto">
@@ -162,25 +168,49 @@
         </section>
 
         <section id="tab-settings" class="tab-content hidden">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">GitHub Database Configuration</h2>
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-xl">
-                <form id="settings-form" onsubmit="saveSettings(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">GitHub Personal Access Token</label>
-                        <input type="password" id="cfg-token" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">GitHub Username</label>
-                        <input type="text" id="cfg-username" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Repository Name</label>
-                        <input type="text" id="cfg-repo" value="abkd" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                    </div>
-                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded font-medium transition shadow">
-                        Save Configurations & Sync
-                    </button>
-                </form>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Application Settings</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                <!-- Left Column: Database Sync -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="text-base font-bold text-slate-800 border-b border-slate-50 pb-2 mb-4">🔗 GitHub Database Configuration</h3>
+                    <form id="settings-form" onsubmit="saveSettings(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">GitHub Personal Access Token</label>
+                            <input type="password" id="cfg-token" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">GitHub Username</label>
+                            <input type="text" id="cfg-username" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Repository Name</label>
+                            <input type="text" id="cfg-repo" value="abkd" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded font-medium transition shadow">
+                            Save Data Connections
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Column: App Layout Customizer panel (New Section Requested!) -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="text-base font-bold text-slate-800 border-b border-slate-50 pb-2 mb-4">🎨 Store Branding & Thresholds</h3>
+                    <form id="app-config-form" onsubmit="saveAppPreferences(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Store Display Name</label>
+                            <input type="text" id="cfg-store-name" placeholder="e.g. 📦 ABKD Inventory" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Low Stock Alert Level (Units)</label>
+                            <input type="number" id="cfg-low-threshold" min="1" max="100" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                            <p class="text-[11px] text-gray-400 mt-1">Products with stock volumes strict below this limit appear automatically inside the low alert matrix.</p>
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded font-medium transition shadow">
+                            Apply View Adjustments
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
@@ -270,12 +300,24 @@
             return {
                 token: localStorage.getItem('gh_token'),
                 user: localStorage.getItem('gh_user'),
-                repo: localStorage.getItem('gh_repo') || 'abkd'
+                repo: localStorage.getItem('gh_repo') || 'abkd',
+                // Runtime Config fallbacks if not yet initialized in localStorage
+                storeName: localStorage.getItem('app_store_name') || '📦 ABKD Inventory',
+                lowThreshold: parseInt(localStorage.getItem('app_low_threshold')) || 5
             };
         }
 
         function init() {
             const cfg = getConfigs();
+            
+            // Apply preferences to live document tree components instantly
+            document.getElementById('app-store-title').innerText = cfg.storeName;
+            document.getElementById('lbl-low-threshold').innerText = cfg.lowThreshold;
+            
+            // Populate Form Layout Fields
+            document.getElementById('cfg-store-name').value = cfg.storeName;
+            document.getElementById('cfg-low-threshold').value = cfg.lowThreshold;
+
             if (!cfg.token || !cfg.user) {
                 document.getElementById('setup-alert').classList.remove('hidden');
                 switchTab('settings');
@@ -300,6 +342,21 @@
             localStorage.setItem('gh_user', document.getElementById('cfg-username').value.trim());
             localStorage.setItem('gh_repo', document.getElementById('cfg-repo').value.trim());
             init();
+        }
+
+        // Handle App Specific Operational preferences
+        function saveAppPreferences(e) {
+            e.preventDefault();
+            const chosenName = document.getElementById('cfg-store-name').value.trim();
+            const chosenThreshold = parseInt(document.getElementById('cfg-low-threshold').value) || 5;
+
+            localStorage.setItem('app_store_name', chosenName);
+            localStorage.setItem('app_low_threshold', chosenThreshold);
+            
+            // Rerender layout updates with updated definitions
+            init();
+            renderApp();
+            alert('Application configurations updated successfully!');
         }
 
         async function fetchDataFromGitHub() {
@@ -451,9 +508,14 @@
         }
 
         function renderApp() {
+            const cfg = getConfigs();
+            const lowStockThreshold = cfg.lowThreshold;
+
             const totalItems = db.inventory.length;
             const totalStock = db.inventory.reduce((acc, curr) => acc + Number(curr.qty), 0);
-            const lowStockItems = db.inventory.filter(i => Number(i.qty) < 5 && Number(i.qty) > 0);
+            
+            // Filter dynamic low stocks using the runtime variable configuration
+            const lowStockItems = db.inventory.filter(i => Number(i.qty) < lowStockThreshold && Number(i.qty) > 0);
             const outOfStockItems = db.inventory.filter(i => Number(i.qty) === 0);
             
             // 1. Retail Value = Current Stock × Price SRP
@@ -482,12 +544,13 @@
             document.getElementById('stat-potential-profit').innerText = "₱" + totalPotentialProfit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
             const dashLowStockTbody = document.getElementById('dash-lowstock-tbody');
-            const allDeficitItems = db.inventory.filter(i => Number(i.qty) < 5); 
+            // Include everything below the user configured warning line threshold
+            const allDeficitItems = db.inventory.filter(i => Number(i.qty) < lowStockThreshold); 
             
             if (allDeficitItems.length === 0) {
                 dashLowStockTbody.innerHTML = `
                     <tr>
-                        <td colspan="3" class="p-4 text-center text-xs text-gray-400 italic">✨ Safe operations. No low stock items detected!</td>
+                        <td colspan="3" class="p-4 text-center text-xs text-gray-400 italic">✨ Safe operations. No items below threshold value!</td>
                     </tr>
                 `;
             } else {
@@ -585,7 +648,7 @@
                         <td class="p-4">${imageTag}</td>
                         <td class="p-4 font-medium text-gray-900">${item.name}</td>
                         <td class="p-4 text-sm text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
-                        <td class="p-4"><span class="px-2 py-1 rounded text-sm ${item.qty < 5 ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${item.qty}</span></td>
+                        <td class="p-4"><span class="px-2 py-1 rounded text-sm ${item.qty < lowStockThreshold ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${item.qty}</span></td>
                         <td class="p-4 text-sm font-mono font-bold text-indigo-600">₱${Number(item.price).toFixed(2)}</td>
                         <td class="p-4 text-sm"><span class="${expiryStyle}">${expiryText}</span></td>
                         <td class="p-2 text-center">
