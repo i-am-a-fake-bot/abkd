@@ -74,7 +74,7 @@
     },
     {
       "id": "id_e960tuxxm",
-      "name": "Atbp - Steel Wool",
+      "name": "Steel Wool",
       "category": "Household",
       "cost": 99.75,
       "units": 3,
@@ -1534,6 +1534,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Posporo\"."
+    },
+    {
+      "time": 1781434384538,
+      "name": "Steel Wool",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Steel Wool\"."
     }
   ],
   "config": {
