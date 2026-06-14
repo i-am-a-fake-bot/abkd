@@ -443,6 +443,18 @@
       "price": 9,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_jzlffg4v5",
+      "name": "Panligo - Head & Shoulders - Green",
+      "category": "Panligo",
+      "cost": 90,
+      "units": 12,
+      "markup": 12,
+      "qty": 12,
+      "price": 9,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -914,6 +926,13 @@
       "type": "Addition",
       "change": 10,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781427141956,
+      "name": "Panligo - Head & Shoulders - Green",
+      "type": "Addition",
+      "change": 12,
+      "notes": "Initial stock addition under category: Panligo. Expiry: N/A."
     }
   ],
   "config": {
