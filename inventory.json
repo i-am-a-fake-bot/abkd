@@ -266,7 +266,7 @@
     },
     {
       "id": "id_ch177yy9i",
-      "name": "Candy - Maxx - Cherry - 3 for ₱5",
+      "name": "Candy - Maxx - Cherry - 3 for â±5",
       "category": "Candy",
       "cost": 41.9,
       "units": 50,
@@ -278,7 +278,7 @@
     },
     {
       "id": "id_dt5c40014",
-      "name": "Candy - Potchi - 3 for ₱5",
+      "name": "Candy - Potchi - 3 for â±5",
       "category": "Candy",
       "cost": 34.75,
       "units": 24,
@@ -302,7 +302,7 @@
     },
     {
       "id": "id_iez9uu61t",
-      "name": "Candy - V Fresh - 3 for ₱5",
+      "name": "Candy - V Fresh - 3 for â±5",
       "category": "Candy",
       "cost": 39.4,
       "units": 24,
@@ -374,7 +374,7 @@
     },
     {
       "id": "id_gdgc6xpxr",
-      "name": "Panlaba - Downy - 3 for ₱20",
+      "name": "Panlaba - Downy - 3 for â±20",
       "category": "Panlaba",
       "cost": 95,
       "units": 18,
@@ -453,6 +453,18 @@
       "markup": 12,
       "qty": 12,
       "price": 9,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_xsf3ciy7j",
+      "name": "Lucky Me - Pancit Canton - Calamansi",
+      "category": "Lucky Me",
+      "cost": 95.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 17,
       "expiry": "",
       "image": ""
     }
@@ -817,14 +829,14 @@
     },
     {
       "time": 1781414687904,
-      "name": "Candy - Maxx - Cherry - 3 for â±5",
+      "name": "Candy - Maxx - Cherry - 3 for Ã¢ÂÂ±5",
       "type": "Addition",
       "change": 20,
       "notes": "Initial stock addition under category: Candy. Expiry: N/A."
     },
     {
       "time": 1781414743934,
-      "name": "Candy - Potchi - 3 for â±5",
+      "name": "Candy - Potchi - 3 for Ã¢ÂÂ±5",
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Candy. Expiry: N/A."
@@ -838,7 +850,7 @@
     },
     {
       "time": 1781414836428,
-      "name": "\":\"Candy - V Fresh - 3 for â±5",
+      "name": "\":\"Candy - V Fresh - 3 for Ã¢ÂÂ±5",
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Candy. Expiry: N/A."
@@ -887,7 +899,7 @@
     },
     {
       "time": 1781426386800,
-      "name": "Panlaba - Downy - 3 for â±20",
+      "name": "Panlaba - Downy - 3 for Ã¢ÂÂ±20",
       "type": "Addition",
       "change": 18,
       "notes": "Initial stock addition under category: Panlaba. Expiry: N/A."
@@ -933,6 +945,13 @@
       "type": "Addition",
       "change": 12,
       "notes": "Initial stock addition under category: Panligo. Expiry: N/A."
+    },
+    {
+      "time": 1781428750714,
+      "name": "Lucky Me - Pancit Canton - Calamansi",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Lucky Me. Expiry: N/A."
     }
   ],
   "config": {
