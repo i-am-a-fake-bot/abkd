@@ -422,8 +422,8 @@
     },
     {
       "id": "id_78fci41c4",
-      "name": "Snacks - Piattos - Sour Cream & Onion",
-      "category": "Snacks",
+      "name": "Piattos - Sour Cream & Onion",
+      "category": "Meryenda",
       "cost": 16,
       "units": 1,
       "markup": 12,
@@ -1499,6 +1499,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Wings Detergent - Powder\"."
+    },
+    {
+      "time": 1781434314873,
+      "name": "Piattos - Sour Cream & Onion",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Piattos - Sour Cream & Onion\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
