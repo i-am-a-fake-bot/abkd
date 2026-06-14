@@ -278,8 +278,8 @@
     },
     {
       "id": "id_dt5c40014",
-      "name": "Candy - Potchi - 3 for ₱5",
-      "category": "Candy",
+      "name": "Potchii - 3 for ₱5",
+      "category": "Meryenda",
       "cost": 34.75,
       "units": 24,
       "markup": 12,
@@ -1331,6 +1331,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Stick-O\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433925523,
+      "name": "Potchii - 3 for ₱5",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Potchii - 3 for ₱5\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
