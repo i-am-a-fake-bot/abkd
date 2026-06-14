@@ -98,8 +98,8 @@
     },
     {
       "id": "id_t7qcxoc7z",
-      "name": "Biskwit - Combi",
-      "category": "Biskwit",
+      "name": "Combi - Choco",
+      "category": "Meryenda",
       "cost": 60.75,
       "units": 10,
       "markup": 12,
@@ -1212,6 +1212,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Choco Mucho Biscuit\"."
+    },
+    {
+      "time": 1781433675345,
+      "name": "Combi - Choco",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Combi - Choco\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
