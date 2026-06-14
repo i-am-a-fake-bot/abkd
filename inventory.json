@@ -644,7 +644,7 @@
       "units": 1,
       "markup": 12,
       "qty": 0,
-      "price": 30,
+      "price": 31,
       "expiry": "",
       "image": ""
     }
@@ -1675,6 +1675,13 @@
     {
       "time": 1781436208276,
       "name": "555 Tuna - Afritada",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: price updated to ₱31.00."
+    },
+    {
+      "time": 1781436212800,
+      "name": "555 Tuna - Caldereta",
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: price updated to ₱31.00."
