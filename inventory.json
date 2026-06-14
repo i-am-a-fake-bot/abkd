@@ -887,6 +887,18 @@
       "price": 16,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_muejhfsml",
+      "name": "Great Taste - White",
+      "category": "Beverage",
+      "cost": 121.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 16,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2090,6 +2102,13 @@
     {
       "time": 1781437232012,
       "name": "Great Taste - Premium Roast",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
+    },
+    {
+      "time": 1781437293267,
+      "name": "Great Taste - White",
       "type": "Clone / Copy",
       "change": 4,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
