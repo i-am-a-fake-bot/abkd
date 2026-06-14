@@ -387,7 +387,7 @@
     {
       "id": "id_z3v9ymc3u",
       "name": "Wings Detergent - Powder",
-      "category": "Panlaba",
+      "category": "Household",
       "cost": 38,
       "units": 6,
       "markup": 12,
@@ -2373,6 +2373,13 @@
       "type": "Clone / Copy",
       "change": 4,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱8.00."
+    },
+    {
+      "time": 1781438201349,
+      "name": "Wings Detergent - Powder",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Household\"."
     }
   ],
   "config": {
