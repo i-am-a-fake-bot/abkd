@@ -139,11 +139,13 @@
                 </button>
             </div>
 
-            <!-- Smart Search Bar -->
             <div class="mb-4">
-                <div class="relative max-w-md">
+                <div class="relative max-w-md flex items-center">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">🔍</span>
-                    <input type="text" id="inventory-search" oninput="renderApp()" placeholder="Search item name or category..." class="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
+                    <input type="text" id="inventory-search" oninput="handleSearchInput()" placeholder="Search item name or category..." class="w-full pl-9 pr-10 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
+                    <button id="search-clear-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 transition">
+                        ✕
+                    </button>
                 </div>
             </div>
             
@@ -610,6 +612,26 @@
                 currentSortDirection = 'asc';
             }
             renderApp();
+        }
+
+        function handleSearchInput() {
+            const searchInput = document.getElementById('inventory-search');
+            const clearBtn = document.getElementById('search-clear-btn');
+            
+            if (searchInput.value.trim().length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            renderApp();
+        }
+
+        function clearSearch() {
+            const searchInput = document.getElementById('inventory-search');
+            searchInput.value = '';
+            document.getElementById('search-clear-btn').classList.add('hidden');
+            renderApp();
+            searchInput.focus();
         }
 
         function openModal(id = null) {
