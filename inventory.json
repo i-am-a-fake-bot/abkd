@@ -14,7 +14,7 @@
     },
     {
       "id": "id_h8xav0sm3",
-      "name": "Asukal - Segunda - 1/2",
+      "name": "Victoria - Segunda - 1/2",
       "category": "Pantry",
       "cost": 31,
       "units": 1,
@@ -1548,6 +1548,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Peewee - BBQ\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781434494070,
+      "name": "Victoria - Segunda - 1/2",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Victoria - Segunda - 1/2\"."
     }
   ],
   "config": {
