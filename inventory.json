@@ -242,8 +242,8 @@
     },
     {
       "id": "id_bh1al3qq0",
-      "name": "Candy - Choco Mani",
-      "category": "Candy",
+      "name": "Choco Mani",
+      "category": "Meryenda",
       "cost": 35.75,
       "units": 24,
       "markup": 12,
@@ -1303,6 +1303,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Skyflakes - Crackers\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433888125,
+      "name": "Choco Mani",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Choco Mani\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
