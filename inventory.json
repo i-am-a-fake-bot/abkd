@@ -923,6 +923,18 @@
       "price": 16,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_0d66upi0n",
+      "name": "Kopiko - Brown",
+      "category": "Beverage",
+      "cost": 135.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 16,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2147,6 +2159,13 @@
     {
       "time": 1781437459442,
       "name": "Kopiko - Black",
+      "type": "Clone / Copy",
+      "change": 0,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
+    },
+    {
+      "time": 1781437485283,
+      "name": "Kopiko - Brown",
       "type": "Clone / Copy",
       "change": 0,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
