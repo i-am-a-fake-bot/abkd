@@ -503,6 +503,18 @@
       "price": 24,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_h6b8lrye7",
+      "name": "Condiments - Knorr - Beef Cube",
+      "category": "Condiments",
+      "cost": 34.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 6,
+      "price": 7,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1008,6 +1020,13 @@
       "name": "Condiments - Del Monte Tomato Sauce - Original - 115g",
       "type": "Addition",
       "change": 5,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432488517,
+      "name": "Condiments - Knorr - Beef Cube",
+      "type": "Addition",
+      "change": 6,
       "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
     }
   ],
