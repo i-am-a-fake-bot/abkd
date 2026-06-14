@@ -290,8 +290,8 @@
     },
     {
       "id": "id_l44wlocwy",
-      "name": "Candy - Stick-O",
-      "category": "Candy",
+      "name": "Stick-O",
+      "category": "Meryenda",
       "cost": 90,
       "units": 55,
       "markup": 12,
@@ -1324,6 +1324,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Maxx - Cherry - 3 for ₱5\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433915714,
+      "name": "Stick-O",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Stick-O\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
