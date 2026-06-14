@@ -58,6 +58,18 @@
       "price": 3.08,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_xo8ntde9l",
+      "name": "Atbp - Posporo",
+      "category": "Atbp",
+      "cost": 19.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 3,
+      "price": 5,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -283,6 +295,13 @@
       "name": "Atbp - Kandila - Small",
       "type": "Addition",
       "change": 5,
+      "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
+    },
+    {
+      "time": 1781413661247,
+      "name": "Atbp - Posporo",
+      "type": "Addition",
+      "change": 3,
       "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
     }
   ],
