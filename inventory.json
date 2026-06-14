@@ -482,8 +482,8 @@
     },
     {
       "id": "id_kv4mbvt4o",
-      "name": "Condiments - Coco Mama - Gata",
-      "category": "Condiments",
+      "name": "Coco Mama - Gata",
+      "category": "Pantry",
       "cost": 33.25,
       "units": 1,
       "markup": 12,
@@ -1352,6 +1352,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Combi - Choco Fill\"."
+    },
+    {
+      "time": 1781433984783,
+      "name": "Coco Mama - Gata",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Coco Mama - Gata\", category updated to \"Pantry\"."
     }
   ],
   "config": {
