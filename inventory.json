@@ -254,8 +254,8 @@
     },
     {
       "id": "id_bkf5575uu",
-      "name": "Candy - Flat Tops",
-      "category": "Candy",
+      "name": "Flat Tops",
+      "category": "Meryenda",
       "cost": 50.75,
       "units": 24,
       "markup": 12,
@@ -1310,6 +1310,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Choco Mani\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433899107,
+      "name": "Flat Tops",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Flat Tops\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
