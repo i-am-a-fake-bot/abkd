@@ -27,7 +27,7 @@
     {
       "id": "id_be8p4bsvd",
       "name": "Asukal - Segunda - 1/4",
-      "category": "Condiments",
+      "category": "Pantry",
       "cost": 136,
       "units": 8,
       "markup": 12,
@@ -1174,6 +1174,13 @@
     {
       "time": 1781433351788,
       "name": "Asukal - Segunda - 1/2",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781433361054,
+      "name": "Asukal - Segunda - 1/4",
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: category updated to \"Pantry\"."
