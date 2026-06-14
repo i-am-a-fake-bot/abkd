@@ -566,8 +566,8 @@
     },
     {
       "id": "id_dy0cc7vdt",
-      "name": "Condiments - Magic Sarap",
-      "category": "Condiments",
+      "name": "Magic Sarap",
+      "category": "Pantry",
       "cost": 125.15,
       "units": 26,
       "markup": 12,
@@ -1401,6 +1401,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Knorr Cube - Pork\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434071228,
+      "name": "Magic Sarap",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Magic Sarap\", category updated to \"Pantry\"."
     }
   ],
   "config": {
