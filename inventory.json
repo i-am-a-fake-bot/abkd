@@ -82,6 +82,18 @@
       "price": 37,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_ekuw4nmkx",
+      "name": "Biskwit - Choco Mucho",
+      "category": "Biskwit",
+      "cost": 73.95,
+      "units": 10,
+      "markup": 12,
+      "qty": 2,
+      "price": 9,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -322,6 +334,13 @@
       "type": "Addition",
       "change": 3,
       "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
+    },
+    {
+      "time": 1781413813184,
+      "name": "Biskwit - Choco Mucho",
+      "type": "Addition",
+      "change": 2,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
     }
   ],
   "config": {
