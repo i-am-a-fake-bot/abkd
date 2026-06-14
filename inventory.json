@@ -539,6 +539,18 @@
       "price": 7,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_a80vq2xue",
+      "name": "Condiments - Knorr - Sampaloc Mix",
+      "category": "Condiments",
+      "cost": 176.4,
+      "units": 12,
+      "markup": 12,
+      "qty": 12,
+      "price": 18,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1065,6 +1077,13 @@
       "name": "Condiments - Knorr - Pork Cube",
       "type": "Addition",
       "change": 8,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432645932,
+      "name": "Condiments - Knorr - Sampaloc Mix",
+      "type": "Addition",
+      "change": 12,
       "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
     }
   ],
