@@ -158,8 +158,8 @@
     },
     {
       "id": "id_9lsp4zpzc",
-      "name": "Biskwit - Hansel - Crackers",
-      "category": "Biskwit",
+      "name": "Hansel - Crackers",
+      "category": "Meryenda",
       "cost": 59.95,
       "units": 10,
       "markup": 12,
@@ -1247,6 +1247,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Hansel - Choco\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433754792,
+      "name": "Hansel - Crackers",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Hansel - Crackers\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
