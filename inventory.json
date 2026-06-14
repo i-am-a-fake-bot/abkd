@@ -226,6 +226,18 @@
       "price": 8,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_8uffvkwcb",
+      "name": "Biskwit - Skyflakes - Crackers",
+      "category": "Biskwit",
+      "cost": 132,
+      "units": 24,
+      "markup": 12,
+      "qty": 0,
+      "price": 7,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -554,6 +566,13 @@
     {
       "time": 1781414436525,
       "name": "Biskwit - Rebisco - Strawberry",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414466251,
+      "name": "Biskwit - Skyflakes - Crackers",
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
