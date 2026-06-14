@@ -827,6 +827,18 @@
       "price": 12,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_2dg7d703w",
+      "name": "Mineral Water - Galon",
+      "category": "Beverage",
+      "cost": 300,
+      "units": 11,
+      "markup": 12,
+      "qty": 4,
+      "price": 35,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1991,6 +2003,13 @@
       "type": "Clone / Copy",
       "change": 0,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱12.00."
+    },
+    {
+      "time": 1781437006358,
+      "name": "Mineral Water - Galon",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱35.00."
     }
   ],
   "config": {
