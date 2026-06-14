@@ -32,32 +32,26 @@
             
             <!-- Row 1 & 2: Main 6 Stats Matrix Layout -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                <!-- Column 1, Row 1 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Items</p>
                     <p id="stat-total-items" class="text-2xl font-black text-indigo-600 mt-2">0</p>
                 </div>
-                <!-- Column 2, Row 1 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Stock</p>
                     <p id="stat-total-stock" class="text-2xl font-black text-emerald-600 mt-2">0</p>
                 </div>
-                <!-- Column 3, Row 1 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Low Stock (&lt; 5)</p>
                     <p id="stat-low-stock" class="text-2xl font-black text-amber-500 mt-2">0</p>
                 </div>
-                <!-- Column 1, Row 2 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Out of Stock</p>
                     <p id="stat-out-of-stock" class="text-2xl font-black text-rose-600 mt-2">0</p>
                 </div>
-                <!-- Column 2, Row 2 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Inventory Value</p>
                     <p id="stat-inventory-value" class="text-2xl font-black text-slate-800 mt-2">₱0.00</p>
                 </div>
-                <!-- Column 3, Row 2 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Added This Month</p>
                     <p id="stat-added-month" class="text-2xl font-black text-blue-600 mt-2">0</p>
@@ -85,23 +79,22 @@
                 </div>
             </div>
 
-            <!-- Dashboard Row 4: Recent Activities Timeline Panel Viewport -->
+            <!-- CHANGED HERE: Replaced Recent Activity with Expiring Soon Panel Monitor -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-                <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⏱️ Recent Activity</h3>
+                <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⏳ Expiring Soon (Next 30 Days)</h3>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-xs">
+                    <table class="w-full text-left border-collapse text-sm">
                         <thead>
                             <tr class="border-b border-gray-100 text-gray-500 font-semibold bg-gray-50/50">
-                                <th class="p-3 w-40">Timestamp</th>
                                 <th class="p-3">Item Name</th>
-                                <th class="p-3">Action</th>
-                                <th class="p-3">Delta</th>
-                                <th class="p-3">Remarks</th>
+                                <th class="p-3">Category</th>
+                                <th class="p-3">Expiration Date</th>
+                                <th class="p-3 text-center">Status</th>
                             </tr>
                         </thead>
-                        <tbody id="dash-activity-tbody" class="divide-y divide-gray-50 text-gray-600">
+                        <tbody id="dash-expiry-tbody" class="divide-y divide-gray-50 text-gray-700">
                             <tr>
-                                <td colspan="5" class="p-4 text-center text-gray-400 italic">Waiting for logging transaction metrics sync...</td>
+                                <td colspan="4" class="p-4 text-center text-gray-400 italic">No upcoming product expirations to monitor.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -451,7 +444,7 @@
         }
 
         function renderApp() {
-            // --- CALCULATION LOGIC FOR THE NEW 6-CARD DASHBOARD GRID ---
+            // Main Top 6 Calculations
             const totalItems = db.inventory.length;
             const totalStock = db.inventory.reduce((acc, curr) => acc + Number(curr.qty), 0);
             const lowStockItems = db.inventory.filter(i => Number(i.qty) < 5 && Number(i.qty) > 0);
@@ -461,14 +454,12 @@
                 return acc + (Number(curr.qty) * Number(curr.price));
             }, 0);
 
-            // Calculation for updates tracking back through the current month
             const now = new Date();
             const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
             const additionsThisMonth = db.history.filter(log => {
                 return log.time >= startOfMonth && (log.type === 'Addition');
             }).length;
 
-            // DOM Insertion for top 6 dashboard tiles
             document.getElementById('stat-total-items').innerText = totalItems;
             document.getElementById('stat-total-stock').innerText = totalStock;
             document.getElementById('stat-low-stock').innerText = lowStockItems.length;
@@ -476,9 +467,9 @@
             document.getElementById('stat-inventory-value').innerText = "₱" + totalInventoryValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('stat-added-month').innerText = additionsThisMonth;
 
-            // --- RENDER RE-ARRANGED SECTION 3: LOW STOCK LIVE TABLE VIEW ---
+            // Render Low Stock Live Monitor Table View
             const dashLowStockTbody = document.getElementById('dash-lowstock-tbody');
-            const allDeficitItems = db.inventory.filter(i => Number(i.qty) < 5); // display out-of-stock + low-stock here
+            const allDeficitItems = db.inventory.filter(i => Number(i.qty) < 5); 
             
             if (allDeficitItems.length === 0) {
                 dashLowStockTbody.innerHTML = `
@@ -500,35 +491,52 @@
                 `).join('');
             }
 
-            // --- RENDER RE-ARRANGED SECTION 4: RECENT TIMELINE ACTIVITIES VIEW ---
-            const dashActivityTbody = document.getElementById('dash-activity-tbody');
-            const recentLogs = [...db.history].reverse().slice(0, 5); // display latest 5 events directly onto dashboard home
+            // CHANGED HERE: Calculate and Render Expiring Soon items (Next 30 Days)
+            const dashExpiryTbody = document.getElementById('dash-expiry-tbody');
+            const todayTimestamp = new Date().setHours(0,0,0,0);
+            const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
+            
+            const expiringItems = db.inventory.filter(item => {
+                if (!item.expiry) return false;
+                const expiryTimestamp = new Date(item.expiry).getTime();
+                // Include if it's already expired OR if it expires within the next 30 days
+                return (expiryTimestamp - todayTimestamp) <= thirtyDaysInMs;
+            });
 
-            if (recentLogs.length === 0) {
-                dashActivityTbody.innerHTML = `
+            // Sort expiring items so that the closest to expiration (or already expired) show first
+            expiringItems.sort((a, b) => new Date(a.expiry) - new Date(b.expiry));
+
+            if (expiringItems.length === 0) {
+                dashExpiryTbody.innerHTML = `
                     <tr>
-                        <td colspan="5" class="p-4 text-center text-xs text-gray-400 italic">No logged activity transactions discovered.</td>
+                        <td colspan="4" class="p-4 text-center text-xs text-gray-400 italic">✨ Great! No items expiring within the next 30 days.</td>
                     </tr>
                 `;
             } else {
-                dashActivityTbody.innerHTML = recentLogs.map(log => `
-                    <tr class="hover:bg-gray-50/50">
-                        <td class="p-3 font-mono text-gray-400 whitespace-nowrap">${new Date(log.time).toLocaleDateString()} ${new Date(log.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
-                        <td class="p-3 font-medium text-gray-800">${log.name}</td>
-                        <td class="p-3">
-                            <span class="text-[10px] uppercase font-extrabold px-1.5 py-0.5 rounded tracking-wide ${log.type === 'Addition' || log.type === 'Restock' ? 'bg-emerald-50 text-emerald-700' : log.type === 'Deletion' ? 'bg-rose-50 text-rose-700' : 'bg-amber-50 text-amber-700'}">
-                                ${log.type}
-                            </span>
-                        </td>
-                        <td class="p-3 font-mono font-bold ${log.change > 0 ? 'text-emerald-600' : log.change < 0 ? 'text-rose-600' : 'text-gray-500'}">
-                            ${log.change > 0 ? '+' + log.change : log.change}
-                        </td>
-                        <td class="p-3 text-gray-500 max-w-[200px] truncate italic">${log.notes}</td>
-                    </tr>
-                `).join('');
+                dashExpiryTbody.innerHTML = expiringItems.map(item => {
+                    const expiryDate = new Date(item.expiry);
+                    const diffTime = expiryDate.getTime() - todayTimestamp;
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    
+                    let statusBadge = '';
+                    if (diffDays <= 0) {
+                        statusBadge = `<span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded text-xs font-black border border-rose-200">EXPIRED</span>`;
+                    } else {
+                        statusBadge = `<span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-bold border border-amber-200">${diffDays} days left</span>`;
+                    }
+
+                    return `
+                        <tr class="hover:bg-gray-50/50">
+                            <td class="p-3 font-medium text-gray-900">${item.name}</td>
+                            <td class="p-3 text-xs text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
+                            <td class="p-3 font-mono text-sm text-gray-700">${formatExpiryDisplay(item.expiry)}</td>
+                            <td class="p-3 text-center">${statusBadge}</td>
+                        </tr>
+                    `;
+                }).join('');
             }
 
-            // --- RENDER SYSTEM COMPONENT VIEW FOR INVENTORY DATA TABLES ---
+            // Render Inventory tab data records
             let displayItems = [...db.inventory];
             
             document.getElementById('sort-icon-category').innerHTML = '';
