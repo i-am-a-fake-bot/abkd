@@ -506,7 +506,7 @@
     },
     {
       "id": "id_h6b8lrye7",
-      "name": "Condiments - Knorr - Beef Cube",
+      "name": "Condiments - Knorr Cube - Beef",
       "category": "Condiments",
       "cost": 34.5,
       "units": 6,
@@ -1104,6 +1104,13 @@
       "type": "Addition",
       "change": 8,
       "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432736683,
+      "name": "Condiments - Knorr Cube - Beef",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Beef\"."
     }
   ],
   "config": {
