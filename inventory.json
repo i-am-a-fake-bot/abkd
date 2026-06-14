@@ -178,6 +178,18 @@
       "price": 8,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_85psqxmzl",
+      "name": "Biskwit - Nissin Butter Coconut",
+      "category": "Biskwit",
+      "cost": 61.4,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 7,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -480,6 +492,13 @@
       "name": "Biskwit - Hello - Choco",
       "type": "Addition",
       "change": 7,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414324194,
+      "name": "Biskwit - Nissin Butter Coconut",
+      "type": "Addition",
+      "change": 0,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
     }
   ],
