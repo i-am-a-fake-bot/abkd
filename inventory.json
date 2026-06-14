@@ -266,8 +266,8 @@
     },
     {
       "id": "id_ch177yy9i",
-      "name": "Candy - Maxx - Cherry - 3 for ₱5",
-      "category": "Candy",
+      "name": "Maxx - Cherry - 3 for ₱5",
+      "category": "Meryenda",
       "cost": 41.9,
       "units": 50,
       "markup": 12,
@@ -1317,6 +1317,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Flat Tops\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433907812,
+      "name": "Maxx - Cherry - 3 for ₱5",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Maxx - Cherry - 3 for ₱5\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
