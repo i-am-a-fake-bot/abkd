@@ -623,6 +623,18 @@
       "price": 12,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_9x6r36r6h",
+      "name": "555 Tuna - Afritada",
+      "category": "De Lata",
+      "cost": 27.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 4,
+      "price": 30,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1626,6 +1638,13 @@
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Pantry. Expiry: N/A."
+    },
+    {
+      "time": 1781436120016,
+      "name": "555 Tuna - Afritada",
+      "type": "Addition",
+      "change": 4,
+      "notes": "Initial stock addition under category: De Lata. Expiry: N/A."
     }
   ],
   "config": {
