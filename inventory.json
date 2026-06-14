@@ -278,7 +278,7 @@
     },
     {
       "id": "id_dt5c40014",
-      "name": "Candy - Potchi - 3 for ₱5",
+      "name": "Candy - Potchi - 3 for â±5",
       "category": "Candy",
       "cost": 34.75,
       "units": 24,
@@ -302,7 +302,7 @@
     },
     {
       "id": "id_iez9uu61t",
-      "name": "Candy - V Fresh - 3 for ₱5",
+      "name": "Candy - V Fresh - 3 for â±5",
       "category": "Candy",
       "cost": 39.4,
       "units": 24,
@@ -374,7 +374,7 @@
     },
     {
       "id": "id_gdgc6xpxr",
-      "name": "Panlaba - Downy - 3 for ₱20",
+      "name": "Panlaba - Downy - 3 for â±20",
       "category": "Panlaba",
       "cost": 95,
       "units": 18,
@@ -817,14 +817,14 @@
     },
     {
       "time": 1781414687904,
-      "name": "Candy - Maxx - Cherry - 3 for ₱5",
+      "name": "Candy - Maxx - Cherry - 3 for â±5",
       "type": "Addition",
       "change": 20,
       "notes": "Initial stock addition under category: Candy. Expiry: N/A."
     },
     {
       "time": 1781414743934,
-      "name": "Candy - Potchi - 3 for ₱5",
+      "name": "Candy - Potchi - 3 for â±5",
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Candy. Expiry: N/A."
@@ -838,7 +838,7 @@
     },
     {
       "time": 1781414836428,
-      "name": "\":\"Candy - V Fresh - 3 for ₱5",
+      "name": "\":\"Candy - V Fresh - 3 for â±5",
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Candy. Expiry: N/A."
@@ -887,7 +887,7 @@
     },
     {
       "time": 1781426386800,
-      "name": "Panlaba - Downy - 3 for ₱20",
+      "name": "Panlaba - Downy - 3 for â±20",
       "type": "Addition",
       "change": 18,
       "notes": "Initial stock addition under category: Panlaba. Expiry: N/A."
