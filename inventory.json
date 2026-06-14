@@ -959,6 +959,18 @@
       "price": 15,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_r32idxx85",
+      "name": "Nescafe - Original",
+      "category": "Beverage",
+      "cost": 119.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 15,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2214,6 +2226,13 @@
       "type": "Product Update",
       "change": -2,
       "notes": "Modified attributes: stock adjusted from 6 to 4."
+    },
+    {
+      "time": 1781437775808,
+      "name": "Nescafe - Original",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱15.00."
     }
   ],
   "config": {
