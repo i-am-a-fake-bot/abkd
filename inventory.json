@@ -218,8 +218,8 @@
     },
     {
       "id": "id_8hdex5uot",
-      "name": "Biskwit - Rebisco - Strawberry",
-      "category": "Biskwit",
+      "name": "Rebisco - Strawberry Fill",
+      "category": "Meryenda",
       "cost": 61.25,
       "units": 10,
       "markup": 12,
@@ -1289,6 +1289,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Rebisco - Choco Fill\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433844309,
+      "name": "Rebisco - Strawberry Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Rebisco - Strawberry Fill\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
