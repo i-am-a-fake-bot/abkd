@@ -182,8 +182,8 @@
     },
     {
       "id": "id_85psqxmzl",
-      "name": "Biskwit - Nissin Butter Coconut",
-      "category": "Biskwit",
+      "name": "Nissin Butter Coconut",
+      "category": "Meryenda",
       "cost": 61.4,
       "units": 10,
       "markup": 12,
@@ -1254,6 +1254,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Hansel - Crackers\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433772309,
+      "name": "Nissin Butter Coconut",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Nissin Butter Coconut\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
