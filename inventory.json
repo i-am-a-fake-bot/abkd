@@ -238,6 +238,18 @@
       "price": 7,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_bh1al3qq0",
+      "name": "Candy - Choco Mani",
+      "category": "Candy",
+      "cost": 35.75,
+      "units": 24,
+      "markup": 12,
+      "qty": 20,
+      "price": 3,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -583,6 +595,13 @@
       "type": "Manual Edit",
       "change": 4,
       "notes": "Stock updated directly from 0 to 4."
+    },
+    {
+      "time": 1781414552085,
+      "name": "Candy - Choco Mani",
+      "type": "Addition",
+      "change": 20,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
     }
   ],
   "config": {
