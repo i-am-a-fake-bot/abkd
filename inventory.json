@@ -234,7 +234,7 @@
       "cost": 132,
       "units": 24,
       "markup": 12,
-      "qty": 0,
+      "qty": 4,
       "price": 7,
       "expiry": "",
       "image": ""
@@ -576,6 +576,13 @@
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414482046,
+      "name": "Biskwit - Skyflakes - Crackers",
+      "type": "Manual Edit",
+      "change": 4,
+      "notes": "Stock updated directly from 0 to 4."
     }
   ],
   "config": {
