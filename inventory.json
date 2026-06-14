@@ -803,6 +803,18 @@
       "price": 14,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_e0zsrjrya",
+      "name": "Birch Tree - Choco",
+      "category": "Beverage",
+      "cost": 66.15,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 13,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1953,6 +1965,13 @@
       "type": "Clone / Copy",
       "change": 4,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱14.00."
+    },
+    {
+      "time": 1781436945122,
+      "name": "Birch Tree - Choco",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱13.00."
     }
   ],
   "config": {
