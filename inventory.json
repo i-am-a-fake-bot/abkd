@@ -15,7 +15,7 @@
     {
       "id": "id_h8xav0sm3",
       "name": "Asukal - Segunda - 1/2",
-      "category": "Condiments",
+      "category": "Pantry",
       "cost": 31,
       "units": 1,
       "markup": 12,
@@ -1170,6 +1170,13 @@
       "type": "Addition",
       "change": 12,
       "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781433351788,
+      "name": "Asukal - Segunda - 1/2",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Pantry\"."
     }
   ],
   "config": {
