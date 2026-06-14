@@ -554,7 +554,7 @@
     },
     {
       "id": "id_cupfn3q5z",
-      "name": "Condiments - Knorr - Shrimp Cube",
+      "name": "Condiments - Knorr Cube - Shrimp",
       "category": "Condiments",
       "cost": 67.5,
       "units": 12,
@@ -1125,6 +1125,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Pork\"."
+    },
+    {
+      "time": 1781432790283,
+      "name": "Condiments - Knorr Cube - Shrimp",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Shrimp\"."
     }
   ],
   "config": {
