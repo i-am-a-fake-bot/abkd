@@ -635,6 +635,18 @@
       "price": 30,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_zdn6oiyn7",
+      "name": "555 Tuna - Caldereta",
+      "category": "De Lata",
+      "cost": 27.7,
+      "units": 1,
+      "markup": 12,
+      "qty": 0,
+      "price": 31,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1645,6 +1657,13 @@
       "type": "Addition",
       "change": 4,
       "notes": "Initial stock addition under category: De Lata. Expiry: N/A."
+    },
+    {
+      "time": 1781436165361,
+      "name": "555 Tuna - Caldereta",
+      "type": "Clone / Copy",
+      "change": 0,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱31.00."
     }
   ],
   "config": {
