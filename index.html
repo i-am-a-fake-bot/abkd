@@ -27,6 +27,7 @@
             <p class="text-amber-700 font-medium">Action Required: Please head to the Settings tab (⚙️) to configure your GitHub Token and Repository details.</p>
         </div>
 
+        <!-- DASHBOARD TAB -->
         <section id="tab-dashboard" class="tab-content">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Summary</h2>
             
@@ -131,51 +132,47 @@
             </div>
         </section>
 
+        <!-- INVENTORY TAB (REWRITTEN FROM TABLE TO INTERACTIVE CARDS) -->
         <section id="tab-inventory" class="tab-content hidden">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-                <h2 class="text-2xl font-bold text-gray-800">Inventory Items</h2>
-                <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium shadow transition">
+                <h2 class="text-2xl font-bold text-gray-800">Inventory Catalog</h2>
+                <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium shadow transition w-full md:w-auto">
                     + Add New Item
                 </button>
             </div>
 
-            <div class="mb-4">
-                <div class="relative max-w-md flex items-center">
+            <!-- Smart Filter Controls Container -->
+            <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center mb-6">
+                <!-- Search Box Wrapper -->
+                <div class="relative flex-1 max-w-md flex items-center">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">🔍</span>
                     <input type="text" id="inventory-search" oninput="handleSearchInput()" placeholder="Search item name or category..." class="w-full pl-9 pr-10 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
                     <button id="search-clear-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 transition">
                         ✕
                     </button>
                 </div>
+                
+                <!-- Sort Matrix Selector Dropdown -->
+                <div class="flex items-center gap-2 bg-white border border-gray-300 px-3 py-2 rounded-lg shadow-sm">
+                    <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Sort by:</span>
+                    <select id="sort-picker" onchange="handleSortPickerChange()" class="text-sm font-medium text-gray-700 bg-transparent focus:outline-none cursor-pointer">
+                        <option value="name-asc">Name (A ➔ Z)</option>
+                        <option value="name-desc">Name (Z ➔ A)</option>
+                        <option value="category-asc">Category (A ➔ Z)</option>
+                        <option value="stock-asc">Stock (Low ➔ High)</option>
+                        <option value="stock-desc">Stock (High ➔ Low)</option>
+                        <option value="expiry-asc">Expiration (Soonest First)</option>
+                    </select>
+                </div>
             </div>
             
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
-                <table class="w-full text-left border-collapse min-w-[720px]">
-                    <thead>
-                        <tr class="bg-gray-50 border-b border-gray-100 text-gray-600 font-semibold text-sm">
-                            <th class="p-4 w-16">Photo</th>
-                            <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition w-1/3" onclick="toggleSort('name')">
-                                Item Name <span id="sort-icon-name" class="text-indigo-600 ml-1"></span>
-                            </th>
-                            <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition" onclick="toggleSort('category')">
-                                Category <span id="sort-icon-category" class="text-indigo-600 ml-1"></span>
-                            </th>
-                            <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition" onclick="toggleSort('stock')">
-                                Current Stock <span id="sort-icon-stock" class="text-indigo-600 ml-1"></span>
-                            </th>
-                            <th class="p-4">Price (SRP)</th>
-                            <th class="p-4 cursor-pointer hover:bg-gray-100 select-none transition" onclick="toggleSort('expiry')">
-                                Expiration Date <span id="sort-icon-expiry" class="text-indigo-600 ml-1"></span>
-                            </th>
-                            <th class="p-4 text-center w-40">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="inventory-table-body" class="divide-y divide-gray-50 text-gray-700">
-                    </tbody>
-                </table>
+            <!-- Beautiful Card Wrapper Engine -->
+            <div id="inventory-card-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- Javascript maps product tiles dynamic loop strings here directly -->
             </div>
         </section>
 
+        <!-- TRANSACTION HISTORY TAB -->
         <section id="tab-history" class="tab-content hidden">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Transaction History</h2>
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
@@ -195,6 +192,7 @@
             </div>
         </section>
 
+        <!-- PREFERENCES AND CONNECTIONS SETTINGS -->
         <section id="tab-settings" class="tab-content hidden">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Application Settings</h2>
             
@@ -251,6 +249,7 @@
         </section>
     </main>
 
+    <!-- NEW OR UPDATE PROFILE CONTEXT MODAL -->
     <div id="item-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto">
         <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 my-8">
             <h3 id="modal-title" class="text-xl font-bold text-gray-800 mb-4">Add New Item</h3>
@@ -334,6 +333,7 @@
         </div>
     </div>
 
+    <!-- MAIN APP SCRIPT CONFIGURATION MODULE -->
     <script>
         let db = { 
             inventory: [], 
@@ -345,6 +345,7 @@
         };
         let githubSha = null;
         
+        // Sorting State Management Configuration Variables
         let currentSortColumn = 'name'; 
         let currentSortDirection = 'asc'; 
 
@@ -584,7 +585,7 @@
         }
 
         function getExpiryBadgeStyle(dateString) {
-            if (!dateString) return 'text-gray-400 font-medium';
+            if (!dateString) return 'text-gray-400 text-[11px] font-medium';
             const expiryDate = new Date(dateString);
             const today = new Date();
             
@@ -592,25 +593,19 @@
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             
             if (diffDays <= 0) {
-                return 'bg-rose-100 text-rose-800 px-2 py-0.5 rounded text-xs font-bold border border-rose-200'; 
+                return 'bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded text-[10px] font-bold border border-rose-200'; 
             } else if (diffDays <= 30) {
-                return 'bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-bold border border-amber-200'; 
+                return 'bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded text-[10px] font-bold border border-amber-200'; 
             }
-            return 'text-gray-700 font-mono font-medium'; 
+            return 'text-gray-600 font-mono text-[11px] font-medium'; 
         }
 
-        function toggleSort(columnKey) {
-            if (currentSortColumn === columnKey) {
-                if (currentSortDirection === 'asc') {
-                    currentSortDirection = 'desc';
-                } else if (currentSortDirection === 'desc') {
-                    currentSortColumn = 'none';
-                    currentSortDirection = 'none';
-                }
-            } else {
-                currentSortColumn = columnKey;
-                currentSortDirection = 'asc';
-            }
+        // Dropdown Sort Picker Logic Bridge Integration
+        function handleSortPickerChange() {
+            const selectVal = document.getElementById('sort-picker').value;
+            const tokens = selectVal.split('-');
+            currentSortColumn = tokens[0];
+            currentSortDirection = tokens[1];
             renderApp();
         }
 
@@ -968,15 +963,7 @@
                 return nameMatch || catMatch;
             });
             
-            document.getElementById('sort-icon-name').innerHTML = '';
-            document.getElementById('sort-icon-category').innerHTML = '';
-            document.getElementById('sort-icon-stock').innerHTML = '';
-            document.getElementById('sort-icon-expiry').innerHTML = '';
-
             if (currentSortColumn !== 'none' && currentSortDirection !== 'none') {
-                const arrowIndicator = currentSortDirection === 'asc' ? '▲' : '▼';
-                document.getElementById(`sort-icon-${currentSortColumn}`).innerHTML = arrowIndicator;
-
                 displayItems.sort((a, b) => {
                     let modifier = currentSortDirection === 'asc' ? 1 : -1;
                     if (currentSortColumn === 'name') return (a.name || '').localeCompare(b.name || '') * modifier;
@@ -992,39 +979,97 @@
                 });
             }
 
-            const tbody = document.getElementById('inventory-table-body');
+            // RENDERING TRANSITION FOR CARDS PREVIEW GRID MATRIX
+            const cardGrid = document.getElementById('inventory-card-grid');
             if (displayItems.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-gray-400 italic">No matching products found. Filter values or clear the query!</td></tr>`;
+                cardGrid.className = "block text-center p-12 bg-white rounded-xl border border-dashed text-gray-400 italic";
+                cardGrid.innerHTML = "No matching items found inside your catalog matching your active filters.";
             } else {
-                tbody.innerHTML = displayItems.map(item => {
+                cardGrid.className = "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4";
+                cardGrid.innerHTML = displayItems.map(item => {
                     const itemId = item.id || 'err_' + Math.random().toString(36).substr(2, 5);
                     const safeId = itemId.replace(/'/g, "\\'");
+                    const qtyVal = Number(item.qty) || 0;
+                    const isOOS = qtyVal === 0;
+
+                    // Compute dynamic styling properties for cover frames
                     const imageTag = item.image 
-                        ? `<img src="${item.image}" class="w-10 h-10 object-cover rounded-md shadow-inner border border-gray-100">`
-                        : `<div class="w-10 h-10 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-lg shadow-inner">📦</div>`;
+                        ? `<img src="${item.image}" class="w-full h-full object-cover transition duration-300 ${isOOS ? 'blur-[2px]' : ''}">`
+                        : `<div class="w-full h-full bg-slate-100 flex items-center justify-center text-3xl select-none">📦</div>`;
+
+                    // Generate the slanted absolute-positioned OOS Red stamp component string conditionally
+                    const oosStamp = isOOS 
+                        ? `<div class="absolute inset-0 bg-white/30 flex items-center justify-center p-2 backdrop-blur-[0.5px] z-10">
+                                <div class="border-4 border-rose-600 text-rose-600 font-black text-[15px] uppercase tracking-wider px-2 py-1 rounded transform -rotate-12 bg-white/90 shadow-md select-none tracking-widest animate-pulse">
+                                    Out of Stock
+                                </div>
+                           </div>`
+                        : '';
+
+                    // Quantity Alert Warning pill styling logic block
+                    let stockBadgeClass = "bg-gray-100 text-gray-700";
+                    if (isOOS) {
+                        stockBadgeClass = "bg-rose-100 text-rose-800 font-extrabold";
+                    } else if (qtyVal <= lowStockThreshold) {
+                        stockBadgeClass = "bg-amber-100 text-amber-800 font-bold animate-pulse";
+                    }
 
                     const expiryText = formatExpiryDisplay(item.expiry);
                     const expiryStyle = getExpiryBadgeStyle(item.expiry);
-                    const qtyVal = Number(item.qty) || 0;
 
                     return `
-                        <tr class="hover:bg-gray-50 border-b border-gray-100">
-                            <td class="p-4">${imageTag}</td>
-                            <td class="p-4 font-medium text-gray-900">${item.name || 'Unnamed Item'}</td>
-                            <td class="p-4 text-sm text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
-                            <td class="p-4"><span class="px-2 py-1 rounded text-sm ${qtyVal <= lowStockThreshold ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${qtyVal}</span></td>
-                            <td class="p-4 text-sm font-mono font-bold text-indigo-600">₱${(Number(item.price) || 0).toFixed(2)}</td>
-                            <td class="p-4 text-sm"><span class="${expiryStyle}">${expiryText}</span></td>
-                            <td class="p-2 text-center">
-                                <div class="grid grid-cols-2 gap-1.5 max-w-[160px] mx-auto">
-                                    <button onclick="handleStockAdjust('${safeId}', 'restock')" class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 p-1 rounded text-[11px] font-bold transition">Add</button>
-                                    <button onclick="handleStockAdjust('${safeId}', 'reduce')" class="bg-amber-50 text-amber-700 hover:bg-amber-100 p-1 rounded text-[11px] font-bold transition">Less</button>
-                                    <button onclick="openModal('${safeId}')" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 p-1 rounded text-[11px] font-medium transition">Edit</button>
-                                    <button onclick="cloneItemToNewForm('${safeId}')" class="bg-sky-50 text-sky-700 hover:bg-sky-100 p-1 rounded text-[11px] font-bold transition">Copy</button>
-                                    <button onclick="deleteItem('${safeId}')" class="bg-rose-50 text-rose-600 hover:bg-rose-100 p-1 rounded text-[11px] font-medium transition col-span-2">Delete Item</button>
+                        <div class="relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition group">
+                            
+                            <!-- PRODUCT HERO TOP CONTAINER LAYER -->
+                            <div class="relative h-32 w-full bg-gray-50 flex items-center justify-center overflow-hidden border-b border-gray-100">
+                                ${imageTag}
+                                ${oosStamp}
+                                <span class="absolute top-2 left-2 text-[9px] uppercase font-bold tracking-wider bg-black/60 text-white px-1.5 py-0.5 rounded backdrop-blur-xs z-20">
+                                    ${item.category || 'General'}
+                                </span>
+                            </div>
+
+                            <!-- INTERMEDIATE DETAILS SPEC SHEET AREA -->
+                            <div class="p-3 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="font-bold text-gray-800 text-sm tracking-tight line-clamp-2 leading-tight min-h-[2.5rem]" title="${item.name || 'Unnamed Item'}">
+                                        ${item.name || 'Unnamed Item'}
+                                    </h3>
+                                    
+                                    <div class="flex justify-between items-baseline mt-2">
+                                        <span class="text-base font-black text-indigo-600">₱${(Number(item.price) || 0).toFixed(2)}</span>
+                                        <span class="text-[11px] px-1.5 py-0.5 rounded-full ${stockBadgeClass}">
+                                            ${qtyVal} left
+                                        </span>
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
+
+                                <div class="mt-2.5 pt-2 border-t border-gray-50 text-[11px] text-gray-500 flex justify-between items-center">
+                                    <span>⏳ Exp:</span>
+                                    <span class="${expiryStyle}">${expiryText}</span>
+                                </div>
+                            </div>
+
+                            <!-- TOUCH-FRIENDLY COMPACT QUICK ACTION BUTTON PANEL -->
+                            <div class="bg-gray-50 border-t border-gray-100 p-1.5 grid grid-cols-4 gap-1">
+                                <button onclick="handleStockAdjust('${safeId}', 'restock')" class="bg-emerald-600 hover:bg-emerald-700 text-white p-1.5 rounded-md font-bold transition flex flex-col items-center justify-center" title="Add Stock">
+                                    <span class="text-xs">➕</span>
+                                    <span class="text-[8px] tracking-tighter mt-0.5">Add</span>
+                                </button>
+                                <button onclick="handleStockAdjust('${safeId}', 'reduce')" class="bg-amber-500 hover:bg-amber-600 text-white p-1.5 rounded-md font-bold transition flex flex-col items-center justify-center ${isOOS ? 'opacity-40 pointer-events-none' : ''}" title="Reduce Stock">
+                                    <span class="text-xs">Less</span>
+                                </button>
+                                <button onclick="openModal('${safeId}')" class="bg-white border border-gray-200 text-gray-600 hover:bg-gray-100 p-1.5 rounded-md font-medium transition flex flex-col items-center justify-center" title="Edit Properties">
+                                    <span class="text-xs">✏️</span>
+                                </button>
+                                <button onclick="cloneItemToNewForm('${safeId}')" class="bg-white border border-gray-200 text-sky-600 hover:bg-sky-50 p-1.5 rounded-md font-medium transition flex flex-col items-center justify-center" title="Clone Row Asset">
+                                    <span class="text-xs">📋</span>
+                                </button>
+                                <button onclick="deleteItem('${safeId}')" class="bg-rose-50 text-rose-600 hover:bg-rose-100 text-[10px] py-1 rounded-md font-semibold transition col-span-4 mt-0.5 border border-rose-100/40">
+                                    🗑️ Drop Catalog Line
+                                </button>
+                            </div>
+                        </div>
                     `;
                 }).join('');
             }
