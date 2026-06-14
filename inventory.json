@@ -491,6 +491,18 @@
       "price": 37,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_1tmz8473v",
+      "name": "Condiments - Del Monte Tomato Sauce - Original - 115g",
+      "category": "Condiments",
+      "cost": 213,
+      "units": 10,
+      "markup": 12,
+      "qty": 5,
+      "price": 24,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -989,6 +1001,13 @@
       "name": "Condiments - Coco Mama - Gata",
       "type": "Addition",
       "change": 0,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432334129,
+      "name": "Condiments - Del Monte Tomato Sauce - Original - 115g",
+      "type": "Addition",
+      "change": 5,
       "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
     }
   ],
