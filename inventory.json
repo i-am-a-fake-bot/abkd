@@ -407,6 +407,18 @@
       "price": 10,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_ib7ygi9tr",
+      "name": "Snacks - Peewee - BBQ",
+      "category": "Snacks",
+      "cost": 7,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 10,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -854,6 +866,13 @@
     {
       "time": 1781426679862,
       "name": "Snacks - Marty's - Plain Salted",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Snacks. Expiry: N/A."
+    },
+    {
+      "time": 1781426727300,
+      "name": "Snacks - Peewee - BBQ",
       "type": "Addition",
       "change": 3,
       "notes": "Initial stock addition under category: Snacks. Expiry: N/A."
