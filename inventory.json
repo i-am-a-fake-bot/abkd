@@ -298,6 +298,18 @@
       "price": 3,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_iez9uu61t",
+      "name": "\":\"Candy - V Fresh - 3 for ₱5",
+      "category": "Candy",
+      "cost": 39.4,
+      "units": 24,
+      "markup": 12,
+      "qty": 0,
+      "price": 2,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -675,6 +687,13 @@
     {
       "time": 1781414785804,
       "name": "Candy - Stick-O",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
+    },
+    {
+      "time": 1781414836428,
+      "name": "\":\"Candy - V Fresh - 3 for ₱5",
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Candy. Expiry: N/A."
