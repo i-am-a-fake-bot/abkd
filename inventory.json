@@ -943,7 +943,7 @@
       "cost": 124.5,
       "units": 10,
       "markup": 12,
-      "qty": 6,
+      "qty": 4,
       "price": 15,
       "expiry": "",
       "image": ""
@@ -2207,6 +2207,13 @@
       "type": "Clone / Copy",
       "change": 4,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱15.00."
+    },
+    {
+      "time": 1781437554842,
+      "name": "Nescafe - Creamy White",
+      "type": "Product Update",
+      "change": -2,
+      "notes": "Modified attributes: stock adjusted from 6 to 4."
     }
   ],
   "config": {
