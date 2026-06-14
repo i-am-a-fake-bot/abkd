@@ -110,7 +110,7 @@
     },
     {
       "id": "id_zk7yuf4kq",
-      "name": "Cream-O - Choco",
+      "name": "Cream-O - Choco Fill",
       "category": "Meryenda",
       "cost": 74.25,
       "units": 10,
@@ -1415,6 +1415,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Mama Sita's - Oyster Sauce\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434097027,
+      "name": "Cream-O - Choco Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Cream-O - Choco Fill\"."
     }
   ],
   "config": {
