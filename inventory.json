@@ -692,7 +692,7 @@
       "units": 6,
       "markup": 12,
       "qty": 3,
-      "price": 25,
+      "price": 26,
       "expiry": "",
       "image": ""
     },
@@ -1787,6 +1787,13 @@
       "type": "Clone / Copy",
       "change": 2,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱26.00."
+    },
+    {
+      "time": 1781436575716,
+      "name": "Ligo Sardines - Green",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: price updated to ₱26.00."
     }
   ],
   "config": {
