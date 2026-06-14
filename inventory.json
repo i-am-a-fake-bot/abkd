@@ -599,6 +599,18 @@
       "price": 32,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_ll4b8bvs9",
+      "name": "Silver Swan - Toyo",
+      "category": "Pantry",
+      "cost": 8.35,
+      "units": 1,
+      "markup": 12,
+      "qty": 2,
+      "price": 11,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1588,6 +1600,13 @@
       "type": "Addition",
       "change": 1,
       "notes": "Initial stock addition under category: Pantry. Expiry: N/A."
+    },
+    {
+      "time": 1781435937548,
+      "name": "Silver Swan - Toyo",
+      "type": "Clone / Copy",
+      "change": 2,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱11.00."
     }
   ],
   "config": {
