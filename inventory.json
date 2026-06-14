@@ -395,6 +395,18 @@
       "price": 8,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_7bwz7ixxx",
+      "name": "Snacks - Marty's - Plain Salted",
+      "category": "Snacks",
+      "cost": 7,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 10,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -838,6 +850,13 @@
       "type": "Addition",
       "change": 6,
       "notes": "Initial stock addition under category: Panlaba. Expiry: N/A."
+    },
+    {
+      "time": 1781426679862,
+      "name": "Snacks - Marty's - Plain Salted",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Snacks. Expiry: N/A."
     }
   ],
   "config": {
