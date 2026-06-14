@@ -1007,6 +1007,18 @@
       "price": 12,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_fk1m8ngj5",
+      "name": "Lucky Me - Noodles - Chicken",
+      "category": "Pantry",
+      "cost": 52.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 6,
+      "price": 10,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2290,6 +2302,13 @@
       "type": "Clone / Copy",
       "change": 3,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱12.00."
+    },
+    {
+      "time": 1781437987169,
+      "name": "Lucky Me - Noodles - Chicken",
+      "type": "Clone / Copy",
+      "change": 6,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱10.00."
     }
   ],
   "config": {
