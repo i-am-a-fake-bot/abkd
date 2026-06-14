@@ -371,6 +371,18 @@
       "price": 10,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_gdgc6xpxr",
+      "name": "Panlaba - Downy - 3 for ₱20",
+      "category": "Panlaba",
+      "cost": 95,
+      "units": 18,
+      "markup": 12,
+      "qty": 18,
+      "price": 7,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -800,6 +812,13 @@
       "type": "Addition",
       "change": 20,
       "notes": "Initial stock addition under category: Yosi. Expiry: N/A."
+    },
+    {
+      "time": 1781426386800,
+      "name": "Panlaba - Downy - 3 for ₱20",
+      "type": "Addition",
+      "change": 18,
+      "notes": "Initial stock addition under category: Panlaba. Expiry: N/A."
     }
   ],
   "config": {
