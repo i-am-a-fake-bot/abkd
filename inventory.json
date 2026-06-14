@@ -467,6 +467,18 @@
       "price": 17,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_gk7huh9ia",
+      "name": "Lucky Me - Pancit Canton - Extra HOT",
+      "category": "Lucky Me",
+      "cost": 95.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 17,
+      "expiry": "2046-08-18",
+      "image": ""
     }
   ],
   "history": [
@@ -952,6 +964,13 @@
       "type": "Addition",
       "change": 3,
       "notes": "Initial stock addition under category: Lucky Me. Expiry: N/A."
+    },
+    {
+      "time": 1781428872003,
+      "name": "Lucky Me - Pancit Canton - Extra HOT",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Lucky Me. Expiry: 2046-08-18."
     }
   ],
   "config": {
