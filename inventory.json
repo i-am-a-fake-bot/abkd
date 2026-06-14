@@ -214,6 +214,18 @@
       "price": 8,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_8hdex5uot",
+      "name": "Biskwit - Rebisco - Strawberry",
+      "category": "Biskwit",
+      "cost": 61.25,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 8,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -535,6 +547,13 @@
     {
       "time": 1781414401119,
       "name": "Biskwit - Rebisco - Butter",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414436525,
+      "name": "Biskwit - Rebisco - Strawberry",
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
