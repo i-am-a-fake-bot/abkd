@@ -431,6 +431,18 @@
       "price": 20,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_dym7vr4v4",
+      "name": "Biskwit - Rebisco - Choco",
+      "category": "Biskwit",
+      "cost": 60,
+      "units": 10,
+      "markup": 12,
+      "qty": 10,
+      "price": 9,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -895,6 +907,13 @@
       "type": "Addition",
       "change": 3,
       "notes": "Initial stock addition under category: Snacks. Expiry: N/A."
+    },
+    {
+      "time": 1781426962311,
+      "name": "Biskwit - Rebisco - Choco",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
     }
   ],
   "config": {
