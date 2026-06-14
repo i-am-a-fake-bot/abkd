@@ -518,8 +518,8 @@
     },
     {
       "id": "id_0sgcv00q9",
-      "name": "Condiments - Knorr Cube - Chicken",
-      "category": "Condiments",
+      "name": "Knorr Cube - Chicken",
+      "category": "Pantry",
       "cost": 67.5,
       "units": 12,
       "markup": 12,
@@ -1373,6 +1373,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Knorr - Sampaloc Mix\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434036489,
+      "name": "Knorr Cube - Chicken",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Knorr Cube - Chicken\", category updated to \"Pantry\"."
     }
   ],
   "config": {
