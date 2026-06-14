@@ -839,6 +839,18 @@
       "price": 35,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_j8p9hlx4g",
+      "name": "Nestea - Apple",
+      "category": "Beverage",
+      "cost": 120,
+      "units": 6,
+      "markup": 12,
+      "qty": 4,
+      "price": 25,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2010,6 +2022,13 @@
       "type": "Clone / Copy",
       "change": 4,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱35.00."
+    },
+    {
+      "time": 1781437049044,
+      "name": "Nestea - Apple",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱25.00."
     }
   ],
   "config": {
