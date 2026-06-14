@@ -791,6 +791,18 @@
       "price": 14,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_c493kqckk",
+      "name": "Bear Brand - Swakto",
+      "category": "Beverage",
+      "cost": 99.5,
+      "units": 8,
+      "markup": 12,
+      "qty": 4,
+      "price": 14,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1934,6 +1946,13 @@
       "type": "Addition",
       "change": 2,
       "notes": "Initial stock addition under category: Beverage. Expiry: N/A."
+    },
+    {
+      "time": 1781436897501,
+      "name": "Bear Brand - Swakto",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱14.00."
     }
   ],
   "config": {
