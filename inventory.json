@@ -419,6 +419,18 @@
       "price": 10,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_78fci41c4",
+      "name": "Snacks - Piattos - Sour Cream % Onion",
+      "category": "Snacks",
+      "cost": 16,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 20,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -873,6 +885,13 @@
     {
       "time": 1781426727300,
       "name": "Snacks - Peewee - BBQ",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Snacks. Expiry: N/A."
+    },
+    {
+      "time": 1781426829090,
+      "name": "Snacks - Piattos - Sour Cream % Onion",
       "type": "Addition",
       "change": 3,
       "notes": "Initial stock addition under category: Snacks. Expiry: N/A."
