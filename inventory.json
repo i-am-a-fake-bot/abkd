@@ -18,7 +18,7 @@
       "cost": 150,
       "units": 10,
       "markup": 12,
-      "qty": 3,
+      "qty": 4,
       "price": 17,
       "image": "",
       "expiry": "2026-12-31"
@@ -206,6 +206,13 @@
       "type": "Sale / Usage",
       "change": -1,
       "notes": "Bulk reduction transaction."
+    },
+    {
+      "time": 1781403201935,
+      "name": "Test Widget",
+      "type": "Restock",
+      "change": 1,
+      "notes": "Bulk restock transaction."
     }
   ]
 }
