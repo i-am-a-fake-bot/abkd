@@ -94,6 +94,18 @@
       "price": 9,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_t7qcxoc7z",
+      "name": "Biskwit - Combi",
+      "category": "Biskwit",
+      "cost": 60.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 9,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -340,6 +352,13 @@
       "name": "Biskwit - Choco Mucho",
       "type": "Addition",
       "change": 2,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781413890933,
+      "name": "Biskwit - Combi",
+      "type": "Addition",
+      "change": 4,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
     }
   ],
