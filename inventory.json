@@ -542,8 +542,8 @@
     },
     {
       "id": "id_a80vq2xue",
-      "name": "Condiments - Knorr - Sampaloc Mix",
-      "category": "Condiments",
+      "name": "Knorr - Sampaloc Mix",
+      "category": "Pantry",
       "cost": 176.4,
       "units": 12,
       "markup": 12,
@@ -1366,6 +1366,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Del Monte Tomato Sauce - Original - 115g\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434028685,
+      "name": "Knorr - Sampaloc Mix",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Knorr - Sampaloc Mix\", category updated to \"Pantry\"."
     }
   ],
   "config": {
