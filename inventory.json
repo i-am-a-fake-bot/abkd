@@ -362,7 +362,7 @@
     },
     {
       "id": "id_p93wzqdse",
-      "name": "Yosi - Fortune - Green",
+      "name": "Fortune - Green",
       "category": "Yosi",
       "cost": 166,
       "units": 20,
@@ -1471,6 +1471,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Camel - Red\"."
+    },
+    {
+      "time": 1781434276037,
+      "name": "Fortune - Green",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Fortune - Green\"."
     }
   ],
   "config": {
