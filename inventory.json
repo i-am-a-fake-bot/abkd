@@ -695,6 +695,18 @@
       "price": 25,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_yp1i2o247",
+      "name": "Ligo Sardines - Red",
+      "category": "De Lata",
+      "cost": 23.2,
+      "units": 1,
+      "markup": 12,
+      "qty": 2,
+      "price": 26,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1768,6 +1780,13 @@
       "type": "Clone / Copy",
       "change": 3,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱25.00."
+    },
+    {
+      "time": 1781436564961,
+      "name": "Ligo Sardines - Red",
+      "type": "Clone / Copy",
+      "change": 2,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱26.00."
     }
   ],
   "config": {
