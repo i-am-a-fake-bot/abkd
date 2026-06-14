@@ -110,7 +110,7 @@
     },
     {
       "id": "id_zk7yuf4kq",
-      "name": "Biskwit - Cream-O - Choco",
+      "name": "Cream-O - Choco",
       "category": "Meryenda",
       "cost": 74.25,
       "units": 10,
@@ -1219,6 +1219,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Combi - Choco\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433698892,
+      "name": "Cream-O - Choco",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Cream-O - Choco\"."
     }
   ],
   "config": {
