@@ -755,6 +755,18 @@
       "price": 40,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_hx8t4v1mc",
+      "name": "Youngs Town Sardines - Green",
+      "category": "De Lata",
+      "cost": 23,
+      "units": 1,
+      "markup": 12,
+      "qty": 1,
+      "price": 26,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1877,6 +1889,13 @@
       "type": "Clone / Copy",
       "change": 3,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱40.00."
+    },
+    {
+      "time": 1781436755024,
+      "name": "Youngs Town Sardines - Green",
+      "type": "Clone / Copy",
+      "change": 1,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱26.00."
     }
   ],
   "config": {
