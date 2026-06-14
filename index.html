@@ -132,7 +132,7 @@
             </div>
         </section>
 
-        <!-- INVENTORY TAB (REWRITTEN FROM TABLE TO INTERACTIVE CARDS) -->
+        <!-- INVENTORY CATALOG TAB -->
         <section id="tab-inventory" class="tab-content hidden">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                 <h2 class="text-2xl font-bold text-gray-800">Inventory Catalog</h2>
@@ -141,9 +141,8 @@
                 </button>
             </div>
 
-            <!-- Smart Filter Controls Container -->
+            <!-- Filter Controls Container -->
             <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center mb-6">
-                <!-- Search Box Wrapper -->
                 <div class="relative flex-1 max-w-md flex items-center">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">🔍</span>
                     <input type="text" id="inventory-search" oninput="handleSearchInput()" placeholder="Search item name or category..." class="w-full pl-9 pr-10 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
@@ -152,7 +151,6 @@
                     </button>
                 </div>
                 
-                <!-- Sort Matrix Selector Dropdown -->
                 <div class="flex items-center gap-2 bg-white border border-gray-300 px-3 py-2 rounded-lg shadow-sm">
                     <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Sort by:</span>
                     <select id="sort-picker" onchange="handleSortPickerChange()" class="text-sm font-medium text-gray-700 bg-transparent focus:outline-none cursor-pointer">
@@ -166,9 +164,9 @@
                 </div>
             </div>
             
-            <!-- Beautiful Card Wrapper Engine -->
+            <!-- Dynamic Grid Matrix for Inventory Cards -->
             <div id="inventory-card-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!-- Javascript maps product tiles dynamic loop strings here directly -->
+                <!-- Appended dynamically via JS execution -->
             </div>
         </section>
 
@@ -192,7 +190,7 @@
             </div>
         </section>
 
-        <!-- PREFERENCES AND CONNECTIONS SETTINGS -->
+        <!-- CONFIGURATION AND SYNC SETTINGS -->
         <section id="tab-settings" class="tab-content hidden">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Application Settings</h2>
             
@@ -333,7 +331,7 @@
         </div>
     </div>
 
-    <!-- MAIN APP SCRIPT CONFIGURATION MODULE -->
+    <!-- MAIN APP CONFIGURATION ENGINE -->
     <script>
         let db = { 
             inventory: [], 
@@ -345,7 +343,6 @@
         };
         let githubSha = null;
         
-        // Sorting State Management Configuration Variables
         let currentSortColumn = 'name'; 
         let currentSortDirection = 'asc'; 
 
@@ -600,7 +597,6 @@
             return 'text-gray-600 font-mono text-[11px] font-medium'; 
         }
 
-        // Dropdown Sort Picker Logic Bridge Integration
         function handleSortPickerChange() {
             const selectVal = document.getElementById('sort-picker').value;
             const tokens = selectVal.split('-');
@@ -979,7 +975,7 @@
                 });
             }
 
-            // RENDERING TRANSITION FOR CARDS PREVIEW GRID MATRIX
+            // RENDERING CARDS WITH TEXT-ONLY BLOCK ACTION MATRIX
             const cardGrid = document.getElementById('inventory-card-grid');
             if (displayItems.length === 0) {
                 cardGrid.className = "block text-center p-12 bg-white rounded-xl border border-dashed text-gray-400 italic";
@@ -992,21 +988,18 @@
                     const qtyVal = Number(item.qty) || 0;
                     const isOOS = qtyVal === 0;
 
-                    // Compute dynamic styling properties for cover frames
                     const imageTag = item.image 
                         ? `<img src="${item.image}" class="w-full h-full object-cover transition duration-300 ${isOOS ? 'blur-[2px]' : ''}">`
                         : `<div class="w-full h-full bg-slate-100 flex items-center justify-center text-3xl select-none">📦</div>`;
 
-                    // Generate the slanted absolute-positioned OOS Red stamp component string conditionally
                     const oosStamp = isOOS 
                         ? `<div class="absolute inset-0 bg-white/30 flex items-center justify-center p-2 backdrop-blur-[0.5px] z-10">
-                                <div class="border-4 border-rose-600 text-rose-600 font-black text-[15px] uppercase tracking-wider px-2 py-1 rounded transform -rotate-12 bg-white/90 shadow-md select-none tracking-widest animate-pulse">
+                                <div class="border-4 border-rose-600 text-rose-600 font-black text-[15px] uppercase px-2 py-1 rounded transform -rotate-12 bg-white/90 shadow-md select-none tracking-widest animate-pulse">
                                     Out of Stock
                                 </div>
                            </div>`
                         : '';
 
-                    // Quantity Alert Warning pill styling logic block
                     let stockBadgeClass = "bg-gray-100 text-gray-700";
                     if (isOOS) {
                         stockBadgeClass = "bg-rose-100 text-rose-800 font-extrabold";
@@ -1020,7 +1013,7 @@
                     return `
                         <div class="relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition group">
                             
-                            <!-- PRODUCT HERO TOP CONTAINER LAYER -->
+                            <!-- COVER/IMAGE TOP SECTION -->
                             <div class="relative h-32 w-full bg-gray-50 flex items-center justify-center overflow-hidden border-b border-gray-100">
                                 ${imageTag}
                                 ${oosStamp}
@@ -1029,7 +1022,7 @@
                                 </span>
                             </div>
 
-                            <!-- INTERMEDIATE DETAILS SPEC SHEET AREA -->
+                            <!-- SPEC DATA MIDDLE SECTION -->
                             <div class="p-3 flex-1 flex flex-col justify-between">
                                 <div>
                                     <h3 class="font-bold text-gray-800 text-sm tracking-tight line-clamp-2 leading-tight min-h-[2.5rem]" title="${item.name || 'Unnamed Item'}">
@@ -1050,23 +1043,29 @@
                                 </div>
                             </div>
 
-                            <!-- TOUCH-FRIENDLY COMPACT QUICK ACTION BUTTON PANEL -->
-                            <div class="bg-gray-50 border-t border-gray-100 p-1.5 grid grid-cols-4 gap-1">
-                                <button onclick="handleStockAdjust('${safeId}', 'restock')" class="bg-emerald-600 hover:bg-emerald-700 text-white p-1.5 rounded-md font-bold transition flex flex-col items-center justify-center" title="Add Stock">
-                                    <span class="text-xs">➕</span>
-                                    <span class="text-[8px] tracking-tighter mt-0.5">Add</span>
-                                </button>
-                                <button onclick="handleStockAdjust('${safeId}', 'reduce')" class="bg-amber-500 hover:bg-amber-600 text-white p-1.5 rounded-md font-bold transition flex flex-col items-center justify-center ${isOOS ? 'opacity-40 pointer-events-none' : ''}" title="Reduce Stock">
-                                    <span class="text-xs">Less</span>
-                                </button>
-                                <button onclick="openModal('${safeId}')" class="bg-white border border-gray-200 text-gray-600 hover:bg-gray-100 p-1.5 rounded-md font-medium transition flex flex-col items-center justify-center" title="Edit Properties">
-                                    <span class="text-xs">✏️</span>
-                                </button>
-                                <button onclick="cloneItemToNewForm('${safeId}')" class="bg-white border border-gray-200 text-sky-600 hover:bg-sky-50 p-1.5 rounded-md font-medium transition flex flex-col items-center justify-center" title="Clone Row Asset">
-                                    <span class="text-xs">📋</span>
-                                </button>
-                                <button onclick="deleteItem('${safeId}')" class="bg-rose-50 text-rose-600 hover:bg-rose-100 text-[10px] py-1 rounded-md font-semibold transition col-span-4 mt-0.5 border border-rose-100/40">
-                                    🗑️ Drop Catalog Line
+                            <!-- TEXT-ONLY BLOCK ACTION MATRIX -->
+                            <div class="border-t border-gray-100 divide-y divide-gray-100 text-center text-xs font-semibold">
+                                <!-- ROW 1: RESTOCK | DESTOCK -->
+                                <div class="grid grid-cols-2 divide-x divide-gray-100">
+                                    <button onclick="handleStockAdjust('${safeId}', 'restock')" class="py-2.5 bg-white text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 transition">
+                                        Restock
+                                    </button>
+                                    <button onclick="handleStockAdjust('${safeId}', 'reduce')" class="py-2.5 bg-white text-amber-600 hover:bg-amber-50 active:bg-amber-100 transition ${isOOS ? 'opacity-40 pointer-events-none bg-gray-50 text-gray-400' : ''}">
+                                        Destock
+                                    </button>
+                                </div>
+                                <!-- ROW 2: EDIT | COPY -->
+                                <div class="grid grid-cols-2 divide-x divide-gray-100">
+                                    <button onclick="openModal('${safeId}')" class="py-2.5 bg-white text-gray-600 hover:bg-gray-50 active:bg-gray-100 transition">
+                                        Edit
+                                    </button>
+                                    <button onclick="cloneItemToNewForm('${safeId}')" class="py-2.5 bg-white text-sky-600 hover:bg-sky-50 active:bg-sky-100 transition">
+                                        Copy
+                                    </button>
+                                </div>
+                                <!-- ROW 3: DELETE -->
+                                <button onclick="deleteItem('${safeId}')" class="w-full py-2 bg-white text-rose-500 hover:bg-rose-50 active:bg-rose-100 transition text-[11px] font-medium tracking-wide">
+                                    Delete
                                 </button>
                             </div>
                         </div>
