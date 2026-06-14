@@ -863,6 +863,18 @@
       "price": 25,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_itlhaamsx",
+      "name": "Great Taste - Choco",
+      "category": "Beverage",
+      "cost": 140,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 16,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2055,6 +2067,13 @@
       "type": "Clone / Copy",
       "change": 4,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱25.00."
+    },
+    {
+      "time": 1781437183007,
+      "name": "Great Taste - Choco",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
     }
   ],
   "config": {
