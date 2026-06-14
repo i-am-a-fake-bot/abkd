@@ -118,6 +118,18 @@
       "price": 9,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_1lgc0aikk",
+      "name": "Biskwit - Cream-O - Vanilla",
+      "category": "Biskwit",
+      "cost": 74.25,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 9,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -376,6 +388,13 @@
     {
       "time": 1781413973864,
       "name": "Biskwit - Cream-O - Choco",
+      "type": "Addition",
+      "change": 4,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414002075,
+      "name": "Biskwit - Cream-O - Vanilla",
       "type": "Addition",
       "change": 4,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
