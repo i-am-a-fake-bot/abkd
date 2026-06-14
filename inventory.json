@@ -386,7 +386,7 @@
     },
     {
       "id": "id_z3v9ymc3u",
-      "name": "Panlaba - Wings",
+      "name": "Wings Detergent",
       "category": "Panlaba",
       "cost": 38,
       "units": 6,
@@ -1450,6 +1450,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Downy - 3 for ₱20\"."
+    },
+    {
+      "time": 1781434220954,
+      "name": "Wings Detergent",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Wings Detergent\"."
     }
   ],
   "config": {
