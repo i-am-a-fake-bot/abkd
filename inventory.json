@@ -434,8 +434,8 @@
     },
     {
       "id": "id_dym7vr4v4",
-      "name": "Biskwit - Rebisco - Choco",
-      "category": "Biskwit",
+      "name": "Rebisco - Choco Fill",
+      "category": "Meryenda",
       "cost": 60,
       "units": 10,
       "markup": 12,
@@ -1282,6 +1282,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Rebisco - Butter Fill\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433824287,
+      "name": "Rebisco - Choco Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Rebisco - Choco Fill\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
