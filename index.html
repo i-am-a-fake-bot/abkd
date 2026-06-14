@@ -30,8 +30,9 @@
         <section id="tab-dashboard" class="tab-content">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Summary</h2>
             
-            <!-- Row 1 & 2: Main 6 Stats Matrix Layout -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+            <!-- FIXED: Grid forced to stay 3 columns wide across all viewport orientations -->
+            <div class="grid grid-cols-3 gap-4 mb-8">
+                <!-- Row 1 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Items</p>
                     <p id="stat-total-items" class="text-2xl font-black text-indigo-600 mt-2">0</p>
@@ -44,6 +45,8 @@
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Low Stock (&lt; 5)</p>
                     <p id="stat-low-stock" class="text-2xl font-black text-amber-500 mt-2">0</p>
                 </div>
+                
+                <!-- Row 2 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Out of Stock</p>
                     <p id="stat-out-of-stock" class="text-2xl font-black text-rose-600 mt-2">0</p>
@@ -58,7 +61,7 @@
                 </div>
             </div>
 
-            <!-- Dashboard Row 3: Low Stock Items Live Monitor Viewport -->
+            <!-- Low Stock Items Live Monitor Viewport -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 mb-6">
                 <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⚠️ Low Stock Items</h3>
                 <div class="overflow-x-auto">
@@ -79,7 +82,7 @@
                 </div>
             </div>
 
-            <!-- CHANGED HERE: Replaced Recent Activity with Expiring Soon Panel Monitor -->
+            <!-- Expiring Soon Panel Monitor -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                 <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⏳ Expiring Soon (Next 30 Days)</h3>
                 <div class="overflow-x-auto">
@@ -444,7 +447,6 @@
         }
 
         function renderApp() {
-            // Main Top 6 Calculations
             const totalItems = db.inventory.length;
             const totalStock = db.inventory.reduce((acc, curr) => acc + Number(curr.qty), 0);
             const lowStockItems = db.inventory.filter(i => Number(i.qty) < 5 && Number(i.qty) > 0);
@@ -467,7 +469,6 @@
             document.getElementById('stat-inventory-value').innerText = "₱" + totalInventoryValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('stat-added-month').innerText = additionsThisMonth;
 
-            // Render Low Stock Live Monitor Table View
             const dashLowStockTbody = document.getElementById('dash-lowstock-tbody');
             const allDeficitItems = db.inventory.filter(i => Number(i.qty) < 5); 
             
@@ -491,7 +492,6 @@
                 `).join('');
             }
 
-            // CHANGED HERE: Calculate and Render Expiring Soon items (Next 30 Days)
             const dashExpiryTbody = document.getElementById('dash-expiry-tbody');
             const todayTimestamp = new Date().setHours(0,0,0,0);
             const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
@@ -499,11 +499,9 @@
             const expiringItems = db.inventory.filter(item => {
                 if (!item.expiry) return false;
                 const expiryTimestamp = new Date(item.expiry).getTime();
-                // Include if it's already expired OR if it expires within the next 30 days
                 return (expiryTimestamp - todayTimestamp) <= thirtyDaysInMs;
             });
 
-            // Sort expiring items so that the closest to expiration (or already expired) show first
             expiringItems.sort((a, b) => new Date(a.expiry) - new Date(b.expiry));
 
             if (expiringItems.length === 0) {
@@ -536,7 +534,6 @@
                 }).join('');
             }
 
-            // Render Inventory tab data records
             let displayItems = [...db.inventory];
             
             document.getElementById('sort-icon-category').innerHTML = '';
