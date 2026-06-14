@@ -587,6 +587,18 @@
       "price": 8,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_rqnme72y2",
+      "name": "Mantika - 1 Bote",
+      "category": "Pantry",
+      "cost": 305,
+      "units": 12,
+      "markup": 12,
+      "qty": 1,
+      "price": 32,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1569,6 +1581,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781435764100,
+      "name": "Mantika - 1 Bote",
+      "type": "Addition",
+      "change": 1,
+      "notes": "Initial stock addition under category: Pantry. Expiry: N/A."
     }
   ],
   "config": {
