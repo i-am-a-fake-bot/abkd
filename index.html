@@ -30,7 +30,6 @@
         <section id="tab-dashboard" class="tab-content">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Summary</h2>
             
-            <!-- Financial Summary Matrix Row -->
             <div class="grid grid-cols-3 gap-4 mb-4">
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Retail Value</p>
@@ -46,7 +45,6 @@
                 </div>
             </div>
 
-            <!-- Stock Metrics Nested Layout Block -->
             <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 mb-6">
                 <p class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2 mb-4">📦 Stock Metrics</p>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -69,9 +67,7 @@
                 </div>
             </div>
 
-            <!-- Side-by-Side Critical Stock Monitors Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <!-- Low Stock Items Live Monitor Viewport -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                     <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⚠️ Low Stock Items</h3>
                     <div class="overflow-x-auto">
@@ -92,7 +88,6 @@
                     </div>
                 </div>
 
-                <!-- Out of Stock Items Live Monitor Viewport -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                     <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">🚨 Out of Stock Items</h3>
                     <div class="overflow-x-auto">
@@ -114,7 +109,6 @@
                 </div>
             </div>
 
-            <!-- Expiring Soon Panel Monitor -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
                 <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⏳ Expiring Soon (Next 30 Days)</h3>
                 <div class="overflow-x-auto">
@@ -233,7 +227,6 @@
                         </form>
                     </div>
 
-                    <!-- Force Sync Trigger Section -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-rose-100 bg-gradient-to-br from-white to-rose-50/20">
                         <h3 class="text-base font-bold text-rose-800 border-b border-rose-100/50 pb-2 mb-2">🔄 Manual Live Sync</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">If updates saved from another mobile device or window are not appearing immediately, tap below to force clear local memory and stream the fresh repository matrix instantly.</p>
@@ -405,7 +398,6 @@
 
         async function fetchDataFromGitHub(bypassCache = false) {
             const creds = getGitHubCredentials();
-            // If bypassCache flag is toggled, generate a timestamp query parameter to beat server/CDN nodes
             const cacheBuster = bypassCache ? `?t=${Date.now()}` : '';
             const url = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json${cacheBuster}`;
             
@@ -438,12 +430,10 @@
             const syncBtn = document.getElementById('btn-force-sync');
             const originalText = syncBtn.innerHTML;
             
-            // Visual loading states
             syncBtn.disabled = true;
             syncBtn.innerHTML = "⏳ Fetching Live Matrix...";
             syncBtn.classList.add('opacity-60');
 
-            // Force dynamic load bypassing CDN locks
             await fetchDataFromGitHub(true);
 
             setTimeout(() => {
@@ -579,24 +569,183 @@
             renderApp();
         }
 
-        function renderApp() {
-            const lowStockThreshold = db.config?.lowThreshold || 5;
+        function openModal(id = null) {
+            const modal = document.getElementById('item-modal');
+            const form = document.getElementById('item-form');
+            form.reset();
+            document.getElementById('item-id').value = '';
+            document.getElementById('item-image-base64').value = '';
+            document.getElementById('image-preview-container').innerHTML = 'No Img';
+            
+            if (id) {
+                document.getElementById('modal-title').innerText = "Edit Item Details";
+                const item = db.inventory.find(i => i.id === id);
+                if (item) {
+                    document.getElementById('item-id').value = item.id;
+                    document.getElementById('item-name').value = item.name || '';
+                    document.getElementById('item-category').value = item.category || '';
+                    document.getElementById('item-cost').value = item.cost || 0;
+                    document.getElementById('item-units').value = item.units || 1;
+                    document.getElementById('item-markup').value = item.markup || 12;
+                    document.getElementById('item-qty').value = item.qty || 0;
+                    document.getElementById('item-price').value = item.price || 0;
+                    document.getElementById('item-expiry').value = item.expiry || '';
+                    
+                    if (item.image) {
+                        document.getElementById('item-image-base64').value = item.image;
+                        document.getElementById('image-preview-container').innerHTML = `<img src="${item.image}" class="w-full h-full object-cover">`;
+                    }
+                    calculateSRP(true);
+                }
+            } else {
+                document.getElementById('modal-title').innerText = "Add New Item";
+                document.getElementById('item-units').value = "1";
+                document.getElementById('item-markup').value = "12";
+                calculateSRP(false);
+            }
+            modal.classList.remove('hidden');
+        }
 
-            const totalItems = db.inventory.length;
-            const totalStock = db.inventory.reduce((acc, curr) => acc + Number(curr.qty), 0);
+        function closeModal() {
+            document.getElementById('item-modal').classList.add('hidden');
+        }
+
+        function saveItem(e) {
+            e.preventDefault();
+            const id = document.getElementById('item-id').value;
+            const name = document.getElementById('item-name').value.trim();
+            const category = document.getElementById('item-category').value.trim();
+            const cost = parseFloat(document.getElementById('item-cost').value) || 0;
+            const units = parseInt(document.getElementById('item-units').value) || 1;
+            const markup = parseFloat(document.getElementById('item-markup').value) || 0;
+            const qty = parseInt(document.getElementById('item-qty').value) || 0;
+            const price = parseFloat(document.getElementById('item-price').value) || 0;
+            const expiry = document.getElementById('item-expiry').value;
+            const image = document.getElementById('item-image-base64').value;
+
+            if (!db.inventory) db.inventory = [];
+            if (!db.history) db.history = [];
+
+            if (id) {
+                const idx = db.inventory.findIndex(i => i.id === id);
+                if (idx !== -1) {
+                    const oldQty = db.inventory[idx].qty || 0;
+                    db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry, image };
+                    
+                    if (oldQty !== qty) {
+                        db.history.push({
+                            time: Date.now(),
+                            name,
+                            type: "Manual Edit",
+                            change: qty - oldQty,
+                            notes: `Stock updated directly from ${oldQty} to ${qty}.`
+                        });
+                    }
+                    pushDataToGitHub(`Modified details for product: ${name}`);
+                }
+            } else {
+                const newId = "id_" + Math.random().toString(36).substr(2, 9);
+                db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price, expiry, image });
+                db.history.push({
+                    time: Date.now(),
+                    name,
+                    type: "Addition",
+                    change: qty,
+                    notes: `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`
+                });
+                pushDataToGitHub(`Added fresh inventory item: ${name}`);
+            }
+            closeModal();
+        }
+
+        function handleStockAdjust(id, mode) {
+            const item = db.inventory.find(i => i.id === id);
+            if (!item) return;
             
-            const lowStockItems = db.inventory.filter(i => Number(i.qty) <= lowStockThreshold && Number(i.qty) > 0);
-            const outOfStockItems = db.inventory.filter(i => Number(i.qty) === 0);
+            let change = 0;
+            if (mode === 'restock') {
+                const val = prompt(`How many units of "${item.name}" are you adding to stock?`, "1");
+                if (val === null) return;
+                change = parseInt(val) || 0;
+                if (change <= 0) return;
+                item.qty = (parseInt(item.qty) || 0) + change;
+                db.history.push({
+                    time: Date.now(),
+                    name: item.name,
+                    type: "Restock",
+                    change: change,
+                    notes: "Bulk restock transaction."
+                });
+            } else if (mode === 'reduce') {
+                const val = prompt(`How many units of "${item.name}" were sold/used?`, "1");
+                if (val === null) return;
+                change = parseInt(val) || 0;
+                if (change <= 0) return;
+                const currentQty = parseInt(item.qty) || 0;
+                if (currentQty - change < 0) {
+                    alert("Operation aborted. Outbound stock change exceeds available on-hand quantities.");
+                    return;
+                }
+                item.qty = currentQty - change;
+                db.history.push({
+                    time: Date.now(),
+                    name: item.name,
+                    type: "Sale / Usage",
+                    change: -change,
+                    notes: "Bulk reduction transaction."
+                });
+            }
             
-            const totalRetailValue = db.inventory.reduce((acc, curr) => {
-                return acc + (Number(curr.qty) * Number(curr.price));
+            pushDataToGitHub(`Adjusted stock levels for item: ${item.name} (${mode === 'restock' ? '+' : '-'}${change})`);
+        }
+
+        function deleteItem(id) {
+            const item = db.inventory.find(i => i.id === id);
+            if (!item) return;
+
+            if (confirm(`Are you absolutely sure you want to permanently delete "${item.name}" from your catalog?`)) {
+                const reason = prompt("Please document a brief removal reason:", "Item discontinued/damaged");
+                if (reason === null) return;
+
+                db.inventory = db.inventory.filter(i => i.id !== id);
+                db.history.push({
+                    time: Date.now(),
+                    name: item.name,
+                    type: "Deletion",
+                    change: -(parseInt(item.qty) || 0),
+                    notes: `Item permanently removed. Reason: ${reason || 'Not documented'}`
+                });
+                pushDataToGitHub(`Dropped product line from storage database: ${item.name}`);
+            }
+        }
+
+        function renderApp() {
+            const lowStockThreshold = (db.config && db.config.lowThreshold !== undefined) ? db.config.lowThreshold : 5;
+
+            const inventoryList = Array.isArray(db.inventory) ? db.inventory : [];
+            const historyList = Array.isArray(db.history) ? db.history : [];
+
+            const totalItems = inventoryList.length;
+            const totalStock = inventoryList.reduce((acc, curr) => acc + (Number(curr.qty) || 0), 0);
+            
+            const lowStockItems = inventoryList.filter(i => {
+                const q = Number(i.qty) || 0;
+                return q <= lowStockThreshold && q > 0;
+            });
+            const outOfStockItems = inventoryList.filter(i => (Number(i.qty) || 0) === 0);
+            
+            const totalRetailValue = inventoryList.reduce((acc, curr) => {
+                const qty = Number(curr.qty) || 0;
+                const price = Number(curr.price) || 0;
+                return acc + (qty * price);
             }, 0);
 
-            const totalInventoryCost = db.inventory.reduce((acc, curr) => {
+            const totalInventoryCost = inventoryList.reduce((acc, curr) => {
+                const qty = Number(curr.qty) || 0;
                 const itemCost = parseFloat(curr.cost) || 0;
                 const itemUnits = parseInt(curr.units) || 1;
-                const baseUnitCost = itemCost / itemUnits;
-                return acc + (Number(curr.qty) * baseUnitCost);
+                const baseUnitCost = itemUnits > 0 ? (itemCost / itemUnits) : 0;
+                return acc + (qty * baseUnitCost);
             }, 0);
 
             const totalPotentialProfit = totalRetailValue - totalInventoryCost;
@@ -620,7 +769,7 @@
             } else {
                 dashLowStockTbody.innerHTML = lowStockItems.map(item => `
                     <tr class="hover:bg-gray-50/50">
-                        <td class="p-3 font-medium text-gray-900">${item.name}</td>
+                        <td class="p-3 font-medium text-gray-900">${item.name || 'Unnamed Item'}</td>
                         <td class="p-3 text-xs text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
                         <td class="p-3 text-center">
                             <span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-800">
@@ -641,7 +790,7 @@
             } else {
                 dashOutOfStockTbody.innerHTML = outOfStockItems.map(item => `
                     <tr class="hover:bg-gray-50/50">
-                        <td class="p-3 font-medium text-gray-900">${item.name}</td>
+                        <td class="p-3 font-medium text-gray-900">${item.name || 'Unnamed Item'}</td>
                         <td class="p-3 text-xs text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
                         <td class="p-3 text-center">
                             <span class="px-2 py-0.5 rounded text-xs font-black bg-rose-100 text-rose-800 border border-rose-200 uppercase tracking-wider">
@@ -656,10 +805,10 @@
             const todayTimestamp = new Date().setHours(0,0,0,0);
             const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
             
-            const expiringItems = db.inventory.filter(item => {
+            const expiringItems = inventoryList.filter(item => {
                 if (!item.expiry) return false;
                 const expiryTimestamp = new Date(item.expiry).getTime();
-                return (expiryTimestamp - todayTimestamp) <= thirtyDaysInMs;
+                return !isNaN(expiryTimestamp) && (expiryTimestamp - todayTimestamp) <= thirtyDaysInMs;
             });
 
             expiringItems.sort((a, b) => new Date(a.expiry) - new Date(b.expiry));
@@ -685,7 +834,7 @@
 
                     return `
                         <tr class="hover:bg-gray-50/50">
-                            <td class="p-3 font-medium text-gray-900">${item.name}</td>
+                            <td class="p-3 font-medium text-gray-900">${item.name || 'Unnamed Item'}</td>
                             <td class="p-3 text-xs text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
                             <td class="p-3 font-mono text-sm text-gray-700">${formatExpiryDisplay(item.expiry)}</td>
                             <td class="p-3 text-center">${statusBadge}</td>
@@ -694,7 +843,7 @@
                 }).join('');
             }
 
-            let displayItems = [...db.inventory];
+            let displayItems = [...inventoryList];
             
             document.getElementById('sort-icon-category').innerHTML = '';
             document.getElementById('sort-icon-stock').innerHTML = '';
@@ -707,7 +856,7 @@
                 displayItems.sort((a, b) => {
                     let modifier = currentSortDirection === 'asc' ? 1 : -1;
                     if (currentSortColumn === 'category') return (a.category || '').localeCompare(b.category || '') * modifier;
-                    if (currentSortColumn === 'stock') return (Number(a.qty) - Number(b.qty)) * modifier;
+                    if (currentSortColumn === 'stock') return ((Number(a.qty) || 0) - (Number(b.qty) || 0)) * modifier;
                     if (currentSortColumn === 'expiry') {
                         if (!a.expiry && !b.expiry) return 0;
                         if (!a.expiry) return 1; 
@@ -719,220 +868,58 @@
             }
 
             const tbody = document.getElementById('inventory-table-body');
-            tbody.innerHTML = displayItems.map(item => {
-                const safeId = item.id.replace(/'/g, "\\'");
-                const imageTag = item.image 
-                    ? `<img src="${item.image}" class="w-10 h-10 object-cover rounded-md shadow-inner border border-gray-100">`
-                    : `<div class="w-10 h-10 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-lg shadow-inner">📦</div>`;
+            if (displayItems.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-gray-400 italic">No inventory items found. Click "+ Add New Item" to start!</td></tr>`;
+            } else {
+                tbody.innerHTML = displayItems.map(item => {
+                    const itemId = item.id || 'err_' + Math.random().toString(36).substr(2, 5);
+                    const safeId = itemId.replace(/'/g, "\\'");
+                    const imageTag = item.image 
+                        ? `<img src="${item.image}" class="w-10 h-10 object-cover rounded-md shadow-inner border border-gray-100">`
+                        : `<div class="w-10 h-10 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-lg shadow-inner">📦</div>`;
 
-                const expiryText = formatExpiryDisplay(item.expiry);
-                const expiryStyle = getExpiryBadgeStyle(item.expiry);
+                    const expiryText = formatExpiryDisplay(item.expiry);
+                    const expiryStyle = getExpiryBadgeStyle(item.expiry);
+                    const qtyVal = Number(item.qty) || 0;
 
-                return `
-                    <tr class="hover:bg-gray-50 border-b border-gray-100">
-                        <td class="p-4">${imageTag}</td>
-                        <td class="p-4 font-medium text-gray-900">${item.name}</td>
-                        <td class="p-4 text-sm text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
-                        <td class="p-4"><span class="px-2 py-1 rounded text-sm ${item.qty <= lowStockThreshold ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${item.qty}</span></td>
-                        <td class="p-4 text-sm font-mono font-bold text-indigo-600">₱${Number(item.price).toFixed(2)}</td>
-                        <td class="p-4 text-sm"><span class="${expiryStyle}">${expiryText}</span></td>
-                        <td class="p-2 text-center">
-                            <div class="grid grid-cols-2 gap-1.5 max-w-[150px] mx-auto">
-                                <button onclick="handleStockAdjust('${safeId}', 'restock')" class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 p-1 rounded text-[11px] font-bold transition">Add</button>
-                                <button onclick="handleStockAdjust('${safeId}', 'reduce')" class="bg-amber-50 text-amber-700 hover:bg-amber-100 p-1 rounded text-[11px] font-bold transition">Less</button>
-                                <button onclick="openModal('${safeId}')" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 p-1 rounded text-[11px] font-medium transition">Edit</button>
-                                <button onclick="deleteItem('${safeId}')" class="bg-rose-50 text-rose-600 hover:bg-rose-100 p-1 rounded text-[11px] font-medium transition">Del</button>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
+                    return `
+                        <tr class="hover:bg-gray-50 border-b border-gray-100">
+                            <td class="p-4">${imageTag}</td>
+                            <td class="p-4 font-medium text-gray-900">${item.name || 'Unnamed Item'}</td>
+                            <td class="p-4 text-sm text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
+                            <td class="p-4"><span class="px-2 py-1 rounded text-sm ${qtyVal <= lowStockThreshold ? 'bg-rose-50 text-rose-700 font-bold' : 'bg-gray-100'}">${qtyVal}</span></td>
+                            <td class="p-4 text-sm font-mono font-bold text-indigo-600">₱${(Number(item.price) || 0).toFixed(2)}</td>
+                            <td class="p-4 text-sm"><span class="${expiryStyle}">${expiryText}</span></td>
+                            <td class="p-2 text-center">
+                                <div class="grid grid-cols-2 gap-1.5 max-w-[150px] mx-auto">
+                                    <button onclick="handleStockAdjust('${safeId}', 'restock')" class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 p-1 rounded text-[11px] font-bold transition">Add</button>
+                                    <button onclick="handleStockAdjust('${safeId}', 'reduce')" class="bg-amber-50 text-amber-700 hover:bg-amber-100 p-1 rounded text-[11px] font-bold transition">Less</button>
+                                    <button onclick="openModal('${safeId}')" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 p-1 rounded text-[11px] font-medium transition">Edit</button>
+                                    <button onclick="deleteItem('${safeId}')" class="bg-rose-50 text-rose-600 hover:bg-rose-100 p-1 rounded text-[11px] font-medium transition">Del</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
 
             const hbody = document.getElementById('history-table-body');
-            hbody.innerHTML = [...db.history].reverse().map(log => `
-                <tr class="border-b border-gray-50">
-                    <td class="p-4 text-xs font-mono text-gray-400">${new Date(log.time).toLocaleString()}</td>
-                    <td class="p-4 font-medium">${log.name}</td>
-                    <td class="p-4"><span class="text-xs uppercase font-bold tracking-wider ${log.type === 'Addition' || log.type === 'Restock' ? 'text-emerald-600' : log.type === 'Deletion' ? 'text-rose-600' : 'text-amber-600'}">${log.type}</span></td>
-                    <td class="p-4 font-mono font-bold">${log.change > 0 ? '+' + log.change : log.change}</td>
-                    <td class="p-4 text-xs italic text-gray-500">${log.notes}</td>
-                </tr>
-            `).join('');
-        }
-
-        function openModal(id = null) {
-            document.getElementById('item-modal').classList.remove('hidden');
-            document.getElementById('item-image-input').value = ""; 
-            
-            if (id) {
-                const item = db.inventory.find(i => i.id === id);
-                if (!item) return;
-                document.getElementById('modal-title').innerText = "Edit Item";
-                document.getElementById('item-id').value = item.id;
-                document.getElementById('item-name').value = item.name;
-                document.getElementById('item-category').value = item.category || '';
-                
-                document.getElementById('item-cost').value = item.cost || 0;
-                document.getElementById('item-units').value = item.units || 1;
-                document.getElementById('item-markup').value = item.markup !== undefined ? item.markup : 12;
-                document.getElementById('item-qty').value = item.qty;
-                document.getElementById('item-price').value = item.price;
-                
-                document.getElementById('item-expiry').value = item.expiry || '';
-
-                document.getElementById('item-image-base64').value = item.image || '';
-                if (item.image) {
-                    document.getElementById('image-preview-container').innerHTML = `<img src="${item.image}" class="w-full h-full object-cover">`;
-                } else {
-                    document.getElementById('image-preview-container').innerHTML = "No Img";
-                }
-
-                calculateSRP(true);
+            if (historyList.length === 0) {
+                hbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400 italic">No transactions recorded yet.</td></tr>`;
             } else {
-                document.getElementById('modal-title').innerText = "Add New Item";
-                document.getElementById('item-form').reset();
-                document.getElementById('item-id').value = '';
-                document.getElementById('item-image-base64').value = '';
-                document.getElementById('image-preview-container').innerHTML = "No Img";
-                document.getElementById('item-expiry').value = '';
-                document.getElementById('item-markup').value = 12; 
-                document.getElementById('item-units').value = 1;
-                document.getElementById('item-rec-price').value = "₱0.00";
+                hbody.innerHTML = [...historyList].reverse().map(log => `
+                    <tr class="border-b border-gray-50">
+                        <td class="p-4 text-xs font-mono text-gray-400">${log.time ? new Date(log.time).toLocaleString() : 'N/A'}</td>
+                        <td class="p-4 font-medium">${log.name || 'Unknown'}</td>
+                        <td class="p-4"><span class="text-xs uppercase font-bold tracking-wider ${log.type === 'Addition' || log.type === 'Restock' ? 'text-emerald-600' : log.type === 'Deletion' ? 'text-rose-600' : 'text-amber-600'}">${log.type || 'Transaction'}</span></td>
+                        <td class="p-4 font-mono font-bold">${(Number(log.change) || 0) > 0 ? '+' + log.change : log.change}</td>
+                        <td class="p-4 text-xs italic text-gray-500">${log.notes || ''}</td>
+                    </tr>
+                `).join('');
             }
-        }
-
-        function closeModal() {
-            document.getElementById('item-modal').classList.add('hidden');
-        }
-
-        function saveItem(e) {
-            e.preventDefault();
-            const id = document.getElementById('item-id').value;
-            const name = document.getElementById('item-name').value.trim();
-            const category = document.getElementById('item-category').value.trim();
-            const cost = parseFloat(document.getElementById('item-cost').value) || 0;
-            const units = parseInt(document.getElementById('item-units').value) || 1;
-            const markup = parseFloat(document.getElementById('item-markup').value) || 0;
-            const qty = parseInt(document.getElementById('item-qty').value) || 0;
-            const price = parseFloat(document.getElementById('item-price').value) || 0;
-            const image = document.getElementById('item-image-base64').value;
-            const expiry = document.getElementById('item-expiry').value;
-        
-            if (id) {
-                const index = db.inventory.findIndex(i => i.id === id);
-                if (index === -1) return;
-                const originalItem = db.inventory[index];
-                
-                let changeNotes = [];
-                if (originalItem.name !== name) changeNotes.push(`Name changed`);
-                if (originalItem.category !== category) changeNotes.push(`Category changed`);
-                if (Number(originalItem.price) !== price) changeNotes.push(`Price changed to ₱${price.toFixed(2)}`);
-                if (Number(originalItem.qty) !== qty) changeNotes.push(`Stock adjusted from ${originalItem.qty} to ${qty}`);
-                if (originalItem.image !== image) changeNotes.push(`Image updated`);
-                if ((originalItem.expiry || '') !== expiry) {
-                    changeNotes.push(`Expiry date updated to ${expiry ? formatExpiryDisplay(expiry) : 'N/A'}`);
-                }
-        
-                db.inventory[index] = { id, name, category, cost, units, markup, qty, price, image, expiry };
-                
-                if (changeNotes.length > 0) {
-                    db.history.push({ 
-                        time: Date.now(), 
-                        name: name, 
-                        type: 'Manual Edit', 
-                        change: qty - Number(originalItem.qty), 
-                        notes: changeNotes.join(', ') + '.' 
-                    });
-                }
-                pushDataToGitHub(`Updated item: ${name}`);
-            } else {
-                const newId = 'id_' + Math.random().toString(36).substr(2, 9);
-                db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price, image, expiry });
-                db.history.push({ 
-                    time: Date.now(), 
-                    name, 
-                    type: 'Addition', 
-                    change: qty, 
-                    notes: `Initial stock addition under category: ${category || 'None'}. Expiry: ${expiry ? formatExpiryDisplay(expiry) : 'N/A'}.` 
-                });
-                pushDataToGitHub(`Added new item: ${name}`);
-            }
-            closeModal();
-        }
-
-        function handleStockAdjust(id, actionType) {
-            const item = db.inventory.find(i => i.id === id);
-            if (!item) return;
-
-            const isRestock = actionType === 'restock';
-            const actionText = isRestock ? 'add to' : 'remove from';
-            
-            const userInput = prompt(`Current stock for "${item.name}": ${item.qty}\n\nEnter the quantity you want to ${actionText} stock:`);
-            if (userInput === null) return;
-
-            const amount = parseInt(userInput);
-            if (isNaN(amount) || amount <= 0) {
-                alert("Please enter a valid positive number.");
-                return;
-            }
-
-            const currentQty = parseInt(item.qty);
-            let finalDelta = isRestock ? amount : -amount;
-
-            if (currentQty + finalDelta < 0) {
-                alert(`Operation cancelled. Stock cannot fall below 0 (Requested reduction: -${amount}, Available: ${currentQty}).`);
-                return;
-            }
-
-            item.qty = currentQty + finalDelta;
-
-            db.history.push({
-                time: Date.now(),
-                name: item.name,
-                type: isRestock ? 'Restock' : 'Sale / Usage',
-                change: finalDelta,
-                notes: isRestock ? `Bulk restock transaction.` : `Bulk reduction transaction.`
-            });
-
-            pushDataToGitHub(`Adjusted stock for ${item.name} (${finalDelta > 0 ? '+' : ''}${finalDelta})`);
-        }
-
-        function deleteItem(id) {
-            const index = db.inventory.findIndex(i => i.id === id);
-            if (index === -1) return;
-
-            const item = db.inventory[index];
-            const reason = prompt(`Are you sure you want to delete "${item.name}"?\n\nPlease enter the reason for deletion:`);
-            
-            if (reason === null) return; 
-            
-            const formattedReason = reason.trim();
-            if (formattedReason === "") {
-                alert("Deletion cancelled. A valid reason is required to delete an item.");
-                return;
-            }
-
-            db.history.push({
-                time: Date.now(),
-                name: item.name,
-                type: 'Deletion',
-                change: -Math.abs(Number(item.qty)), 
-                notes: `Item permanently removed. Reason: ${formattedReason}`
-            });
-
-            db.inventory.splice(index, 1);
-            pushDataToGitHub(`Deleted item: ${item.name}`);
         }
 
         window.onload = init;
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Service Worker registered successfully!', reg))
-                    .catch(err => console.error('Service Worker registration failed:', err));
-            });
-        }
     </script>
 </body>
 </html>
