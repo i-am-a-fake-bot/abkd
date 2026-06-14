@@ -286,6 +286,18 @@
       "price": 2,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_l44wlocwy",
+      "name": "Candy - Stick-O",
+      "category": "Candy",
+      "cost": 90,
+      "units": 55,
+      "markup": 12,
+      "qty": 0,
+      "price": 3,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -656,6 +668,13 @@
     {
       "time": 1781414743934,
       "name": "Candy - Potchi - 3 for ₱5",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
+    },
+    {
+      "time": 1781414785804,
+      "name": "Candy - Stick-O",
       "type": "Addition",
       "change": 0,
       "notes": "Initial stock addition under category: Candy. Expiry: N/A."
