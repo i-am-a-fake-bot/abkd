@@ -1043,6 +1043,18 @@
       "price": 13,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_ya4hdt0mx",
+      "name": "Ariel Detergent Powder",
+      "category": "Household",
+      "cost": 82.5,
+      "units": 12,
+      "markup": 12,
+      "qty": 4,
+      "price": 8,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2354,6 +2366,13 @@
       "type": "Clone / Copy",
       "change": 4,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱13.00."
+    },
+    {
+      "time": 1781438185264,
+      "name": "Ariel Detergent Powder",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱8.00."
     }
   ],
   "config": {
