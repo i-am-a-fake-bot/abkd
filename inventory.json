@@ -386,7 +386,7 @@
     },
     {
       "id": "id_z3v9ymc3u",
-      "name": "Wings Detergent - Powder",
+      "name": "Wings Detergent Powder",
       "category": "Household",
       "cost": 38,
       "units": 6,
@@ -2380,6 +2380,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: category updated to \"Household\"."
+    },
+    {
+      "time": 1781480849018,
+      "name": "Wings Detergent Powder",
+      "type": "Modified",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Wings Detergent Powder\"."
     }
   ],
   "config": {
