@@ -707,6 +707,18 @@
       "price": 26,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_58nbbp5aa",
+      "name": "Mega Sardines - Green",
+      "category": "De Lata",
+      "cost": 117.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 26,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1794,6 +1806,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: price updated to ₱26.00."
+    },
+    {
+      "time": 1781436608320,
+      "name": "Mega Sardines - Green",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱26.00."
     }
   ],
   "config": {
