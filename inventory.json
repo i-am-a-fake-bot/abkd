@@ -170,8 +170,8 @@
     },
     {
       "id": "id_o8j677vsy",
-      "name": "Biskwit - Hello - Choco",
-      "category": "Biskwit",
+      "name": "Hello - Wafer - Choco",
+      "category": "Meryenda",
       "cost": 55.25,
       "units": 10,
       "markup": 12,
@@ -1261,6 +1261,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Nissin Butter Coconut\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433788682,
+      "name": "Hello - Wafer - Choco",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Hello - Wafer - Choco\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
