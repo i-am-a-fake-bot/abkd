@@ -815,6 +815,18 @@
       "price": 13,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_rrnlbwelj",
+      "name": "Milo",
+      "category": "Beverage",
+      "cost": 107.46,
+      "units": 12,
+      "markup": 12,
+      "qty": 0,
+      "price": 12,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1972,6 +1984,13 @@
       "type": "Clone / Copy",
       "change": 3,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱13.00."
+    },
+    {
+      "time": 1781436971451,
+      "name": "Milo",
+      "type": "Clone / Copy",
+      "change": 0,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱12.00."
     }
   ],
   "config": {
