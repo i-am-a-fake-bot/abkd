@@ -122,7 +122,7 @@
     },
     {
       "id": "id_1lgc0aikk",
-      "name": "Cream-O - Vanilla",
+      "name": "Cream-O - Vanilla Fill",
       "category": "Meryenda",
       "cost": 69.75,
       "units": 10,
@@ -1422,6 +1422,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Cream-O - Choco Fill\"."
+    },
+    {
+      "time": 1781434103634,
+      "name": "Cream-O - Vanilla Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Cream-O - Vanilla Fill\"."
     }
   ],
   "config": {
