@@ -26,7 +26,7 @@
     },
     {
       "id": "id_be8p4bsvd",
-      "name": "Asukal - Segunda - 1/4",
+      "name": "Victoria - Segunda - 1/4",
       "category": "Pantry",
       "cost": 136,
       "units": 8,
@@ -1555,6 +1555,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Victoria - Segunda - 1/2\"."
+    },
+    {
+      "time": 1781434503240,
+      "name": "Victoria - Segunda - 1/4",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Victoria - Segunda - 1/4\"."
     }
   ],
   "config": {
