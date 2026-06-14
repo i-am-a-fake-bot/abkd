@@ -374,7 +374,7 @@
     },
     {
       "id": "id_gdgc6xpxr",
-      "name": "Panlaba - Downy - 3 for ₱20",
+      "name": "Downy - 3 for ₱20",
       "category": "Panlaba",
       "cost": 95,
       "units": 18,
@@ -1443,6 +1443,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434204713,
+      "name": "Downy - 3 for ₱20",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Downy - 3 for ₱20\"."
     }
   ],
   "config": {
