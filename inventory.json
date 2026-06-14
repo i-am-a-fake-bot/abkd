@@ -335,6 +335,18 @@
       "price": 11,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_2t2vkrtdb",
+      "name": "Yosi - Camel - Red",
+      "category": "Yosi",
+      "cost": 147,
+      "units": 20,
+      "markup": 12,
+      "qty": 40,
+      "price": 9,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -742,6 +754,13 @@
       "name": "Yosi - Marlboro - Red",
       "type": "Addition",
       "change": 20,
+      "notes": "Initial stock addition under category: Yosi. Expiry: N/A."
+    },
+    {
+      "time": 1781426064921,
+      "name": "Yosi - Camel - Red",
+      "type": "Addition",
+      "change": 40,
       "notes": "Initial stock addition under category: Yosi. Expiry: N/A."
     }
   ],
