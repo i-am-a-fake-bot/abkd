@@ -530,8 +530,8 @@
     },
     {
       "id": "id_etmftzha9",
-      "name": "Condiments - Knorr Cube - Pork",
-      "category": "Condiments",
+      "name": "Knorr Cube - Pork",
+      "category": "Pantry",
       "cost": 57.5,
       "units": 12,
       "markup": 12,
@@ -1394,6 +1394,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Knorr Cube - Beef\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434062129,
+      "name": "Knorr Cube - Pork",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Knorr Cube - Pork\", category updated to \"Pantry\"."
     }
   ],
   "config": {
