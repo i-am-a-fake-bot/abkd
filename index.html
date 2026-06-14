@@ -471,37 +471,69 @@
             }, 500);
         }
 
-        async function pushDataToGitHub(commitMessage = "Inventory state updated") {
-            const creds = getGitHubCredentials();
-            const url = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
-            
-            const jsonString = JSON.stringify(db, null, 2);
-            const payload = {
-                message: commitMessage,
-                content: safeEncodeBase64(jsonString),
-            };
-            if (githubSha) payload.sha = githubSha;
+		async function pushDataToGitHub(commitMessage = "Inventory state updated") {
+			// 🛡️ SAFETY SHIELD: Never sync if db or inventory array is missing/empty
+			if (!db || !db.inventory || db.inventory.length === 0) {
+				console.error("Sync blocked: Prevented a blank database overwrite attempt.");
+				alert("Action blocked: Database appears empty. To protect your data, synchronization was halted.");
+				return;
+			}
 
-            try {
-                const res = await fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${creds.token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-                const data = await res.json();
-                if (res.ok) {
-                    githubSha = data.content.sha;
-                    renderApp();
-                } else {
-                    throw new Error(data.message);
-                }
-            } catch (err) {
-                alert('Failed to save to GitHub database: ' + err.message);
-            }
-        }
+			const creds = getGitHubCredentials();
+			const url = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
+			
+			try {
+				// 1. ALWAYS fetch the absolute latest SHA directly from GitHub first
+				// This stops conflicts if you updated stock on another device!
+				const getRes = await fetch(url, {
+					headers: { 'Authorization': `token ${creds.token}` }
+				});
+				
+				let dynamicSha = null;
+				if (getRes.ok) {
+					const currentFileData = await getRes.json();
+					dynamicSha = currentFileData.sha; // Fresh SHA straight from the source
+				}
+
+				const jsonString = JSON.stringify(db, null, 2);
+				
+				// 🛡️ DOUBLE SAFETY SHIELD: Stop if stringification broke
+				if (!jsonString || jsonString === "{}" || jsonString === "[]") {
+					throw new Error("Generated data payload is completely empty.");
+				}
+
+				const payload = {
+					message: commitMessage,
+					content: safeEncodeBase64(jsonString),
+				};
+				
+				// Use the fresh SHA we just retrieved
+				if (dynamicSha) payload.sha = dynamicSha;
+
+				// 2. Push the clean update to GitHub
+				const res = await fetch(url, {
+					method: 'PUT',
+					headers: {
+						'Authorization': `token ${creds.token}`,
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(payload)
+				});
+				
+				const data = await res.json();
+				
+				if (res.ok) {
+					githubSha = data.content.sha; // Update global tracking fallback
+					console.log("Successfully synced item profile adjustments!");
+					renderApp();
+				} else {
+					throw new Error(data.message || "GitHub rejected the data injection save.");
+				}
+			} catch (err) {
+				console.error(err);
+				alert('Failed to save to GitHub database: ' + err.message + '\n\nDon\'t panic! Your changes are safe in your local browser session.');
+			}
+		}
 
         function processImageUpload(element) {
             const file = element.files[0];
