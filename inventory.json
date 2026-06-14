@@ -338,7 +338,7 @@
     },
     {
       "id": "id_2t2vkrtdb",
-      "name": "Yosi - Camel - Red",
+      "name": "Camel - Red",
       "category": "Yosi",
       "cost": 147,
       "units": 20,
@@ -1464,6 +1464,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Head & Shoulders - Green\"."
+    },
+    {
+      "time": 1781434270122,
+      "name": "Camel - Red",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Camel - Red\"."
     }
   ],
   "config": {
