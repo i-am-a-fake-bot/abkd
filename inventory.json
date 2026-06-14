@@ -459,7 +459,7 @@
     {
       "id": "id_xsf3ciy7j",
       "name": "Lucky Me - Pancit Canton - Calamansi",
-      "category": "Lucky Me",
+      "category": "Pantry",
       "cost": 95.5,
       "units": 6,
       "markup": 12,
@@ -1429,6 +1429,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Cream-O - Vanilla Fill\"."
+    },
+    {
+      "time": 1781434135379,
+      "name": "Lucky Me - Pancit Canton - Calamansi",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Pantry\"."
     }
   ],
   "config": {
