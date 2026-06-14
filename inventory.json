@@ -350,7 +350,7 @@
     },
     {
       "id": "id_67895ejej",
-      "name": "Yosi - Mighty - Green",
+      "name": "Mighty - Green",
       "category": "Yosi",
       "cost": 166,
       "units": 20,
@@ -1485,6 +1485,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Marlboro - Red\"."
+    },
+    {
+      "time": 1781434286444,
+      "name": "Mighty - Green",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Mighty - Green\"."
     }
   ],
   "config": {
