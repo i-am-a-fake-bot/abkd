@@ -851,6 +851,18 @@
       "price": 25,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_ovy6z9w9w",
+      "name": "Nestea - Lemon",
+      "category": "Beverage",
+      "cost": 120,
+      "units": 6,
+      "markup": 12,
+      "qty": 4,
+      "price": 25,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2036,6 +2048,13 @@
       "type": "Product Update",
       "change": -3,
       "notes": "Modified attributes: stock adjusted from 4 to 1."
+    },
+    {
+      "time": 1781437078383,
+      "name": "Nestea - Lemon",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱25.00."
     }
   ],
   "config": {
