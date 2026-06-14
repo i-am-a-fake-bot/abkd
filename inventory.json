@@ -563,6 +563,18 @@
       "price": 7,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_dy0cc7vdt",
+      "name": "Condiments - Magic Sarap",
+      "category": "Condiments",
+      "cost": 125.15,
+      "units": 26,
+      "markup": 12,
+      "qty": 10,
+      "price": 6,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1132,6 +1144,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Shrimp\"."
+    },
+    {
+      "time": 1781433057940,
+      "name": "Condiments - Magic Sarap",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
     }
   ],
   "config": {
