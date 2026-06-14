@@ -518,7 +518,7 @@
     },
     {
       "id": "id_0sgcv00q9",
-      "name": "Condiments - Knorr - Chicken Cube",
+      "name": "Condiments - Knorr Cube - Chicken",
       "category": "Condiments",
       "cost": 67.5,
       "units": 12,
@@ -1111,6 +1111,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Beef\"."
+    },
+    {
+      "time": 1781432755554,
+      "name": "Condiments - Knorr Cube - Chicken",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Chicken\"."
     }
   ],
   "config": {
