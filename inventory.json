@@ -262,6 +262,18 @@
       "price": 3,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_ch177yy9i",
+      "name": "Candy - Maxx - Cherry - 3 for ₱5",
+      "category": "Candy",
+      "cost": 41.9,
+      "units": 50,
+      "markup": 12,
+      "qty": 20,
+      "price": 2,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -620,6 +632,13 @@
       "name": "Candy - Flat Tops",
       "type": "Addition",
       "change": 10,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
+    },
+    {
+      "time": 1781414687904,
+      "name": "Candy - Maxx - Cherry - 3 for ₱5",
+      "type": "Addition",
+      "change": 20,
       "notes": "Initial stock addition under category: Candy. Expiry: N/A."
     }
   ],
