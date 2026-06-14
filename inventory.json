@@ -383,6 +383,18 @@
       "price": 7,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_z3v9ymc3u",
+      "name": "Panlaba - Wings",
+      "category": "Panlaba",
+      "cost": 38,
+      "units": 6,
+      "markup": 12,
+      "qty": 6,
+      "price": 8,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -818,6 +830,13 @@
       "name": "Panlaba - Downy - 3 for ₱20",
       "type": "Addition",
       "change": 18,
+      "notes": "Initial stock addition under category: Panlaba. Expiry: N/A."
+    },
+    {
+      "time": 1781426544964,
+      "name": "Panlaba - Wings",
+      "type": "Addition",
+      "change": 6,
       "notes": "Initial stock addition under category: Panlaba. Expiry: N/A."
     }
   ],
