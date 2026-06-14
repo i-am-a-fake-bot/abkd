@@ -659,6 +659,18 @@
       "price": 31,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_u3nxcjxa5",
+      "name": "Argentina - Corned beef",
+      "category": "De Lata",
+      "cost": 39.95,
+      "units": 1,
+      "markup": 12,
+      "qty": 1,
+      "price": 44,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1711,6 +1723,13 @@
       "type": "Product Update",
       "change": 3,
       "notes": "Modified attributes: stock adjusted from 0 to 3."
+    },
+    {
+      "time": 1781436332194,
+      "name": "Argentina - Corned beef",
+      "type": "Addition",
+      "change": 1,
+      "notes": "Initial stock addition under category: De Lata. Expiry: N/A."
     }
   ],
   "config": {
