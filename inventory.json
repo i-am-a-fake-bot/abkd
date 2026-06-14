@@ -18,7 +18,7 @@
       "cost": 150,
       "units": 10,
       "markup": 12,
-      "qty": 10,
+      "qty": 4,
       "price": 17,
       "image": "",
       "expiry": "2026-12-31"
@@ -192,6 +192,13 @@
       "type": "Addition",
       "change": 10,
       "notes": "Initial stock addition under category: Test 1. Expiry: 31-Dec-2026."
+    },
+    {
+      "time": 1781402789099,
+      "name": "Test Widget",
+      "type": "Sale / Usage",
+      "change": -6,
+      "notes": "Bulk reduction transaction."
     }
   ]
 }
