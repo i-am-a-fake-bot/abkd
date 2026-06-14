@@ -38,7 +38,7 @@
     },
     {
       "id": "id_0zoas22c6",
-      "name": "Atbp - Kandila - Medium",
+      "name": "Kandila - Medium",
       "category": "Atbp",
       "cost": 53.75,
       "units": 10,
@@ -1513,6 +1513,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Marty's - Plain Salted\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781434368805,
+      "name": "Kandila - Medium",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Kandila - Medium\"."
     }
   ],
   "config": {
