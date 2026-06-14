@@ -671,6 +671,18 @@
       "price": 44,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_aol0ql3fs",
+      "name": "Century Tuna - Spicy",
+      "category": "De Lata",
+      "cost": 36.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 1,
+      "price": 40,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1730,6 +1742,13 @@
       "type": "Addition",
       "change": 1,
       "notes": "Initial stock addition under category: De Lata. Expiry: N/A."
+    },
+    {
+      "time": 1781436389762,
+      "name": "Century Tuna - Spicy",
+      "type": "Clone / Copy",
+      "change": 1,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱40.00."
     }
   ],
   "config": {
