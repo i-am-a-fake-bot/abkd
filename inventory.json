@@ -875,6 +875,18 @@
       "price": 16,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_ydk7wkbkm",
+      "name": "Great Taste - Premium Roast",
+      "category": "Beverage",
+      "cost": 129.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 16,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2071,6 +2083,13 @@
     {
       "time": 1781437183007,
       "name": "Great Taste - Choco",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
+    },
+    {
+      "time": 1781437232012,
+      "name": "Great Taste - Premium Roast",
       "type": "Clone / Copy",
       "change": 4,
       "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
