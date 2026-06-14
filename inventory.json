@@ -471,7 +471,7 @@
     {
       "id": "id_gk7huh9ia",
       "name": "Lucky Me - Pancit Canton - Extra HOT",
-      "category": "Lucky Me",
+      "category": "Pantry",
       "cost": 95.5,
       "units": 6,
       "markup": 12,
@@ -1433,6 +1433,13 @@
     {
       "time": 1781434135379,
       "name": "Lucky Me - Pancit Canton - Calamansi",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434142294,
+      "name": "Lucky Me - Pancit Canton - Extra HOT",
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: category updated to \"Pantry\"."
