@@ -274,6 +274,18 @@
       "price": 2,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_dt5c40014",
+      "name": "Candy - Potchi - 3 for ₱5",
+      "category": "Candy",
+      "cost": 34.75,
+      "units": 24,
+      "markup": 12,
+      "qty": 0,
+      "price": 2,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -639,6 +651,13 @@
       "name": "Candy - Maxx - Cherry - 3 for ₱5",
       "type": "Addition",
       "change": 20,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
+    },
+    {
+      "time": 1781414743934,
+      "name": "Candy - Potchi - 3 for ₱5",
+      "type": "Addition",
+      "change": 0,
       "notes": "Initial stock addition under category: Candy. Expiry: N/A."
     }
   ],
