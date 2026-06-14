@@ -166,6 +166,18 @@
       "price": 8,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_o8j677vsy",
+      "name": "Biskwit - Hello - Choco",
+      "category": "Biskwit",
+      "cost": 55.25,
+      "units": 10,
+      "markup": 12,
+      "qty": 7,
+      "price": 8,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -461,6 +473,13 @@
       "name": "Biskwit - Hansel - Crackers",
       "type": "Addition",
       "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414286129,
+      "name": "Biskwit - Hello - Choco",
+      "type": "Addition",
+      "change": 7,
       "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
     }
   ],
