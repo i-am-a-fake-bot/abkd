@@ -359,6 +359,18 @@
       "price": 10,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_p93wzqdse",
+      "name": "Yosi - Fortune - Green",
+      "category": "Yosi",
+      "cost": 166,
+      "units": 20,
+      "markup": 12,
+      "qty": 20,
+      "price": 10,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -778,6 +790,13 @@
     {
       "time": 1781426103818,
       "name": "Yosi - Mighty - Red",
+      "type": "Addition",
+      "change": 20,
+      "notes": "Initial stock addition under category: Yosi. Expiry: N/A."
+    },
+    {
+      "time": 1781426150791,
+      "name": "Yosi - Fortune - Green",
       "type": "Addition",
       "change": 20,
       "notes": "Initial stock addition under category: Yosi. Expiry: N/A."
