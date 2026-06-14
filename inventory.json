@@ -1,0 +1,2389 @@
+{
+  "inventory": [
+    {
+      "id": "id_22ibp7oeh",
+      "name": "Gin - Kwatro Kantos",
+      "category": "Alak",
+      "cost": 140,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 160,
+      "expiry": "",
+      "image": "data:image/jpeg;base64,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"
+    },
+    {
+      "id": "id_h8xav0sm3",
+      "name": "Victoria - Segunda - 1/2",
+      "category": "Pantry",
+      "cost": 31,
+      "units": 1,
+      "markup": 12,
+      "qty": 0,
+      "price": 35,
+      "expiry": "",
+      "image": "data:image/jpeg;base64,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"
+    },
+    {
+      "id": "id_be8p4bsvd",
+      "name": "Victoria - Segunda - 1/4",
+      "category": "Pantry",
+      "cost": 136,
+      "units": 8,
+      "markup": 12,
+      "qty": 0,
+      "price": 22,
+      "expiry": "",
+      "image": "data:image/jpeg;base64,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"
+    },
+    {
+      "id": "id_0zoas22c6",
+      "name": "Kandila - Medium",
+      "category": "Atbp",
+      "cost": 53.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 10,
+      "price": 10,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_9ag2jya41",
+      "name": "Kandila - Small",
+      "category": "Atbp",
+      "cost": 55,
+      "units": 20,
+      "markup": 12,
+      "qty": 5,
+      "price": 5,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_xo8ntde9l",
+      "name": "Posporo",
+      "category": "Atbp",
+      "cost": 19.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 3,
+      "price": 5,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_e960tuxxm",
+      "name": "Steel Wool",
+      "category": "Household",
+      "cost": 99.75,
+      "units": 3,
+      "markup": 12,
+      "qty": 3,
+      "price": 37,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_ekuw4nmkx",
+      "name": "Choco Mucho Biscuit",
+      "category": "Meryenda",
+      "cost": 73.95,
+      "units": 10,
+      "markup": 12,
+      "qty": 2,
+      "price": 9,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_t7qcxoc7z",
+      "name": "Combi - Choco Fill",
+      "category": "Meryenda",
+      "cost": 60.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 9,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_zk7yuf4kq",
+      "name": "Cream-O - Choco Fill",
+      "category": "Meryenda",
+      "cost": 74.25,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 9,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_1lgc0aikk",
+      "name": "Cream-O - Vanilla Fill",
+      "category": "Meryenda",
+      "cost": 69.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 9,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_tys2atsrh",
+      "name": "Fita - Crackers",
+      "category": "Meryenda",
+      "cost": 50.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 8,
+      "price": 8,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_laa54qbbv",
+      "name": "Hansel - Choco",
+      "category": "Meryenda",
+      "cost": 61.25,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 8,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_9lsp4zpzc",
+      "name": "Hansel - Crackers",
+      "category": "Meryenda",
+      "cost": 59.95,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 8,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_o8j677vsy",
+      "name": "Hello - Wafer - Choco",
+      "category": "Meryenda",
+      "cost": 55.25,
+      "units": 10,
+      "markup": 12,
+      "qty": 7,
+      "price": 8,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_85psqxmzl",
+      "name": "Nissin Butter Coconut",
+      "category": "Meryenda",
+      "cost": 61.4,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 7,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_w16nwla60",
+      "name": "Nissin Choco - Wafer",
+      "category": "Meryenda",
+      "cost": 54.25,
+      "units": 25,
+      "markup": 12,
+      "qty": 0,
+      "price": 5,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_vvyz546og",
+      "name": "Rebisco - Butter Fill",
+      "category": "Meryenda",
+      "cost": 61.25,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 8,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_8hdex5uot",
+      "name": "Rebisco - Strawberry Fill",
+      "category": "Meryenda",
+      "cost": 61.25,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 8,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_8uffvkwcb",
+      "name": "Skyflakes - Crackers",
+      "category": "Meryenda",
+      "cost": 132,
+      "units": 24,
+      "markup": 12,
+      "qty": 4,
+      "price": 7,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_bh1al3qq0",
+      "name": "Choco Mani",
+      "category": "Meryenda",
+      "cost": 35.75,
+      "units": 24,
+      "markup": 12,
+      "qty": 20,
+      "price": 3,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_bkf5575uu",
+      "name": "Flat Tops",
+      "category": "Meryenda",
+      "cost": 50.75,
+      "units": 24,
+      "markup": 12,
+      "qty": 10,
+      "price": 3,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_ch177yy9i",
+      "name": "Maxx - Cherry - 3 for ₱5",
+      "category": "Meryenda",
+      "cost": 41.9,
+      "units": 50,
+      "markup": 12,
+      "qty": 20,
+      "price": 2,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_dt5c40014",
+      "name": "Potchii - 3 for ₱5",
+      "category": "Meryenda",
+      "cost": 34.75,
+      "units": 24,
+      "markup": 12,
+      "qty": 0,
+      "price": 2,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_l44wlocwy",
+      "name": "Stick-O",
+      "category": "Meryenda",
+      "cost": 90,
+      "units": 55,
+      "markup": 12,
+      "qty": 0,
+      "price": 3,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_iez9uu61t",
+      "name": "V Fresh - 3 for ₱5",
+      "category": "Meryenda",
+      "cost": 39.4,
+      "units": 24,
+      "markup": 12,
+      "qty": 0,
+      "price": 2,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_yiu9hmqlx",
+      "name": "Gin - Bilog",
+      "category": "Alak",
+      "cost": 69,
+      "units": 1,
+      "markup": 12,
+      "qty": 4,
+      "price": 80,
+      "expiry": "",
+      "image": "data:image/jpeg;base64,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"
+    },
+    {
+      "id": "id_5nmvq5nao",
+      "name": "Marlboro - Red",
+      "category": "Yosi",
+      "cost": 177,
+      "units": 20,
+      "markup": 12,
+      "qty": 20,
+      "price": 11,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_2t2vkrtdb",
+      "name": "Camel - Red",
+      "category": "Yosi",
+      "cost": 147,
+      "units": 20,
+      "markup": 12,
+      "qty": 40,
+      "price": 9,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_67895ejej",
+      "name": "Mighty - Green",
+      "category": "Yosi",
+      "cost": 166,
+      "units": 20,
+      "markup": 12,
+      "qty": 20,
+      "price": 10,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_p93wzqdse",
+      "name": "Fortune - Green",
+      "category": "Yosi",
+      "cost": 166,
+      "units": 20,
+      "markup": 12,
+      "qty": 20,
+      "price": 10,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_gdgc6xpxr",
+      "name": "Downy - 3 for ₱20",
+      "category": "Household",
+      "cost": 95,
+      "units": 18,
+      "markup": 12,
+      "qty": 18,
+      "price": 7,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_z3v9ymc3u",
+      "name": "Wings Detergent - Powder",
+      "category": "Household",
+      "cost": 38,
+      "units": 6,
+      "markup": 12,
+      "qty": 6,
+      "price": 8,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_7bwz7ixxx",
+      "name": "Marty's - Plain Salted",
+      "category": "Meryenda",
+      "cost": 7,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 10,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_ib7ygi9tr",
+      "name": "Peewee - BBQ",
+      "category": "Meryenda",
+      "cost": 7,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 10,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_78fci41c4",
+      "name": "Piattos - Sour Cream & Onion",
+      "category": "Meryenda",
+      "cost": 16,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 20,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_dym7vr4v4",
+      "name": "Rebisco - Choco Fill",
+      "category": "Meryenda",
+      "cost": 60,
+      "units": 10,
+      "markup": 12,
+      "qty": 10,
+      "price": 9,
+      "expiry": "2026-09-28",
+      "image": ""
+    },
+    {
+      "id": "id_jzlffg4v5",
+      "name": "Head & Shoulders - Green",
+      "category": "Panligo",
+      "cost": 90,
+      "units": 12,
+      "markup": 12,
+      "qty": 12,
+      "price": 9,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_xsf3ciy7j",
+      "name": "Lucky Me - Pancit Canton - Calamansi",
+      "category": "Pantry",
+      "cost": 95.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 17,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_gk7huh9ia",
+      "name": "Lucky Me - Pancit Canton - Extra HOT",
+      "category": "Pantry",
+      "cost": 95.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 17,
+      "expiry": "2046-08-18",
+      "image": ""
+    },
+    {
+      "id": "id_kv4mbvt4o",
+      "name": "Coco Mama - Gata",
+      "category": "Pantry",
+      "cost": 33.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 0,
+      "price": 37,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_1tmz8473v",
+      "name": "Del Monte Tomato Sauce - Original - 115g",
+      "category": "Pantry",
+      "cost": 213,
+      "units": 10,
+      "markup": 12,
+      "qty": 5,
+      "price": 24,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_h6b8lrye7",
+      "name": "Knorr Cube - Beef",
+      "category": "Pantry",
+      "cost": 34.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 6,
+      "price": 7,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_0sgcv00q9",
+      "name": "Knorr Cube - Chicken",
+      "category": "Pantry",
+      "cost": 67.5,
+      "units": 12,
+      "markup": 12,
+      "qty": 8,
+      "price": 7,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_etmftzha9",
+      "name": "Knorr Cube - Pork",
+      "category": "Pantry",
+      "cost": 57.5,
+      "units": 12,
+      "markup": 12,
+      "qty": 8,
+      "price": 7,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_a80vq2xue",
+      "name": "Knorr - Sampaloc Mix",
+      "category": "Pantry",
+      "cost": 176.4,
+      "units": 12,
+      "markup": 12,
+      "qty": 12,
+      "price": 18,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_cupfn3q5z",
+      "name": "Knorr Cube - Shrimp",
+      "category": "Pantry",
+      "cost": 67.5,
+      "units": 12,
+      "markup": 12,
+      "qty": 8,
+      "price": 7,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_dy0cc7vdt",
+      "name": "Magic Sarap",
+      "category": "Pantry",
+      "cost": 125.15,
+      "units": 26,
+      "markup": 12,
+      "qty": 10,
+      "price": 6,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_fj3pizt4a",
+      "name": "Mama Sita's - Oyster Sauce",
+      "category": "Pantry",
+      "cost": 72.35,
+      "units": 12,
+      "markup": 12,
+      "qty": 12,
+      "price": 8,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_rqnme72y2",
+      "name": "Mantika - 1 Bote",
+      "category": "Pantry",
+      "cost": 305,
+      "units": 12,
+      "markup": 12,
+      "qty": 1,
+      "price": 32,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_ll4b8bvs9",
+      "name": "Silver Swan - Toyo",
+      "category": "Pantry",
+      "cost": 8.35,
+      "units": 1,
+      "markup": 12,
+      "qty": 2,
+      "price": 11,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_vgz6jj51m",
+      "name": "UFC Ketchup",
+      "category": "Pantry",
+      "cost": 10.75,
+      "units": 1,
+      "markup": 12,
+      "qty": 0,
+      "price": 12,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_9x6r36r6h",
+      "name": "555 Tuna - Afritada",
+      "category": "De Lata",
+      "cost": 27.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 4,
+      "price": 31,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_zdn6oiyn7",
+      "name": "555 Tuna - Caldereta",
+      "category": "De Lata",
+      "cost": 27.7,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 31,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_g1ynvch7z",
+      "name": "555 Tuna - Mechado",
+      "category": "De Lata",
+      "cost": 27.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 31,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_u3nxcjxa5",
+      "name": "Argentina - Corned beef",
+      "category": "De Lata",
+      "cost": 39.95,
+      "units": 1,
+      "markup": 12,
+      "qty": 1,
+      "price": 44,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_aol0ql3fs",
+      "name": "Century Tuna - Spicy",
+      "category": "De Lata",
+      "cost": 36.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 1,
+      "price": 40,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_u52trj4a9",
+      "name": "Ligo Sardines - Green",
+      "category": "De Lata",
+      "cost": 115,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 26,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_yp1i2o247",
+      "name": "Ligo Sardines - Red",
+      "category": "De Lata",
+      "cost": 23.2,
+      "units": 1,
+      "markup": 12,
+      "qty": 2,
+      "price": 26,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_58nbbp5aa",
+      "name": "Mega Sardines - Green",
+      "category": "De Lata",
+      "cost": 117.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 25,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_lwr3t0n9e",
+      "name": "Mega Sardines - Red",
+      "category": "De Lata",
+      "cost": 119.25,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 25,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_dm6lqc6u2",
+      "name": "San Marino - Red",
+      "category": "De Lata",
+      "cost": 36.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 40,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_2a14spm80",
+      "name": "San Marino - Chili",
+      "category": "De Lata",
+      "cost": 36.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 40,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_hx8t4v1mc",
+      "name": "Youngs Town Sardines - Green",
+      "category": "De Lata",
+      "cost": 23,
+      "units": 1,
+      "markup": 12,
+      "qty": 1,
+      "price": 26,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_j9dsx2auw",
+      "name": "Youngs Town Sardines - Red",
+      "category": "De Lata",
+      "cost": 23.1,
+      "units": 1,
+      "markup": 12,
+      "qty": 1,
+      "price": 26,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_xzceffks6",
+      "name": "Bear Brand - Choco",
+      "category": "Beverage",
+      "cost": 99,
+      "units": 8,
+      "markup": 12,
+      "qty": 2,
+      "price": 14,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_c493kqckk",
+      "name": "Bear Brand - Swakto",
+      "category": "Beverage",
+      "cost": 99.5,
+      "units": 8,
+      "markup": 12,
+      "qty": 4,
+      "price": 14,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_e0zsrjrya",
+      "name": "Birch Tree - Choco",
+      "category": "Beverage",
+      "cost": 66.15,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 13,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_rrnlbwelj",
+      "name": "Milo",
+      "category": "Beverage",
+      "cost": 107.46,
+      "units": 12,
+      "markup": 12,
+      "qty": 0,
+      "price": 12,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_2dg7d703w",
+      "name": "Mineral Water - Galon",
+      "category": "Beverage",
+      "cost": 300,
+      "units": 11,
+      "markup": 12,
+      "qty": 4,
+      "price": 35,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_j8p9hlx4g",
+      "name": "Nestea - Apple",
+      "category": "Beverage",
+      "cost": 120,
+      "units": 6,
+      "markup": 12,
+      "qty": 1,
+      "price": 25,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_ovy6z9w9w",
+      "name": "Nestea - Lemon",
+      "category": "Beverage",
+      "cost": 120,
+      "units": 6,
+      "markup": 12,
+      "qty": 4,
+      "price": 25,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_itlhaamsx",
+      "name": "Great Taste - Choco",
+      "category": "Beverage",
+      "cost": 140,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 16,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_ydk7wkbkm",
+      "name": "Great Taste - Premium Roast",
+      "category": "Beverage",
+      "cost": 129.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 16,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_muejhfsml",
+      "name": "Great Taste - White",
+      "category": "Beverage",
+      "cost": 121.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 16,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_ksmvpw2ab",
+      "name": "Kopiko - Blanca",
+      "category": "Beverage",
+      "cost": 271.5,
+      "units": 20,
+      "markup": 12,
+      "qty": 6,
+      "price": 16,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_l0xkraohh",
+      "name": "Kopiko - Black",
+      "category": "Beverage",
+      "cost": 135.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 16,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_0d66upi0n",
+      "name": "Kopiko - Brown",
+      "category": "Beverage",
+      "cost": 135.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 16,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_i33pb9zd7",
+      "name": "Nescafe - Creamy White",
+      "category": "Beverage",
+      "cost": 124.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 15,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_r4ls2wnns",
+      "name": "Nescafe - Latte",
+      "category": "Beverage",
+      "cost": 119.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 15,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_r32idxx85",
+      "name": "Nescafe - Original",
+      "category": "Beverage",
+      "cost": 119.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 4,
+      "price": 15,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_csijh4ook",
+      "name": "Nescafe - Stick",
+      "category": "Beverage",
+      "cost": 148.95,
+      "units": 40,
+      "markup": 12,
+      "qty": 37,
+      "price": 5,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_d6mr1drf2",
+      "name": "Lucky Me - Noodles - Beef",
+      "category": "Pantry",
+      "cost": 105,
+      "units": 12,
+      "markup": 12,
+      "qty": 3,
+      "price": 10,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_pgb5lz5vf",
+      "name": "Lucky Me - Noodles - Beef - Spicy Labuyo",
+      "category": "Pantry",
+      "cost": 61.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 12,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_fk1m8ngj5",
+      "name": "Lucky Me - Noodles - Chicken",
+      "category": "Pantry",
+      "cost": 52.5,
+      "units": 6,
+      "markup": 12,
+      "qty": 6,
+      "price": 10,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_qmnqi39d5",
+      "name": "Lucky Me - Noodles - Chicken - Spicy Labuyo",
+      "category": "Pantry",
+      "cost": 10.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 0,
+      "price": 12,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_swvu1cubg",
+      "name": "Joy - Dishwashing Liquid",
+      "category": "Household",
+      "cost": 120,
+      "units": 12,
+      "markup": 12,
+      "qty": 4,
+      "price": 13,
+      "expiry": "",
+      "image": ""
+    },
+    {
+      "id": "id_ya4hdt0mx",
+      "name": "Ariel Detergent Powder",
+      "category": "Household",
+      "cost": 82.5,
+      "units": 12,
+      "markup": 12,
+      "qty": 4,
+      "price": 8,
+      "expiry": "",
+      "image": ""
+    }
+  ],
+  "history": [
+    {
+      "time": 1781382439395,
+      "name": "Test Widget",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition."
+    },
+    {
+      "time": 1781383992890,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Addition",
+      "change": 1,
+      "notes": "Initial stock addition."
+    },
+    {
+      "time": 1781384887671,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Restock",
+      "change": 1,
+      "notes": "Incremental quick update"
+    },
+    {
+      "time": 1781384899719,
+      "name": "Test Widget",
+      "type": "Sale / Usage",
+      "change": -1,
+      "notes": "Decremental quick update"
+    },
+    {
+      "time": 1781385803304,
+      "name": "Test Widget",
+      "type": "Sale / Usage",
+      "change": -1,
+      "notes": "Decremental quick update"
+    },
+    {
+      "time": 1781385818243,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Restock",
+      "change": 1,
+      "notes": "Incremental quick update"
+    },
+    {
+      "time": 1781386180426,
+      "name": "Test Widget",
+      "type": "Deletion",
+      "change": -8,
+      "notes": "Item permanently removed. Reason: test"
+    },
+    {
+      "time": 1781386233641,
+      "name": "Test Widget",
+      "type": "Addition",
+      "change": 6,
+      "notes": "Initial stock addition under category: Test."
+    },
+    {
+      "time": 1781386240027,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Restock",
+      "change": 1,
+      "notes": "Incremental quick update"
+    },
+    {
+      "time": 1781386242206,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Restock",
+      "change": 1,
+      "notes": "Incremental quick update"
+    },
+    {
+      "time": 1781386247500,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Sale / Usage",
+      "change": -1,
+      "notes": "Decremental quick update"
+    },
+    {
+      "time": 1781386254309,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Sale / Usage",
+      "change": -1,
+      "notes": "Decremental quick update"
+    },
+    {
+      "time": 1781386277280,
+      "name": "Test",
+      "type": "Manual Edit",
+      "change": 0,
+      "notes": "Name changed."
+    },
+    {
+      "time": 1781386942512,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Restock",
+      "change": 12,
+      "notes": "Bulk restock transaction."
+    },
+    {
+      "time": 1781386953941,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Sale / Usage",
+      "change": -10,
+      "notes": "Bulk reduction transaction."
+    },
+    {
+      "time": 1781387033696,
+      "name": "Test",
+      "type": "Restock",
+      "change": 5,
+      "notes": "Bulk restock transaction."
+    },
+    {
+      "time": 1781388020530,
+      "name": "Test Widget",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition under category: Test 1."
+    },
+    {
+      "time": 1781388030609,
+      "name": "Test Widget",
+      "type": "Deletion",
+      "change": -10,
+      "notes": "Item permanently removed. Reason: yest"
+    },
+    {
+      "time": 1781388444435,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Manual Edit",
+      "change": 0,
+      "notes": "Image updated."
+    },
+    {
+      "time": 1781388747220,
+      "name": "Test",
+      "type": "Sale / Usage",
+      "change": -8,
+      "notes": "Bulk reduction transaction."
+    },
+    {
+      "time": 1781388752313,
+      "name": "Test",
+      "type": "Restock",
+      "change": 1,
+      "notes": "Bulk restock transaction."
+    },
+    {
+      "time": 1781388981266,
+      "name": "Test",
+      "type": "Sale / Usage",
+      "change": -4,
+      "notes": "Bulk reduction transaction."
+    },
+    {
+      "time": 1781389690718,
+      "name": "Test",
+      "type": "Deletion",
+      "change": 0,
+      "notes": "Item permanently removed. Reason: test"
+    },
+    {
+      "time": 1781389759211,
+      "name": "Test Widget",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition under category: Test 1. Expiry: 31-Dec-2026."
+    },
+    {
+      "time": 1781402789099,
+      "name": "Test Widget",
+      "type": "Sale / Usage",
+      "change": -6,
+      "notes": "Bulk reduction transaction."
+    },
+    {
+      "time": 1781402819893,
+      "name": "Test Widget",
+      "type": "Sale / Usage",
+      "change": -1,
+      "notes": "Bulk reduction transaction."
+    },
+    {
+      "time": 1781403201935,
+      "name": "Test Widget",
+      "type": "Restock",
+      "change": 1,
+      "notes": "Bulk restock transaction."
+    },
+    {
+      "time": 1781408902256,
+      "name": "Test Widget",
+      "type": "Deletion",
+      "change": -4,
+      "notes": "Item permanently removed. Reason: test"
+    },
+    {
+      "time": 1781409116963,
+      "name": "Asukal - Segunda - 1/2",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781411628580,
+      "name": "Asukal - Segunda - 1/4 kg",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781411692144,
+      "name": "Atbp - Kandila - Medium",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
+    },
+    {
+      "time": 1781411810122,
+      "name": "Atbp - Kandila - Small",
+      "type": "Addition",
+      "change": 5,
+      "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
+    },
+    {
+      "time": 1781413661247,
+      "name": "Atbp - Posporo",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
+    },
+    {
+      "time": 1781413749226,
+      "name": "Atbp - Steel Wool",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Atbp. Expiry: N/A."
+    },
+    {
+      "time": 1781413813184,
+      "name": "Biskwit - Choco Mucho",
+      "type": "Addition",
+      "change": 2,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781413890933,
+      "name": "Biskwit - Combi",
+      "type": "Addition",
+      "change": 4,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781413973864,
+      "name": "Biskwit - Cream-O - Choco",
+      "type": "Addition",
+      "change": 4,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414002075,
+      "name": "Biskwit - Cream-O - Vanilla",
+      "type": "Addition",
+      "change": 4,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414021329,
+      "name": "Biskwit - Cream-O - Choco",
+      "type": "Sale / Usage",
+      "change": -4,
+      "notes": "Bulk reduction transaction."
+    },
+    {
+      "time": 1781414128504,
+      "name": "Biskwit - Fita - Crackers",
+      "type": "Addition",
+      "change": 8,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414177103,
+      "name": "Biskwit - Hansel - Choco",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414211477,
+      "name": "Biskwit - Hansel - Crackers",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414286129,
+      "name": "Biskwit - Hello - Choco",
+      "type": "Addition",
+      "change": 7,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414324194,
+      "name": "Biskwit - Nissin Butter Coconut",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414366739,
+      "name": "Biskwit - Nissin Choco - Wafer",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414401119,
+      "name": "Biskwit - Rebisco - Butter",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414436525,
+      "name": "Biskwit - Rebisco - Strawberry",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414466251,
+      "name": "Biskwit - Skyflakes - Crackers",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781414482046,
+      "name": "Biskwit - Skyflakes - Crackers",
+      "type": "Manual Edit",
+      "change": 4,
+      "notes": "Stock updated directly from 0 to 4."
+    },
+    {
+      "time": 1781414552085,
+      "name": "Candy - Choco Mani",
+      "type": "Addition",
+      "change": 20,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
+    },
+    {
+      "time": 1781414618327,
+      "name": "Candy - Flat Tops",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
+    },
+    {
+      "time": 1781414687904,
+      "name": "Candy - Maxx - Cherry - 3 for Ã¢ÂÂ±5",
+      "type": "Addition",
+      "change": 20,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
+    },
+    {
+      "time": 1781414743934,
+      "name": "Candy - Potchi - 3 for Ã¢ÂÂ±5",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
+    },
+    {
+      "time": 1781414785804,
+      "name": "Candy - Stick-O",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
+    },
+    {
+      "time": 1781414836428,
+      "name": "\":\"Candy - V Fresh - 3 for Ã¢ÂÂ±5",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Candy. Expiry: N/A."
+    },
+    {
+      "time": 1781425698554,
+      "name": "Gin - Bilog",
+      "type": "Addition",
+      "change": 4,
+      "notes": "Initial stock addition under category: Alak. Expiry: N/A."
+    },
+    {
+      "time": 1781425710806,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Manual Edit",
+      "change": -2,
+      "notes": "Stock updated directly from 5 to 3."
+    },
+    {
+      "time": 1781426002720,
+      "name": "Yosi - Marlboro - Red",
+      "type": "Addition",
+      "change": 20,
+      "notes": "Initial stock addition under category: Yosi. Expiry: N/A."
+    },
+    {
+      "time": 1781426064921,
+      "name": "Yosi - Camel - Red",
+      "type": "Addition",
+      "change": 40,
+      "notes": "Initial stock addition under category: Yosi. Expiry: N/A."
+    },
+    {
+      "time": 1781426103818,
+      "name": "Yosi - Mighty - Red",
+      "type": "Addition",
+      "change": 20,
+      "notes": "Initial stock addition under category: Yosi. Expiry: N/A."
+    },
+    {
+      "time": 1781426150791,
+      "name": "Yosi - Fortune - Green",
+      "type": "Addition",
+      "change": 20,
+      "notes": "Initial stock addition under category: Yosi. Expiry: N/A."
+    },
+    {
+      "time": 1781426386800,
+      "name": "Panlaba - Downy - 3 for Ã¢ÂÂ±20",
+      "type": "Addition",
+      "change": 18,
+      "notes": "Initial stock addition under category: Panlaba. Expiry: N/A."
+    },
+    {
+      "time": 1781426544964,
+      "name": "Panlaba - Wings",
+      "type": "Addition",
+      "change": 6,
+      "notes": "Initial stock addition under category: Panlaba. Expiry: N/A."
+    },
+    {
+      "time": 1781426679862,
+      "name": "Snacks - Marty's - Plain Salted",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Snacks. Expiry: N/A."
+    },
+    {
+      "time": 1781426727300,
+      "name": "Snacks - Peewee - BBQ",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Snacks. Expiry: N/A."
+    },
+    {
+      "time": 1781426829090,
+      "name": "Snacks - Piattos - Sour Cream % Onion",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Snacks. Expiry: N/A."
+    },
+    {
+      "time": 1781426962311,
+      "name": "Biskwit - Rebisco - Choco",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition under category: Biskwit. Expiry: N/A."
+    },
+    {
+      "time": 1781427141956,
+      "name": "Panligo - Head & Shoulders - Green",
+      "type": "Addition",
+      "change": 12,
+      "notes": "Initial stock addition under category: Panligo. Expiry: N/A."
+    },
+    {
+      "time": 1781428750714,
+      "name": "Lucky Me - Pancit Canton - Calamansi",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Lucky Me. Expiry: N/A."
+    },
+    {
+      "time": 1781428872003,
+      "name": "Lucky Me - Pancit Canton - Extra HOT",
+      "type": "Addition",
+      "change": 3,
+      "notes": "Initial stock addition under category: Lucky Me. Expiry: 2046-08-18."
+    },
+    {
+      "time": 1781432206782,
+      "name": "Condiments - Coco Mama - Gata",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432334129,
+      "name": "Condiments - Del Monte Tomato Sauce - Original - 115g",
+      "type": "Addition",
+      "change": 5,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432488517,
+      "name": "Condiments - Knorr - Beef Cube",
+      "type": "Addition",
+      "change": 6,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432571246,
+      "name": "Condiments - Knorr - Chicken Cube",
+      "type": "Addition",
+      "change": 8,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432592649,
+      "name": "Condiments - Knorr - Pork Cube",
+      "type": "Addition",
+      "change": 8,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432645932,
+      "name": "Condiments - Knorr - Sampaloc Mix",
+      "type": "Addition",
+      "change": 12,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432679437,
+      "name": "Condiments - Knorr - Shrimp Cube",
+      "type": "Addition",
+      "change": 8,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781432736683,
+      "name": "Condiments - Knorr Cube - Beef",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Beef\"."
+    },
+    {
+      "time": 1781432755554,
+      "name": "Condiments - Knorr Cube - Chicken",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Chicken\"."
+    },
+    {
+      "time": 1781432771362,
+      "name": "Condiments - Knorr Cube - Pork",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Pork\"."
+    },
+    {
+      "time": 1781432790283,
+      "name": "Condiments - Knorr Cube - Shrimp",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Shrimp\"."
+    },
+    {
+      "time": 1781433057940,
+      "name": "Condiments - Magic Sarap",
+      "type": "Addition",
+      "change": 10,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781433101309,
+      "name": "Condiments - Mama Sita's - Oyster Sauce",
+      "type": "Addition",
+      "change": 12,
+      "notes": "Initial stock addition under category: Condiments. Expiry: N/A."
+    },
+    {
+      "time": 1781433351788,
+      "name": "Asukal - Segunda - 1/2",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781433361054,
+      "name": "Asukal - Segunda - 1/4",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781433531346,
+      "name": "Atbp - Steel Wool",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Household\"."
+    },
+    {
+      "time": 1781433618466,
+      "name": "Biskwit - Cream-O - Choco",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433635301,
+      "name": "Biskwit - Cream-O - Vanilla",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433655472,
+      "name": "Choco Mucho Biscuit",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Choco Mucho Biscuit\"."
+    },
+    {
+      "time": 1781433675345,
+      "name": "Combi - Choco",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Combi - Choco\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433698892,
+      "name": "Cream-O - Choco",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Cream-O - Choco\"."
+    },
+    {
+      "time": 1781433711982,
+      "name": "Cream-O - Vanilla",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Cream-O - Vanilla\"."
+    },
+    {
+      "time": 1781433732767,
+      "name": "Fita - Crackers",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Fita - Crackers\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433742670,
+      "name": "Hansel - Choco",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Hansel - Choco\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433754792,
+      "name": "Hansel - Crackers",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Hansel - Crackers\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433772309,
+      "name": "Nissin Butter Coconut",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Nissin Butter Coconut\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433788682,
+      "name": "Hello - Wafer - Choco",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Hello - Wafer - Choco\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433800302,
+      "name": "Nissin Choco - Wafer",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Nissin Choco - Wafer\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433813463,
+      "name": "Rebisco - Butter Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Rebisco - Butter Fill\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433824287,
+      "name": "Rebisco - Choco Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Rebisco - Choco Fill\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433844309,
+      "name": "Rebisco - Strawberry Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Rebisco - Strawberry Fill\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433857078,
+      "name": "Skyflakes - Crackers",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Skyflakes - Crackers\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433888125,
+      "name": "Choco Mani",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Choco Mani\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433899107,
+      "name": "Flat Tops",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Flat Tops\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433907812,
+      "name": "Maxx - Cherry - 3 for ₱5",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Maxx - Cherry - 3 for ₱5\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433915714,
+      "name": "Stick-O",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Stick-O\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433925523,
+      "name": "Potchii - 3 for ₱5",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Potchii - 3 for ₱5\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433933985,
+      "name": "V Fresh - 3 for ₱5",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"V Fresh - 3 for ₱5\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781433945422,
+      "name": "Combi - Choco Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Combi - Choco Fill\"."
+    },
+    {
+      "time": 1781433984783,
+      "name": "Coco Mama - Gata",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Coco Mama - Gata\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434009826,
+      "name": "Del Monte Tomato Sauce - Original - 115g",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Del Monte Tomato Sauce - Original - 115g\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434028685,
+      "name": "Knorr - Sampaloc Mix",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Knorr - Sampaloc Mix\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434036489,
+      "name": "Knorr Cube - Chicken",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Knorr Cube - Chicken\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434044584,
+      "name": "Knorr Cube - Shrimp",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Knorr Cube - Shrimp\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434052530,
+      "name": "Knorr Cube - Beef",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Knorr Cube - Beef\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434062129,
+      "name": "Knorr Cube - Pork",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Knorr Cube - Pork\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434071228,
+      "name": "Magic Sarap",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Magic Sarap\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434084540,
+      "name": "Mama Sita's - Oyster Sauce",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Mama Sita's - Oyster Sauce\", category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434097027,
+      "name": "Cream-O - Choco Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Cream-O - Choco Fill\"."
+    },
+    {
+      "time": 1781434103634,
+      "name": "Cream-O - Vanilla Fill",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Cream-O - Vanilla Fill\"."
+    },
+    {
+      "time": 1781434135379,
+      "name": "Lucky Me - Pancit Canton - Calamansi",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434142294,
+      "name": "Lucky Me - Pancit Canton - Extra HOT",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Pantry\"."
+    },
+    {
+      "time": 1781434204713,
+      "name": "Downy - 3 for ₱20",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Downy - 3 for ₱20\"."
+    },
+    {
+      "time": 1781434220954,
+      "name": "Wings Detergent",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Wings Detergent\"."
+    },
+    {
+      "time": 1781434231928,
+      "name": "Head & Shoulders - Green",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Head & Shoulders - Green\"."
+    },
+    {
+      "time": 1781434270122,
+      "name": "Camel - Red",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Camel - Red\"."
+    },
+    {
+      "time": 1781434276037,
+      "name": "Fortune - Green",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Fortune - Green\"."
+    },
+    {
+      "time": 1781434281410,
+      "name": "Marlboro - Red",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Marlboro - Red\"."
+    },
+    {
+      "time": 1781434286444,
+      "name": "Mighty - Green",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Mighty - Green\"."
+    },
+    {
+      "time": 1781434302360,
+      "name": "Wings Detergent - Powder",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Wings Detergent - Powder\"."
+    },
+    {
+      "time": 1781434314873,
+      "name": "Piattos - Sour Cream & Onion",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Piattos - Sour Cream & Onion\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781434326790,
+      "name": "Marty's - Plain Salted",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Marty's - Plain Salted\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781434368805,
+      "name": "Kandila - Medium",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Kandila - Medium\"."
+    },
+    {
+      "time": 1781434373906,
+      "name": "Kandila - Small",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Kandila - Small\"."
+    },
+    {
+      "time": 1781434378858,
+      "name": "Posporo",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Posporo\"."
+    },
+    {
+      "time": 1781434384538,
+      "name": "Steel Wool",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Steel Wool\"."
+    },
+    {
+      "time": 1781434431807,
+      "name": "Peewee - BBQ",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Peewee - BBQ\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781434494070,
+      "name": "Victoria - Segunda - 1/2",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Victoria - Segunda - 1/2\"."
+    },
+    {
+      "time": 1781434503240,
+      "name": "Victoria - Segunda - 1/4",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Victoria - Segunda - 1/4\"."
+    },
+    {
+      "time": 1781434564301,
+      "name": "Choco Mucho Biscuit",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781435764100,
+      "name": "Mantika - 1 Bote",
+      "type": "Addition",
+      "change": 1,
+      "notes": "Initial stock addition under category: Pantry. Expiry: N/A."
+    },
+    {
+      "time": 1781435937548,
+      "name": "Silver Swan - Toyo",
+      "type": "Clone / Copy",
+      "change": 2,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱11.00."
+    },
+    {
+      "time": 1781436031539,
+      "name": "UFC Ketchup",
+      "type": "Addition",
+      "change": 0,
+      "notes": "Initial stock addition under category: Pantry. Expiry: N/A."
+    },
+    {
+      "time": 1781436120016,
+      "name": "555 Tuna - Afritada",
+      "type": "Addition",
+      "change": 4,
+      "notes": "Initial stock addition under category: De Lata. Expiry: N/A."
+    },
+    {
+      "time": 1781436165361,
+      "name": "555 Tuna - Caldereta",
+      "type": "Clone / Copy",
+      "change": 0,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱31.00."
+    },
+    {
+      "time": 1781436180501,
+      "name": "555 Tuna - Caldereta",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: price updated to ₱30.00."
+    },
+    {
+      "time": 1781436208276,
+      "name": "555 Tuna - Afritada",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: price updated to ₱31.00."
+    },
+    {
+      "time": 1781436212800,
+      "name": "555 Tuna - Caldereta",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: price updated to ₱31.00."
+    },
+    {
+      "time": 1781436240721,
+      "name": "555 Tuna - Mechado",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱31.00."
+    },
+    {
+      "time": 1781436247450,
+      "name": "555 Tuna - Caldereta",
+      "type": "Product Update",
+      "change": 3,
+      "notes": "Modified attributes: stock adjusted from 0 to 3."
+    },
+    {
+      "time": 1781436332194,
+      "name": "Argentina - Corned beef",
+      "type": "Addition",
+      "change": 1,
+      "notes": "Initial stock addition under category: De Lata. Expiry: N/A."
+    },
+    {
+      "time": 1781436389762,
+      "name": "Century Tuna - Spicy",
+      "type": "Clone / Copy",
+      "change": 1,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱40.00."
+    },
+    {
+      "time": 1781436510795,
+      "name": "Ligo Sardines - Green",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱25.00."
+    },
+    {
+      "time": 1781436564961,
+      "name": "Ligo Sardines - Red",
+      "type": "Clone / Copy",
+      "change": 2,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱26.00."
+    },
+    {
+      "time": 1781436575716,
+      "name": "Ligo Sardines - Green",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: price updated to ₱26.00."
+    },
+    {
+      "time": 1781436608320,
+      "name": "Mega Sardines - Green",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱26.00."
+    },
+    {
+      "time": 1781436627159,
+      "name": "Mega Sardines - Green",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: price updated to ₱25.00."
+    },
+    {
+      "time": 1781436645722,
+      "name": "Mega Sardines - Red",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱25.00."
+    },
+    {
+      "time": 1781436690496,
+      "name": "San Marino - Red",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱40.00."
+    },
+    {
+      "time": 1781436707873,
+      "name": "San Marino - Chili",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱40.00."
+    },
+    {
+      "time": 1781436755024,
+      "name": "Youngs Town Sardines - Green",
+      "type": "Clone / Copy",
+      "change": 1,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱26.00."
+    },
+    {
+      "time": 1781436786377,
+      "name": "Youngs Town Sardines - Red",
+      "type": "Clone / Copy",
+      "change": 1,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱26.00."
+    },
+    {
+      "time": 1781436848541,
+      "name": "Bear Brand - Choco",
+      "type": "Addition",
+      "change": 2,
+      "notes": "Initial stock addition under category: Beverage. Expiry: N/A."
+    },
+    {
+      "time": 1781436897501,
+      "name": "Bear Brand - Swakto",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱14.00."
+    },
+    {
+      "time": 1781436945122,
+      "name": "Birch Tree - Choco",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱13.00."
+    },
+    {
+      "time": 1781436971451,
+      "name": "Milo",
+      "type": "Clone / Copy",
+      "change": 0,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱12.00."
+    },
+    {
+      "time": 1781437006358,
+      "name": "Mineral Water - Galon",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱35.00."
+    },
+    {
+      "time": 1781437049044,
+      "name": "Nestea - Apple",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱25.00."
+    },
+    {
+      "time": 1781437055624,
+      "name": "Nestea - Apple",
+      "type": "Product Update",
+      "change": -3,
+      "notes": "Modified attributes: stock adjusted from 4 to 1."
+    },
+    {
+      "time": 1781437078383,
+      "name": "Nestea - Lemon",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱25.00."
+    },
+    {
+      "time": 1781437183007,
+      "name": "Great Taste - Choco",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
+    },
+    {
+      "time": 1781437232012,
+      "name": "Great Taste - Premium Roast",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
+    },
+    {
+      "time": 1781437293267,
+      "name": "Great Taste - White",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
+    },
+    {
+      "time": 1781437422488,
+      "name": "Kopiko - Blanca",
+      "type": "Clone / Copy",
+      "change": 6,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
+    },
+    {
+      "time": 1781437459442,
+      "name": "Kopiko - Black",
+      "type": "Clone / Copy",
+      "change": 0,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
+    },
+    {
+      "time": 1781437485283,
+      "name": "Kopiko - Brown",
+      "type": "Clone / Copy",
+      "change": 0,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱16.00."
+    },
+    {
+      "time": 1781437524458,
+      "name": "Nescafe - Creamy White",
+      "type": "Clone / Copy",
+      "change": 6,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱15.00."
+    },
+    {
+      "time": 1781437548241,
+      "name": "Nescafe - Latte",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱15.00."
+    },
+    {
+      "time": 1781437554842,
+      "name": "Nescafe - Creamy White",
+      "type": "Product Update",
+      "change": -2,
+      "notes": "Modified attributes: stock adjusted from 6 to 4."
+    },
+    {
+      "time": 1781437775808,
+      "name": "Nescafe - Original",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱15.00."
+    },
+    {
+      "time": 1781437803792,
+      "name": "Nescafe - Stick",
+      "type": "Clone / Copy",
+      "change": 37,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱5.00."
+    },
+    {
+      "time": 1781437866762,
+      "name": "Lucky Me - Noodles - Beef",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱10.00."
+    },
+    {
+      "time": 1781437932916,
+      "name": "Lucky Me - Noodles - Beef - Spicy Labuyo",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱12.00."
+    },
+    {
+      "time": 1781437987169,
+      "name": "Lucky Me - Noodles - Chicken",
+      "type": "Clone / Copy",
+      "change": 6,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱10.00."
+    },
+    {
+      "time": 1781438015662,
+      "name": "Lucky Me - Noodles - Chicken - Spicy Labuyo",
+      "type": "Clone / Copy",
+      "change": 0,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱12.00."
+    },
+    {
+      "time": 1781438041992,
+      "name": "Lucky Me - Noodles - Beef - Spicy Labuyo",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Saved item modifications without profile value adjustments."
+    },
+    {
+      "time": 1781438117098,
+      "name": "Joy - Dishwashing Liquid",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱13.00."
+    },
+    {
+      "time": 1781438185264,
+      "name": "Ariel Detergent Powder",
+      "type": "Clone / Copy",
+      "change": 4,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱8.00."
+    },
+    {
+      "time": 1781438201349,
+      "name": "Wings Detergent - Powder",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Household\"."
+    }
+  ],
+  "config": {
+    "storeName": "ABKD Inventory",
+    "lowThreshold": 3
+  }
+}
