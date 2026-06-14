@@ -50,7 +50,7 @@
     },
     {
       "id": "id_9ag2jya41",
-      "name": "Atbp - Kandila - Small",
+      "name": "Kandila - Small",
       "category": "Atbp",
       "cost": 55,
       "units": 20,
@@ -1520,6 +1520,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Kandila - Medium\"."
+    },
+    {
+      "time": 1781434373906,
+      "name": "Kandila - Small",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Kandila - Small\"."
     }
   ],
   "config": {
