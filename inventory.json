@@ -398,8 +398,8 @@
     },
     {
       "id": "id_7bwz7ixxx",
-      "name": "Snacks - Marty's - Plain Salted",
-      "category": "Snacks",
+      "name": "Marty's - Plain Salted",
+      "category": "Meryenda",
       "cost": 7,
       "units": 1,
       "markup": 12,
@@ -1506,6 +1506,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Piattos - Sour Cream & Onion\", category updated to \"Meryenda\"."
+    },
+    {
+      "time": 1781434326790,
+      "name": "Marty's - Plain Salted",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Marty's - Plain Salted\", category updated to \"Meryenda\"."
     }
   ],
   "config": {
