@@ -719,6 +719,18 @@
       "price": 25,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_lwr3t0n9e",
+      "name": "Mega Sardines - Red",
+      "category": "De Lata",
+      "cost": 119.25,
+      "units": 6,
+      "markup": 12,
+      "qty": 3,
+      "price": 25,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -1820,6 +1832,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: price updated to ₱25.00."
+    },
+    {
+      "time": 1781436645722,
+      "name": "Mega Sardines - Red",
+      "type": "Clone / Copy",
+      "change": 3,
+      "notes": "Cloned line layout generated at zero balance base matrix state. Price: ₱25.00."
     }
   ],
   "config": {
