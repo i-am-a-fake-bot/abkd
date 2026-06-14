@@ -530,7 +530,7 @@
     },
     {
       "id": "id_etmftzha9",
-      "name": "Condiments - Knorr - Pork Cube",
+      "name": "Condiments - Knorr Cube - Pork",
       "category": "Condiments",
       "cost": 57.5,
       "units": 12,
@@ -1118,6 +1118,13 @@
       "type": "Product Update",
       "change": 0,
       "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Chicken\"."
+    },
+    {
+      "time": 1781432771362,
+      "name": "Condiments - Knorr Cube - Pork",
+      "type": "Product Update",
+      "change": 0,
+      "notes": "Modified attributes: renamed to \"Condiments - Knorr Cube - Pork\"."
     }
   ],
   "config": {
