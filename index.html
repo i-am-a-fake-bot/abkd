@@ -1091,35 +1091,44 @@
 						</div>
 
 						<!-- ACTIONS (CLEANER) -->
-						<div class="grid grid-cols-5 border-t border-slate-100 text-xs font-semibold">
+						<div class="border-t border-slate-100 text-[11px] font-semibold">
 
-						  <button onclick="handleStockAdjust('${itemId}', 'restock')"
-							class="py-3 text-emerald-700 hover:bg-emerald-50">
-							ADD
-						  </button>
+						  <!-- TOP ROW: ADD | LESS -->
+						  <div class="grid grid-cols-2 divide-x divide-slate-100">
+							<button onclick="handleStockAdjust('${itemId}', 'restock')"
+							  class="py-3 text-emerald-700 hover:bg-emerald-50 flex items-center justify-center gap-1">
+							  <span class="text-sm">➕</span> ADD
+							</button>
 
-						  <button onclick="handleStockAdjust('${itemId}', 'reduce')"
-							class="py-3 text-amber-700 hover:bg-amber-50 ${isOOS ? 'opacity-30 pointer-events-none' : ''}">
-							LESS
-						  </button>
+							<button onclick="handleStockAdjust('${itemId}', 'reduce')"
+							  class="py-3 text-amber-700 hover:bg-amber-50 flex items-center justify-center gap-1 ${isOOS ? 'opacity-30 pointer-events-none' : ''}">
+							  <span class="text-sm">➖</span> LESS
+							</button>
+						  </div>
 
-						  <button onclick="openModal('${itemId}')"
-							class="py-3 text-slate-700 hover:bg-slate-50">
-							EDIT
-						  </button>
+						  <!-- DIVIDER -->
+						  <div class="h-px bg-slate-100"></div>
 
-						  <button onclick="cloneItemToNewForm('${itemId}')"
-							class="py-3 text-indigo-700 hover:bg-indigo-50">
-							COPY
-						  </button>
+						  <!-- BOTTOM ROW: EDIT | COPY | DEL -->
+						  <div class="grid grid-cols-3 divide-x divide-slate-100">
 
-						  <button onclick="deleteItem('${itemId}')"
-							class="py-3 text-red-600 hover:bg-red-50">
-							DEL
-						  </button>
+							<button onclick="openModal('${itemId}')"
+							  class="py-3 text-slate-700 hover:bg-slate-50 flex items-center justify-center gap-1">
+							  <span class="text-sm">✏️</span> EDIT
+							</button>
 
+							<button onclick="cloneItemToNewForm('${itemId}')"
+							  class="py-3 text-indigo-700 hover:bg-indigo-50 flex items-center justify-center gap-1">
+							  <span class="text-sm">📋</span> COPY
+							</button>
+
+							<button onclick="deleteItem('${itemId}')"
+							  class="py-3 text-red-600 hover:bg-red-50 flex items-center justify-center gap-1">
+							  <span class="text-sm">🗑</span> DEL
+							</button>
+
+						  </div>
 						</div>
-					</div>
 					`;
 				}).join('');
 				}
