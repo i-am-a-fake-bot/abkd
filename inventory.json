@@ -1091,6 +1091,18 @@
       "price": 20,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_evikmk3iv",
+      "name": "Charmee - Wings",
+      "category": "Personal Care",
+      "cost": 45,
+      "units": 20,
+      "markup": 12,
+      "qty": 0,
+      "price": 6,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2450,6 +2462,13 @@
       "name": "Bioderm",
       "type": "New Product",
       "change": 3,
+      "notes": "Initial stock addition under category: Personal Care. Expiry: N/A."
+    },
+    {
+      "time": 1781486576318,
+      "name": "Charmee - Wings",
+      "type": "New Product",
+      "change": 0,
       "notes": "Initial stock addition under category: Personal Care. Expiry: N/A."
     }
   ],
