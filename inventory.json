@@ -1103,6 +1103,18 @@
       "price": 6,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_feq8kur0i",
+      "name": "Close - Up",
+      "category": "Personal Care",
+      "cost": 87.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 5,
+      "price": 10,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2469,6 +2481,13 @@
       "name": "Charmee - Wings",
       "type": "New Product",
       "change": 0,
+      "notes": "Initial stock addition under category: Personal Care. Expiry: N/A."
+    },
+    {
+      "time": 1781486622781,
+      "name": "Close - Up",
+      "type": "New Product",
+      "change": 5,
       "notes": "Initial stock addition under category: Personal Care. Expiry: N/A."
     }
   ],
