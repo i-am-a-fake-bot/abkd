@@ -2436,6 +2436,6 @@
   ],
   "config": {
     "storeName": "ABKD Inventory",
-    "lowThreshold": 3
+    "lowThreshold": 2
   }
 }
