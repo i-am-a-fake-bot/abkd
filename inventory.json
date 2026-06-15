@@ -1115,6 +1115,18 @@
       "price": 10,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_qoac4pdxn",
+      "name": "Colgate - Ibang Flavor",
+      "category": "Personal Care",
+      "cost": 155,
+      "units": 12,
+      "markup": 12,
+      "qty": 5,
+      "price": 15,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2486,6 +2498,13 @@
     {
       "time": 1781486622781,
       "name": "Close - Up",
+      "type": "New Product",
+      "change": 5,
+      "notes": "Initial stock addition under category: Personal Care. Expiry: N/A."
+    },
+    {
+      "time": 1781486690763,
+      "name": "Colgate - Ibang Flavor",
       "type": "New Product",
       "change": 5,
       "notes": "Initial stock addition under category: Personal Care. Expiry: N/A."
