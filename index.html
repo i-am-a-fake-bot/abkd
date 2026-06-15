@@ -578,7 +578,7 @@
             reader.onload = function (e) {
                 const img = new Image();
                 img.onload = function() {
-                    const maxDim = 120; 
+                    const maxDim = 600; 
                     let w = img.width;
                     let h = img.height;
                     
@@ -594,7 +594,7 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, w, h);
                     
-                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.9);
                     
                     document.getElementById('item-image-base64').value = compressedBase64;
                     document.getElementById('image-preview-container').innerHTML = `<img src="${compressedBase64}" class="w-full h-full object-cover">`;
