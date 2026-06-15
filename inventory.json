@@ -315,7 +315,7 @@
     {
       "id": "id_yiu9hmqlx",
       "name": "Gin - Bilog",
-      "category": "Alak",
+      "category": "Beverage",
       "cost": 69,
       "units": 1,
       "markup": 12,
@@ -2512,6 +2512,13 @@
     {
       "time": 1781486831850,
       "name": "Gin - Kwatro Kantos",
+      "type": "Modified",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Beverage\"."
+    },
+    {
+      "time": 1781486836847,
+      "name": "Gin - Bilog",
       "type": "Modified",
       "change": 0,
       "notes": "Modified attributes: category updated to \"Beverage\"."
