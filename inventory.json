@@ -3,7 +3,7 @@
     {
       "id": "id_22ibp7oeh",
       "name": "Gin - Kwatro Kantos",
-      "category": "Alak",
+      "category": "Beverage",
       "cost": 140,
       "units": 1,
       "markup": 12,
@@ -2508,6 +2508,13 @@
       "type": "New Product",
       "change": 5,
       "notes": "Initial stock addition under category: Personal Care. Expiry: N/A."
+    },
+    {
+      "time": 1781486831850,
+      "name": "Gin - Kwatro Kantos",
+      "type": "Modified",
+      "change": 0,
+      "notes": "Modified attributes: category updated to \"Beverage\"."
     }
   ],
   "config": {
