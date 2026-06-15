@@ -1067,6 +1067,18 @@
       "price": 11,
       "expiry": "",
       "image": ""
+    },
+    {
+      "id": "id_uywfv6a7i",
+      "name": "Zonrox - Orig - 250ml",
+      "category": "Household",
+      "cost": 16.25,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 20,
+      "expiry": "",
+      "image": ""
     }
   ],
   "history": [
@@ -2413,6 +2425,13 @@
       "type": "Copy",
       "change": 3,
       "notes": "Copied the metrics of Wings Detergent Powder"
+    },
+    {
+      "time": 1781486377921,
+      "name": "Zonrox - Orig - 250ml",
+      "type": "Copy",
+      "change": 3,
+      "notes": "Copied the metrics of Zonrox - Orig - 100ml"
     }
   ],
   "config": {
