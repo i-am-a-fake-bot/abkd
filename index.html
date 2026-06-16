@@ -263,6 +263,23 @@
                         </form>
                     </div>
 
+                    <!-- 💾 Local Storage Backup & Restore Toolkit -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 bg-gradient-to-br from-white to-indigo-50/20">
+                        <h3 class="text-base font-bold text-slate-800 border-b border-slate-100 pb-2 mb-3">💾 Local Storage Backup & Restore</h3>
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Download physical backups directly to your local file storage or manually load local data sets back into memory if your connection to GitHub fails.</p>
+                        
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <button onclick="backupData()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 p-2.5 rounded-lg font-semibold text-xs transition shadow-sm text-center">
+                                📥 Create Backups
+                            </button>
+                            <label class="bg-emerald-600 hover:bg-emerald-700 text-white p-2.5 rounded-lg font-semibold text-xs transition shadow-sm text-center cursor-pointer">
+                                📤 Restore Backup File
+                                <input type="file" id="restore-file-input" accept=".json" onchange="restoreData(this)" class="hidden">
+                            </label>
+                        </div>
+                        <p class="text-[10px] text-gray-400">Note: The restoration system reads your backup file profile and prompts you to choose whether to load just Inventory items, Image files, or transaction History.</p>
+                    </div>
+
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-rose-100 bg-gradient-to-br from-white to-rose-50/20">
                         <h3 class="text-base font-bold text-rose-800 border-b border-rose-100/50 pb-2 mb-2">🔄 Manual Live Sync</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">If updates saved from another mobile device or window are not appearing immediately, tap below to force clear local memory and stream the fresh repository matrix instantly.</p>
@@ -668,6 +685,124 @@
 				alert('Failed to save to GitHub database: ' + err.message + '\n\nDon\'t panic! Your changes are safe in your local browser session.');
 			}
 		}
+
+        // 📥 BACKUP LOGIC: Generates and downloads 3 separate JSON files
+        function backupData() {
+            if (!db || !Array.isArray(db.inventory)) {
+                alert("No valid internal inventory data sets found to export.");
+                return;
+            }
+
+            // Scrub image binaries away from the item attributes for a pure metadata profile array
+            const strippedInventory = db.inventory.map(item => {
+                const cleanItem = Object.assign({}, item);
+                delete cleanItem.image;
+                return cleanItem;
+            });
+
+            const datasets = [
+                { filename: "abkd_inventory_backup.json", data: { inventory: strippedInventory, config: db.config } },
+                { filename: "abkd_images_backup.json", data: dbImages || {} },
+                { filename: "abkd_history_backup.json", data: db.history || [] }
+            ];
+
+            datasets.forEach(set => {
+                const jsonString = JSON.stringify(set.data, null, 2);
+                const blob = new Blob([jsonString], { type: "application/json" });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = set.filename;
+                document.body.appendChild(a);
+                a.click();
+                
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+
+            alert("Local storage download completed!\nCheck your download history for 3 discrete backup files.");
+        }
+
+        // 📤 RESTORE LOGIC: Parses manual files and asks the user what parts to inject
+        function restoreData(inputElement) {
+            const file = inputElement.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsedData = JSON.parse(e.target.result);
+                    
+                    // Identify layout configuration signature patterns 
+                    const isHistoryFile = Array.isArray(parsedData) && (parsedData.length === 0 || ('time' in parsedData[0] && 'type' in parsedData[0]));
+                    const isInventoryFile = parsedData && typeof parsedData === 'object' && ('inventory' in parsedData);
+                    const isImageFile = parsedData && typeof parsedData === 'object' && !('inventory' in parsedData) && !Array.isArray(parsedData);
+
+                    let instruction = "We analyzed the file layer properties. Choose how you want to restore this data:\n\n";
+                    if (isInventoryFile) instruction += "👉 Type '1' to restore Inventory Catalog Data & preferences.\n";
+                    if (isImageFile) instruction += "👉 Type '2' to restore Image Map Row Assets.\n";
+                    if (isHistoryFile) instruction += "👉 Type '3' to restore Transaction Logs Sequence.\n";
+                    instruction += "Type 'ALL' to execute auto-parse mode rules.";
+
+                    const selection = prompt(instruction, "1")?.trim().toUpperCase();
+                    if (!selection) {
+                        inputElement.value = '';
+                        return;
+                    }
+
+                    let statusMessage = "";
+
+                    // Path 1: Core Inventory List Structure Restoration
+                    if (selection === '1' || (selection === 'ALL' && isInventoryFile)) {
+                        if (!isInventoryFile && !Array.isArray(parsedData.inventory)) {
+                            throw new Error("Uploaded content signature does not match an inventory structural array schema.");
+                        }
+                        db.inventory = parsedData.inventory;
+                        if (parsedData.config) db.config = parsedData.config;
+                        statusMessage = "Inventory lines and preferences successfully updated locally!";
+                    }
+                    // Path 2: Key-Value Image Map Block Restoration
+                    else if (selection === '2' || (selection === 'ALL' && isImageFile)) {
+                        if (typeof parsedData !== 'object' || Array.isArray(parsedData)) {
+                            throw new Error("Uploaded content signature does not match an image key-value dictionary map.");
+                        }
+                        dbImages = Object.assign({}, dbImages, parsedData);
+                        statusMessage = "Key-value image assets stitched back into active layout rows successfully!";
+                    }
+                    // Path 3: Ledger History Array Records Restoration
+                    else if (selection === '3' || (selection === 'ALL' && isHistoryFile)) {
+                        if (!Array.isArray(parsedData)) {
+                            throw new Error("Uploaded content signature does not match a linear ledger trace array.");
+                        }
+                        db.history = parsedData;
+                        statusMessage = "Transaction logs registry replaced locally!";
+                    } else {
+                        alert("Restoration canceled or unsupported selection rule matching typed key.");
+                        inputElement.value = '';
+                        return;
+                    }
+
+                    // Render UI using the restored values
+                    applyDatabasePreferences();
+                    renderApp();
+                    
+                    // Automatically push data updates if valid GitHub configuration variables are present
+                    const credentials = getGitHubCredentials();
+                    if (credentials.token && credentials.user) {
+                        pushDataToGitHub("Restored local JSON structural dataset branch update");
+                    }
+
+                    alert("Success! " + statusMessage);
+                    
+                } catch (err) {
+                    alert("Parsing payload failure: " + err.message);
+                }
+                
+                inputElement.value = '';
+            };
+            reader.readAsText(file);
+        }
 
         function processImageUpload(element) {
             const file = element.files[0];
