@@ -1045,22 +1045,12 @@
                 if (idx !== -1) {
                     const oldItem = db.inventory[idx];
                     const oldQty = oldItem.qty || 0;
-                    const oldImage = dbImages[id] || ''; 
                     
                     let changesMade = [];
                     if (oldItem.name !== name) changesMade.push(`renamed to "${name}"`);
                     if (oldItem.price !== price) changesMade.push(`price updated to ₱${price.toFixed(2)}`);
                     if (oldQty !== qty) changesMade.push(`stock adjusted from ${oldQty} to ${qty}`);
                     if (oldItem.category !== category) changesMade.push(`category updated to "${category}"`);
-                    
-                    // Evaluates separate image data buffer maps for accurate log changes
-                    if (image && !oldImage) {
-                        changesMade.push("uploaded profile image");
-                    } else if (image && oldImage && image !== oldImage) {
-                        changesMade.push("replaced profile image");
-                    } else if (!image && oldImage) {
-                        changesMade.push("removed profile image");
-                    }
                     
                     const logNotes = changesMade.length > 0 
                         ? `Modified attributes: ${changesMade.join(', ')}.`
@@ -1088,21 +1078,16 @@
                 if (image) dbImages[id] = image;
 
                 const operationType = originalName ? "Copy" : "New Product";
-                
-                let creationNotes = originalName
+                const logNotes = originalName
                     ? `Copied the metrics of ${originalName}`
                     : `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`;
-                
-                if (image) {
-                    creationNotes += originalName ? " with image attachment preserved." : " (with uploaded profile image).";
-                }
 
                 db.history.push({
                     time: Date.now(),
                     name,
                     type: operationType,
                     change: qty,
-                    notes: creationNotes
+                    notes: logNotes
                 });
                 
                 pushDataToGitHub(`Added fresh inventory item line profile: ${name}`);
