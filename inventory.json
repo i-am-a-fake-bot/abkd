@@ -1,4 +1,8 @@
 {
+  "config": {
+    "storeName": "ABKD Inventory",
+    "lowThreshold": 2
+  },
   "inventory": [
     {
       "id": "id_22ibp7oeh",
@@ -733,7 +737,7 @@
       "cost": 99.5,
       "units": 8,
       "markup": 12,
-      "qty": 4,
+      "qty": 5,
       "price": 14,
       "expiry": ""
     },
@@ -1034,9 +1038,5 @@
       "price": 15,
       "expiry": ""
     }
-  ],
-  "config": {
-    "storeName": "ABKD Inventory",
-    "lowThreshold": 2
-  }
+  ]
 }
