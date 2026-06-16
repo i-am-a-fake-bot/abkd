@@ -40,5 +40,12 @@
     "type": "Restock",
     "change": 2,
     "notes": "Bulk restock transaction."
+  },
+  {
+    "time": 1781593621874,
+    "name": "Cream-O - Vanilla Fill",
+    "type": "Destock",
+    "change": -1,
+    "notes": "Bulk reduction transaction."
   }
 ]
