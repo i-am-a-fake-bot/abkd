@@ -23,7 +23,6 @@
     </nav>
 
     <main class="max-w-6xl mx-auto p-4 mt-4">
-        <!-- Persistent Offline Operations Warning Panel -->
         <div id="offline-fallback-alert" class="hidden bg-rose-50 border-l-4 border-rose-500 p-4 mb-6 rounded shadow-sm">
             <p class="text-rose-700 font-medium">⚠️ Connection Lost: You are working completely offline. Structural changes are protected inside this device's browser memory layer but will need internet access to save to your GitHub Repository.</p>
         </div>
@@ -148,47 +147,24 @@
 
 		<section id="tab-inventory" class="tab-content hidden">
 			<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-				
 				<div>
-					<h2 class="text-3xl font-black text-slate-800 tracking-tight">
-						Inventory
-					</h2>
-					<p class="text-slate-500 text-sm mt-1">
-						Manage products, stock, and pricing
-					</p>
+					<h2 class="text-3xl font-black text-slate-800 tracking-tight">Inventory</h2>
+					<p class="text-slate-500 text-sm mt-1">Manage products, stock, and pricing</p>
 				</div>
-
-				<button onclick="openModal()"
-					class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-sm transition w-full md:w-auto">
-					+ Add Item
-				</button>
+				<button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-sm transition w-full md:w-auto">+ Add Item</button>
 			</div>
 
 			<div class="bg-white border border-slate-200 rounded-3xl p-4 mb-6 shadow-sm">
 				<div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
-
 					<div class="relative flex-1">
 						<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍︎</span>
-
-						<input type="text"
-							id="inventory-search"
-							oninput="handleSearchInput()"
-							placeholder="Search items..."
-							class="w-full pl-11 pr-10 py-3 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none bg-slate-50 text-sm">
-
-						<button id="search-clear-btn"
-							onclick="clearSearch()"
-							class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
-							✖️
-						</button>
+						<input type="text" id="inventory-search" oninput="handleSearchInput()" placeholder="Search items..." class="w-full pl-11 pr-10 py-3 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none bg-slate-50 text-sm">
+						<button id="search-clear-btn" onclick="clearSearch()" class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">✖️</button>
 					</div>
 
 					<div class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-4 py-3 rounded-2xl">
 						<span class="text-xs font-semibold text-slate-500">Sort</span>
-
-						<select id="sort-picker"
-							onchange="handleSortPickerChange()"
-							class="bg-transparent text-sm font-medium outline-none cursor-pointer">
+						<select id="sort-picker" onchange="handleSortPickerChange()" class="bg-transparent text-sm font-medium outline-none cursor-pointer">
 							<option value="name-asc">Name (A–Z)</option>
 							<option value="name-desc">Name (Z–A)</option>
 							<option value="stock-asc">Stock (Low)</option>
@@ -196,13 +172,10 @@
 							<option value="expiry-asc">Expiry</option>
 						</select>
 					</div>
-
 				</div>
 			</div>
 
-			<div id="inventory-card-grid"
-				class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
-			</div>
+			<div id="inventory-card-grid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5"></div>
 		</section>
 
         <section id="tab-history" class="tab-content hidden">
@@ -218,15 +191,13 @@
                             <th class="p-4">Notes</th>
                         </tr>
                     </thead>
-                    <tbody id="history-table-body" class="divide-y divide-gray-50 text-gray-600 text-sm">
-                    </tbody>
+                    <tbody id="history-table-body" class="divide-y divide-gray-50 text-gray-600 text-sm"></tbody>
                 </table>
             </div>
         </section>
 
         <section id="tab-settings" class="tab-content hidden">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Application Settings</h2>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                     <h3 class="text-base font-bold text-slate-800 border-b border-slate-50 pb-2 mb-4">🔗 GitHub Database Configuration</h3>
@@ -243,9 +214,7 @@
                             <label class="block text-sm font-medium text-gray-700 mb-1">Repository Name</label>
                             <input type="text" id="cfg-repo" value="abkd" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
                         </div>
-                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded font-medium transition shadow">
-                            Save Data Connections
-                        </button>
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded font-medium transition shadow">Save Data Connections</button>
                     </form>
                 </div>
 
@@ -262,35 +231,26 @@
                                 <input type="number" id="cfg-low-threshold" min="1" max="100" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
                                 <p class="text-[11px] text-gray-400 mt-1">Products with stock volumes less than or equal to this limit appear automatically inside the low alert matrix.</p>
                             </div>
-                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded font-medium transition shadow">
-                                Apply View Adjustments
-                            </button>
+                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded font-medium transition shadow">Apply View Adjustments</button>
                         </form>
                     </div>
 
-                    <!-- 💾 Local Storage Backup & Restore Toolkit -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 bg-gradient-to-br from-white to-indigo-50/20">
                         <h3 class="text-base font-bold text-slate-800 border-b border-slate-100 pb-2 mb-3">💾 Local Storage Backup & Restore</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Download physical backups directly to your local file storage or manually load local data sets back into memory if your connection to GitHub fails.</p>
-                        
                         <div class="grid grid-cols-2 gap-3 mb-4">
-                            <button onclick="backupData()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 p-2.5 rounded-lg font-semibold text-xs transition shadow-sm text-center">
-                                📥 Create Backups
-                            </button>
+                            <button onclick="backupData()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 p-2.5 rounded-lg font-semibold text-xs transition shadow-sm text-center">📥 Create Backups</button>
                             <label class="bg-emerald-600 hover:bg-emerald-700 text-white p-2.5 rounded-lg font-semibold text-xs transition shadow-sm text-center cursor-pointer">
                                 📤 Restore Backup File
                                 <input type="file" id="restore-file-input" accept=".json" onchange="restoreData(this)" class="hidden">
                             </label>
                         </div>
-                        <p class="text-[10px] text-gray-400">Note: The restoration system reads your backup file profile and prompts you to choose whether to load just Inventory items, Image files, or transaction History.</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-rose-100 bg-gradient-to-br from-white to-rose-50/20">
                         <h3 class="text-base font-bold text-rose-800 border-b border-rose-100/50 pb-2 mb-2">🔄 Manual Live Sync</h3>
-                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">If updates saved from another mobile device or window are not appearing immediately, tap below to force clear local memory and stream the fresh repository matrix instantly.</p>
-                        <button onclick="forceSyncData()" id="btn-force-sync" class="w-full bg-white hover:bg-rose-50 text-rose-600 border border-rose-300 p-2.5 rounded-lg font-semibold tracking-wide text-sm transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
-                            ⚡ Force Sync Database
-                        </button>
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">If updates saved from another device are not showing, force sync local memory.</p>
+                        <button onclick="forceSyncData()" id="btn-force-sync" class="w-full bg-white hover:bg-rose-50 text-rose-600 border border-rose-300 p-2.5 rounded-lg font-semibold tracking-wide text-sm transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">⚡ Force Sync Database</button>
                     </div>
                 </div>
             </div>
@@ -308,9 +268,7 @@
                 <div class="bg-gray-50 border border-dashed border-gray-300 rounded-lg p-3 text-center">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Item Image (Optional)</label>
                     <div class="flex items-center justify-center gap-4">
-                        <div id="image-preview-container" class="w-16 h-16 bg-gray-200 border rounded overflow-hidden flex items-center justify-center text-gray-400 text-xs">
-                            No Img
-                        </div>
+                        <div id="image-preview-container" class="w-16 h-16 bg-gray-200 border rounded overflow-hidden flex items-center justify-center text-gray-400 text-xs">No Img</div>
                         <input type="file" id="item-image-input" accept="image/*" onchange="processImageUpload(this)" class="text-xs text-gray-600 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
                     </div>
                 </div>
@@ -419,7 +377,6 @@
                 fetchDataFromGitHub();
             }
             
-            // Setup listener for PWA framework components to catch offline events
             window.addEventListener('online', updateOnlineStatus);
             window.addEventListener('offline', updateOnlineStatus);
             updateOnlineStatus();
@@ -471,7 +428,6 @@
                 storeName: chosenName,
                 lowThreshold: chosenThreshold
             };
-            
             applyDatabasePreferences();
             pushDataToGitHub("Updated application threshold configurations globally");
             alert('Application configurations updated and synced globally!');
@@ -486,21 +442,17 @@
             return new TextDecoder('utf-8').decode(bytes);
         }
 
-		function safeEncodeBase64(unicodeString) {
-			const bytes = new TextEncoder().encode(unicodeString);
-			let binaryString = '';
-
-			for (let i = 0; i < bytes.length; i++) {
-				binaryString += String.fromCharCode(bytes[i]);
-			}
-
-			return btoa(binaryString);
-		}
+        function safeEncodeBase64(unicodeString) {
+            const bytes = new TextEncoder().encode(unicodeString);
+            let binaryString = '';
+            for (let i = 0; i < bytes.length; i++) {
+                binaryString += String.fromCharCode(bytes[i]);
+            }
+            return btoa(binaryString);
+        }
 
         async function fetchDataFromGitHub(bypassCache = false) {
             const creds = getGitHubCredentials();
-            
-            // 1. If fields are blank, initialize structure layout immediately and stop network request
             if (!creds.token || !creds.user || !creds.repo) {
                 document.getElementById('setup-alert').classList.remove('hidden');
                 if (!db || !db.inventory) db = { inventory: [], history: [], config: { storeName: "📦 ABKD Inventory", lowThreshold: 5 } };
@@ -513,991 +465,580 @@
             const inventoryUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json${cacheBuster}`;
             const historyUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/history.json${cacheBuster}`;
             const imagesUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images.json${cacheBuster}`;
-            
+
             try {
                 document.getElementById('setup-alert').classList.add('hidden');
-
-                // 1. Fetch Inventory & Config details
-                const invRes = await fetch(inventoryUrl, {
-                    headers: { 'Authorization': `token ${creds.token}` }
-                });
-
-                if (!invRes.ok && invRes.status !== 404) {
-                    throw new Error(`Inventory API Error: Server responded with status ${invRes.status}`);
-                }
-
+                
+                // 1. Fetch Inventory
+                const invRes = await fetch(inventoryUrl, { headers: { 'Authorization': `token ${creds.token}` } });
                 if (invRes.status === 200) {
                     const data = await invRes.json();
-                    
-                    if (!data.content || data.content.trim() === "") {
-                        throw new Error("The inventory.json file exists on GitHub but is completely blank.");
-                    }
-
                     const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
-                    if (!decoded || decoded.trim() === "") {
-                        throw new Error("Decoded inventory content payload string evaluates to empty.");
-                    }
-
-                    let parsed;
-                    try {
-                        parsed = JSON.parse(decoded);
-                    } catch (pErr) {
-                        throw new Error(`Malformed JSON structure in inventory.json repository file: ${pErr.message}`);
-                    }
-                    
+                    let parsed = JSON.parse(decoded);
                     db.inventory = parsed.inventory || [];
                     db.config = parsed.config || { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
-                    
                     if (Array.isArray(parsed.history) && parsed.history.length > 0 && db.history.length === 0) {
                         db.history = parsed.history;
                     }
-
-                    db.inventory.forEach(item => {
-                        if (item.image && item.id) {
-                            dbImages[item.id] = item.image;
-                        }
-                    });
-                } else if (invRes.status === 404) {
-                    db.inventory = [];
-                    db.config = { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
                 }
 
-                // 2. Fetch separate transaction logs
+                // 2. Fetch History
                 try {
-                    const histRes = await fetch(historyUrl, {
-                        headers: { 'Authorization': `token ${creds.token}` }
-                    });
+                    const histRes = await fetch(historyUrl, { headers: { 'Authorization': `token ${creds.token}` } });
                     if (histRes.status === 200) {
                         const data = await histRes.json();
-                        if (data.content && data.content.trim() !== "") {
-                            const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
-                            db.history = JSON.parse(decoded);
-                        }
-                    } else if (histRes.status === 404) {
-                        if (!Array.isArray(db.history)) db.history = [];
+                        const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
+                        db.history = JSON.parse(decoded);
                     }
-                } catch (hErr) {
-                    console.warn("Failed parsing history endpoint logs segment gracefully.", hErr);
-                    if (!Array.isArray(db.history)) db.history = [];
-                }
+                } catch(e) { console.warn(e); }
 
-                // 3. Fetch separated images map file
+                // 3. Fetch Images Map File cleanly
                 try {
-                    const imgRes = await fetch(imagesUrl, {
-                        headers: { 'Authorization': `token ${creds.token}` }
-                    });
+                    const imgRes = await fetch(imagesUrl, { headers: { 'Authorization': `token ${creds.token}` } });
                     if (imgRes.status === 200) {
                         const data = await imgRes.json();
-                        if (data.content && data.content.trim() !== "") {
-                            // FIX: Clean trailing newlines cleanly without stripping internal base64 content spaces/padding
-                            const cleanContent = data.content.replace(/\n/g, '').replace(/\r/g, '').trim();
-                            const decoded = safeDecodeBase64(cleanContent);
-                            dbImages = Object.assign({}, dbImages, JSON.parse(decoded));
-                        }
-                    } else if (imgRes.status === 404) {
-                        if (!dbImages) dbImages = {};
+                        const cleanContent = data.content.replace(/\n/g, '').replace(/\r/g, '').trim();
+                        const decoded = safeDecodeBase64(cleanContent);
+                        dbImages = JSON.parse(decoded);
                     }
-                } catch (imgErr) {
-                    console.warn("Media file tracking map generation skipped or not found.", imgErr);
-                    if (!dbImages) dbImages = {};
+                } catch (imgErr) { 
+                    console.warn(imgErr); 
+                    dbImages = {};
                 }
-                
-                // Synchronize network values out to the local fallback layer
+
                 localStorage.setItem('offline_db_cache', JSON.stringify(db));
                 localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
-
-                document.getElementById('offline-fallback-alert').classList.add('hidden');
                 applyDatabasePreferences();
                 renderApp();
-
             } catch (err) {
-                console.error('Core Ecosystem Integration Traceback:', err);
-                
-                const cachedDbRaw = localStorage.getItem('offline_db_cache');
-                const cachedImagesRaw = localStorage.getItem('offline_images_cache');
-                
-                if (cachedDbRaw) {
-                    try {
-                        db = JSON.parse(cachedDbRaw);
-                        if (cachedImagesRaw) dbImages = JSON.parse(cachedImagesRaw);
-                    } catch(jsonErr) {
-                        console.error("Corrupted local storage payload discovered. Resetting layout schemas...", jsonErr);
-                        db = { inventory: [], history: [], config: { storeName: "📦 ABKD Inventory", lowThreshold: 5 } };
-                        dbImages = {};
-                    }
-                    
-                    document.getElementById('offline-fallback-alert').classList.remove('hidden');
-                    applyDatabasePreferences();
-                    renderApp();
-                } else {
-                    // Safe Fallback Resolution: Build default variables instead of locking UI with high-frequency alert loops
-                    console.warn("No baseline dataset cached inside this browser node window context. Starting completely clear configuration.");
-                    db = { inventory: [], history: [], config: { storeName: "📦 ABKD Inventory", lowThreshold: 5 } };
-                    dbImages = {};
-                    
-                    applyDatabasePreferences();
-                    renderApp();
-                    
-                    alert(`Connection Notice:\n\n${err.message}\n\nApp UI framework initialized successfully. If you have credentials, verify your setup metrics under the Settings Panel.`);
-                }
+                console.error(err);
+                // Load fallback data layers smoothly
+                const localData = localStorage.getItem('offline_db_cache');
+                const localImages = localStorage.getItem('offline_images_cache');
+                if (localData) db = JSON.parse(localData);
+                if (localImages) dbImages = JSON.parse(localImages);
+                applyDatabasePreferences();
+                renderApp();
             }
         }
 
-        async function forceSyncData() {
-            const syncBtn = document.getElementById('btn-force-sync');
-            const originalText = syncBtn.innerHTML;
-            
-            syncBtn.disabled = true;
-            syncBtn.innerHTML = "⏳ Fetching Live Matrix...";
-            syncBtn.classList.add('opacity-60');
+        // Optimized push method that cleans image payloads before saving metadata
+        async function pushDataToGitHub(commitMessage = "Inventory Sync Trigger") {
+            const creds = getGitHubCredentials();
+            if (!creds.token || !creds.user || !creds.repo) return;
 
-            await fetchDataFromGitHub(true);
+            // Security Firewall: Stop empty save operations from wiping database configurations
+            if (!db.inventory || (db.inventory.length === 0 && db.history.length === 0 && (!db.config || !db.config.storeName))) {
+                console.warn("Prevented push logic trigger: payload structural integrity check failed.");
+                return;
+            }
 
-            setTimeout(() => {
-                syncBtn.disabled = false;
-                syncBtn.innerHTML = originalText;
-                syncBtn.classList.remove('opacity-60');
-                if (navigator.onLine) {
-                    alert('Database refreshed! The absolute latest server modifications have been populated.');
-                }
-            }, 500);
-        }
+            // Strips base64 streams from inventory items array before writing metadata out
+            const cleanedInventory = db.inventory.map(item => {
+                const copy = {...item};
+                delete copy.image; // Ensure it stays separate
+                return copy;
+            });
 
-		async function pushDataToGitHub(commitMessage = "Inventory state updated") {
-			if (!db || !Array.isArray(db.inventory) || !Array.isArray(db.history)) {
-				console.error("Sync blocked: Database structure is invalid.");
-				alert("Database error: Synchronization was halted because the database structure is invalid.");
-				return;
-			}
+            const databasePayload = {
+                inventory: cleanedInventory,
+                config: db.config
+            };
 
-            // Immediately save state changes locally first to protect current mutations
-            localStorage.setItem('offline_db_cache', JSON.stringify(db));
-            localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
+            async function uploadFileViaAPI(filename, dataObj) {
+                const url = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/${filename}`;
+                let currentSha = null;
 
-			const creds = getGitHubCredentials();
-			const inventoryUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
-			const historyUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/history.json`;
-			const imagesUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images.json`;
-			
-			try {
-				// --- STEP 1: SAVE LIGHTWEIGHT INVENTORY FILE ---
-				const invGetRes = await fetch(inventoryUrl, {
-					headers: { 'Authorization': `token ${creds.token}` }
-				});
-				let invSha = null;
-				if (invGetRes.ok) {
-					const currentFileData = await invGetRes.json();
-					invSha = currentFileData.sha;
-				}
+                try {
+                    const checkRes = await fetch(url, { headers: { 'Authorization': `token ${creds.token}` } });
+                    if (checkRes.status === 200) {
+                        const fileMeta = await checkRes.json();
+                        currentSha = fileMeta.sha;
+                    }
+                } catch (e) {}
 
-                const sanitizedInventoryArray = db.inventory.map(item => {
-                    const cleanItem = Object.assign({}, item);
-                    delete cleanItem.image; 
-                    return cleanItem;
-                });
+                const jsonStr = JSON.stringify(dataObj, null, 2);
+                const b64Body = safeEncodeBase64(jsonStr);
 
-				const inventoryPayloadObj = {
-					inventory: sanitizedInventoryArray,
-					config: db.config
-				};
-				const invJsonString = JSON.stringify(inventoryPayloadObj, null, 2);
-				
-				if (!invJsonString || invJsonString === "{}" || invJsonString === "[]") {
-					throw new Error("Generated item payload is completely empty.");
-				}
-
-				const invPayload = {
-					message: commitMessage,
-					content: safeEncodeBase64(invJsonString),
-				};
-				if (invSha) invPayload.sha = invSha;
-
-				const invRes = await fetch(inventoryUrl, {
-					method: 'PUT',
-					headers: {
-						'Authorization': `token ${creds.token}`,
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(invPayload)
-				});
-
-				// --- STEP 2: SAVE DECOUPLED HISTORY LOG FILE ---
-				const histGetRes = await fetch(historyUrl, {
-					headers: { 'Authorization': `token ${creds.token}` }
-				});
-				let histSha = null;
-				if (histGetRes.ok) {
-					const currentFileData = await histGetRes.json();
-					histSha = currentFileData.sha;
-				}
-
-				const histJsonString = JSON.stringify(db.history, null, 2);
-				const histPayload = {
-					message: "Log transaction tracks: " + commitMessage,
-					content: safeEncodeBase64(histJsonString),
-				};
-				if (histSha) histPayload.sha = histSha;
-
-				await fetch(historyUrl, {
-					method: 'PUT',
-					headers: {
-						'Authorization': `token ${creds.token}`,
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(histPayload)
-				});
-
-                // --- STEP 3: SAVE DECOUPLED IMAGES FILE ---
-                const imgGetRes = await fetch(imagesUrl, {
-                    headers: { 'Authorization': `token ${creds.token}` }
-                });
-                let imgSha = null;
-                if (imgGetRes.ok) {
-                    const currentFileData = await imgGetRes.json();
-                    imgSha = currentFileData.sha;
-                }
-
-                const imgJsonString = JSON.stringify(dbImages, null, 2);
-                const imgPayload = {
-                    message: "Sync media attachments: " + commitMessage,
-                    content: safeEncodeBase64(imgJsonString),
+                const putPayload = {
+                    message: commitMessage,
+                    content: b64Body
                 };
-                if (imgSha) imgPayload.sha = imgSha;
+                if (currentSha) putPayload.sha = currentSha;
 
-                await fetch(imagesUrl, {
+                await fetch(url, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `token ${creds.token}`,
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(imgPayload)
+                    body: JSON.stringify(putPayload)
                 });
-				
-				if (invRes.ok) {
-					console.log("Successfully synced all decoupled core, history, and asset structures!");
-					renderApp();
-				} else {
-                    const errorData = await invRes.json();
-					throw new Error(errorData.message || "GitHub rejected the data injection save.");
-				}
-			} catch (err) {
-				console.error(err);
-                renderApp(); // Redraw UI elements regardless to show local updates
-				alert('Failed to save to GitHub database: ' + err.message + '\n\nDon\'t panic! Your changes are completely safe in this browser session and will be cached offline.');
-			}
-		}
-
-        function backupData() {
-            if (!db || !Array.isArray(db.inventory)) {
-                alert("No valid internal inventory data sets found to export.");
-                return;
             }
 
-            const strippedInventory = db.inventory.map(item => {
-                const cleanItem = Object.assign({}, item);
-                delete cleanItem.image;
-                return cleanItem;
-            });
-
-            const datasets = [
-                { filename: "abkd_inventory_backup.json", data: { inventory: strippedInventory, config: db.config } },
-                { filename: "abkd_images_backup.json", data: dbImages || {} },
-                { filename: "abkd_history_backup.json", data: db.history || [] }
-            ];
-
-            datasets.forEach(set => {
-                const jsonString = JSON.stringify(set.data, null, 2);
-                const blob = new Blob([jsonString], { type: "application/json" });
-                const url = URL.createObjectURL(blob);
+            try {
+                await uploadFileViaAPI('inventory.json', databasePayload);
+                await uploadFileViaAPI('history.json', db.history);
+                // Prevents images.json from inflating by ensuring empty spaces/deleted entries are dropped cleanly
+                await uploadFileViaAPI('images.json', dbImages);
                 
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = set.filename;
-                document.body.appendChild(a);
-                a.click();
-                
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            });
-
-            alert("Local storage download completed!\nCheck your download history for 3 discrete backup files.");
+                localStorage.setItem('offline_db_cache', JSON.stringify(db));
+                localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
+            } catch(err) {
+                console.error("Cloud database synchronization failed:", err);
+            }
         }
 
-        function restoreData(inputElement) {
-            const file = inputElement.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const parsedData = JSON.parse(e.target.result);
-                    
-                    const isHistoryFile = Array.isArray(parsedData) && (parsedData.length === 0 || ('time' in parsedData[0] && 'type' in parsedData[0]));
-                    const isInventoryFile = parsedData && typeof parsedData === 'object' && ('inventory' in parsedData);
-                    const isImageFile = parsedData && typeof parsedData === 'object' && !('inventory' in parsedData) && !Array.isArray(parsedData);
-
-                    let instruction = "We analyzed the file layer properties. Choose how you want to restore this data:\n\n";
-                    if (isInventoryFile) instruction += "👉 Type '1' to restore Inventory Catalog Data & preferences.\n";
-                    if (isImageFile) instruction += "👉 Type '2' to restore Image Map Row Assets.\n";
-                    if (isHistoryFile) instruction += "👉 Type '3' to restore Transaction Logs Sequence.\n";
-                    instruction += "Type 'ALL' to execute auto-parse mode rules.";
-
-                    const selection = prompt(instruction, "1")?.trim().toUpperCase();
-                    if (!selection) {
-                        inputElement.value = '';
-                        return;
-                    }
-
-                    let statusMessage = "";
-
-                    if (selection === '1' || (selection === 'ALL' && isInventoryFile)) {
-                        if (!isInventoryFile && !Array.isArray(parsedData.inventory)) {
-                            throw new Error("Uploaded content signature does not match an inventory structural array schema.");
-                        }
-                        db.inventory = parsedData.inventory;
-                        if (parsedData.config) db.config = parsedData.config;
-                        statusMessage = "Inventory lines and preferences successfully updated locally!";
-                    }
-                    else if (selection === '2' || (selection === 'ALL' && isImageFile)) {
-                        if (typeof parsedData !== 'object' || Array.isArray(parsedData)) {
-                            throw new Error("Uploaded content signature does not match an image key-value dictionary map.");
-                        }
-                        dbImages = Object.assign({}, dbImages, parsedData);
-                        statusMessage = "Key-value image assets stitched back into active layout rows successfully!";
-                    }
-                    else if (selection === '3' || (selection === 'ALL' && isHistoryFile)) {
-                        if (!Array.isArray(parsedData)) {
-                            throw new Error("Uploaded content signature does not match a linear ledger trace array.");
-                        }
-                        db.history = parsedData;
-                        statusMessage = "Transaction logs registry replaced locally!";
-                    } else {
-                        alert("Restoration canceled or unsupported selection rule matching typed key.");
-                        inputElement.value = '';
-                        return;
-                    }
-
-                    applyDatabasePreferences();
-                    renderApp();
-                    
-                    const credentials = getGitHubCredentials();
-                    if (credentials.token && credentials.user) {
-                        pushDataToGitHub("Restored local JSON structural dataset branch update");
-                    }
-
-                    alert("Success! " + statusMessage);
-                    
-                } catch (err) {
-                    alert("Parsing payload failure: " + err.message);
-                }
-                
-                inputElement.value = '';
-            };
-            reader.readAsText(file);
+        function forceSyncData() {
+            if (!confirm("Are you sure you want to drop local memory and clear cache?")) return;
+            fetchDataFromGitHub(true);
         }
 
-        function processImageUpload(element) {
-            const file = element.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const img = new Image();
-                img.onload = function() {
-                    const maxDim = 600; 
-                    let w = img.width;
-                    let h = img.height;
-                    
-                    if (w > h) {
-                        if (w > maxDim) { h = Math.round(h * (maxDim / w)); w = maxDim; }
-                    } else {
-                        if (h > maxDim) { w = Math.round(w * (maxDim / h)); h = maxDim; }
-                    }
-
-                    const canvas = document.createElement('canvas');
-                    canvas.width = w;
-                    canvas.height = h;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, w, h);
-                    
-                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.9);
-                    
-                    document.getElementById('item-image-base64').value = compressedBase64;
-                    document.getElementById('image-preview-container').innerHTML = `<img src="${compressedBase64}" class="w-full h-full object-cover">`;
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function calculateSRP(keepCurrentSRP = false) {
+        function calculateSRP(isManualSRPInput = false) {
             const cost = parseFloat(document.getElementById('item-cost').value) || 0;
             const units = parseInt(document.getElementById('item-units').value) || 1;
             const markup = parseFloat(document.getElementById('item-markup').value) || 0;
-
-            if (units <= 0) return;
-
-            const baseUnitCost = cost / units;
-            document.getElementById('item-unit-cost').value = "₱" + baseUnitCost.toFixed(2);
-
-            const recommendedPrice = baseUnitCost + (baseUnitCost * (markup / 100));
-            document.getElementById('item-rec-price').value = "₱" + recommendedPrice.toFixed(2);
             
-            if (!keepCurrentSRP) {
+            const unitCost = cost / units;
+            document.getElementById('item-unit-cost').value = `₱${unitCost.toFixed(2)}`;
+            
+            const recommendedPrice = unitCost * (1 + (markup / 100));
+            document.getElementById('item-rec-price').value = recommendedPrice.toFixed(2);
+            
+            if (!isManualSRPInput) {
                 document.getElementById('item-price').value = recommendedPrice.toFixed(2);
             }
-
-            const currentSRP = parseFloat(document.getElementById('item-price').value) || 0;
-            const pureNetProfit = currentSRP - baseUnitCost;
-            document.getElementById('item-unit-profit').value = "₱" + pureNetProfit.toFixed(2);
-        }
-
-        function formatExpiryDisplay(dateString) {
-            if (!dateString) return 'N/A';
-            const date = new Date(dateString);
-            if (isNaN(date.getTime())) return 'N/A';
             
-            const day = String(date.getDate()).padStart(2, '0');
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const month = months[date.getMonth()];
-            const year = date.getFullYear();
-            
-            return `${day}-${month}-${year}`;
+            const srp = parseFloat(document.getElementById('item-price').value) || 0;
+            const unitProfit = srp - unitCost;
+            document.getElementById('item-unit-profit').value = `₱${unitProfit.toFixed(2)}`;
         }
 
-        function getExpiryBadgeStyle(dateString) {
-            if (!dateString) return 'text-gray-400 text-[11px] font-medium';
-            const expiryDate = new Date(dateString);
-            const today = new Date();
-            
-            const diffTime = expiryDate - today;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
-            if (diffDays <= 0) {
-                return 'bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded text-[10px] font-bold border border-rose-200'; 
-            } else if (diffDays <= 30) {
-                return 'bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded text-[10px] font-bold border border-amber-200'; 
-            }
-            return 'text-gray-600 font-mono text-[11px] font-medium'; 
-        }
-
-        function handleSortPickerChange() {
-            const selectVal = document.getElementById('sort-picker').value;
-            const tokens = selectVal.split('-');
-            currentSortColumn = tokens[0];
-            currentSortDirection = tokens[1];
-            renderApp();
-        }
-
-        function handleSearchInput() {
-            const searchInput = document.getElementById('inventory-search');
-            const clearBtn = document.getElementById('search-clear-btn');
-            
-            if (searchInput.value.trim().length > 0) {
-                clearBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
-            }
-            renderApp();
-        }
-
-        function clearSearch() {
-            const searchInput = document.getElementById('inventory-search');
-            searchInput.value = '';
-            document.getElementById('search-clear-btn').classList.add('hidden');
-            renderApp();
-            searchInput.focus();
-        }
-
-        function openModal(id = null) {
-            const modal = document.getElementById('item-modal');
-            const form = document.getElementById('item-form');
-            form.reset();
+        function openModal(itemJsonString = null) {
+            document.getElementById('item-form').reset();
             document.getElementById('item-id').value = '';
             document.getElementById('item-image-base64').value = '';
             document.getElementById('item-original-name').value = '';
-            document.getElementById('image-preview-container').innerHTML = 'No Img';
-            
-            if (id) {
-                document.getElementById('modal-title').innerText = "Edit Item Details";
-                const item = db.inventory.find(i => i.id === id);
-                if (item) {
-                    document.getElementById('item-id').value = item.id;
-                    document.getElementById('item-name').value = item.name || '';
-                    document.getElementById('item-category').value = item.category || '';
-                    document.getElementById('item-cost').value = item.cost || 0;
-                    document.getElementById('item-units').value = item.units || 1;
-                    document.getElementById('item-markup').value = item.markup || 12;
-                    document.getElementById('item-qty').value = item.qty || 0;
-                    document.getElementById('item-price').value = item.price || 0;
-                    document.getElementById('item-expiry').value = item.expiry || '';
-                    
-                    const mappedImg = dbImages[item.id] || '';
-                    if (mappedImg) {
-                        document.getElementById('item-image-base64').value = mappedImg;
-                        document.getElementById('image-preview-container').innerHTML = `<img src="${mappedImg}" class="w-full h-full object-cover">`;
-                    }
-                    calculateSRP(true);
+            document.getElementById('image-preview-container').innerHTML = "No Img";
+            document.getElementById('item-image-input').value = '';
+
+            if (itemJsonString) {
+                const item = JSON.parse(decodeURIComponent(itemJsonString));
+                document.getElementById('modal-title').innerText = "Edit Product Details";
+                document.getElementById('item-id').value = item.id;
+                document.getElementById('item-name').value = item.name;
+                document.getElementById('item-original-name').value = item.name;
+                document.getElementById('item-category').value = item.category || '';
+                document.getElementById('item-cost').value = item.cost || 0;
+                document.getElementById('item-units').value = item.units || 1;
+                document.getElementById('item-markup').value = item.markup || 12;
+                document.getElementById('item-qty').value = item.qty || 0;
+                document.getElementById('item-price').value = item.price || 0;
+                document.getElementById('item-expiry').value = item.expiry || '';
+
+                // FIX: Check isolated tracking layout instead of bloating item data structure arrays
+                const base64Image = dbImages[item.id] || '';
+                if (base64Image) {
+                    document.getElementById('item-image-base64').value = base64Image;
+                    document.getElementById('image-preview-container').innerHTML = `<img src="${base64Image}" class="w-full h-full object-cover">`;
                 }
             } else {
                 document.getElementById('modal-title').innerText = "Add New Item";
-                document.getElementById('item-units').value = "1";
-                document.getElementById('item-markup').value = "12";
-                calculateSRP(false);
             }
-            modal.classList.remove('hidden');
-        }
-
-        function cloneItemToNewForm(id) {
-            const item = db.inventory.find(i => i.id === id);
-            if (!item) return;
-
-            const modal = document.getElementById('item-modal');
-            const form = document.getElementById('item-form');
-            form.reset();
-
-            document.getElementById('item-id').value = '';
-            document.getElementById('item-original-name').value = item.name || '';
             
-            document.getElementById('modal-title').innerText = `Clone: ${item.name}`;
-            document.getElementById('item-name').value = (item.name || '') + ' (Copy)';
-            document.getElementById('item-category').value = item.category || '';
-            document.getElementById('item-cost').value = item.cost || 0;
-            document.getElementById('item-units').value = item.units || 1;
-            document.getElementById('item-markup').value = item.markup || 12;
-            document.getElementById('item-price').value = item.price || 0;
-            document.getElementById('item-expiry').value = item.expiry || '';
-            document.getElementById('item-qty').value = 0;
-
-            const mappedImg = dbImages[item.id] || '';
-            if (mappedImg) {
-                document.getElementById('item-image-base64').value = mappedImg;
-                document.getElementById('image-preview-container').innerHTML = `<img src="${mappedImg}" class="w-full h-full object-cover">`;
-            } else {
-                document.getElementById('item-image-base64').value = '';
-                document.getElementById('image-preview-container').innerHTML = 'No Img';
-            }
-
-            calculateSRP(true);
-            modal.classList.remove('hidden');
+            calculateSRP(itemJsonString ? true : false);
+            document.getElementById('item-modal').classList.remove('hidden');
         }
 
         function closeModal() {
             document.getElementById('item-modal').classList.add('hidden');
         }
 
+        function processImageUpload(inputElement) {
+            const file = inputElement.files[0];
+            if (!file) return;
+
+            // Enforce scaling configuration constraints on heavy assets
+            if (file.size > 1024 * 1024) {
+                alert("This picture file is too large. Please select an optimized icon/photo below 1MB to prevent processing crashes.");
+                inputElement.value = '';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Str = e.target.result;
+                document.getElementById('item-image-base64').value = base64Str;
+                document.getElementById('image-preview-container').innerHTML = `<img src="${base64Str}" class="w-full h-full object-cover">`;
+            };
+            reader.readAsDataURL(file);
+        }
+
         function saveItem(e) {
             e.preventDefault();
-            let id = document.getElementById('item-id').value;
+            
+            const id = document.getElementById('item-id').value || 'prod_' + Date.now();
             const name = document.getElementById('item-name').value.trim();
+            const originalName = document.getElementById('item-original-name').value;
             const category = document.getElementById('item-category').value.trim();
             const cost = parseFloat(document.getElementById('item-cost').value) || 0;
             const units = parseInt(document.getElementById('item-units').value) || 1;
             const markup = parseFloat(document.getElementById('item-markup').value) || 0;
             const qty = parseInt(document.getElementById('item-qty').value) || 0;
             const price = parseFloat(document.getElementById('item-price').value) || 0;
-            const expiry = document.getElementById('item-expiry').value;
-            const image = document.getElementById('item-image-base64').value;
-            const originalName = document.getElementById('item-original-name').value;
+            const expiry = document.getElementById('item-expiry').value || '';
+            const imgBase64 = document.getElementById('item-image-base64').value || '';
 
-            if (!db.inventory) db.inventory = [];
-            if (!db.history) db.history = [];
+            // Handle independent images map file updates without duplicating to items list layout arrays
+            if (imgBase64) {
+                dbImages[id] = imgBase64;
+            }
 
-            if (id) {
-                const idx = db.inventory.findIndex(i => i.id === id);
-                if (idx !== -1) {
-                    const oldItem = db.inventory[idx];
-                    const oldQty = oldItem.qty || 0;
-                    const oldImage = dbImages[id] || ''; 
-                    
-                    let changesMade = [];
-                    if (oldItem.name !== name) changesMade.push(`renamed to "${name}"`);
-                    if (oldItem.price !== price) changesMade.push(`price updated to ₱${price.toFixed(2)}`);
-                    if (oldQty !== qty) changesMade.push(`stock adjusted from ${oldQty} to ${qty}`);
-                    if (oldItem.category !== category) changesMade.push(`category updated to "${category}"`);
-                    
-                    // Evaluates separate image data buffer maps for accurate log changes
-                    if (image && !oldImage) {
-                        changesMade.push("uploaded profile image");
-                    } else if (image && oldImage && image !== oldImage) {
-                        changesMade.push("replaced profile image");
-                    } else if (!image && oldImage) {
-                        changesMade.push("removed profile image");
-                    }
-                    
-                    const logNotes = changesMade.length > 0 
-                        ? `Modified attributes: ${changesMade.join(', ')}.`
-                        : "Saved item without changes.";
+            const existingIdx = db.inventory.findIndex(p => p.id === id);
+            let logType = "New Product";
+            let logChange = qty;
 
-                    db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry };
-                    
-                    if (image) dbImages[id] = image;
-                    else delete dbImages[id];
-
-                    db.history.push({
-                        time: Date.now(),
-                        name: name,
-                        type: "Modified",
-                        change: qty - oldQty,
-                        notes: logNotes
-                    });
-
-                    pushDataToGitHub(`Modified details for product: ${name}`);
-                }
+            if (existingIdx > -1) {
+                const oldQty = db.inventory[existingIdx].qty;
+                logChange = qty - oldQty;
+                logType = logChange >= 0 ? "Addition" : "Destock";
+                
+                db.inventory[existingIdx] = { id, name, category, cost, units, markup, qty, price, expiry };
             } else {
-                id = "id_" + Math.random().toString(36).substr(2, 9);
                 db.inventory.push({ id, name, category, cost, units, markup, qty, price, expiry });
-                
-                if (image) dbImages[id] = image;
-
-                const operationType = originalName ? "Copy" : "New Product";
-                
-                let creationNotes = originalName
-                    ? `Copied the metrics of ${originalName}`
-                    : `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`;
-                
-                if (image) {
-                    creationNotes += originalName ? " with image attachment preserved." : " (with uploaded profile image).";
-                }
-
-                db.history.push({
-                    time: Date.now(),
-                    name,
-                    type: operationType,
-                    change: qty,
-                    notes: creationNotes
-                });
-                
-                pushDataToGitHub(`Added fresh inventory item line profile: ${name}`);
             }
+
+            db.history.unshift({
+                time: Date.now(),
+                name: name,
+                type: logType,
+                change: logChange,
+                notes: document.getElementById('item-id').value ? `Modified system properties registry item` : `Initial profile deployment`
+            });
+
             closeModal();
+            renderApp();
+            pushDataToGitHub(`Saved profile update for target: ${name}`);
         }
 
-        function handleStockAdjust(id, mode) {
-            const item = db.inventory.find(i => i.id === id);
-            if (!item) return;
-            
-            let change = 0;
-            if (mode === 'restock') {
-                const val = prompt(`How many units of "${item.name}" are you adding to stock?`, "1");
-                if (val === null) return;
-                change = parseInt(val) || 0;
-                if (change <= 0) return;
-                item.qty = (parseInt(item.qty) || 0) + change;
-                db.history.push({
-                    time: Date.now(),
-                    name: item.name,
-                    type: "Restock",
-                    change: change,
-                    notes: "Bulk restock transaction."
-                });
-            } else if (mode === 'reduce') {
-                const val = prompt(`How many units of "${item.name}" were sold/used?`, "1");
-                if (val === null) return;
-                change = parseInt(val) || 0;
-                if (change <= 0) return;
-                const currentQty = parseInt(item.qty) || 0;
-                if (currentQty - change < 0) {
-                    alert("Operation aborted. Outbound stock change exceeds available on-hand quantities.");
-                    return;
-                }
-                item.qty = currentQty - change;
-                db.history.push({
-                    time: Date.now(),
-                    name: item.name,
-                    type: "Destock",
-                    change: -change,
-                    notes: "Bulk reduction transaction."
-                });
-            }
-            
-            pushDataToGitHub(`Adjusted stock levels for item: ${item.name} (${mode === 'restock' ? '+' : '-'}${change})`);
+        function deleteItem(id, name) {
+            if (!confirm(`Are you absolutely sure you want to permanently delete "${name}"?`)) return;
+
+            db.inventory = db.inventory.filter(p => p.id !== id);
+            // Drop image map key completely to save database size when items are deleted
+            delete dbImages[id];
+
+            db.history.unshift({
+                time: Date.now(),
+                name: name,
+                type: "Deletion",
+                change: 0,
+                notes: "Purged product systematically from records management console"
+            });
+
+            renderApp();
+            pushDataToGitHub(`Purged data footprint for: ${name}`);
         }
 
-        function deleteItem(id) {
-            const item = db.inventory.find(i => i.id === id);
-            if (!item) return;
+        function updateInlineQuantity(id, changeAmount) {
+            const idx = db.inventory.findIndex(p => p.id === id);
+            if (idx === -1) return;
 
-            if (confirm(`Are you absolutely sure you want to permanently delete "${item.name}" from your catalog?`)) {
-                const reason = prompt("Please document a brief removal reason:", "Item discontinued/damaged");
-                if (reason === null) return;
+            const targetItem = db.inventory[idx];
+            const oldQty = targetItem.qty;
+            const newQty = Math.max(0, oldQty + changeAmount);
+            
+            if (oldQty === newQty) return;
+            targetItem.qty = newQty;
 
-                db.inventory = db.inventory.filter(i => i.id !== id);
-                delete dbImages[id];
+            db.history.unshift({
+                time: Date.now(),
+                name: targetItem.name,
+                type: changeAmount > 0 ? "Restock" : "Sale / Usage",
+                change: changeAmount,
+                notes: `Counter altered from dashboard quick actions button layer`
+            });
 
-                db.history.push({
-                    time: Date.now(),
-                    name: item.name,
-                    type: "Deletion",
-                    change: -(parseInt(item.qty) || 0),
-                    notes: `Item permanently removed. Reason: ${reason || 'Not documented'}`
-                });
-                pushDataToGitHub(`Dropped product line from storage database: ${item.name}`);
-            }
+            renderApp();
+            pushDataToGitHub(`Inline quantity modification applied on context tracking label ${targetItem.name}`);
+        }
+
+        function handleSearchInput() {
+            renderInventoryGrid();
+        }
+
+        function clearSearch() {
+            document.getElementById('inventory-search').value = '';
+            renderInventoryGrid();
+        }
+
+        function handleSortPickerChange() {
+            const selection = document.getElementById('sort-picker').value;
+            const pieces = selection.split('-');
+            currentSortColumn = pieces[0];
+            currentSortDirection = pieces[1];
+            renderInventoryGrid();
         }
 
         function renderApp() {
-            const lowStockThreshold = (db.config && db.config.lowThreshold !== undefined) ? db.config.lowThreshold : 5;
-
-            const inventoryList = Array.isArray(db.inventory) ? db.inventory : [];
-            const historyList = Array.isArray(db.history) ? db.history : [];
-
-            const totalItems = inventoryList.length;
-            const totalStock = inventoryList.reduce((acc, curr) => acc + (Number(curr.qty) || 0), 0);
-            
-            const lowStockItems = inventoryList.filter(i => {
-                const q = Number(i.qty) || 0;
-                return q <= lowStockThreshold && q > 0;
-            });
-            const outOfStockItems = inventoryList.filter(i => (Number(i.qty) || 0) === 0);
-            
-            const totalRetailValue = inventoryList.reduce((acc, curr) => {
-                const qty = Number(curr.qty) || 0;
-                const price = Number(curr.price) || 0;
-                return acc + (qty * price);
-            }, 0);
-
-            const totalInventoryCost = inventoryList.reduce((acc, curr) => {
-                const qty = Number(curr.qty) || 0;
-                const itemCost = parseFloat(curr.cost) || 0;
-                const itemUnits = parseInt(curr.units) || 1;
-                const baseUnitCost = itemUnits > 0 ? (itemCost / itemUnits) : 0;
-                return acc + (qty * baseUnitCost);
-            }, 0);
-
-            const totalPotentialProfit = totalRetailValue - totalInventoryCost;
-
-            document.getElementById('stat-total-items').innerText = totalItems;
-            document.getElementById('stat-total-stock').innerText = totalStock;
-            document.getElementById('stat-low-stock').innerText = lowStockItems.length;
-            document.getElementById('stat-out-of-stock').innerText = outOfStockItems.length;
-            
-            document.getElementById('stat-retail-value').innerText = "₱" + totalRetailValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('stat-inventory-cost').innerText = "₱" + totalInventoryCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('stat-potential-profit').innerText = "₱" + totalPotentialProfit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-            const dashLowStockTbody = document.getElementById('dash-lowstock-tbody');
-            if (lowStockItems.length === 0) {
-                dashLowStockTbody.innerHTML = `
-                    <tr>
-                        <td colspan="3" class="p-4 text-center text-xs text-gray-400 italic">✨ Safe operations. No items below threshold value!</td>
-                    </tr>
-                `;
-            } else {
-                dashLowStockTbody.innerHTML = lowStockItems.map(item => `
-                    <tr class="hover:bg-gray-50">
-                        <td class="p-3 font-medium text-gray-900">${item.name || 'Unnamed Item'}</td>
-                        <td class="p-3 text-xs text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
-                        <td class="p-3 text-center">
-                            <span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-800">
-                                ${item.qty} left
-                            </span>
-                        </td>
-                    </tr>
-                `).join('');
-            }
-
-            const dashOutOfStockTbody = document.getElementById('dash-outofstock-tbody');
-            if (outOfStockItems.length === 0) {
-                dashOutOfStockTbody.innerHTML = `
-                    <tr>
-                        <td colspan="3" class="p-4 text-center text-xs text-gray-400 italic">✨ All clear! No completely depleted products found.</td>
-                    </tr>
-                `;
-            } else {
-                dashOutOfStockTbody.innerHTML = outOfStockItems.map(item => `
-                    <tr class="hover:bg-gray-50">
-                        <td class="p-3 font-medium text-gray-900">${item.name || 'Unnamed Item'}</td>
-                        <td class="p-3 text-xs text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
-                        <td class="p-3 text-center">
-                            <span class="px-2 py-0.5 rounded text-xs font-black bg-rose-100 text-rose-800 border border-rose-200 uppercase tracking-wider">
-                                Depleted
-                            </span>
-                        </td>
-                    </tr>
-                `).join('');
-            }
-
-            const dashExpiryTbody = document.getElementById('dash-expiry-tbody');
-            const todayTimestamp = new Date().setHours(0,0,0,0);
-            const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
-            
-            const expiringItems = inventoryList.filter(item => {
-                if (!item.expiry) return false;
-                const expiryTimestamp = new Date(item.expiry).getTime();
-                return !isNaN(expiryTimestamp) && (expiryTimestamp - todayTimestamp) <= thirtyDaysInMs;
-            });
-
-            expiringItems.sort((a, b) => new Date(a.expiry) - new Date(b.expiry));
-
-            if (expiringItems.length === 0) {
-                dashExpiryTbody.innerHTML = `
-                    <tr>
-                        <td colspan="4" class="p-4 text-center text-xs text-gray-400 italic">✨ Great! No items expiring within the next 30 days.</td>
-                    </tr>
-                `;
-            } else {
-                dashExpiryTbody.innerHTML = expiringItems.map(item => {
-                    const expiryDate = new Date(item.expiry);
-                    const diffTime = expiryDate.getTime() - todayTimestamp;
-                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                    
-                    let statusBadge = '';
-                    if (diffDays <= 0) {
-                        statusBadge = `<span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded text-xs font-black border border-rose-200">EXPIRED</span>`;
-                    } else {
-                        statusBadge = `<span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-bold border border-amber-200">${diffDays} days left</span>`;
-                    }
-
-                    return `
-                        <tr class="hover:bg-gray-50">
-                            <td class="p-3 font-medium text-gray-900">${item.name || 'Unnamed Item'}</td>
-                            <td class="p-3 text-xs text-gray-500 font-semibold">${item.category || 'Uncategorized'}</td>
-                            <td class="p-3 font-mono text-sm text-gray-700">${formatExpiryDisplay(item.expiry)}</td>
-                            <td class="p-3 text-center">${statusBadge}</td>
-                        </tr>
-                    `;
-                }).join('');
-            }
-
-            let query = (document.getElementById('inventory-search')?.value || '').trim().toLowerCase();
-            let displayItems = inventoryList.filter(item => {
-                let nameMatch = (item.name || '').toLowerCase().includes(query);
-                let catMatch = (item.category || '').toLowerCase().includes(query);
-                return nameMatch || catMatch;
-            });
-            
-            if (currentSortColumn !== 'none' && currentSortDirection !== 'none') {
-                displayItems.sort((a, b) => {
-                    let modifier = currentSortDirection === 'asc' ? 1 : -1;
-                    if (currentSortColumn === 'name') return (a.name || '').localeCompare(b.name || '') * modifier;
-                    if (currentSortColumn === 'category') return (a.category || '').localeCompare(b.category || '') * modifier;
-                    if (currentSortColumn === 'stock') return ((Number(a.qty) || 0) - (Number(b.qty) || 0)) * modifier;
-                    if (currentSortColumn === 'expiry') {
-                        if (!a.expiry && !b.expiry) return 0;
-                        if (!a.expiry) return 1; 
-                        if (!b.expiry) return -1;
-                        return (new Date(a.expiry) - new Date(b.expiry)) * modifier;
-                    }
-                    return 0;
-                });
-            }
-
-            const cardGrid = document.getElementById('inventory-card-grid');
-            if (displayItems.length === 0) {
-                cardGrid.className = "block text-center p-12 bg-white rounded-xl border border-dashed text-gray-400 italic";
-                cardGrid.innerHTML = "No matching items found inside your catalog matching your active filters.";
-            } else {
-                cardGrid.className = "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4";
-				cardGrid.innerHTML = displayItems.map(item => {
-					const itemId = item.id;
-					const qtyVal = Number(item.qty) || 0;
-					const isOOS = qtyVal === 0;
-
-                    const mappedImgSrc = dbImages[item.id] || '';
-
-					return `
-					<div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition group">
-
-						<div class="h-52 sm:h-56 bg-slate-100 relative overflow-hidden">
-							${
-								mappedImgSrc
-								? `<img src="${mappedImgSrc}" class="w-full h-full object-cover ${isOOS ? 'opacity-70 blur-[1px]' : ''}">`
-								: `<div class="w-full h-full flex items-center justify-center text-6xl sm:text-7xl">📦</div>`
-							}
-
-							<div class="absolute top-2 left-2 bg-black/60 text-white text-xs sm:text-sm px-3 py-1.5 rounded-full">
-								${item.category || 'Uncategorized'}
-							</div>
-
-							${isOOS ? `
-								<div class="absolute inset-0 flex items-center justify-center">
-									<span class="bg-white text-red-600 font-black px-3 py-1 rounded-xl border border-red-200 rotate-[-10deg]">
-										OUT OF STOCK
-									</span>
-								</div>
-							` : ''}
-						</div>
-
-						<div class="p-4">
-							<h3 class="font-bold text-slate-800 text-sm line-clamp-2">
-								${item.name || 'Unnamed Item'}
-							</h3>
-
-							<div class="flex items-center justify-between mt-3">
-								<span class="text-indigo-600 font-black text-xl sm:text-2xl">
-									₱${(Number(item.price) || 0).toFixed(2)}
-								</span>
-
-								<span class="text-sm font-bold px-2 py-1 rounded-full ${
-									isOOS ? 'bg-red-100 text-red-700'
-									: qtyVal <= 5 ? 'bg-amber-100 text-amber-700'
-									: 'bg-emerald-100 text-emerald-700'
-								}">
-									${qtyVal} pcs
-								</span>
-							</div>
-						</div>
-
-						<div class="grid grid-cols-5 border-t border-slate-100 text-xs font-semibold">
-
-						  <button onclick="handleStockAdjust('${itemId}', 'restock')"
-							class="py-3 text-emerald-700 hover:bg-emerald-50">
-							ADD
-						  </button>
-
-						  <button onclick="handleStockAdjust('${itemId}', 'reduce')"
-							class="py-3 text-amber-700 hover:bg-amber-50 ${isOOS ? 'opacity-30 pointer-events-none' : ''}">
-							LESS
-						  </button>
-
-						  <button onclick="openModal('${itemId}')"
-							class="py-3 text-slate-700 hover:bg-slate-50">
-							EDIT
-						  </button>
-
-						  <button onclick="cloneItemToNewForm('${itemId}')"
-							class="py-3 text-indigo-700 hover:bg-indigo-50">
-							COPY
-						  </button>
-
-						  <button onclick="deleteItem('${itemId}')"
-							class="py-3 text-red-600 hover:bg-red-50">
-							DEL
-						  </button>
-
-						</div>
-					</div>
-					`;
-				}).join('');
-				}
-
-            const hbody = document.getElementById('history-table-body');
-            if (historyList.length === 0) {
-                hbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400 italic">No transactions recorded yet.</td></tr>`;
-            } else {
-                hbody.innerHTML = [...historyList].reverse().map(log => {
-                    let badgeColor = "text-amber-600";
-                    
-                    if (log.type === 'New Product' || log.type === 'Addition' || log.type === 'Restock') badgeColor = "text-emerald-600";
-                    if (log.type === 'Deletion') badgeColor = "text-rose-600";
-                    if (log.type === 'Copy' || log.type === 'Clone / Copy') badgeColor = "text-sky-600";
-                    if (log.type === 'Modified' || log.type === 'Product Update') badgeColor = "text-indigo-600";
-                    if (log.type === 'Destock' || log.type === 'Sale / Usage') badgeColor = "text-rose-500";
-
-                    return `
-                        <tr class="border-b border-gray-50">
-                            <td class="p-4 text-xs font-mono text-gray-400">${log.time ? new Date(log.time).toLocaleString() : 'N/A'}</td>
-                            <td class="p-4 font-medium">${log.name || 'Unknown'}</td>
-                            <td class="p-4"><span class="text-xs uppercase font-bold tracking-wider ${badgeColor}">${log.type || 'Transaction'}</span></td>
-                            <td class="p-4 font-mono font-bold">${(Number(log.change) || 0) > 0 ? '+' + log.change : log.change}</td>
-                            <td class="p-4 text-xs italic text-gray-500">${log.notes || ''}</td>
-                        </tr>
-                    `;
-                }).join('');
-            }
+            renderDashboardMetrics();
+            renderInventoryGrid();
+            renderHistoryLog();
         }
 
+        function renderDashboardMetrics() {
+            let totalItems = db.inventory.length;
+            let totalStock = 0;
+            let lowStockCount = 0;
+            let outOfStockCount = 0;
+            let totalRetailValue = 0;
+            let totalInventoryCost = 0;
+
+            const lowThreshold = db.config ? (db.config.lowThreshold || 5) : 5;
+
+            const lowStockRows = [];
+            const outOfStockRows = [];
+            const expiryRows = [];
+
+            const today = new Date();
+            const criticalWindow = new Date();
+            criticalWindow.setDate(today.getDate() + 30);
+
+            db.inventory.forEach(item => {
+                totalStock += item.qty;
+                const unitCost = (item.cost || 0) / (item.units || 1);
+                totalInventoryCost += (unitCost * item.qty);
+                totalRetailValue += ((item.price || 0) * item.qty);
+
+                if (item.qty === 0) {
+                    outOfStockCount++;
+                    outOfStockRows.push(`
+                        <tr class="border-b border-gray-50">
+                            <td class="p-3 font-semibold text-gray-800">${item.name}</td>
+                            <td class="p-3 text-xs"><span class="bg-gray-100 px-2 py-0.5 rounded text-gray-600 font-medium">${item.category || 'General'}</span></td>
+                            <td class="p-3 text-center"><span class="text-rose-600 font-bold text-xs uppercase tracking-wider">Empty</span></td>
+                        </tr>
+                    `);
+                } else if (item.qty <= lowThreshold) {
+                    lowStockCount++;
+                    lowStockRows.push(`
+                        <tr class="border-b border-gray-50">
+                            <td class="p-3 font-semibold text-gray-800">${item.name}</td>
+                            <td class="p-3 text-xs"><span class="bg-gray-100 px-2 py-0.5 rounded text-gray-600 font-medium">${item.category || 'General'}</span></td>
+                            <td class="p-3 text-center font-mono font-bold text-amber-600 bg-amber-50/50 rounded">${item.qty} units</td>
+                        </tr>
+                    `);
+                }
+
+                if (item.expiry) {
+                    const expiryDate = new Date(item.expiry);
+                    if (expiryDate <= criticalWindow) {
+                        const daysLeft = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+                        let styleClass = "text-emerald-600 bg-emerald-50";
+                        let statusText = `${daysLeft} Days Left`;
+                        
+                        if (daysLeft <= 0) {
+                            styleClass = "text-rose-700 bg-rose-100 font-black animate-pulse";
+                            statusText = "Expired";
+                        } else if (daysLeft <= 7) {
+                            styleClass = "text-amber-700 bg-amber-100 font-bold";
+                        }
+
+                        expiryRows.push(`
+                            <tr class="border-b border-gray-50">
+                                <td class="p-3 font-semibold text-gray-800">${item.name}</td>
+                                <td class="p-3 text-xs text-gray-500">${item.category || 'General'}</td>
+                                <td class="p-3 text-xs font-mono">${expiryDate.toLocaleDateString()}</td>
+                                <td class="p-3 text-center"><span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${styleClass}">${statusText}</span></td>
+                            </tr>
+                        `);
+                    }
+                }
+            });
+
+            document.getElementById('stat-retail-value').innerText = `₱${totalRetailValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('stat-inventory-cost').innerText = `₱${totalInventoryCost.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('stat-potential-profit').innerText = `₱${Math.max(0, totalRetailValue - totalInventoryCost).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            
+            document.getElementById('stat-total-items').innerText = totalItems;
+            document.getElementById('stat-total-stock').innerText = totalStock;
+            document.getElementById('stat-low-stock').innerText = lowStockCount;
+            document.getElementById('stat-out-of-stock').innerText = outOfStockCount;
+
+            document.getElementById('dash-lowstock-tbody').innerHTML = lowStockRows.length ? lowStockRows.join('') : `<tr><td colspan="3" class="p-4 text-center text-gray-400 italic">No low stock items detected. All products clear!</td></tr>`;
+            document.getElementById('dash-outofstock-tbody').innerHTML = outOfStockRows.length ? outOfStockRows.join('') : `<tr><td colspan="3" class="p-4 text-center text-gray-400 italic">Excellent! No out of stock items registered.</td></tr>`;
+            document.getElementById('dash-expiry-tbody').innerHTML = expiryRows.length ? expiryRows.join('') : `<tr><td colspan="4" class="p-4 text-center text-gray-400 italic">No upcoming product expirations to monitor.</td></tr>`;
+        }
+
+        function renderInventoryGrid() {
+            const grid = document.getElementById('inventory-card-grid');
+            const searchInput = document.getElementById('inventory-search');
+            const clearBtn = document.getElementById('search-clear-btn');
+            
+            const query = searchInput.value.trim().toLowerCase();
+            if (query) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            let filtered = db.inventory.filter(item => {
+                return item.name.toLowerCase().includes(query) || (item.category && item.category.toLowerCase().includes(query));
+            });
+
+            const lowThreshold = db.config ? (db.config.lowThreshold || 5) : 5;
+
+            filtered.sort((a, b) => {
+                let valA, valB;
+                if (currentSortColumn === 'name') {
+                    valA = a.name.toLowerCase();
+                    valB = b.name.toLowerCase();
+                } else if (currentSortColumn === 'stock') {
+                    valA = a.qty;
+                    valB = b.qty;
+                } else if (currentSortColumn === 'expiry') {
+                    valA = a.expiry ? new Date(a.expiry).getTime() : Infinity;
+                    valB = b.expiry ? new Date(b.expiry).getTime() : Infinity;
+                }
+                
+                if (valA < valB) return currentSortDirection === 'asc' ? -1 : 1;
+                if (valA > valB) return currentSortDirection === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 bg-white border rounded-3xl italic">No tracking assets matched your current search parameters.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(item => {
+                const escapedJson = encodeURIComponent(JSON.stringify(item));
+                
+                // FIX: Look inside dbImages instead of item data properties directly
+                const imageSource = dbImages[item.id] || '';
+                
+                let mediaFrameDOM = `
+                    <div class="w-full aspect-square bg-slate-100 flex items-center justify-center text-slate-300 font-bold text-sm tracking-wider uppercase">
+                        No image
+                    </div>
+                `;
+
+                if (imageSource && imageSource.startsWith('data:image')) {
+                    mediaFrameDOM = `
+                        <div class="w-full aspect-square bg-white relative">
+                            <img src="${imageSource}" alt="${item.name}" class="w-full h-full object-cover">
+                        </div>
+                    `;
+                }
+
+                let badgeDOM = '';
+                if (item.qty === 0) {
+                    badgeDOM = `<span class="absolute top-2 left-2 bg-rose-600 text-white text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded shadow-sm z-10">Out of Stock</span>`;
+                } else if (item.qty <= lowThreshold) {
+                    badgeDOM = `<span class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded shadow-sm z-10">Low Stock</span>`;
+                }
+
+                return `
+                    <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-xs flex flex-col relative group hover:shadow-md transition duration-200">
+                        ${badgeDOM}
+                        ${mediaFrameDOM}
+                        
+                        <div class="p-4 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">${item.category || 'General'}</span>
+                                <h4 class="font-black text-slate-800 text-base leading-tight line-clamp-2">${item.name}</h4>
+                                <p class="font-mono text-indigo-600 font-bold text-lg mt-1">₱${(item.price || 0).toFixed(2)}</p>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <div>
+                                    <span class="text-[10px] font-semibold text-slate-400 block uppercase">Stock</span>
+                                    <span class="font-mono text-sm font-bold ${item.qty === 0 ? 'text-rose-600' : 'text-slate-700'}">${item.qty} units</span>
+                                </div>
+                                
+                                <div class="flex items-center gap-1.5">
+                                    <button onclick="updateInlineQuantity('${item.id}', -1)" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-rose-100 hover:text-rose-600 font-bold text-sm flex items-center justify-center transition">-</button>
+                                    <button onclick="updateInlineQuantity('${item.id}', 1)" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-emerald-100 hover:text-emerald-600 font-bold text-sm flex items-center justify-center transition">+</button>
+                                    <button onclick="openModal('${escapedJson}')" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-indigo-100 hover:text-indigo-600 font-bold text-sm flex items-center justify-center transition">✏️</button>
+                                    <button onclick="deleteItem('${item.id}', '${item.name}')" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-rose-100 hover:text-rose-600 font-bold text-sm flex items-center justify-center transition">🗑️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderHistoryLog() {
+            const tbody = document.getElementById('history-table-body');
+            if (!db.history || db.history.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400 italic">No operations recorded yet.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = db.history.map(log => {
+                let badgeColor = "text-amber-600";
+                if (log.type === 'New Product' || log.type === 'Addition' || log.type === 'Restock') badgeColor = "text-emerald-600";
+                if (log.type === 'Deletion') badgeColor = "text-rose-600";
+                if (log.type === 'Copy' || log.type === 'Clone / Copy') badgeColor = "text-sky-600";
+                if (log.type === 'Modified' || log.type === 'Product Update') badgeColor = "text-indigo-600";
+                if (log.type === 'Destock' || log.type === 'Sale / Usage') badgeColor = "text-rose-500";
+
+                return `
+                    <tr class="border-b border-gray-50">
+                        <td class="p-4 text-xs font-mono text-gray-400">${log.time ? new Date(log.time).toLocaleString() : 'N/A'}</td>
+                        <td class="p-4 font-medium text-slate-800">${log.name || 'Unknown'}</td>
+                        <td class="p-4"><span class="text-xs uppercase font-bold tracking-wider ${badgeColor}">${log.type || 'Transaction'}</span></td>
+                        <td class="p-4 font-mono font-bold">${(Number(log.change) || 0) > 0 ? '+' + log.change : log.change}</td>
+                        <td class="p-4 text-xs italic text-gray-500">${log.notes || ''}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function backupData() {
+            const backupPayload = {
+                version: "2.1-split",
+                timestamp: Date.now(),
+                db: db,
+                images: dbImages
+            };
+            const str = JSON.stringify(backupPayload, null, 2);
+            const blob = new Blob([str], {type: "application/json"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `abkd_inventory_backup_${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+        }
+
+        function restoreData(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (parsed.db && parsed.images) {
+                        if (confirm("Restore metadata inventory dataset and image assets from file?")) {
+                            db = parsed.db;
+                            dbImages = parsed.images;
+                            renderApp();
+                            pushDataToGitHub("Restored complete dataset configuration from local backup archive");
+                            alert("Backup profiles successfully restored and synchronized.");
+                        }
+                    } else {
+                        alert("Invalid file structure. This does not appear to match a valid system configuration file export.");
+                    }
+                } catch(err) {
+                    alert("Error parsing document file: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Initialize setup
         window.onload = init;
     </script>
 </body>
