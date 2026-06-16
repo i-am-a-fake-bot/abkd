@@ -589,7 +589,9 @@
                     if (imgRes.status === 200) {
                         const data = await imgRes.json();
                         if (data.content && data.content.trim() !== "") {
-                            const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
+                            // FIX: Clean trailing newlines cleanly without stripping internal base64 content spaces/padding
+                            const cleanContent = data.content.replace(/\n/g, '').replace(/\r/g, '').trim();
+                            const decoded = safeDecodeBase64(cleanContent);
                             dbImages = Object.assign({}, dbImages, JSON.parse(decoded));
                         }
                     } else if (imgRes.status === 404) {
