@@ -47,5 +47,12 @@
     "type": "Destock",
     "change": -1,
     "notes": "Bulk reduction transaction."
+  },
+  {
+    "time": 1781593735728,
+    "name": "555 Tuna - Afritada",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Saved item without changes."
   }
 ]
