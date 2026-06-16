@@ -1,5 +1,19 @@
 [
   {
+    "time": "2026-06-16T12:30:16.372Z",
+    "name": "Bear Brand - Swakto",
+    "type": "Sale / Usage",
+    "change": -1,
+    "notes": "Point of Sale retail counter reduction deduction."
+  },
+  {
+    "time": "2026-06-16T12:30:15.603Z",
+    "name": "Bear Brand - Swakto",
+    "type": "Restock",
+    "change": 1,
+    "notes": "Incremental storage check addition."
+  },
+  {
     "time": 1781593543025,
     "name": "Cream-O - Vanilla Fill",
     "type": "Destock",
