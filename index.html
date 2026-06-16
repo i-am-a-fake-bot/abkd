@@ -368,6 +368,9 @@
             }
         };
         
+        // Runtime key-value map to hold images separate from inventory array
+        let dbImages = {};
+
         let currentSortColumn = 'name'; 
         let currentSortDirection = 'asc'; 
 
@@ -464,6 +467,7 @@
             const cacheBuster = bypassCache ? `?t=${Date.now()}` : '';
             const inventoryUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json${cacheBuster}`;
             const historyUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/history.json${cacheBuster}`;
+            const imagesUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images.json${cacheBuster}`;
             
             try {
                 // 1. Fetch Inventory & Config details
@@ -475,20 +479,26 @@
                     const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
                     const parsed = JSON.parse(decoded);
                     
-                    // Support legacy combined structures if users convert down seamlessly
                     db.inventory = parsed.inventory || [];
                     db.config = parsed.config || { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
                     
-                    // Migration fallback: If ancient history array remains bundled locally inside the inventory file
+                    // Legacy history bundle migration check
                     if (Array.isArray(parsed.history) && parsed.history.length > 0 && db.history.length === 0) {
                         db.history = parsed.history;
                     }
+
+                    // Legacy image bundle migration check: extract images into our separate map if they are still inline
+                    db.inventory.forEach(item => {
+                        if (item.image && item.id) {
+                            dbImages[item.id] = item.image;
+                        }
+                    });
                 } else if (invRes.status === 404) {
                     db.inventory = [];
                     db.config = { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
                 }
 
-                // 2. Separately fetch transaction logs
+                // 2. Fetch separate transaction logs
                 const histRes = await fetch(historyUrl, {
                     headers: { 'Authorization': `token ${creds.token}` }
                 });
@@ -497,8 +507,20 @@
                     const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
                     db.history = JSON.parse(decoded);
                 } else if (histRes.status === 404) {
-                    // If history file is missing, we preserve structural default array
                     if (!Array.isArray(db.history)) db.history = [];
+                }
+
+                // 3. Fetch separated images map file
+                const imgRes = await fetch(imagesUrl, {
+                    headers: { 'Authorization': `token ${creds.token}` }
+                });
+                if (imgRes.status === 200) {
+                    const data = await imgRes.json();
+                    const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
+                    // Overwrite/merge map parameters cleanly
+                    dbImages = Object.assign({}, dbImages, JSON.parse(decoded));
+                } else if (imgRes.status === 404) {
+                    if (!dbImages) dbImages = {};
                 }
                 
                 applyDatabasePreferences();
@@ -528,7 +550,6 @@
         }
 
 		async function pushDataToGitHub(commitMessage = "Inventory state updated") {
-			// 🛡️ SAFETY SHIELD: Block write transactions if arrays get corrupted in runtime memory
 			if (!db || !Array.isArray(db.inventory) || !Array.isArray(db.history)) {
 				console.error("Sync blocked: Database structure is invalid.");
 				alert("Database error: Synchronization was halted because the database structure is invalid.");
@@ -538,6 +559,7 @@
 			const creds = getGitHubCredentials();
 			const inventoryUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
 			const historyUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/history.json`;
+			const imagesUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images.json`;
 			
 			try {
 				// --- STEP 1: SAVE LIGHTWEIGHT INVENTORY FILE ---
@@ -550,9 +572,15 @@
 					invSha = currentFileData.sha;
 				}
 
-                // Strip transaction logs entirely from the item matrix object
+                // Strip images out of the clean inventory map array before generating payload text string
+                const sanitizedInventoryArray = db.inventory.map(item => {
+                    const cleanItem = Object.assign({}, item);
+                    delete cleanItem.image; // Explicitly scrub large image data from this file
+                    return cleanItem;
+                });
+
 				const inventoryPayloadObj = {
-					inventory: db.inventory,
+					inventory: sanitizedInventoryArray,
 					config: db.config
 				};
 				const invJsonString = JSON.stringify(inventoryPayloadObj, null, 2);
@@ -601,9 +629,35 @@
 					},
 					body: JSON.stringify(histPayload)
 				});
+
+                // --- STEP 3: SAVE DECOUPLED IMAGES FILE ---
+                const imgGetRes = await fetch(imagesUrl, {
+                    headers: { 'Authorization': `token ${creds.token}` }
+                });
+                let imgSha = null;
+                if (imgGetRes.ok) {
+                    const currentFileData = await imgGetRes.json();
+                    imgSha = currentFileData.sha;
+                }
+
+                const imgJsonString = JSON.stringify(dbImages, null, 2);
+                const imgPayload = {
+                    message: "Sync media attachments: " + commitMessage,
+                    content: safeEncodeBase64(imgJsonString),
+                };
+                if (imgSha) imgPayload.sha = imgSha;
+
+                await fetch(imagesUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${creds.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(imgPayload)
+                });
 				
 				if (invRes.ok) {
-					console.log("Successfully synced decoupled data structures!");
+					console.log("Successfully synced all decoupled core, history, and asset structures!");
 					renderApp();
 				} else {
                     const errorData = await invRes.json();
@@ -751,9 +805,11 @@
                     document.getElementById('item-price').value = item.price || 0;
                     document.getElementById('item-expiry').value = item.expiry || '';
                     
-                    if (item.image) {
-                        document.getElementById('item-image-base64').value = item.image;
-                        document.getElementById('image-preview-container').innerHTML = `<img src="${item.image}" class="w-full h-full object-cover">`;
+                    // Pull image from the independent image dictionary mapping layer
+                    const mappedImg = dbImages[item.id] || '';
+                    if (mappedImg) {
+                        document.getElementById('item-image-base64').value = mappedImg;
+                        document.getElementById('image-preview-container').innerHTML = `<img src="${mappedImg}" class="w-full h-full object-cover">`;
                     }
                     calculateSRP(true);
                 }
@@ -787,9 +843,10 @@
             document.getElementById('item-expiry').value = item.expiry || '';
             document.getElementById('item-qty').value = 0;
 
-            if (item.image) {
-                document.getElementById('item-image-base64').value = item.image;
-                document.getElementById('image-preview-container').innerHTML = `<img src="${item.image}" class="w-full h-full object-cover">`;
+            const mappedImg = dbImages[item.id] || '';
+            if (mappedImg) {
+                document.getElementById('item-image-base64').value = mappedImg;
+                document.getElementById('image-preview-container').innerHTML = `<img src="${mappedImg}" class="w-full h-full object-cover">`;
             } else {
                 document.getElementById('item-image-base64').value = '';
                 document.getElementById('image-preview-container').innerHTML = 'No Img';
@@ -805,7 +862,7 @@
 
         function saveItem(e) {
             e.preventDefault();
-            const id = document.getElementById('item-id').value;
+            let id = document.getElementById('item-id').value;
             const name = document.getElementById('item-name').value.trim();
             const category = document.getElementById('item-category').value.trim();
             const cost = parseFloat(document.getElementById('item-cost').value) || 0;
@@ -836,8 +893,12 @@
                         ? `Modified attributes: ${changesMade.join(', ')}.`
                         : "Saved item without changes.";
 
-                    db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry, image };
+                    db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry };
                     
+                    // Assign/Update base64 safely directly to decoupled media collection map
+                    if (image) dbImages[id] = image;
+                    else delete dbImages[id];
+
                     db.history.push({
                         time: Date.now(),
                         name: name,
@@ -849,9 +910,12 @@
                     pushDataToGitHub(`Modified details for product: ${name}`);
                 }
             } else {
-                const newId = "id_" + Math.random().toString(36).substr(2, 9);
-                db.inventory.push({ id: newId, name, category, cost, units, markup, qty, price, expiry, image });
+                id = "id_" + Math.random().toString(36).substr(2, 9);
+                db.inventory.push({ id, name, category, cost, units, markup, qty, price, expiry });
                 
+                // Track image parameters into split dictionary layer asynchronously
+                if (image) dbImages[id] = image;
+
                 const operationType = originalName ? "Copy" : "New Product";
                 const logNotes = originalName
                     ? `Copied the metrics of ${originalName}`
@@ -920,6 +984,10 @@
                 if (reason === null) return;
 
                 db.inventory = db.inventory.filter(i => i.id !== id);
+                
+                // Clear media payload from decoupled layers automatically
+                delete dbImages[id];
+
                 db.history.push({
                     time: Date.now(),
                     name: item.name,
@@ -1089,13 +1157,16 @@
 					const qtyVal = Number(item.qty) || 0;
 					const isOOS = qtyVal === 0;
 
+                    // Dynamically map item images using decoupled runtime map
+                    const mappedImgSrc = dbImages[item.id] || '';
+
 					return `
 					<div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition group">
 
 						<div class="h-52 sm:h-56 bg-slate-100 relative overflow-hidden">
 							${
-								item.image
-								? `<img src="${item.image}" class="w-full h-full object-cover ${isOOS ? 'opacity-70 blur-[1px]' : ''}">`
+								mappedImgSrc
+								? `<img src="${mappedImgSrc}" class="w-full h-full object-cover ${isOOS ? 'opacity-70 blur-[1px]' : ''}">`
 								: `<div class="w-full h-full flex items-center justify-center text-6xl sm:text-7xl">📦</div>`
 							}
 
