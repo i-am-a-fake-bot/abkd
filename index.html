@@ -499,20 +499,51 @@
 
         async function fetchDataFromGitHub(bypassCache = false) {
             const creds = getGitHubCredentials();
+            
+            // 1. If fields are blank, initialize structure layout immediately and stop network request
+            if (!creds.token || !creds.user || !creds.repo) {
+                document.getElementById('setup-alert').classList.remove('hidden');
+                if (!db || !db.inventory) db = { inventory: [], history: [], config: { storeName: "📦 ABKD Inventory", lowThreshold: 5 } };
+                if (!dbImages) dbImages = {};
+                renderApp();
+                return;
+            }
+
             const cacheBuster = bypassCache ? `?t=${Date.now()}` : '';
             const inventoryUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json${cacheBuster}`;
             const historyUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/history.json${cacheBuster}`;
             const imagesUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images.json${cacheBuster}`;
             
             try {
+                document.getElementById('setup-alert').classList.add('hidden');
+
                 // 1. Fetch Inventory & Config details
                 const invRes = await fetch(inventoryUrl, {
                     headers: { 'Authorization': `token ${creds.token}` }
                 });
+
+                if (!invRes.ok && invRes.status !== 404) {
+                    throw new Error(`Inventory API Error: Server responded with status ${invRes.status}`);
+                }
+
                 if (invRes.status === 200) {
                     const data = await invRes.json();
+                    
+                    if (!data.content || data.content.trim() === "") {
+                        throw new Error("The inventory.json file exists on GitHub but is completely blank.");
+                    }
+
                     const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
-                    const parsed = JSON.parse(decoded);
+                    if (!decoded || decoded.trim() === "") {
+                        throw new Error("Decoded inventory content payload string evaluates to empty.");
+                    }
+
+                    let parsed;
+                    try {
+                        parsed = JSON.parse(decoded);
+                    } catch (pErr) {
+                        throw new Error(`Malformed JSON structure in inventory.json repository file: ${pErr.message}`);
+                    }
                     
                     db.inventory = parsed.inventory || [];
                     db.config = parsed.config || { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
@@ -532,26 +563,40 @@
                 }
 
                 // 2. Fetch separate transaction logs
-                const histRes = await fetch(historyUrl, {
-                    headers: { 'Authorization': `token ${creds.token}` }
-                });
-                if (histRes.status === 200) {
-                    const data = await histRes.json();
-                    const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
-                    db.history = JSON.parse(decoded);
-                } else if (histRes.status === 404) {
+                try {
+                    const histRes = await fetch(historyUrl, {
+                        headers: { 'Authorization': `token ${creds.token}` }
+                    });
+                    if (histRes.status === 200) {
+                        const data = await histRes.json();
+                        if (data.content && data.content.trim() !== "") {
+                            const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
+                            db.history = JSON.parse(decoded);
+                        }
+                    } else if (histRes.status === 404) {
+                        if (!Array.isArray(db.history)) db.history = [];
+                    }
+                } catch (hErr) {
+                    console.warn("Failed parsing history endpoint logs segment gracefully.", hErr);
                     if (!Array.isArray(db.history)) db.history = [];
                 }
 
                 // 3. Fetch separated images map file
-                const imgRes = await fetch(imagesUrl, {
-                    headers: { 'Authorization': `token ${creds.token}` }
-                });
-                if (imgRes.status === 200) {
-                    const data = await imgRes.json();
-                    const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
-                    dbImages = Object.assign({}, dbImages, JSON.parse(decoded));
-                } else if (imgRes.status === 404) {
+                try {
+                    const imgRes = await fetch(imagesUrl, {
+                        headers: { 'Authorization': `token ${creds.token}` }
+                    });
+                    if (imgRes.status === 200) {
+                        const data = await imgRes.json();
+                        if (data.content && data.content.trim() !== "") {
+                            const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
+                            dbImages = Object.assign({}, dbImages, JSON.parse(decoded));
+                        }
+                    } else if (imgRes.status === 404) {
+                        if (!dbImages) dbImages = {};
+                    }
+                } catch (imgErr) {
+                    console.warn("Media file tracking map generation skipped or not found.", imgErr);
                     if (!dbImages) dbImages = {};
                 }
                 
@@ -559,23 +604,39 @@
                 localStorage.setItem('offline_db_cache', JSON.stringify(db));
                 localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
 
+                document.getElementById('offline-fallback-alert').classList.add('hidden');
                 applyDatabasePreferences();
                 renderApp();
+
             } catch (err) {
-                console.warn('Network acquisition rejected. Shifting to localStorage data...', err);
+                console.error('Core Ecosystem Integration Traceback:', err);
                 
                 const cachedDbRaw = localStorage.getItem('offline_db_cache');
                 const cachedImagesRaw = localStorage.getItem('offline_images_cache');
                 
                 if (cachedDbRaw) {
-                    db = JSON.parse(cachedDbRaw);
-                    if (cachedImagesRaw) dbImages = JSON.parse(cachedImagesRaw);
+                    try {
+                        db = JSON.parse(cachedDbRaw);
+                        if (cachedImagesRaw) dbImages = JSON.parse(cachedImagesRaw);
+                    } catch(jsonErr) {
+                        console.error("Corrupted local storage payload discovered. Resetting layout schemas...", jsonErr);
+                        db = { inventory: [], history: [], config: { storeName: "📦 ABKD Inventory", lowThreshold: 5 } };
+                        dbImages = {};
+                    }
                     
                     document.getElementById('offline-fallback-alert').classList.remove('hidden');
                     applyDatabasePreferences();
                     renderApp();
                 } else {
-                    alert('Offline mode warning: No cached historical dataset discovered inside this browser node.');
+                    // Safe Fallback Resolution: Build default variables instead of locking UI with high-frequency alert loops
+                    console.warn("No baseline dataset cached inside this browser node window context. Starting completely clear configuration.");
+                    db = { inventory: [], history: [], config: { storeName: "📦 ABKD Inventory", lowThreshold: 5 } };
+                    dbImages = {};
+                    
+                    applyDatabasePreferences();
+                    renderApp();
+                    
+                    alert(`Connection Notice:\n\n${err.message}\n\nApp UI framework initialized successfully. If you have credentials, verify your setup metrics under the Settings Panel.`);
                 }
             }
         }
