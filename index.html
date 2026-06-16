@@ -147,24 +147,47 @@
 
 		<section id="tab-inventory" class="tab-content hidden">
 			<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+				
 				<div>
-					<h2 class="text-3xl font-black text-slate-800 tracking-tight">Inventory</h2>
-					<p class="text-slate-500 text-sm mt-1">Manage products, stock, and pricing</p>
+					<h2 class="text-3xl font-black text-slate-800 tracking-tight">
+						Inventory
+					</h2>
+					<p class="text-slate-500 text-sm mt-1">
+						Manage products, stock, and pricing
+					</p>
 				</div>
-				<button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-sm transition w-full md:w-auto">+ Add Item</button>
+
+				<button onclick="openModal()"
+					class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-sm transition w-full md:w-auto">
+					+ Add Item
+				</button>
 			</div>
 
 			<div class="bg-white border border-slate-200 rounded-3xl p-4 mb-6 shadow-sm">
 				<div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
+
 					<div class="relative flex-1">
 						<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍︎</span>
-						<input type="text" id="inventory-search" oninput="handleSearchInput()" placeholder="Search items..." class="w-full pl-11 pr-10 py-3 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none bg-slate-50 text-sm">
-						<button id="search-clear-btn" onclick="clearSearch()" class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">✖️</button>
+
+						<input type="text"
+							id="inventory-search"
+							oninput="handleSearchInput()"
+							placeholder="Search items..."
+							class="w-full pl-11 pr-10 py-3 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none bg-slate-50 text-sm">
+
+						<button id="search-clear-btn"
+							onclick="clearSearch()"
+							class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
+							✖️
+						</button>
 					</div>
 
 					<div class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-4 py-3 rounded-2xl">
 						<span class="text-xs font-semibold text-slate-500">Sort</span>
-						<select id="sort-picker" onchange="handleSortPickerChange()" class="bg-transparent text-sm font-medium outline-none cursor-pointer">
+
+						<select id="sort-picker"
+							onchange="handleSortPickerChange()"
+							class="bg-transparent text-sm font-medium outline-none cursor-pointer">
 							<option value="name-asc">Name (A–Z)</option>
 							<option value="name-desc">Name (Z–A)</option>
 							<option value="stock-asc">Stock (Low)</option>
@@ -172,10 +195,13 @@
 							<option value="expiry-asc">Expiry</option>
 						</select>
 					</div>
+
 				</div>
 			</div>
 
-			<div id="inventory-card-grid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5"></div>
+			<div id="inventory-card-grid"
+				class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
+			</div>
 		</section>
 
         <section id="tab-history" class="tab-content hidden">
@@ -191,13 +217,15 @@
                             <th class="p-4">Notes</th>
                         </tr>
                     </thead>
-                    <tbody id="history-table-body" class="divide-y divide-gray-50 text-gray-600 text-sm"></tbody>
+                    <tbody id="history-table-body" class="divide-y divide-gray-50 text-gray-600 text-sm">
+                    </tbody>
                 </table>
             </div>
         </section>
 
         <section id="tab-settings" class="tab-content hidden">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Application Settings</h2>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                     <h3 class="text-base font-bold text-slate-800 border-b border-slate-50 pb-2 mb-4">🔗 GitHub Database Configuration</h3>
@@ -214,7 +242,9 @@
                             <label class="block text-sm font-medium text-gray-700 mb-1">Repository Name</label>
                             <input type="text" id="cfg-repo" value="abkd" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
                         </div>
-                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded font-medium transition shadow">Save Data Connections</button>
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded font-medium transition shadow">
+                            Save Data Connections
+                        </button>
                     </form>
                 </div>
 
@@ -231,26 +261,34 @@
                                 <input type="number" id="cfg-low-threshold" min="1" max="100" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
                                 <p class="text-[11px] text-gray-400 mt-1">Products with stock volumes less than or equal to this limit appear automatically inside the low alert matrix.</p>
                             </div>
-                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded font-medium transition shadow">Apply View Adjustments</button>
+                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded font-medium transition shadow">
+                                Apply View Adjustments
+                            </button>
                         </form>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 bg-gradient-to-br from-white to-indigo-50/20">
                         <h3 class="text-base font-bold text-slate-800 border-b border-slate-100 pb-2 mb-3">💾 Local Storage Backup & Restore</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Download physical backups directly to your local file storage or manually load local data sets back into memory if your connection to GitHub fails.</p>
+                        
                         <div class="grid grid-cols-2 gap-3 mb-4">
-                            <button onclick="backupData()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 p-2.5 rounded-lg font-semibold text-xs transition shadow-sm text-center">📥 Create Backups</button>
+                            <button onclick="backupData()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 p-2.5 rounded-lg font-semibold text-xs transition shadow-sm text-center">
+                                📥 Create Backups
+                            </button>
                             <label class="bg-emerald-600 hover:bg-emerald-700 text-white p-2.5 rounded-lg font-semibold text-xs transition shadow-sm text-center cursor-pointer">
                                 📤 Restore Backup File
                                 <input type="file" id="restore-file-input" accept=".json" onchange="restoreData(this)" class="hidden">
                             </label>
                         </div>
+                        <p class="text-[10px] text-gray-400">Note: The restoration system reads your backup file profile and prompts you to choose whether to load just Inventory items, Image files, or transaction History.</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-rose-100 bg-gradient-to-br from-white to-rose-50/20">
                         <h3 class="text-base font-bold text-rose-800 border-b border-rose-100/50 pb-2 mb-2">🔄 Manual Live Sync</h3>
-                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">If updates saved from another device are not showing, force sync local memory.</p>
-                        <button onclick="forceSyncData()" id="btn-force-sync" class="w-full bg-white hover:bg-rose-50 text-rose-600 border border-rose-300 p-2.5 rounded-lg font-semibold tracking-wide text-sm transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">⚡ Force Sync Database</button>
+                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">If updates saved from another mobile device or window are not appearing immediately, tap below to force clear local memory and stream the fresh repository matrix instantly.</p>
+                        <button onclick="forceSyncData()" id="btn-force-sync" class="w-full bg-white hover:bg-rose-50 text-rose-600 border border-rose-300 p-2.5 rounded-lg font-semibold tracking-wide text-sm transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
+                            ⚡ Force Sync Database
+                        </button>
                     </div>
                 </div>
             </div>
@@ -268,7 +306,9 @@
                 <div class="bg-gray-50 border border-dashed border-gray-300 rounded-lg p-3 text-center">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Item Image (Optional)</label>
                     <div class="flex items-center justify-center gap-4">
-                        <div id="image-preview-container" class="w-16 h-16 bg-gray-200 border rounded overflow-hidden flex items-center justify-center text-gray-400 text-xs">No Img</div>
+                        <div id="image-preview-container" class="w-16 h-16 bg-gray-200 border rounded overflow-hidden flex items-center justify-center text-gray-400 text-xs">
+                            No Img
+                        </div>
                         <input type="file" id="item-image-input" accept="image/*" onchange="processImageUpload(this)" class="text-xs text-gray-600 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
                     </div>
                 </div>
@@ -377,6 +417,7 @@
                 fetchDataFromGitHub();
             }
             
+            // Setup listener for PWA framework components to catch offline events
             window.addEventListener('online', updateOnlineStatus);
             window.addEventListener('offline', updateOnlineStatus);
             updateOnlineStatus();
@@ -428,6 +469,7 @@
                 storeName: chosenName,
                 lowThreshold: chosenThreshold
             };
+
             applyDatabasePreferences();
             pushDataToGitHub("Updated application threshold configurations globally");
             alert('Application configurations updated and synced globally!');
@@ -453,6 +495,8 @@
 
         async function fetchDataFromGitHub(bypassCache = false) {
             const creds = getGitHubCredentials();
+
+            // 1. If fields are blank, initialize structure layout immediately and stop network request
             if (!creds.token || !creds.user || !creds.repo) {
                 document.getElementById('setup-alert').classList.remove('hidden');
                 if (!db || !db.inventory) db = { inventory: [], history: [], config: { storeName: "📦 ABKD Inventory", lowThreshold: 5 } };
@@ -468,500 +512,455 @@
 
             try {
                 document.getElementById('setup-alert').classList.add('hidden');
-                
-                // 1. Fetch Inventory
-                const invRes = await fetch(inventoryUrl, { headers: { 'Authorization': `token ${creds.token}` } });
+
+                // 1. Fetch Inventory & Config details
+                const invRes = await fetch(inventoryUrl, {
+                    headers: { 'Authorization': `token ${creds.token}` }
+                });
+
+                if (!invRes.ok && invRes.status !== 404) {
+                    throw new Error(`Inventory API Error: Server responded with status ${invRes.status}`);
+                }
+
                 if (invRes.status === 200) {
                     const data = await invRes.json();
+                    if (!data.content || data.content.trim() === "") {
+                        throw new Error("The inventory.json file exists on GitHub but is completely blank.");
+                    }
                     const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
-                    let parsed = JSON.parse(decoded);
+                    if (!decoded || decoded.trim() === "") {
+                        throw new Error("Decoded inventory content payload string evaluates to empty.");
+                    }
+                    let parsed;
+                    try {
+                        parsed = JSON.parse(decoded);
+                    } catch (pErr) {
+                        throw new Error(`Malformed JSON structure in inventory.json repository file: ${pErr.message}`);
+                    }
                     db.inventory = parsed.inventory || [];
                     db.config = parsed.config || { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
                     if (Array.isArray(parsed.history) && parsed.history.length > 0 && db.history.length === 0) {
                         db.history = parsed.history;
                     }
+                    db.inventory.forEach(item => {
+                        if (item.image && item.id) {
+                            dbImages[item.id] = item.image;
+                        }
+                    });
+                } else if (invRes.status === 404) {
+                    db.inventory = [];
+                    db.config = { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
                 }
 
-                // 2. Fetch History
+                // 2. Fetch separate transaction logs
                 try {
-                    const histRes = await fetch(historyUrl, { headers: { 'Authorization': `token ${creds.token}` } });
+                    const histRes = await fetch(historyUrl, {
+                        headers: { 'Authorization': `token ${creds.token}` }
+                    });
                     if (histRes.status === 200) {
                         const data = await histRes.json();
-                        const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
-                        db.history = JSON.parse(decoded);
+                        if (data.content && data.content.trim() !== "") {
+                            const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
+                            db.history = JSON.parse(decoded);
+                        }
+                    } else if (histRes.status === 404) {
+                        if (!Array.isArray(db.history)) db.history = [];
                     }
-                } catch(e) { console.warn(e); }
-
-                // 3. Fetch Images Map File cleanly
-                try {
-                    const imgRes = await fetch(imagesUrl, { headers: { 'Authorization': `token ${creds.token}` } });
-                    if (imgRes.status === 200) {
-                        const data = await imgRes.json();
-                        const cleanContent = data.content.replace(/\n/g, '').replace(/\r/g, '').trim();
-                        const decoded = safeDecodeBase64(cleanContent);
-                        dbImages = JSON.parse(decoded);
-                    }
-                } catch (imgErr) { 
-                    console.warn(imgErr); 
-                    dbImages = {};
+                } catch (hErr) {
+                    console.warn("Failed parsing history endpoint logs segment gracefully.", hErr);
+                    if (!Array.isArray(db.history)) db.history = [];
                 }
 
+                // 3. Fetch separated images map file
+                try {
+                    const imgRes = await fetch(imagesUrl, {
+                        headers: { 'Authorization': `token ${creds.token}` }
+                    });
+                    if (imgRes.status === 200) {
+                        const data = await imgRes.json();
+                        if (data.content && data.content.trim() !== "") {
+                            // FIX: Clean trailing newlines cleanly without stripping internal base64 content spaces/padding
+                            const cleanContent = data.content.replace(/\n/g, '').replace(/\r/g, '').trim();
+                            const decoded = safeDecodeBase64(cleanContent);
+                            dbImages = Object.assign({}, dbImages, JSON.parse(decoded));
+                        }
+                    } else if (imgRes.status === 404) {
+                        if (!dbImages) dbImages = {};
+                    }
+                } catch (imgErr) {
+                    console.warn("Media file tracking map generation skipped or not found.", imgErr);
+                    if (!dbImages) dbImages = {};
+                }
+
+                // Synchronize network values out to the local fallback layer
                 localStorage.setItem('offline_db_cache', JSON.stringify(db));
                 localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
+
+                document.getElementById('offline-fallback-alert').classList.add('hidden');
                 applyDatabasePreferences();
                 renderApp();
+
             } catch (err) {
-                console.error(err);
-                // Load fallback data layers smoothly
-                const localData = localStorage.getItem('offline_db_cache');
-                const localImages = localStorage.getItem('offline_images_cache');
-                if (localData) db = JSON.parse(localData);
-                if (localImages) dbImages = JSON.parse(localImages);
+                console.error("Critical Network Sync Interrupted. Loading offline safety cache layer...", err);
+                document.getElementById('offline-fallback-alert').classList.remove('hidden');
+
+                const cachedDb = localStorage.getItem('offline_db_cache');
+                const cachedImages = localStorage.getItem('offline_images_cache');
+
+                if (cachedDb) db = JSON.parse(cachedDb);
+                if (cachedImages) dbImages = JSON.parse(cachedImages);
+
                 applyDatabasePreferences();
                 renderApp();
             }
         }
 
-        // Optimized push method that cleans image payloads before saving metadata
-        async function pushDataToGitHub(commitMessage = "Inventory Sync Trigger") {
-            const creds = getGitHubCredentials();
-            if (!creds.token || !creds.user || !creds.repo) return;
+        async function getShaForFile(url, token) {
+            try {
+                const res = await fetch(url, { headers: { 'Authorization': `token ${token}` } });
+                if (res.status === 200) {
+                    const d = await res.json();
+                    return d.sha;
+                }
+            } catch (e) {
+                console.error("Failed querying resource signature reference tracking index.", e);
+            }
+            return null;
+        }
 
-            // Security Firewall: Stop empty save operations from wiping database configurations
-            if (!db.inventory || (db.inventory.length === 0 && db.history.length === 0 && (!db.config || !db.config.storeName))) {
-                console.warn("Prevented push logic trigger: payload structural integrity check failed.");
+        async function pushDataToGitHub(commitMessageText = "Inventory updated data matrices") {
+            const creds = getGitHubCredentials();
+            
+            // Sync values to the local browser engine storage container instantly
+            localStorage.setItem('offline_db_cache', JSON.stringify(db));
+            localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
+
+            if (!creds.token || !creds.user || !creds.repo) {
+                console.warn("Operation saved to browser storage memory layer only (Missing configurations setup).");
                 return;
             }
 
-            // Strips base64 streams from inventory items array before writing metadata out
-            const cleanedInventory = db.inventory.map(item => {
-                const copy = {...item};
-                delete copy.image; // Ensure it stays separate
-                return copy;
-            });
+            const inventoryUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
+            const historyUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/history.json`;
+            const imagesUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images.json`;
 
-            const databasePayload = {
-                inventory: cleanedInventory,
-                config: db.config
+            const cleanedDb = {
+                config: db.config,
+                inventory: db.inventory.map(item => {
+                    const itemCopy = Object.assign({}, item);
+                    delete itemCopy.image; 
+                    return itemCopy;
+                })
             };
 
-            async function uploadFileViaAPI(filename, dataObj) {
-                const url = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/${filename}`;
-                let currentSha = null;
-
-                try {
-                    const checkRes = await fetch(url, { headers: { 'Authorization': `token ${creds.token}` } });
-                    if (checkRes.status === 200) {
-                        const fileMeta = await checkRes.json();
-                        currentSha = fileMeta.sha;
-                    }
-                } catch (e) {}
-
-                const jsonStr = JSON.stringify(dataObj, null, 2);
-                const b64Body = safeEncodeBase64(jsonStr);
-
-                const putPayload = {
-                    message: commitMessage,
-                    content: b64Body
-                };
-                if (currentSha) putPayload.sha = currentSha;
-
-                await fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${creds.token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(putPayload)
-                });
-            }
+            const invPayloadUnicodeString = JSON.stringify(cleanedDb, null, 2);
+            const histPayloadUnicodeString = JSON.stringify(db.history || [], null, 2);
+            const imgPayloadUnicodeString = JSON.stringify(dbImages || {}, null, 2);
 
             try {
-                await uploadFileViaAPI('inventory.json', databasePayload);
-                await uploadFileViaAPI('history.json', db.history);
-                // Prevents images.json from inflating by ensuring empty spaces/deleted entries are dropped cleanly
-                await uploadFileViaAPI('images.json', dbImages);
-                
-                localStorage.setItem('offline_db_cache', JSON.stringify(db));
-                localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
-            } catch(err) {
-                console.error("Cloud database synchronization failed:", err);
+                const invSha = await getShaForFile(inventoryUrl, creds.token);
+                await fetch(inventoryUrl, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `token ${creds.token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: `${commitMessageText} [Inventory Matrix Data]`,
+                        content: safeEncodeBase64(invPayloadUnicodeString),
+                        sha: invSha
+                    })
+                });
+
+                const histSha = await getShaForFile(historyUrl, creds.token);
+                await fetch(historyUrl, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `token ${creds.token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: `${commitMessageText} [Audit Tracking Logs Data]`,
+                        content: safeEncodeBase64(histPayloadUnicodeString),
+                        sha: histSha
+                    })
+                });
+
+                const imgSha = await getShaForFile(imagesUrl, creds.token);
+                await fetch(imagesUrl, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `token ${creds.token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: `${commitMessageText} [Binary Media Collections Data]`,
+                        content: safeEncodeBase64(imgPayloadUnicodeString),
+                        sha: imgSha
+                    })
+                });
+
+                document.getElementById('offline-fallback-alert').classList.add('hidden');
+                console.log("Database structural contents pushed and mapped correctly inside cloud repository profile layer.");
+            } catch (err) {
+                console.error("Unable to upload layout tracking indices out to GitHub endpoint tree structures. Reverting to device buffer.", err);
+                document.getElementById('offline-fallback-alert').classList.remove('hidden');
             }
         }
 
         function forceSyncData() {
-            if (!confirm("Are you sure you want to drop local memory and clear cache?")) return;
-            fetchDataFromGitHub(true);
-        }
+            const syncButton = document.getElementById('btn-force-sync');
+            syncButton.innerText = "⚡ Streaming Repository...";
+            syncButton.disabled = true;
 
-        function calculateSRP(isManualSRPInput = false) {
-            const cost = parseFloat(document.getElementById('item-cost').value) || 0;
-            const units = parseInt(document.getElementById('item-units').value) || 1;
-            const markup = parseFloat(document.getElementById('item-markup').value) || 0;
-            
-            const unitCost = cost / units;
-            document.getElementById('item-unit-cost').value = `₱${unitCost.toFixed(2)}`;
-            
-            const recommendedPrice = unitCost * (1 + (markup / 100));
-            document.getElementById('item-rec-price').value = recommendedPrice.toFixed(2);
-            
-            if (!isManualSRPInput) {
-                document.getElementById('item-price').value = recommendedPrice.toFixed(2);
-            }
-            
-            const srp = parseFloat(document.getElementById('item-price').value) || 0;
-            const unitProfit = srp - unitCost;
-            document.getElementById('item-unit-profit').value = `₱${unitProfit.toFixed(2)}`;
-        }
-
-        function openModal(itemJsonString = null) {
-            document.getElementById('item-form').reset();
-            document.getElementById('item-id').value = '';
-            document.getElementById('item-image-base64').value = '';
-            document.getElementById('item-original-name').value = '';
-            document.getElementById('image-preview-container').innerHTML = "No Img";
-            document.getElementById('item-image-input').value = '';
-
-            if (itemJsonString) {
-                const item = JSON.parse(decodeURIComponent(itemJsonString));
-                document.getElementById('modal-title').innerText = "Edit Product Details";
-                document.getElementById('item-id').value = item.id;
-                document.getElementById('item-name').value = item.name;
-                document.getElementById('item-original-name').value = item.name;
-                document.getElementById('item-category').value = item.category || '';
-                document.getElementById('item-cost').value = item.cost || 0;
-                document.getElementById('item-units').value = item.units || 1;
-                document.getElementById('item-markup').value = item.markup || 12;
-                document.getElementById('item-qty').value = item.qty || 0;
-                document.getElementById('item-price').value = item.price || 0;
-                document.getElementById('item-expiry').value = item.expiry || '';
-
-                // FIX: Check isolated tracking layout instead of bloating item data structure arrays
-                const base64Image = dbImages[item.id] || '';
-                if (base64Image) {
-                    document.getElementById('item-image-base64').value = base64Image;
-                    document.getElementById('image-preview-container').innerHTML = `<img src="${base64Image}" class="w-full h-full object-cover">`;
-                }
-            } else {
-                document.getElementById('modal-title').innerText = "Add New Item";
-            }
-            
-            calculateSRP(itemJsonString ? true : false);
-            document.getElementById('item-modal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('item-modal').classList.add('hidden');
-        }
-
-        function processImageUpload(inputElement) {
-            const file = inputElement.files[0];
-            if (!file) return;
-
-            // Enforce scaling configuration constraints on heavy assets
-            if (file.size > 1024 * 1024) {
-                alert("This picture file is too large. Please select an optimized icon/photo below 1MB to prevent processing crashes.");
-                inputElement.value = '';
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const base64Str = e.target.result;
-                document.getElementById('item-image-base64').value = base64Str;
-                document.getElementById('image-preview-container').innerHTML = `<img src="${base64Str}" class="w-full h-full object-cover">`;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function saveItem(e) {
-            e.preventDefault();
-            
-            const id = document.getElementById('item-id').value || 'prod_' + Date.now();
-            const name = document.getElementById('item-name').value.trim();
-            const originalName = document.getElementById('item-original-name').value;
-            const category = document.getElementById('item-category').value.trim();
-            const cost = parseFloat(document.getElementById('item-cost').value) || 0;
-            const units = parseInt(document.getElementById('item-units').value) || 1;
-            const markup = parseFloat(document.getElementById('item-markup').value) || 0;
-            const qty = parseInt(document.getElementById('item-qty').value) || 0;
-            const price = parseFloat(document.getElementById('item-price').value) || 0;
-            const expiry = document.getElementById('item-expiry').value || '';
-            const imgBase64 = document.getElementById('item-image-base64').value || '';
-
-            // Handle independent images map file updates without duplicating to items list layout arrays
-            if (imgBase64) {
-                dbImages[id] = imgBase64;
-            }
-
-            const existingIdx = db.inventory.findIndex(p => p.id === id);
-            let logType = "New Product";
-            let logChange = qty;
-
-            if (existingIdx > -1) {
-                const oldQty = db.inventory[existingIdx].qty;
-                logChange = qty - oldQty;
-                logType = logChange >= 0 ? "Addition" : "Destock";
-                
-                db.inventory[existingIdx] = { id, name, category, cost, units, markup, qty, price, expiry };
-            } else {
-                db.inventory.push({ id, name, category, cost, units, markup, qty, price, expiry });
-            }
-
-            db.history.unshift({
-                time: Date.now(),
-                name: name,
-                type: logType,
-                change: logChange,
-                notes: document.getElementById('item-id').value ? `Modified system properties registry item` : `Initial profile deployment`
+            fetchDataFromGitHub(true).then(() => {
+                alert("Database matrix context cleared and parsed instantly from primary upstream repository records!");
+            }).catch((err) => {
+                alert("Could not update stream context: " + err.message);
+            }).finally(() => {
+                syncButton.innerText = "⚡ Force Sync Database";
+                syncButton.disabled = false;
             });
-
-            closeModal();
-            renderApp();
-            pushDataToGitHub(`Saved profile update for target: ${name}`);
-        }
-
-        function deleteItem(id, name) {
-            if (!confirm(`Are you absolutely sure you want to permanently delete "${name}"?`)) return;
-
-            db.inventory = db.inventory.filter(p => p.id !== id);
-            // Drop image map key completely to save database size when items are deleted
-            delete dbImages[id];
-
-            db.history.unshift({
-                time: Date.now(),
-                name: name,
-                type: "Deletion",
-                change: 0,
-                notes: "Purged product systematically from records management console"
-            });
-
-            renderApp();
-            pushDataToGitHub(`Purged data footprint for: ${name}`);
-        }
-
-        function updateInlineQuantity(id, changeAmount) {
-            const idx = db.inventory.findIndex(p => p.id === id);
-            if (idx === -1) return;
-
-            const targetItem = db.inventory[idx];
-            const oldQty = targetItem.qty;
-            const newQty = Math.max(0, oldQty + changeAmount);
-            
-            if (oldQty === newQty) return;
-            targetItem.qty = newQty;
-
-            db.history.unshift({
-                time: Date.now(),
-                name: targetItem.name,
-                type: changeAmount > 0 ? "Restock" : "Sale / Usage",
-                change: changeAmount,
-                notes: `Counter altered from dashboard quick actions button layer`
-            });
-
-            renderApp();
-            pushDataToGitHub(`Inline quantity modification applied on context tracking label ${targetItem.name}`);
-        }
-
-        function handleSearchInput() {
-            renderInventoryGrid();
-        }
-
-        function clearSearch() {
-            document.getElementById('inventory-search').value = '';
-            renderInventoryGrid();
-        }
-
-        function handleSortPickerChange() {
-            const selection = document.getElementById('sort-picker').value;
-            const pieces = selection.split('-');
-            currentSortColumn = pieces[0];
-            currentSortDirection = pieces[1];
-            renderInventoryGrid();
         }
 
         function renderApp() {
-            renderDashboardMetrics();
+            renderDashboard();
             renderInventoryGrid();
-            renderHistoryLog();
+            renderHistoryTable();
         }
 
-        function renderDashboardMetrics() {
-            let totalItems = db.inventory.length;
-            let totalStock = 0;
-            let lowStockCount = 0;
-            let outOfStockCount = 0;
-            let totalRetailValue = 0;
-            let totalInventoryCost = 0;
+        function renderDashboard() {
+            let totalItemsCount = db.inventory.length;
+            let totalStockVolumeValue = 0;
+            let combinedRetailMarketVal = 0;
+            let combinedInvestmentCostVal = 0;
+            let thresholdMarginLimit = (db.config && db.config.lowThreshold) ? db.config.lowThreshold : 5;
 
-            const lowThreshold = db.config ? (db.config.lowThreshold || 5) : 5;
+            let lowStockItemsArray = [];
+            let outOfStockItemsArray = [];
+            let structuralExpiringItemsArray = [];
 
-            const lowStockRows = [];
-            const outOfStockRows = [];
-            const expiryRows = [];
+            const dateTodayMarker = new Date();
+            const dateExpirationThresholdMargin = new Date();
+            dateExpirationThresholdMargin.setDate(dateTodayMarker.getDate() + 30);
 
-            const today = new Date();
-            const criticalWindow = new Date();
-            criticalWindow.setDate(today.getDate() + 30);
+            db.inventory.forEach(product => {
+                let currentItemQuantityCount = parseInt(product.qty) || 0;
+                let activeSellingPriceValue = parseFloat(product.price) || 0;
+                let singleSupplierCostValue = parseFloat(product.cost) || 0;
+                let packageUnitCapacityMultiplier = parseInt(product.units) || 1;
 
-            db.inventory.forEach(item => {
-                totalStock += item.qty;
-                const unitCost = (item.cost || 0) / (item.units || 1);
-                totalInventoryCost += (unitCost * item.qty);
-                totalRetailValue += ((item.price || 0) * item.qty);
+                let trueUnitCostBasis = singleSupplierCostValue / packageUnitCapacityMultiplier;
 
-                if (item.qty === 0) {
-                    outOfStockCount++;
-                    outOfStockRows.push(`
-                        <tr class="border-b border-gray-50">
-                            <td class="p-3 font-semibold text-gray-800">${item.name}</td>
-                            <td class="p-3 text-xs"><span class="bg-gray-100 px-2 py-0.5 rounded text-gray-600 font-medium">${item.category || 'General'}</span></td>
-                            <td class="p-3 text-center"><span class="text-rose-600 font-bold text-xs uppercase tracking-wider">Empty</span></td>
-                        </tr>
-                    `);
-                } else if (item.qty <= lowThreshold) {
-                    lowStockCount++;
-                    lowStockRows.push(`
-                        <tr class="border-b border-gray-50">
-                            <td class="p-3 font-semibold text-gray-800">${item.name}</td>
-                            <td class="p-3 text-xs"><span class="bg-gray-100 px-2 py-0.5 rounded text-gray-600 font-medium">${item.category || 'General'}</span></td>
-                            <td class="p-3 text-center font-mono font-bold text-amber-600 bg-amber-50/50 rounded">${item.qty} units</td>
-                        </tr>
-                    `);
+                totalStockVolumeValue += currentItemQuantityCount;
+                combinedRetailMarketVal += (currentItemQuantityCount * activeSellingPriceValue);
+                combinedInvestmentCostVal += (currentItemQuantityCount * trueUnitCostBasis);
+
+                if (currentItemQuantityCount === 0) {
+                    outOfStockItemsArray.push(product);
+                } else if (currentItemQuantityCount <= thresholdMarginLimit) {
+                    lowStockItemsArray.push(product);
                 }
 
-                if (item.expiry) {
-                    const expiryDate = new Date(item.expiry);
-                    if (expiryDate <= criticalWindow) {
-                        const daysLeft = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
-                        let styleClass = "text-emerald-600 bg-emerald-50";
-                        let statusText = `${daysLeft} Days Left`;
-                        
-                        if (daysLeft <= 0) {
-                            styleClass = "text-rose-700 bg-rose-100 font-black animate-pulse";
-                            statusText = "Expired";
-                        } else if (daysLeft <= 7) {
-                            styleClass = "text-amber-700 bg-amber-100 font-bold";
+                if (product.expiry && product.expiry.trim() !== "") {
+                    const parsedExpiryDateObj = new Date(product.expiry);
+                    if (!isNaN(parsedExpiryDateObj.getTime())) {
+                        if (parsedExpiryDateObj >= dateTodayMarker && parsedExpiryDateObj <= dateExpirationThresholdMargin) {
+                            structuralExpiringItemsArray.push(product);
                         }
-
-                        expiryRows.push(`
-                            <tr class="border-b border-gray-50">
-                                <td class="p-3 font-semibold text-gray-800">${item.name}</td>
-                                <td class="p-3 text-xs text-gray-500">${item.category || 'General'}</td>
-                                <td class="p-3 text-xs font-mono">${expiryDate.toLocaleDateString()}</td>
-                                <td class="p-3 text-center"><span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${styleClass}">${statusText}</span></td>
-                            </tr>
-                        `);
                     }
                 }
             });
 
-            document.getElementById('stat-retail-value').innerText = `₱${totalRetailValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            document.getElementById('stat-inventory-cost').innerText = `₱${totalInventoryCost.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            document.getElementById('stat-potential-profit').innerText = `₱${Math.max(0, totalRetailValue - totalInventoryCost).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('stat-retail-value').innerText = "₱" + combinedRetailMarketVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('stat-inventory-cost').innerText = "₱" + combinedInvestmentCostVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             
-            document.getElementById('stat-total-items').innerText = totalItems;
-            document.getElementById('stat-total-stock').innerText = totalStock;
-            document.getElementById('stat-low-stock').innerText = lowStockCount;
-            document.getElementById('stat-out-of-stock').innerText = outOfStockCount;
+            let structuralDifferenceMarginProfit = combinedRetailMarketVal - combinedInvestmentCostVal;
+            document.getElementById('stat-potential-profit').innerText = "₱" + structuralDifferenceMarginProfit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-            document.getElementById('dash-lowstock-tbody').innerHTML = lowStockRows.length ? lowStockRows.join('') : `<tr><td colspan="3" class="p-4 text-center text-gray-400 italic">No low stock items detected. All products clear!</td></tr>`;
-            document.getElementById('dash-outofstock-tbody').innerHTML = outOfStockRows.length ? outOfStockRows.join('') : `<tr><td colspan="3" class="p-4 text-center text-gray-400 italic">Excellent! No out of stock items registered.</td></tr>`;
-            document.getElementById('dash-expiry-tbody').innerHTML = expiryRows.length ? expiryRows.join('') : `<tr><td colspan="4" class="p-4 text-center text-gray-400 italic">No upcoming product expirations to monitor.</td></tr>`;
+            document.getElementById('stat-total-items').innerText = totalItemsCount;
+            document.getElementById('stat-total-stock').innerText = totalStockVolumeValue;
+            document.getElementById('stat-low-stock').innerText = lowStockItemsArray.length;
+            document.getElementById('stat-out-of-stock').innerText = outOfStockItemsArray.length;
+
+            // Render Low Stock Element Blocks Matrix
+            const lowStockTableBodyElement = document.getElementById('dash-lowstock-tbody');
+            if (lowStockItemsArray.length === 0) {
+                lowStockTableBodyElement.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-400 italic">No low stock items detected. All products clear!</td></tr>`;
+            } else {
+                lowStockTableBodyElement.innerHTML = lowStockItemsArray.map(item => `
+                    <tr class="border-b border-gray-50 hover:bg-gray-50/50">
+                        <td class="p-3 font-semibold text-gray-800">${item.name}</td>
+                        <td class="p-3 text-xs text-gray-400 font-medium">${item.category || 'General'}</td>
+                        <td class="p-3 text-center"><span class="bg-amber-100 text-amber-800 font-bold px-2.5 py-1 text-xs rounded-full">${item.qty} units</span></td>
+                    </tr>
+                `).join('');
+            }
+
+            // Render Out Of Stock Element Blocks Matrix
+            const outOfStockTableBodyElement = document.getElementById('dash-outofstock-tbody');
+            if (outOfStockItemsArray.length === 0) {
+                outOfStockTableBodyElement.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-400 italic">Excellent! No out of stock items registered.</td></tr>`;
+            } else {
+                outOfStockTableBodyElement.innerHTML = outOfStockItemsArray.map(item => `
+                    <tr class="border-b border-gray-50 hover:bg-gray-50/50">
+                        <td class="p-3 font-semibold text-gray-800">${item.name}</td>
+                        <td class="p-3 text-xs text-gray-400 font-medium">${item.category || 'General'}</td>
+                        <td class="p-3 text-center"><span class="bg-rose-100 text-rose-800 font-bold px-2.5 py-1 text-xs rounded-full">Empty</span></td>
+                    </tr>
+                `).join('');
+            }
+
+            // Render Expiration Matrix Warnings Layer
+            const expirationTableBodyElement = document.getElementById('dash-expiry-tbody');
+            if (structuralExpiringItemsArray.length === 0) {
+                expirationTableBodyElement.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-400 italic">No upcoming product expirations to monitor.</td></tr>`;
+            } else {
+                expirationTableBodyElement.innerHTML = structuralExpiringItemsArray.map(item => {
+                    const daysRemainingIndexCount = Math.ceil((new Date(item.expiry) - dateTodayMarker) / (1000 * 60 * 60 * 24));
+                    return `
+                        <tr class="border-b border-gray-50 hover:bg-gray-50/50 text-sm">
+                            <td class="p-3 font-semibold text-gray-800">${item.name}</td>
+                            <td class="p-3 text-xs text-gray-500">${item.category || 'General'}</td>
+                            <td class="p-3 font-mono text-xs text-rose-600 font-bold">${new Date(item.expiry).toLocaleDateString()}</td>
+                            <td class="p-3 text-center"><span class="bg-rose-50 border border-rose-200 text-rose-700 px-2 py-0.5 rounded text-xs font-black font-mono">In ${daysRemainingIndexCount} Days</span></td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        }
+
+        function handleSearchInput() {
+            const queryText = document.getElementById('inventory-search').value.trim();
+            const clearButton = document.getElementById('search-clear-btn');
+            if (queryText.length > 0) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            renderInventoryGrid();
+        }
+
+        function clearSearch() {
+            document.getElementById('inventory-search').value = "";
+            document.getElementById('search-clear-btn').classList.add('hidden');
+            renderInventoryGrid();
+        }
+
+        function handleSortPickerChange() {
+            const choice = document.getElementById('sort-picker').value;
+            if (choice === 'name-asc') { currentSortColumn = 'name'; currentSortDirection = 'asc'; }
+            else if (choice === 'name-desc') { currentSortColumn = 'name'; currentSortDirection = 'desc'; }
+            else if (choice === 'stock-asc') { currentSortColumn = 'qty'; currentSortDirection = 'asc'; }
+            else if (choice === 'stock-desc') { currentSortColumn = 'qty'; currentSortDirection = 'desc'; }
+            else if (choice === 'expiry-asc') { currentSortColumn = 'expiry'; currentSortDirection = 'asc'; }
+            renderInventoryGrid();
         }
 
         function renderInventoryGrid() {
-            const grid = document.getElementById('inventory-card-grid');
-            const searchInput = document.getElementById('inventory-search');
-            const clearBtn = document.getElementById('search-clear-btn');
-            
-            const query = searchInput.value.trim().toLowerCase();
-            if (query) {
-                clearBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
-            }
+            const gridContainer = document.getElementById('inventory-card-grid');
+            const searchKeywordFilterString = document.getElementById('inventory-search').value.toLowerCase().trim();
 
-            let filtered = db.inventory.filter(item => {
-                return item.name.toLowerCase().includes(query) || (item.category && item.category.toLowerCase().includes(query));
+            let targetItemsListArray = db.inventory.filter(el => {
+                const matchesName = (el.name || '').toLowerCase().includes(searchKeywordFilterString);
+                const matchesCategory = (el.category || '').toLowerCase().includes(searchKeywordFilterString);
+                return matchesName || matchesCategory;
             });
 
-            const lowThreshold = db.config ? (db.config.lowThreshold || 5) : 5;
+            targetItemsListArray.sort((firstElement, secondElement) => {
+                let evaluationValueA = firstElement[currentSortColumn];
+                let evaluationValueB = secondElement[currentSortColumn];
 
-            filtered.sort((a, b) => {
-                let valA, valB;
-                if (currentSortColumn === 'name') {
-                    valA = a.name.toLowerCase();
-                    valB = b.name.toLowerCase();
-                } else if (currentSortColumn === 'stock') {
-                    valA = a.qty;
-                    valB = b.qty;
+                if (currentSortColumn === 'qty') {
+                    evaluationValueA = parseInt(evaluationValueA) || 0;
+                    evaluationValueB = parseInt(evaluationValueB) || 0;
                 } else if (currentSortColumn === 'expiry') {
-                    valA = a.expiry ? new Date(a.expiry).getTime() : Infinity;
-                    valB = b.expiry ? new Date(b.expiry).getTime() : Infinity;
+                    evaluationValueA = evaluationValueA ? new Date(evaluationValueA).getTime() : Infinity;
+                    evaluationValueB = evaluationValueB ? new Date(evaluationValueB).getTime() : Infinity;
+                } else {
+                    evaluationValueA = (evaluationValueA || '').toString().toLowerCase();
+                    evaluationValueB = (evaluationValueB || '').toString().toLowerCase();
                 }
-                
-                if (valA < valB) return currentSortDirection === 'asc' ? -1 : 1;
-                if (valA > valB) return currentSortDirection === 'asc' ? 1 : -1;
+
+                if (evaluationValueA < evaluationValueB) return currentSortDirection === 'asc' ? -1 : 1;
+                if (evaluationValueA > evaluationValueB) return currentSortDirection === 'asc' ? 1 : -1;
                 return 0;
             });
 
-            if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 bg-white border rounded-3xl italic">No tracking assets matched your current search parameters.</div>`;
+            if (targetItemsListArray.length === 0) {
+                gridContainer.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 italic text-sm bg-white rounded-3xl border border-dashed border-slate-200">No items found matching the selected search query criteria.</div>`;
                 return;
             }
 
-            grid.innerHTML = filtered.map(item => {
-                const escapedJson = encodeURIComponent(JSON.stringify(item));
-                
-                // FIX: Look inside dbImages instead of item data properties directly
-                const imageSource = dbImages[item.id] || '';
-                
-                let mediaFrameDOM = `
-                    <div class="w-full aspect-square bg-slate-100 flex items-center justify-center text-slate-300 font-bold text-sm tracking-wider uppercase">
-                        No image
+            gridContainer.innerHTML = targetItemsListArray.map(product => {
+                const totalStockVolumeUnitsCount = parseInt(product.qty) || 0;
+                const unitSellingPriceValue = parseFloat(product.price) || 0;
+                const wholesaleSupplierCostValue = parseFloat(product.cost) || 0;
+                const packageCapacityCountMultiplier = parseInt(product.units) || 1;
+
+                const isolatedPieceCostBasis = wholesaleSupplierCostValue / packageCapacityCountMultiplier;
+                const netProfitPerPieceMarginValue = unitSellingPriceValue - isolatedPieceCostBasis;
+
+                const mediaImageMapBase64PointerReference = dbImages[product.id] || null;
+
+                let itemImageDOMMarkupBlock = `
+                    <div class="w-full h-32 bg-slate-100 flex items-center justify-center text-slate-300 font-bold text-xs uppercase tracking-wider select-none border-b border-slate-100">
+                        📦 No Image
                     </div>
                 `;
 
-                if (imageSource && imageSource.startsWith('data:image')) {
-                    mediaFrameDOM = `
-                        <div class="w-full aspect-square bg-white relative">
-                            <img src="${imageSource}" alt="${item.name}" class="w-full h-full object-cover">
+                if (mediaImageMapBase64PointerReference) {
+                    itemImageDOMMarkupBlock = `
+                        <div class="w-full h-32 bg-slate-50 relative overflow-hidden border-b border-slate-100">
+                            <img src="${mediaImageMapBase64PointerReference}" alt="${product.name}" class="w-full h-full object-cover">
                         </div>
                     `;
                 }
 
-                let badgeDOM = '';
-                if (item.qty === 0) {
-                    badgeDOM = `<span class="absolute top-2 left-2 bg-rose-600 text-white text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded shadow-sm z-10">Out of Stock</span>`;
-                } else if (item.qty <= lowThreshold) {
-                    badgeDOM = `<span class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded shadow-sm z-10">Low Stock</span>`;
+                let volumeBadgeClassMarkupTemplate = "bg-emerald-50 text-emerald-700 border-emerald-200";
+                if (totalStockVolumeUnitsCount === 0) {
+                    volumeBadgeClassMarkupTemplate = "bg-rose-50 text-rose-700 border-rose-200 animate-pulse";
+                } else if (totalStockVolumeUnitsCount <= (db.config.lowThreshold || 5)) {
+                    volumeBadgeClassMarkupTemplate = "bg-amber-50 text-amber-700 border-amber-200";
+                }
+
+                let formattedExpirationLabelString = "";
+                if (product.expiry && product.expiry.trim() !== "") {
+                    const dateObjectReference = new Date(product.expiry);
+                    if (!isNaN(dateObjectReference.getTime())) {
+                        formattedExpirationLabelString = `
+                            <div class="text-[10px] bg-slate-100 border border-slate-200 text-slate-600 rounded px-1.5 py-0.5 mt-2 font-mono font-medium inline-block">
+                                ⏳ Exp: ${dateObjectReference.toLocaleDateString()}
+                            </div>
+                        `;
+                    }
                 }
 
                 return `
-                    <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-xs flex flex-col relative group hover:shadow-md transition duration-200">
-                        ${badgeDOM}
-                        ${mediaFrameDOM}
-                        
-                        <div class="p-4 flex-1 flex flex-col justify-between">
-                            <div>
-                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">${item.category || 'General'}</span>
-                                <h4 class="font-black text-slate-800 text-base leading-tight line-clamp-2">${item.name}</h4>
-                                <p class="font-mono text-indigo-600 font-bold text-lg mt-1">₱${(item.price || 0).toFixed(2)}</p>
-                            </div>
-
-                            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                                <div>
-                                    <span class="text-[10px] font-semibold text-slate-400 block uppercase">Stock</span>
-                                    <span class="font-mono text-sm font-bold ${item.qty === 0 ? 'text-rose-600' : 'text-slate-700'}">${item.qty} units</span>
-                                </div>
+                    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between group">
+                        <div>
+                            ${itemImageDOMMarkupBlock}
+                            <div class="p-3.5">
+                                <span class="text-[10px] uppercase font-black tracking-wider text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded-md">${product.category || 'General'}</span>
+                                <h4 class="font-bold text-slate-800 text-sm mt-1.5 line-clamp-2 group-hover:text-indigo-600 transition" title="${product.name}">${product.name}</h4>
                                 
-                                <div class="flex items-center gap-1.5">
-                                    <button onclick="updateInlineQuantity('${item.id}', -1)" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-rose-100 hover:text-rose-600 font-bold text-sm flex items-center justify-center transition">-</button>
-                                    <button onclick="updateInlineQuantity('${item.id}', 1)" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-emerald-100 hover:text-emerald-600 font-bold text-sm flex items-center justify-center transition">+</button>
-                                    <button onclick="openModal('${escapedJson}')" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-indigo-100 hover:text-indigo-600 font-bold text-sm flex items-center justify-center transition">✏️</button>
-                                    <button onclick="deleteItem('${item.id}', '${item.name}')" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-rose-100 hover:text-rose-600 font-bold text-sm flex items-center justify-center transition">🗑️</button>
+                                <div class="flex items-center gap-1.5 mt-2">
+                                    <span class="text-xs font-semibold text-slate-400">Stock:</span>
+                                    <span class="text-xs font-black px-2 py-0.5 rounded border ${volumeBadgeClassMarkupTemplate}">${totalStockVolumeUnitsCount} items</span>
                                 </div>
+
+                                ${formattedExpirationLabelString}
+
+                                <div class="grid grid-cols-2 gap-1 border-t border-slate-50 mt-3 pt-2.5 text-left">
+                                    <div>
+                                        <p class="text-[10px] font-medium text-slate-400 uppercase">Cost/Pc</p>
+                                        <p class="font-mono text-xs font-bold text-slate-600">₱${isolatedPieceCostBasis.toFixed(2)}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-medium text-emerald-500 uppercase">Profit/Pc</p>
+                                        <p class="font-mono text-xs font-bold text-emerald-600">₱${netProfitPerPieceMarginValue.toFixed(2)}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between gap-1.5">
+                            <span class="font-mono font-black text-sm text-indigo-700">₱${unitSellingPriceValue.toFixed(2)}</span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="openModal('${product.id}')" class="bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-200 p-1.5 rounded-lg text-xs transition shadow-2xs" title="Edit Item">✏️</button>
+                                <button onclick="adjustStockValuePrompt('${product.id}', 1)" class="bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white p-1.5 rounded-lg text-xs font-black transition shadow-2xs" title="Add 1 Stock">+</button>
+                                <button onclick="adjustStockValuePrompt('${product.id}', -1)" class="bg-rose-50 hover:bg-rose-600 text-rose-700 hover:text-white p-1.5 rounded-lg text-xs font-black transition shadow-2xs" title="Deduct 1 Stock">−</button>
                             </div>
                         </div>
                     </div>
@@ -969,15 +968,20 @@
             }).join('');
         }
 
-        function renderHistoryLog() {
-            const tbody = document.getElementById('history-table-body');
+        function renderHistoryTable() {
+            const tableBodyContainer = document.getElementById('history-table-body');
             if (!db.history || db.history.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400 italic">No operations recorded yet.</td></tr>`;
+                tableBodyContainer.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-gray-400 italic bg-gray-50/50">No logged transaction records found in the system database history index file.</td></tr>`;
                 return;
             }
 
-            tbody.innerHTML = db.history.map(log => {
+            const matrixLogsSortedArray = [...db.history].sort((a, b) => {
+                return new Date(b.time || 0) - new Date(a.time || 0);
+            });
+
+            tableBodyContainer.innerHTML = matrixLogsSortedArray.map(log => {
                 let badgeColor = "text-amber-600";
+                
                 if (log.type === 'New Product' || log.type === 'Addition' || log.type === 'Restock') badgeColor = "text-emerald-600";
                 if (log.type === 'Deletion') badgeColor = "text-rose-600";
                 if (log.type === 'Copy' || log.type === 'Clone / Copy') badgeColor = "text-sky-600";
@@ -985,60 +989,289 @@
                 if (log.type === 'Destock' || log.type === 'Sale / Usage') badgeColor = "text-rose-500";
 
                 return `
-                    <tr class="border-b border-gray-50">
+                    <tr class="border-b border-gray-50 hover:bg-gray-50/30 transition">
                         <td class="p-4 text-xs font-mono text-gray-400">${log.time ? new Date(log.time).toLocaleString() : 'N/A'}</td>
                         <td class="p-4 font-medium text-slate-800">${log.name || 'Unknown'}</td>
                         <td class="p-4"><span class="text-xs uppercase font-bold tracking-wider ${badgeColor}">${log.type || 'Transaction'}</span></td>
                         <td class="p-4 font-mono font-bold">${(Number(log.change) || 0) > 0 ? '+' + log.change : log.change}</td>
-                        <td class="p-4 text-xs italic text-gray-500">${log.notes || ''}</td>
+                        <td class="p-4 text-xs italic text-gray-500 max-w-xs truncate" title="${log.notes || ''}">${log.notes || '—'}</td>
                     </tr>
                 `;
             }).join('');
         }
 
-        function backupData() {
-            const backupPayload = {
-                version: "2.1-split",
-                timestamp: Date.now(),
-                db: db,
-                images: dbImages
-            };
-            const str = JSON.stringify(backupPayload, null, 2);
-            const blob = new Blob([str], {type: "application/json"});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `abkd_inventory_backup_${new Date().toISOString().slice(0,10)}.json`;
-            a.click();
+        function openModal(editingItemId = null) {
+            document.getElementById('item-form').reset();
+            document.getElementById('item-id').value = '';
+            document.getElementById('item-image-base64').value = '';
+            document.getElementById('item-original-name').value = '';
+            document.getElementById('image-preview-container').innerHTML = "No Img";
+            document.getElementById('item-image-input').value = '';
+
+            if (editingItemId) {
+                document.getElementById('modal-title').innerText = "Edit Product Item";
+                const matchingItemObj = db.inventory.find(i => i.id === editingItemId);
+                if (matchingItemObj) {
+                    document.getElementById('item-id').value = matchingItemObj.id;
+                    document.getElementById('item-name').value = matchingItemObj.name;
+                    document.getElementById('item-original-name').value = matchingItemObj.name;
+                    document.getElementById('item-category').value = matchingItemObj.category || '';
+                    document.getElementById('item-cost').value = matchingItemObj.cost || 0;
+                    document.getElementById('item-units').value = matchingItemObj.units || 1;
+                    document.getElementById('item-markup').value = matchingItemObj.markup || 12;
+                    document.getElementById('item-qty').value = matchingItemObj.qty || 0;
+                    document.getElementById('item-price').value = matchingItemObj.price || 0;
+                    document.getElementById('item-expiry').value = matchingItemObj.expiry || '';
+
+                    const base64ImgStringPointer = dbImages[matchingItemObj.id];
+                    if (base64ImgStringPointer) {
+                        document.getElementById('item-image-base64').value = base64ImgStringPointer;
+                        document.getElementById('image-preview-container').innerHTML = `<img src="${base64ImgStringPointer}" class="w-full h-full object-cover">`;
+                    }
+                    calculateSRP(true); 
+                }
+            } else {
+                document.getElementById('modal-title').innerText = "Add New Inventory Item";
+                document.getElementById('item-units').value = 1;
+                document.getElementById('item-markup').value = 12;
+                calculateSRP(false);
+            }
+
+            document.getElementById('item-modal').classList.remove('hidden');
         }
 
-        function restoreData(input) {
-            const file = input.files[0];
-            if (!file) return;
+        function closeModal() {
+            document.getElementById('item-modal').classList.add('hidden');
+        }
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
+        function calculateSRP(userManuallyTypedSRP = false) {
+            const wholesaleCostValue = parseFloat(document.getElementById('item-cost').value) || 0;
+            const packageUnitsCapacityCount = parseInt(document.getElementById('item-units').value) || 1;
+            const percentageMarkupValue = parseFloat(document.getElementById('item-markup').value) || 0;
+            const inputFieldSRPElement = document.getElementById('item-price');
+
+            const mathematicallyCalculatedUnitCost = wholesaleCostValue / packageUnitsCapacityCount;
+            document.getElementById('item-unit-cost').value = "₱" + mathematicallyCalculatedUnitCost.toFixed(2);
+
+            const calculatedRecommendedSellingPrice = mathematicallyCalculatedUnitCost * (1 + (percentageMarkupValue / 100));
+            document.getElementById('item-rec-price').value = calculatedRecommendedSellingPrice.toFixed(2);
+
+            if (!userManuallyTypedSRP) {
+                inputFieldSRPElement.value = calculatedRecommendedSellingPrice.toFixed(2);
+            }
+
+            const finalizedActiveSellingPriceValue = parseFloat(inputFieldSRPElement.value) || 0;
+            const singleUnitProfitMarginPieceValue = finalizedActiveSellingPriceValue - mathematicallyCalculatedUnitCost;
+            document.getElementById('item-unit-profit').value = "₱" + singleUnitProfitMarginPieceValue.toFixed(2);
+        }
+
+        function processImageUpload(inputElement) {
+            const uploadedFile = inputElement.files[0];
+            if (!uploadedFile) return;
+
+            const imageFileReader = new FileReader();
+            imageFileReader.onload = function(event) {
+                const imgElement = new Image();
+                imgElement.onload = function() {
+                    // Maximum image resolution dimensions boundary limits
+                    const maxDimensionLimit = 400; 
+                    let renderedWidth = imgElement.width;
+                    let renderedHeight = imgElement.height;
+
+                    if (renderedWidth > maxDimensionLimit || renderedHeight > maxDimensionLimit) {
+                        if (renderedWidth > renderedHeight) {
+                            renderedHeight = Math.round((renderedHeight * maxDimensionLimit) / renderedWidth);
+                            renderedWidth = maxDimensionLimit;
+                        } else {
+                            renderedWidth = Math.round((renderedWidth * maxDimensionLimit) / renderedHeight);
+                            renderedHeight = maxDimensionLimit;
+                        }
+                    }
+
+                    // Dynamically generate canvas structure to process scaling pipelines offline
+                    const computationCanvas = document.createElement('canvas');
+                    computationCanvas.width = renderedWidth;
+                    computationCanvas.height = renderedHeight;
+                    const graphicContext = computationCanvas.getContext('2d');
+                    graphicContext.drawImage(imgElement, 0, 0, renderedWidth, renderedHeight);
+
+                    // Output low memory impact image profile down to 0.6 quality mapping scale factor
+                    const downscaledCompressedBase64Payload = computationCanvas.toDataURL('image/jpeg', 0.6);
+
+                    document.getElementById('item-image-base64').value = downscaledCompressedBase64Payload;
+                    document.getElementById('image-preview-container').innerHTML = `<img src="${downscaledCompressedBase64Payload}" class="w-full h-full object-cover">`;
+                };
+                imgElement.src = event.target.result;
+            };
+            imageFileReader.readAsDataURL(uploadedFile);
+        }
+
+        function saveItem(e) {
+            e.preventDefault();
+
+            const inputHiddenIdValue = document.getElementById('item-id').value.trim();
+            const inputNameValue = document.getElementById('item-name').value.trim();
+            const originalItemNameText = document.getElementById('item-original-name').value.trim();
+            const inputCategoryValue = document.getElementById('item-category').value.trim();
+            const inputWholesaleCostValue = parseFloat(document.getElementById('item-cost').value) || 0;
+            const inputPackageUnitsCapacityCount = parseInt(document.getElementById('item-units').value) || 1;
+            const inputPercentageMarkupValue = parseFloat(document.getElementById('item-markup').value) || 0;
+            const inputQuantityCountValue = parseInt(document.getElementById('item-qty').value) || 0;
+            const inputPriceSRPValue = parseFloat(document.getElementById('item-price').value) || 0;
+            const inputExpirationDateValue = document.getElementById('item-expiry').value;
+            const inputBase64ImagePayloadString = document.getElementById('item-image-base64').value;
+
+            let auditLogActionTypeLabelString = "New Product";
+            let numericalQuantityDifferenceOffsetValue = inputQuantityCountValue;
+
+            if (inputHiddenIdValue) {
+                const legacyTargetIndexPointer = db.inventory.findIndex(i => i.id === inputHiddenIdValue);
+                if (legacyTargetIndexPointer !== -1) {
+                    const existingProductRecordItem = db.inventory[legacyTargetIndexPointer];
+                    numericalQuantityDifferenceOffsetValue = inputQuantityCountValue - (parseInt(existingProductRecordItem.qty) || 0);
+                    auditLogActionTypeLabelString = "Product Update";
+
+                    db.inventory[legacyTargetIndexPointer] = {
+                        id: inputHiddenIdValue,
+                        name: inputNameValue,
+                        category: inputCategoryValue,
+                        cost: inputWholesaleCostValue,
+                        units: inputPackageUnitsCapacityCount,
+                        markup: inputPercentageMarkupValue,
+                        qty: inputQuantityCountValue,
+                        price: inputPriceSRPValue,
+                        expiry: inputExpirationDateValue
+                    };
+
+                    if (inputBase64ImagePayloadString) {
+                        dbImages[inputHiddenIdValue] = inputBase64ImagePayloadString;
+                    }
+                }
+            } else {
+                const uniqueNewGeneratedProductIdToken = 'item_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+                
+                db.inventory.push({
+                    id: uniqueNewGeneratedProductIdToken,
+                    name: inputNameValue,
+                    category: inputCategoryValue,
+                    cost: inputWholesaleCostValue,
+                    units: inputPackageUnitsCapacityCount,
+                    markup: inputPercentageMarkupValue,
+                    qty: inputQuantityCountValue,
+                    price: inputPriceSRPValue,
+                    expiry: inputExpirationDateValue
+                });
+
+                if (inputBase64ImagePayloadString) {
+                    dbImages[uniqueNewGeneratedProductIdToken] = inputBase64ImagePayloadString;
+                }
+            }
+
+            if (!db.history) db.history = [];
+            db.history.push({
+                time: new Date().toISOString(),
+                name: inputNameValue,
+                type: auditLogActionTypeLabelString,
+                change: numericalQuantityDifferenceOffsetValue,
+                notes: `Form Editor save action confirmation: ${inputNameValue} structure parameters applied.`
+            });
+
+            closeModal();
+            renderApp();
+            pushDataToGitHub(`Form transaction modification saved for product tracking unit: ${inputNameValue}`);
+        }
+
+        function adjustStockValuePrompt(targetProductIdToken, unitOffsetChangeValue) {
+            const uniqueProductRowItemIndex = db.inventory.findIndex(i => i.id === targetProductIdToken);
+            if (uniqueProductRowItemIndex === -1) return;
+
+            const productTargetItemObj = db.inventory[uniqueProductRowItemIndex];
+            let rawEvaluatedQuantityVolumeValue = parseInt(productTargetItemObj.qty) || 0;
+            let dynamicComputedNewQuantityTotal = rawEvaluatedQuantityVolumeValue + unitOffsetChangeValue;
+
+            if (dynamicComputedNewQuantityTotal < 0) {
+                alert("Inventory volume allocations cannot fall below baseline mathematical limits!");
+                return;
+            }
+
+            productTargetItemObj.qty = dynamicComputedNewQuantityTotal;
+
+            let logActionLabelString = unitOffsetChangeValue > 0 ? "Restock" : "Sale / Usage";
+            if (!db.history) db.history = [];
+            db.history.push({
+                time: new Date().toISOString(),
+                name: productTargetItemObj.name,
+                type: logActionLabelString,
+                change: unitOffsetChangeValue,
+                notes: `Quick action adjust triggers: Stock quantity increment changes saved.`
+            });
+
+            renderApp();
+            pushDataToGitHub(`Quick counter status volume allocation adjustment performed on: ${productTargetItemObj.name}`);
+        }
+
+        function backupData() {
+            const compilationBackupObject = {
+                timestamp: new Date().toISOString(),
+                db_core: db,
+                db_images: dbImages
+            };
+
+            const JSONStringDataUri = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(compilationBackupObject, null, 2));
+            const virtualAnchorDownloadLink = document.createElement('a');
+            virtualAnchorDownloadLink.setAttribute("href", JSONStringDataUri);
+            virtualAnchorDownloadLink.setAttribute("download", `abkd_backup_${Date.now()}.json`);
+            document.body.appendChild(virtualAnchorDownloadLink);
+            virtualAnchorDownloadLink.click();
+            virtualAnchorDownloadLink.remove();
+        }
+
+        function restoreData(inputElementReference) {
+            const physicalSelectedFile = inputElementReference.files[0];
+            if (!physicalSelectedFile) return;
+
+            const backupFileReaderInstance = new FileReader();
+            backupFileReaderInstance.onload = function(e) {
                 try {
-                    const parsed = JSON.parse(e.target.result);
-                    if (parsed.db && parsed.images) {
-                        if (confirm("Restore metadata inventory dataset and image assets from file?")) {
-                            db = parsed.db;
-                            dbImages = parsed.images;
-                            renderApp();
-                            pushDataToGitHub("Restored complete dataset configuration from local backup archive");
-                            alert("Backup profiles successfully restored and synchronized.");
+                    const parsedDataPackage = JSON.parse(e.target.result);
+                    
+                    if (!parsedDataPackage.db_core && !parsedDataPackage.inventory) {
+                        alert("Invalid file blueprint specification: Signature properties parameters mapping missing.");
+                        return;
+                    }
+
+                    const optInventoryConfirm = confirm("Load item inventory list entries?");
+                    const optHistoryConfirm = confirm("Merge transaction log indices data?");
+                    const optImagesConfirm = confirm("Load binary image structural elements?");
+
+                    if (parsedDataPackage.db_core) {
+                        if (optInventoryConfirm) {
+                            db.inventory = parsedDataPackage.db_core.inventory || [];
+                            db.config = parsedDataPackage.db_core.config || db.config;
+                        }
+                        if (optHistoryConfirm) {
+                            db.history = parsedDataPackage.db_core.history || [];
                         }
                     } else {
-                        alert("Invalid file structure. This does not appear to match a valid system configuration file export.");
+                        if (optInventoryConfirm) db.inventory = parsedDataPackage.inventory || [];
+                        if (optHistoryConfirm) db.history = parsedDataPackage.history || [];
                     }
-                } catch(err) {
-                    alert("Error parsing document file: " + err.message);
+
+                    if (optImagesConfirm) {
+                        dbImages = parsedDataPackage.db_images || parsedDataPackage.images || {};
+                    }
+
+                    renderApp();
+                    pushDataToGitHub("Physical structural localized backup dataset restore process executed manually");
+                    alert("Backup parameters dataset restored and synchronized out across connection structures successfully!");
+                } catch (err) {
+                    alert("Unable to decode parameters layout structure index definitions: " + err.message);
                 }
             };
-            reader.readAsText(file);
+            backupFileReaderInstance.readAsText(physicalSelectedFile);
+            inputElementReference.value = '';
         }
 
-        // Initialize setup
         window.onload = init;
     </script>
 </body>
