@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store Inventory PWA</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="manifest" href="manifest.json">
+    <link class="manifest-link" rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4f46e5">
 </head>
 <body class="bg-gray-50 font-sans min-h-screen pb-12">
@@ -23,6 +23,11 @@
     </nav>
 
     <main class="max-w-6xl mx-auto p-4 mt-4">
+        <!-- Persistent Offline Operations Warning Panel -->
+        <div id="offline-fallback-alert" class="hidden bg-rose-50 border-l-4 border-rose-500 p-4 mb-6 rounded shadow-sm">
+            <p class="text-rose-700 font-medium">⚠️ Connection Lost: You are working completely offline. Structural changes are protected inside this device's browser memory layer but will need internet access to save to your GitHub Repository.</p>
+        </div>
+
         <div id="setup-alert" class="hidden bg-amber-50 border-l-4 border-amber-500 p-4 mb-6 rounded shadow-sm">
             <p class="text-amber-700 font-medium">Action Required: Please head to the Settings tab (⚙️) to configure your GitHub Token and Repository details.</p>
         </div>
@@ -385,7 +390,6 @@
             }
         };
         
-        // Runtime key-value map to hold images separate from inventory array
         let dbImages = {};
 
         let currentSortColumn = 'name'; 
@@ -413,6 +417,20 @@
                 document.getElementById('cfg-username').value = creds.user;
                 document.getElementById('cfg-repo').value = creds.repo;
                 fetchDataFromGitHub();
+            }
+            
+            // Setup listener for PWA framework components to catch offline events
+            window.addEventListener('online', updateOnlineStatus);
+            window.addEventListener('offline', updateOnlineStatus);
+            updateOnlineStatus();
+        }
+
+        function updateOnlineStatus() {
+            const alertPanel = document.getElementById('offline-fallback-alert');
+            if (navigator.onLine) {
+                alertPanel.classList.add('hidden');
+            } else {
+                alertPanel.classList.remove('hidden');
             }
         }
 
@@ -456,7 +474,7 @@
             
             applyDatabasePreferences();
             pushDataToGitHub("Updated application threshold configurations globally");
-            alert('Application configurations updated and synced globally via GitHub!');
+            alert('Application configurations updated and synced globally!');
         }
 
         function safeDecodeBase64(base64String) {
@@ -499,12 +517,10 @@
                     db.inventory = parsed.inventory || [];
                     db.config = parsed.config || { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
                     
-                    // Legacy history bundle migration check
                     if (Array.isArray(parsed.history) && parsed.history.length > 0 && db.history.length === 0) {
                         db.history = parsed.history;
                     }
 
-                    // Legacy image bundle migration check: extract images into our separate map if they are still inline
                     db.inventory.forEach(item => {
                         if (item.image && item.id) {
                             dbImages[item.id] = item.image;
@@ -534,17 +550,33 @@
                 if (imgRes.status === 200) {
                     const data = await imgRes.json();
                     const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
-                    // Overwrite/merge map parameters cleanly
                     dbImages = Object.assign({}, dbImages, JSON.parse(decoded));
                 } else if (imgRes.status === 404) {
                     if (!dbImages) dbImages = {};
                 }
                 
+                // Synchronize network values out to the local fallback layer
+                localStorage.setItem('offline_db_cache', JSON.stringify(db));
+                localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
+
                 applyDatabasePreferences();
                 renderApp();
             } catch (err) {
-                alert('Error fetching decoupled data matrices from GitHub. Verify connection parameters.');
-                console.error(err);
+                console.warn('Network acquisition rejected. Shifting to localStorage data...', err);
+                
+                const cachedDbRaw = localStorage.getItem('offline_db_cache');
+                const cachedImagesRaw = localStorage.getItem('offline_images_cache');
+                
+                if (cachedDbRaw) {
+                    db = JSON.parse(cachedDbRaw);
+                    if (cachedImagesRaw) dbImages = JSON.parse(cachedImagesRaw);
+                    
+                    document.getElementById('offline-fallback-alert').classList.remove('hidden');
+                    applyDatabasePreferences();
+                    renderApp();
+                } else {
+                    alert('Offline mode warning: No cached historical dataset discovered inside this browser node.');
+                }
             }
         }
 
@@ -562,7 +594,9 @@
                 syncBtn.disabled = false;
                 syncBtn.innerHTML = originalText;
                 syncBtn.classList.remove('opacity-60');
-                alert('Database refreshed! The absolute latest server modifications have been populated.');
+                if (navigator.onLine) {
+                    alert('Database refreshed! The absolute latest server modifications have been populated.');
+                }
             }, 500);
         }
 
@@ -572,6 +606,10 @@
 				alert("Database error: Synchronization was halted because the database structure is invalid.");
 				return;
 			}
+
+            // Immediately save state changes locally first to protect current mutations
+            localStorage.setItem('offline_db_cache', JSON.stringify(db));
+            localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
 
 			const creds = getGitHubCredentials();
 			const inventoryUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
@@ -589,10 +627,9 @@
 					invSha = currentFileData.sha;
 				}
 
-                // Strip images out of the clean inventory map array before generating payload text string
                 const sanitizedInventoryArray = db.inventory.map(item => {
                     const cleanItem = Object.assign({}, item);
-                    delete cleanItem.image; // Explicitly scrub large image data from this file
+                    delete cleanItem.image; 
                     return cleanItem;
                 });
 
@@ -682,18 +719,17 @@
 				}
 			} catch (err) {
 				console.error(err);
-				alert('Failed to save to GitHub database: ' + err.message + '\n\nDon\'t panic! Your changes are safe in your local browser session.');
+                renderApp(); // Redraw UI elements regardless to show local updates
+				alert('Failed to save to GitHub database: ' + err.message + '\n\nDon\'t panic! Your changes are completely safe in this browser session and will be cached offline.');
 			}
 		}
 
-        // 📥 BACKUP LOGIC: Generates and downloads 3 separate JSON files
         function backupData() {
             if (!db || !Array.isArray(db.inventory)) {
                 alert("No valid internal inventory data sets found to export.");
                 return;
             }
 
-            // Scrub image binaries away from the item attributes for a pure metadata profile array
             const strippedInventory = db.inventory.map(item => {
                 const cleanItem = Object.assign({}, item);
                 delete cleanItem.image;
@@ -724,7 +760,6 @@
             alert("Local storage download completed!\nCheck your download history for 3 discrete backup files.");
         }
 
-        // 📤 RESTORE LOGIC: Parses manual files and asks the user what parts to inject
         function restoreData(inputElement) {
             const file = inputElement.files[0];
             if (!file) return;
@@ -734,7 +769,6 @@
                 try {
                     const parsedData = JSON.parse(e.target.result);
                     
-                    // Identify layout configuration signature patterns 
                     const isHistoryFile = Array.isArray(parsedData) && (parsedData.length === 0 || ('time' in parsedData[0] && 'type' in parsedData[0]));
                     const isInventoryFile = parsedData && typeof parsedData === 'object' && ('inventory' in parsedData);
                     const isImageFile = parsedData && typeof parsedData === 'object' && !('inventory' in parsedData) && !Array.isArray(parsedData);
@@ -753,7 +787,6 @@
 
                     let statusMessage = "";
 
-                    // Path 1: Core Inventory List Structure Restoration
                     if (selection === '1' || (selection === 'ALL' && isInventoryFile)) {
                         if (!isInventoryFile && !Array.isArray(parsedData.inventory)) {
                             throw new Error("Uploaded content signature does not match an inventory structural array schema.");
@@ -762,7 +795,6 @@
                         if (parsedData.config) db.config = parsedData.config;
                         statusMessage = "Inventory lines and preferences successfully updated locally!";
                     }
-                    // Path 2: Key-Value Image Map Block Restoration
                     else if (selection === '2' || (selection === 'ALL' && isImageFile)) {
                         if (typeof parsedData !== 'object' || Array.isArray(parsedData)) {
                             throw new Error("Uploaded content signature does not match an image key-value dictionary map.");
@@ -770,7 +802,6 @@
                         dbImages = Object.assign({}, dbImages, parsedData);
                         statusMessage = "Key-value image assets stitched back into active layout rows successfully!";
                     }
-                    // Path 3: Ledger History Array Records Restoration
                     else if (selection === '3' || (selection === 'ALL' && isHistoryFile)) {
                         if (!Array.isArray(parsedData)) {
                             throw new Error("Uploaded content signature does not match a linear ledger trace array.");
@@ -783,11 +814,9 @@
                         return;
                     }
 
-                    // Render UI using the restored values
                     applyDatabasePreferences();
                     renderApp();
                     
-                    // Automatically push data updates if valid GitHub configuration variables are present
                     const credentials = getGitHubCredentials();
                     if (credentials.token && credentials.user) {
                         pushDataToGitHub("Restored local JSON structural dataset branch update");
@@ -940,7 +969,6 @@
                     document.getElementById('item-price').value = item.price || 0;
                     document.getElementById('item-expiry').value = item.expiry || '';
                     
-                    // Pull image from the independent image dictionary mapping layer
                     const mappedImg = dbImages[item.id] || '';
                     if (mappedImg) {
                         document.getElementById('item-image-base64').value = mappedImg;
@@ -1030,7 +1058,6 @@
 
                     db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry };
                     
-                    // Assign/Update base64 safely directly to decoupled media collection map
                     if (image) dbImages[id] = image;
                     else delete dbImages[id];
 
@@ -1048,7 +1075,6 @@
                 id = "id_" + Math.random().toString(36).substr(2, 9);
                 db.inventory.push({ id, name, category, cost, units, markup, qty, price, expiry });
                 
-                // Track image parameters into split dictionary layer asynchronously
                 if (image) dbImages[id] = image;
 
                 const operationType = originalName ? "Copy" : "New Product";
@@ -1119,8 +1145,6 @@
                 if (reason === null) return;
 
                 db.inventory = db.inventory.filter(i => i.id !== id);
-                
-                // Clear media payload from decoupled layers automatically
                 delete dbImages[id];
 
                 db.history.push({
@@ -1292,7 +1316,6 @@
 					const qtyVal = Number(item.qty) || 0;
 					const isOOS = qtyVal === 0;
 
-                    // Dynamically map item images using decoupled runtime map
                     const mappedImgSrc = dbImages[item.id] || '';
 
 					return `
