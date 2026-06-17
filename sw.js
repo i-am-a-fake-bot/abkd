@@ -2,7 +2,6 @@ const CACHE_NAME = 'abkd-inv-v2'; // 1. Incremented version to break old browser
 const ASSETS = [
   './',                  // Caches the root directory
   './index.html',        // Caches your main interface
-  './index.html?v=2.0.1',
   './manifest.json',     // Caches the manifest properties
   'https://cdn.tailwindcss.com' // 2. Explicitly caches Tailwind CSS so styles load offline
 ];
