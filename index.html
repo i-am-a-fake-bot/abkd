@@ -301,6 +301,7 @@
             <form id="item-form" onsubmit="saveItem(event)" class="space-y-4">
                 <input type="hidden" id="item-id">
                 <input type="hidden" id="item-original-name">
+                <input type="hidden" id="item-current-image-path">
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
@@ -310,6 +311,19 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
                         <input type="text" id="item-category" placeholder="e.g. Snacks, Drinks" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Product Image</label>
+                    <div class="flex items-center gap-3">
+                        <label class="flex-1 border-2 border-dashed border-gray-300 rounded-lg p-2.5 text-center cursor-pointer bg-gray-50 hover:bg-gray-100 transition">
+                            <span id="image-upload-status" class="text-xs font-semibold text-gray-500">📷 Take Photo / Choose File</span>
+                            <input type="file" id="item-image-file" accept="image/jpeg, image/jpg" capture="environment" class="hidden" onchange="previewSelectedImage(this)">
+                        </label>
+                        <div id="item-image-preview-container" class="hidden w-12 h-12 rounded-lg border border-gray-200 overflow-hidden bg-gray-50">
+                            <img id="item-image-preview" src="" class="w-full h-full object-cover">
+                        </div>
                     </div>
                 </div>
 
@@ -355,26 +369,13 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Product Image</label>
-                    <div class="flex items-center gap-3">
-                        <label class="flex-1 border-2 border-dashed border-gray-300 rounded-lg p-2.5 text-center cursor-pointer bg-gray-50 hover:bg-gray-100 transition">
-                            <span id="image-upload-status" class="text-xs font-semibold text-gray-500">📷 Take Photo / Choose File</span>
-                            <input type="file" id="item-image-file" accept="image/jpeg, image/jpg" capture="environment" class="hidden" onchange="previewSelectedImage(this)">
-                        </label>
-                        <div id="item-image-preview-container" class="hidden w-12 h-12 rounded-lg border border-gray-200 overflow-hidden bg-gray-50">
-                            <img id="item-image-preview" src="" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                </div>
-
-                <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Expiration Date (Leave blank for N/A)</label>
                     <input type="date" id="item-expiry" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none">
                 </div>
 
                 <div class="flex justify-end space-x-2 pt-2">
                     <button type="button" onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition">Cancel</button>
-                    <button type="submit" id="item-submit-btn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded transition">Save</button>
+                    <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded transition">Save</button>
                 </div>
             </form>
         </div>
@@ -392,7 +393,7 @@
 
         let currentSortColumn = 'name'; 
         let currentSortDirection = 'asc'; 
-        let selectedImageFileRaw = null;
+        let selectedImageFileRaw = null; 
 
         function getGitHubCredentials() {
             return {
@@ -495,61 +496,6 @@
 			return btoa(binaryString);
 		}
 
-        function previewSelectedImage(inputElement) {
-            const file = inputElement.files[0];
-            const previewContainer = document.getElementById('item-image-preview-container');
-            const previewImg = document.getElementById('item-image-preview');
-            const statusLabel = document.getElementById('image-upload-status');
-
-            if (file) {
-                selectedImageFileRaw = file;
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                    previewContainer.classList.remove('hidden');
-                    statusLabel.innerText = "✓ Selected: " + file.name.substring(0, 12) + "...";
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        async function uploadImageToGitHub(file, fileName) {
-            const creds = getGitHubCredentials();
-            const safeName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase() + "_" + Date.now() + ".jpg";
-            const targetUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images/${safeName}`;
-
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = async () => {
-                    const base64Content = reader.result.split(',')[1];
-                    try {
-                        const response = await fetch(targetUrl, {
-                            method: 'PUT',
-                            headers: {
-                                'Authorization': `token ${creds.token}`,
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                message: `Upload product image: ${safeName}`,
-                                content: base64Content
-                            })
-                        });
-
-                        if (response.ok) {
-                            resolve(`images/${safeName}`);
-                        } else {
-                            const err = await response.json();
-                            reject(new Error(err.message || "Failed uploading image."));
-                        }
-                    } catch (e) {
-                        reject(e);
-                    }
-                };
-                reader.onerror = error => reject(error);
-                reader.readAsDataURL(file);
-            });
-        }
-
         async function fetchDataFromGitHub(bypassCache = false) {
             const creds = getGitHubCredentials();
             const cacheBuster = bypassCache ? `?t=${Date.now()}` : '';
@@ -593,9 +539,12 @@
                 renderApp();
             } catch (err) {
                 console.warn('Network acquisition rejected. Shifting to localStorage data...', err);
+                
                 const cachedDbRaw = localStorage.getItem('offline_db_cache');
+                
                 if (cachedDbRaw) {
                     db = JSON.parse(cachedDbRaw);
+                    
                     document.getElementById('offline-fallback-alert').classList.remove('hidden');
                     applyDatabasePreferences();
                     renderApp();
@@ -707,7 +656,7 @@
 				}
 			} catch (err) {
 				console.error(err);
-                renderApp();
+                renderApp(); 
 				alert('Failed to save to GitHub database: ' + err.message + '\n\nDon\'t panic! Your changes are completely safe in this browser session and will be cached offline.');
 			}
 		}
@@ -805,6 +754,82 @@
             reader.readAsText(file);
         }
 
+        function previewSelectedImage(input) {
+            const file = input.files[0];
+            const statusText = document.getElementById('image-upload-status');
+            const previewContainer = document.getElementById('item-image-preview-container');
+            const previewImg = document.getElementById('item-image-preview');
+
+            if (!file) {
+                selectedImageFileRaw = null;
+                statusText.innerText = "📷 Take Photo / Choose File";
+                previewContainer.classList.add('hidden');
+                return;
+            }
+
+            if (file.size > 4 * 1024 * 1024) { 
+                alert('File size exceeds the 4MB payload limit. Please snap or select a lower resolution variant.');
+                input.value = "";
+                selectedImageFileRaw = null;
+                previewContainer.classList.add('hidden');
+                return;
+            }
+
+            selectedImageFileRaw = file;
+            statusText.innerText = `✅ Selected: ${file.name.substring(0, 12)}...`;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                previewContainer.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function uploadImageToGitHub(file, fileName) {
+            const creds = getGitHubCredentials();
+            if (!creds.token || !creds.user) return null;
+
+            const cleanedName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+            const timestamp = Date.now();
+            const repoImagePath = `images/${cleanedName}_${timestamp}.jpg`;
+            const uploadUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/${repoImagePath}`;
+
+            try {
+                const base64Raw = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = error => reject(error);
+                    reader.readAsDataURL(file);
+                });
+
+                const payload = {
+                    message: `Upload product photography asset for: ${fileName}`,
+                    content: base64Raw
+                };
+
+                const res = await fetch(uploadUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${creds.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.ok) {
+                    return repoImagePath;
+                } else {
+                    const data = await res.json();
+                    console.error("GitHub file write error: ", data);
+                    return null;
+                }
+            } catch (err) {
+                console.error("Asset streaming exception: ", err);
+                return null;
+            }
+        }
+
         function calculateSRP(keepCurrentSRP = false) {
             const cost = parseFloat(document.getElementById('item-cost').value) || 0;
             const units = parseInt(document.getElementById('item-units').value) || 1;
@@ -888,16 +913,16 @@
             const modal = document.getElementById('item-modal');
             const form = document.getElementById('item-form');
             form.reset();
+            
             document.getElementById('item-id').value = '';
             document.getElementById('item-original-name').value = '';
+            document.getElementById('item-current-image-path').value = '';
             
             selectedImageFileRaw = null;
-            document.getElementById('item-image-file').value = "";
             document.getElementById('image-upload-status').innerText = "📷 Take Photo / Choose File";
             document.getElementById('item-image-preview-container').classList.add('hidden');
+            document.getElementById('item-image-preview').src = "";
             
-            const creds = getGitHubCredentials();
-
             if (id) {
                 document.getElementById('modal-title').innerText = "Edit Item Details";
                 const item = db.inventory.find(i => i.id === id);
@@ -911,12 +936,16 @@
                     document.getElementById('item-qty').value = item.qty || 0;
                     document.getElementById('item-price').value = item.price || 0;
                     document.getElementById('item-expiry').value = item.expiry || '';
-                    calculateSRP(true);
-
+                    document.getElementById('item-current-image-path').value = item.imagePath || '';
+                    
                     if (item.imagePath) {
+                        const creds = getGitHubCredentials();
                         document.getElementById('item-image-preview').src = `https://raw.githubusercontent.com/${creds.user}/${creds.repo}/main/${item.imagePath}`;
                         document.getElementById('item-image-preview-container').classList.remove('hidden');
+                        document.getElementById('image-upload-status').innerText = "📷 Picture Configured (Tap to Replace)";
                     }
+                    
+                    calculateSRP(true);
                 }
             } else {
                 document.getElementById('modal-title').innerText = "Add New Item";
@@ -937,11 +966,19 @@
 
             document.getElementById('item-id').value = '';
             document.getElementById('item-original-name').value = item.name || '';
+            document.getElementById('item-current-image-path').value = item.imagePath || '';
             
             selectedImageFileRaw = null;
-            document.getElementById('item-image-file').value = "";
-            document.getElementById('image-upload-status').innerText = "📷 Take Photo / Choose File";
+            document.getElementById('image-upload-status').innerText = "📷 Picture Configured (Copied)";
             
+            if (item.imagePath) {
+                const creds = getGitHubCredentials();
+                document.getElementById('item-image-preview').src = `https://raw.githubusercontent.com/${creds.user}/${creds.repo}/main/${item.imagePath}`;
+                document.getElementById('item-image-preview-container').classList.remove('hidden');
+            } else {
+                document.getElementById('item-image-preview-container').classList.add('hidden');
+            }
+
             document.getElementById('modal-title').innerText = `Clone: ${item.name}`;
             document.getElementById('item-name').value = (item.name || '') + ' (Copy)';
             document.getElementById('item-category').value = item.category || '';
@@ -953,15 +990,6 @@
             document.getElementById('item-qty').value = 0;
 
             calculateSRP(true);
-
-            if (item.imagePath) {
-                const creds = getGitHubCredentials();
-                document.getElementById('item-image-preview').src = `https://raw.githubusercontent.com/${creds.user}/${creds.repo}/main/${item.imagePath}`;
-                document.getElementById('item-image-preview-container').classList.remove('hidden');
-            } else {
-                document.getElementById('item-image-preview-container').classList.add('hidden');
-            }
-
             modal.classList.remove('hidden');
         }
 
@@ -972,10 +1000,10 @@
         async function saveItem(e) {
             e.preventDefault();
             
-            const submitBtn = document.getElementById('item-submit-btn');
-            const originalBtnText = submitBtn.innerHTML;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const origBtnText = submitBtn.innerText;
             submitBtn.disabled = true;
-            submitBtn.innerHTML = "⏳ Uploading asset...";
+            submitBtn.innerText = "⏳ Processing Assets...";
 
             let id = document.getElementById('item-id').value;
             const name = document.getElementById('item-name').value.trim();
@@ -987,83 +1015,71 @@
             const price = parseFloat(document.getElementById('item-price').value) || 0;
             const expiry = document.getElementById('item-expiry').value;
             const originalName = document.getElementById('item-original-name').value;
+            
+            let imagePath = document.getElementById('item-current-image-path').value || '';
+
+            if (selectedImageFileRaw) {
+                const uploadedPath = await uploadImageToGitHub(selectedImageFileRaw, name);
+                if (uploadedPath) {
+                    imagePath = uploadedPath;
+                }
+            }
 
             if (!db.inventory) db.inventory = [];
             if (!db.history) db.history = [];
 
-            try {
-                let finalImagePath = null;
-                
-                if (id) {
-                    const existingItem = db.inventory.find(i => i.id === id);
-                    if (existingItem) finalImagePath = existingItem.imagePath || null;
-                }
-
-                if (selectedImageFileRaw) {
-                    finalImagePath = await uploadImageToGitHub(selectedImageFileRaw, name);
-                }
-
-                if (id) {
-                    const idx = db.inventory.findIndex(i => i.id === id);
-                    if (idx !== -1) {
-                        const oldItem = db.inventory[idx];
-                        const oldQty = oldItem.qty || 0;
-                        
-                        let changesMade = [];
-                        if (oldItem.name !== name) changesMade.push(`renamed to "${name}"`);
-                        if (oldItem.price !== price) changesMade.push(`price updated to ₱${price.toFixed(2)}`);
-                        if (oldQty !== qty) changesMade.push(`stock adjusted from ${oldQty} to ${qty}`);
-                        if (oldItem.category !== category) changesMade.push(`category updated to "${category}"`);
-                        
-                        // Check if a new image file was selected and uploaded during this edit session
-                        if (selectedImageFileRaw) {
-                            changesMade.push(`uploaded image`);
-                        }
-
-                        const logNotes = changesMade.length > 0 
-                            ? `Modified attributes: ${changesMade.join(', ')}.`
-                            : "Saved item without changes.";
-
-                        db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry, imagePath: finalImagePath };
-
-                        db.history.push({
-                            time: Date.now(),
-                            name: name,
-                            type: "Modified",
-                            change: qty - oldQty,
-                            notes: logNotes
-                        });
-
-                        await pushDataToGitHub(`Modified details for product: ${name}`);
-                    }
-                } else {
-                    id = "id_" + Math.random().toString(36).substr(2, 9);
-                    db.inventory.push({ id, name, category, cost, units, markup, qty, price, expiry, imagePath: finalImagePath });
-
-                    const operationType = originalName ? "Copy" : "New Product";
+            if (id) {
+                const idx = db.inventory.findIndex(i => i.id === id);
+                if (idx !== -1) {
+                    const oldItem = db.inventory[idx];
+                    const oldQty = oldItem.qty || 0;
                     
-                    let creationNotes = originalName
-                        ? `Copied the metrics of ${originalName}`
-                        : `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`;
+                    let changesMade = [];
+                    if (oldItem.name !== name) changesMade.push(`renamed to "${name}"`);
+                    if (oldItem.price !== price) changesMade.push(`price updated to ₱${price.toFixed(2)}`);
+                    if (oldQty !== qty) changesMade.push(`stock adjusted from ${oldQty} to ${qty}`);
+                    if (oldItem.category !== category) changesMade.push(`category updated to "${category}"`);
+                    
+                    const logNotes = changesMade.length > 0 
+                        ? `Modified attributes: ${changesMade.join(', ')}.`
+                        : "Saved item without changes.";
+
+                    db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry, imagePath };
 
                     db.history.push({
                         time: Date.now(),
-                        name,
-                        type: operationType,
-                        change: qty,
-                        notes: creationNotes
+                        name: name,
+                        type: "Modified",
+                        change: qty - oldQty,
+                        notes: logNotes
                     });
-                    
-                    await pushDataToGitHub(`Added fresh inventory item line profile: ${name}`);
+
+                    pushDataToGitHub(`Modified details for product: ${name}`);
                 }
-                closeModal();
-            } catch (error) {
-                console.error(error);
-                alert("Error handling file or details layout updates: " + error.message);
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
+            } else {
+                id = "id_" + Math.random().toString(36).substr(2, 9);
+                db.inventory.push({ id, name, category, cost, units, markup, qty, price, expiry, imagePath });
+
+                const operationType = originalName ? "Copy" : "New Product";
+                
+                let creationNotes = originalName
+                    ? `Copied the metrics of ${originalName}`
+                    : `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`;
+
+                db.history.push({
+                    time: Date.now(),
+                    name,
+                    type: operationType,
+                    change: qty,
+                    notes: creationNotes
+                });
+                
+                pushDataToGitHub(`Added fresh inventory item line profile: ${name}`);
             }
+            
+            submitBtn.disabled = false;
+            submitBtn.innerText = origBtnText;
+            closeModal();
         }
 
         function handleStockAdjust(id, mode) {
@@ -1130,7 +1146,6 @@
 
         function renderApp() {
             const lowStockThreshold = (db.config && db.config.lowThreshold !== undefined) ? db.config.lowThreshold : 5;
-            const creds = getGitHubCredentials();
 
             const inventoryList = Array.isArray(db.inventory) ? db.inventory : [];
             const historyList = Array.isArray(db.history) ? db.history : [];
@@ -1287,79 +1302,98 @@
 					const qtyVal = Number(item.qty) || 0;
 					const isOOS = qtyVal === 0;
 
+					let imgHtml = `
+						<div class="w-full h-32 bg-slate-100 flex items-center justify-center text-slate-400 text-2xl font-mono select-none">
+							📦
+						</div>
+					`;
+					if (item.imagePath) {
+						const creds = getGitHubCredentials();
+						const rawImageUrl = `https://raw.githubusercontent.com/${creds.user}/${creds.repo}/main/${item.imagePath}`;
+						imgHtml = `
+							<div class="w-full h-32 overflow-hidden bg-slate-50 relative">
+								<img src="${rawImageUrl}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.parentElement.innerHTML='<div class=\"w-full h-full bg-slate-100 flex items-center justify-center text-slate-400 text-xl font-mono\">📷</div>'">
+							</div>
+						`;
+					}
+
 					return `
-					<div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition group flex flex-col justify-between">
-
-						<div class="p-3 relative flex-1">
-                            <div class="w-full h-28 rounded-2xl bg-slate-100 overflow-hidden mb-2.5 relative border border-slate-50 flex items-center justify-center">
-                                ${item.imagePath ? 
-                                    `<img src="https://raw.githubusercontent.com/${creds.user}/${creds.repo}/main/${item.imagePath}" class="w-full h-full object-cover" alt="${item.name}">` 
-                                    : `<div class="text-slate-300 text-2xl">📦</div>`
-                                }
-                                <div class="absolute top-1.5 left-1.5 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full">
-                                    ${item.category || 'Uncategorized'}
+					<div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition group relative">
+                        
+                        ${isOOS ? `
+                            <div class="absolute inset-0 flex items-center justify-center bg-white/40 pointer-events-none z-20 select-none">
+                                <div class="border-4 border-double border-red-600 text-red-600 text-xs font-black tracking-widest uppercase px-3 py-1 rounded transform -rotate-12 mix-blend-multiply bg-white/90 shadow-sm border-opacity-90 font-sans">
+                                    OUT OF STOCK
                                 </div>
-
-                                ${isOOS ? `
-                                    <div class="absolute top-1.5 right-1.5">
-                                        <span class="bg-red-100 text-red-600 text-[10px] font-black px-1.5 py-0.5 rounded border border-red-200">
-                                            OOS
-                                        </span>
-                                    </div>
-                                ` : ''}
                             </div>
+                        ` : ''}
 
-							<h3 class="font-bold text-slate-800 text-sm line-clamp-2 mt-1">
+						${imgHtml}
+
+						<div class="p-4 relative">
+							<div class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2.5 py-1 rounded-full">
+								${item.category || 'Uncategorized'}
+							</div>
+
+							${isOOS ? `
+								<div class="absolute top-2 right-2 z-10">
+									<span class="bg-red-100 text-red-600 text-[10px] font-black px-2 py-0.5 rounded border border-red-200">
+										OOS
+									</span>
+								</div>
+							` : ''}
+
+							<h3 class="font-bold text-slate-800 text-base line-clamp-2 mt-2">
 								${item.name || 'Unnamed Item'}
 							</h3>
 
-							<div class="flex items-center justify-between mt-2.5">
-								<span class="text-indigo-600 font-black text-lg">
+							<div class="flex items-center justify-between mt-3">
+								<span class="text-indigo-600 font-black text-lg sm:text-xl">
 									₱${(Number(item.price) || 0).toFixed(2)}
 								</span>
 
-								<span class="text-xs font-bold px-2 py-0.5 rounded-full ${
+								<span class="text-xs font-bold px-2 py-1 rounded-full ${
 									isOOS ? 'bg-red-100 text-red-700'
-									: qtyVal <= lowStockThreshold ? 'bg-amber-100 text-amber-700'
+									: qtyVal <= 5 ? 'bg-amber-100 text-amber-700'
 									: 'bg-emerald-100 text-emerald-700'
 								}">
 									${qtyVal} pcs
 								</span>
 							</div>
+							
+							<div class="mt-2 flex items-center justify-between text-[11px]">
+								<span class="${getExpiryBadgeStyle(item.expiry)}">
+									⏳ ${formatExpiryDisplay(item.expiry)}
+								</span>
+							</div>
 						</div>
 
-						<div class="grid grid-cols-5 border-t border-slate-100 text-[11px] font-semibold">
-
+						<div class="grid grid-cols-5 border-t border-slate-100 text-xs font-semibold">
 						  <button onclick="handleStockAdjust('${itemId}', 'restock')"
-							class="py-2.5 text-emerald-700 hover:bg-emerald-50">
+							class="py-3 text-emerald-700 hover:bg-emerald-50 text-center">
 							ADD
 						  </button>
-
 						  <button onclick="handleStockAdjust('${itemId}', 'reduce')"
-							class="py-2.5 text-amber-700 hover:bg-amber-50 ${isOOS ? 'opacity-30 pointer-events-none' : ''}">
+							class="py-3 text-amber-700 hover:bg-amber-50 text-center ${isOOS ? 'opacity-30 pointer-events-none' : ''}">
 							LESS
 						  </button>
-
 						  <button onclick="openModal('${itemId}')"
-							class="py-2.5 text-slate-700 hover:bg-slate-50">
+							class="py-3 text-slate-700 hover:bg-slate-50 text-center">
 							EDIT
 						  </button>
-
 						  <button onclick="cloneItemToNewForm('${itemId}')"
-							class="py-2.5 text-indigo-700 hover:bg-indigo-50">
+							class="py-3 text-indigo-700 hover:bg-indigo-50 text-center">
 							COPY
 						  </button>
-
 						  <button onclick="deleteItem('${itemId}')"
-							class="py-2.5 text-red-600 hover:bg-red-50">
+							class="py-3 text-red-600 hover:bg-red-50 text-center">
 							DEL
 						  </button>
-
 						</div>
 					</div>
 					`;
 				}).join('');
-				}
+			}
 
             const hbody = document.getElementById('history-table-body');
             if (historyList.length === 0) {
