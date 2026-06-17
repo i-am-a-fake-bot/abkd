@@ -23,7 +23,6 @@
     </nav>
 
     <main class="max-w-6xl mx-auto p-4 mt-4">
-        <!-- Persistent Offline Operations Warning Panel -->
         <div id="offline-fallback-alert" class="hidden bg-rose-50 border-l-4 border-rose-500 p-4 mb-6 rounded shadow-sm">
             <p class="text-rose-700 font-medium">⚠️ Connection Lost: You are working completely offline. Structural changes are protected inside this device's browser memory layer but will need internet access to save to your GitHub Repository.</p>
         </div>
@@ -268,7 +267,6 @@
                         </form>
                     </div>
 
-                    <!-- 💾 Local Storage Backup & Restore Toolkit -->
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 bg-gradient-to-br from-white to-indigo-50/20">
                         <h3 class="text-base font-bold text-slate-800 border-b border-slate-100 pb-2 mb-3">💾 Local Storage Backup & Restore</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Download physical backups directly to your local file storage or manually load local data sets back into memory if your connection to GitHub fails.</p>
@@ -282,7 +280,7 @@
                                 <input type="file" id="restore-file-input" accept=".json" onchange="restoreData(this)" class="hidden">
                             </label>
                         </div>
-                        <p class="text-[10px] text-gray-400">Note: The restoration system reads your backup file profile and prompts you to choose whether to load just Inventory items, Image files, or transaction History.</p>
+                        <p class="text-[10px] text-gray-400">Note: The restoration system reads your backup file profile and prompts you to choose whether to load just Inventory items or transaction History.</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-rose-100 bg-gradient-to-br from-white to-rose-50/20">
@@ -302,18 +300,7 @@
             <h3 id="modal-title" class="text-xl font-bold text-gray-800 mb-4">Add New Item</h3>
             <form id="item-form" onsubmit="saveItem(event)" class="space-y-4">
                 <input type="hidden" id="item-id">
-                <input type="hidden" id="item-image-base64">
                 <input type="hidden" id="item-original-name">
-                
-                <div class="bg-gray-50 border border-dashed border-gray-300 rounded-lg p-3 text-center">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Item Image (Optional)</label>
-                    <div class="flex items-center justify-center gap-4">
-                        <div id="image-preview-container" class="w-16 h-16 bg-gray-200 border rounded overflow-hidden flex items-center justify-center text-gray-400 text-xs">
-                            No Img
-                        </div>
-                        <input type="file" id="item-image-input" accept="image/*" onchange="processImageUpload(this)" class="text-xs text-gray-600 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
-                    </div>
-                </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
@@ -389,8 +376,6 @@
                 lowThreshold: 5
             }
         };
-        
-        let dbImages = {};
 
         let currentSortColumn = 'name'; 
         let currentSortDirection = 'asc'; 
@@ -502,7 +487,6 @@
             const cacheBuster = bypassCache ? `?t=${Date.now()}` : '';
             const inventoryUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json${cacheBuster}`;
             const historyUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/history.json${cacheBuster}`;
-            const imagesUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images.json${cacheBuster}`;
             
             try {
                 // 1. Fetch Inventory & Config details
@@ -520,12 +504,6 @@
                     if (Array.isArray(parsed.history) && parsed.history.length > 0 && db.history.length === 0) {
                         db.history = parsed.history;
                     }
-
-                    db.inventory.forEach(item => {
-                        if (item.image && item.id) {
-                            dbImages[item.id] = item.image;
-                        }
-                    });
                 } else if (invRes.status === 404) {
                     db.inventory = [];
                     db.config = { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
@@ -542,22 +520,9 @@
                 } else if (histRes.status === 404) {
                     if (!Array.isArray(db.history)) db.history = [];
                 }
-
-                // 3. Fetch separated images map file
-                const imgRes = await fetch(imagesUrl, {
-                    headers: { 'Authorization': `token ${creds.token}` }
-                });
-                if (imgRes.status === 200) {
-                    const data = await imgRes.json();
-                    const decoded = safeDecodeBase64(data.content.replace(/\s/g, ''));
-                    dbImages = Object.assign({}, dbImages, JSON.parse(decoded));
-                } else if (imgRes.status === 404) {
-                    if (!dbImages) dbImages = {};
-                }
                 
                 // Synchronize network values out to the local fallback layer
                 localStorage.setItem('offline_db_cache', JSON.stringify(db));
-                localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
 
                 applyDatabasePreferences();
                 renderApp();
@@ -565,11 +530,9 @@
                 console.warn('Network acquisition rejected. Shifting to localStorage data...', err);
                 
                 const cachedDbRaw = localStorage.getItem('offline_db_cache');
-                const cachedImagesRaw = localStorage.getItem('offline_images_cache');
                 
                 if (cachedDbRaw) {
                     db = JSON.parse(cachedDbRaw);
-                    if (cachedImagesRaw) dbImages = JSON.parse(cachedImagesRaw);
                     
                     document.getElementById('offline-fallback-alert').classList.remove('hidden');
                     applyDatabasePreferences();
@@ -609,12 +572,10 @@
 
             // Immediately save state changes locally first to protect current mutations
             localStorage.setItem('offline_db_cache', JSON.stringify(db));
-            localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
 
 			const creds = getGitHubCredentials();
 			const inventoryUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/inventory.json`;
 			const historyUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/history.json`;
-			const imagesUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images.json`;
 			
 			try {
 				// --- STEP 1: SAVE LIGHTWEIGHT INVENTORY FILE ---
@@ -627,14 +588,8 @@
 					invSha = currentFileData.sha;
 				}
 
-                const sanitizedInventoryArray = db.inventory.map(item => {
-                    const cleanItem = Object.assign({}, item);
-                    delete cleanItem.image; 
-                    return cleanItem;
-                });
-
 				const inventoryPayloadObj = {
-					inventory: sanitizedInventoryArray,
+					inventory: db.inventory,
 					config: db.config
 				};
 				const invJsonString = JSON.stringify(inventoryPayloadObj, null, 2);
@@ -683,35 +638,9 @@
 					},
 					body: JSON.stringify(histPayload)
 				});
-
-                // --- STEP 3: SAVE DECOUPLED IMAGES FILE ---
-                const imgGetRes = await fetch(imagesUrl, {
-                    headers: { 'Authorization': `token ${creds.token}` }
-                });
-                let imgSha = null;
-                if (imgGetRes.ok) {
-                    const currentFileData = await imgGetRes.json();
-                    imgSha = currentFileData.sha;
-                }
-
-                const imgJsonString = JSON.stringify(dbImages, null, 2);
-                const imgPayload = {
-                    message: "Sync media attachments: " + commitMessage,
-                    content: safeEncodeBase64(imgJsonString),
-                };
-                if (imgSha) imgPayload.sha = imgSha;
-
-                await fetch(imagesUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${creds.token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(imgPayload)
-                });
 				
 				if (invRes.ok) {
-					console.log("Successfully synced all decoupled core, history, and asset structures!");
+					console.log("Successfully synced all decoupled core and history structures!");
 					renderApp();
 				} else {
                     const errorData = await invRes.json();
@@ -730,15 +659,8 @@
                 return;
             }
 
-            const strippedInventory = db.inventory.map(item => {
-                const cleanItem = Object.assign({}, item);
-                delete cleanItem.image;
-                return cleanItem;
-            });
-
             const datasets = [
-                { filename: "abkd_inventory_backup.json", data: { inventory: strippedInventory, config: db.config } },
-                { filename: "abkd_images_backup.json", data: dbImages || {} },
+                { filename: "abkd_inventory_backup.json", data: { inventory: db.inventory, config: db.config } },
                 { filename: "abkd_history_backup.json", data: db.history || [] }
             ];
 
@@ -757,7 +679,7 @@
                 URL.revokeObjectURL(url);
             });
 
-            alert("Local storage download completed!\nCheck your download history for 3 discrete backup files.");
+            alert("Local storage download completed!\nCheck your download history for 2 discrete backup files.");
         }
 
         function restoreData(inputElement) {
@@ -771,11 +693,9 @@
                     
                     const isHistoryFile = Array.isArray(parsedData) && (parsedData.length === 0 || ('time' in parsedData[0] && 'type' in parsedData[0]));
                     const isInventoryFile = parsedData && typeof parsedData === 'object' && ('inventory' in parsedData);
-                    const isImageFile = parsedData && typeof parsedData === 'object' && !('inventory' in parsedData) && !Array.isArray(parsedData);
 
                     let instruction = "We analyzed the file layer properties. Choose how you want to restore this data:\n\n";
                     if (isInventoryFile) instruction += "👉 Type '1' to restore Inventory Catalog Data & preferences.\n";
-                    if (isImageFile) instruction += "👉 Type '2' to restore Image Map Row Assets.\n";
                     if (isHistoryFile) instruction += "👉 Type '3' to restore Transaction Logs Sequence.\n";
                     instruction += "Type 'ALL' to execute auto-parse mode rules.";
 
@@ -794,13 +714,6 @@
                         db.inventory = parsedData.inventory;
                         if (parsedData.config) db.config = parsedData.config;
                         statusMessage = "Inventory lines and preferences successfully updated locally!";
-                    }
-                    else if (selection === '2' || (selection === 'ALL' && isImageFile)) {
-                        if (typeof parsedData !== 'object' || Array.isArray(parsedData)) {
-                            throw new Error("Uploaded content signature does not match an image key-value dictionary map.");
-                        }
-                        dbImages = Object.assign({}, dbImages, parsedData);
-                        statusMessage = "Key-value image assets stitched back into active layout rows successfully!";
                     }
                     else if (selection === '3' || (selection === 'ALL' && isHistoryFile)) {
                         if (!Array.isArray(parsedData)) {
@@ -831,40 +744,6 @@
                 inputElement.value = '';
             };
             reader.readAsText(file);
-        }
-
-        function processImageUpload(element) {
-            const file = element.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const img = new Image();
-                img.onload = function() {
-                    const maxDim = 600; 
-                    let w = img.width;
-                    let h = img.height;
-                    
-                    if (w > h) {
-                        if (w > maxDim) { h = Math.round(h * (maxDim / w)); w = maxDim; }
-                    } else {
-                        if (h > maxDim) { w = Math.round(w * (maxDim / h)); h = maxDim; }
-                    }
-
-                    const canvas = document.createElement('canvas');
-                    canvas.width = w;
-                    canvas.height = h;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, w, h);
-                    
-                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.9);
-                    
-                    document.getElementById('item-image-base64').value = compressedBase64;
-                    document.getElementById('image-preview-container').innerHTML = `<img src="${compressedBase64}" class="w-full h-full object-cover">`;
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
         }
 
         function calculateSRP(keepCurrentSRP = false) {
@@ -951,9 +830,7 @@
             const form = document.getElementById('item-form');
             form.reset();
             document.getElementById('item-id').value = '';
-            document.getElementById('item-image-base64').value = '';
             document.getElementById('item-original-name').value = '';
-            document.getElementById('image-preview-container').innerHTML = 'No Img';
             
             if (id) {
                 document.getElementById('modal-title').innerText = "Edit Item Details";
@@ -968,12 +845,6 @@
                     document.getElementById('item-qty').value = item.qty || 0;
                     document.getElementById('item-price').value = item.price || 0;
                     document.getElementById('item-expiry').value = item.expiry || '';
-                    
-                    const mappedImg = dbImages[item.id] || '';
-                    if (mappedImg) {
-                        document.getElementById('item-image-base64').value = mappedImg;
-                        document.getElementById('image-preview-container').innerHTML = `<img src="${mappedImg}" class="w-full h-full object-cover">`;
-                    }
                     calculateSRP(true);
                 }
             } else {
@@ -1006,15 +877,6 @@
             document.getElementById('item-expiry').value = item.expiry || '';
             document.getElementById('item-qty').value = 0;
 
-            const mappedImg = dbImages[item.id] || '';
-            if (mappedImg) {
-                document.getElementById('item-image-base64').value = mappedImg;
-                document.getElementById('image-preview-container').innerHTML = `<img src="${mappedImg}" class="w-full h-full object-cover">`;
-            } else {
-                document.getElementById('item-image-base64').value = '';
-                document.getElementById('image-preview-container').innerHTML = 'No Img';
-            }
-
             calculateSRP(true);
             modal.classList.remove('hidden');
         }
@@ -1034,7 +896,6 @@
             const qty = parseInt(document.getElementById('item-qty').value) || 0;
             const price = parseFloat(document.getElementById('item-price').value) || 0;
             const expiry = document.getElementById('item-expiry').value;
-            const image = document.getElementById('item-image-base64').value;
             const originalName = document.getElementById('item-original-name').value;
 
             if (!db.inventory) db.inventory = [];
@@ -1045,7 +906,6 @@
                 if (idx !== -1) {
                     const oldItem = db.inventory[idx];
                     const oldQty = oldItem.qty || 0;
-                    const oldImage = dbImages[id] || ''; 
                     
                     let changesMade = [];
                     if (oldItem.name !== name) changesMade.push(`renamed to "${name}"`);
@@ -1053,23 +913,11 @@
                     if (oldQty !== qty) changesMade.push(`stock adjusted from ${oldQty} to ${qty}`);
                     if (oldItem.category !== category) changesMade.push(`category updated to "${category}"`);
                     
-                    // Evaluates separate image data buffer maps for accurate log changes
-                    if (image && !oldImage) {
-                        changesMade.push("uploaded profile image");
-                    } else if (image && oldImage && image !== oldImage) {
-                        changesMade.push("replaced profile image");
-                    } else if (!image && oldImage) {
-                        changesMade.push("removed profile image");
-                    }
-                    
                     const logNotes = changesMade.length > 0 
                         ? `Modified attributes: ${changesMade.join(', ')}.`
                         : "Saved item without changes.";
 
                     db.inventory[idx] = { id, name, category, cost, units, markup, qty, price, expiry };
-                    
-                    if (image) dbImages[id] = image;
-                    else delete dbImages[id];
 
                     db.history.push({
                         time: Date.now(),
@@ -1084,18 +932,12 @@
             } else {
                 id = "id_" + Math.random().toString(36).substr(2, 9);
                 db.inventory.push({ id, name, category, cost, units, markup, qty, price, expiry });
-                
-                if (image) dbImages[id] = image;
 
                 const operationType = originalName ? "Copy" : "New Product";
                 
                 let creationNotes = originalName
                     ? `Copied the metrics of ${originalName}`
                     : `Initial stock addition under category: ${category}. Expiry: ${expiry || 'N/A'}.`;
-                
-                if (image) {
-                    creationNotes += originalName ? " with image attachment preserved." : " (with uploaded profile image).";
-                }
 
                 db.history.push({
                     time: Date.now(),
@@ -1160,7 +1002,6 @@
                 if (reason === null) return;
 
                 db.inventory = db.inventory.filter(i => i.id !== id);
-                delete dbImages[id];
 
                 db.history.push({
                     time: Date.now(),
@@ -1331,33 +1172,23 @@
 					const qtyVal = Number(item.qty) || 0;
 					const isOOS = qtyVal === 0;
 
-                    const mappedImgSrc = dbImages[item.id] || '';
-
 					return `
 					<div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition group">
 
-						<div class="h-52 sm:h-56 bg-slate-100 relative overflow-hidden">
-							${
-								mappedImgSrc
-								? `<img src="${mappedImgSrc}" class="w-full h-full object-cover ${isOOS ? 'opacity-70 blur-[1px]' : ''}">`
-								: `<div class="w-full h-full flex items-center justify-center text-6xl sm:text-7xl">📦</div>`
-							}
-
-							<div class="absolute top-2 left-2 bg-black/60 text-white text-xs sm:text-sm px-3 py-1.5 rounded-full">
+						<div class="p-4 pt-6 relative">
+							<div class="absolute top-2 left-2 bg-black/60 text-white text-[10px] sm:text-xs px-2.5 py-1 rounded-full">
 								${item.category || 'Uncategorized'}
 							</div>
 
 							${isOOS ? `
-								<div class="absolute inset-0 flex items-center justify-center">
-									<span class="bg-white text-red-600 font-black px-3 py-1 rounded-xl border border-red-200 rotate-[-10deg]">
-										OUT OF STOCK
+								<div class="absolute top-2 right-2">
+									<span class="bg-red-100 text-red-600 text-[10px] font-black px-2 py-0.5 rounded border border-red-200">
+										OOS
 									</span>
 								</div>
 							` : ''}
-						</div>
 
-						<div class="p-4">
-							<h3 class="font-bold text-slate-800 text-sm line-clamp-2">
+							<h3 class="font-bold text-slate-800 text-base line-clamp-2 mt-4">
 								${item.name || 'Unnamed Item'}
 							</h3>
 
