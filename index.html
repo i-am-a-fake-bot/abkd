@@ -418,7 +418,6 @@
                 fetchDataFromGitHub();
             }
             
-            // Setup listener for PWA framework components to catch offline events
             window.addEventListener('online', updateOnlineStatus);
             window.addEventListener('offline', updateOnlineStatus);
             updateOnlineStatus();
@@ -558,7 +557,6 @@
             const historyUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/history.json${cacheBuster}`;
             
             try {
-                // 1. Fetch Inventory & Config details
                 const invRes = await fetch(inventoryUrl, {
                     headers: { 'Authorization': `token ${creds.token}` }
                 });
@@ -578,7 +576,6 @@
                     db.config = { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
                 }
 
-                // 2. Fetch separate transaction logs
                 const histRes = await fetch(historyUrl, {
                     headers: { 'Authorization': `token ${creds.token}` }
                 });
@@ -590,19 +587,15 @@
                     if (!Array.isArray(db.history)) db.history = [];
                 }
                 
-                // Synchronize network values out to the local fallback layer
                 localStorage.setItem('offline_db_cache', JSON.stringify(db));
 
                 applyDatabasePreferences();
                 renderApp();
             } catch (err) {
                 console.warn('Network acquisition rejected. Shifting to localStorage data...', err);
-                
                 const cachedDbRaw = localStorage.getItem('offline_db_cache');
-                
                 if (cachedDbRaw) {
                     db = JSON.parse(cachedDbRaw);
-                    
                     document.getElementById('offline-fallback-alert').classList.remove('hidden');
                     applyDatabasePreferences();
                     renderApp();
@@ -639,7 +632,6 @@
 				return;
 			}
 
-            // Immediately save state changes locally first to protect current mutations
             localStorage.setItem('offline_db_cache', JSON.stringify(db));
 
 			const creds = getGitHubCredentials();
@@ -647,7 +639,6 @@
 			const historyUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/history.json`;
 			
 			try {
-				// --- STEP 1: SAVE LIGHTWEIGHT INVENTORY FILE ---
 				const invGetRes = await fetch(inventoryUrl, {
 					headers: { 'Authorization': `token ${creds.token}` }
 				});
@@ -682,7 +673,6 @@
 					body: JSON.stringify(invPayload)
 				});
 
-				// --- STEP 2: SAVE DECOUPLED HISTORY LOG FILE ---
 				const histGetRes = await fetch(historyUrl, {
 					headers: { 'Authorization': `token ${creds.token}` }
 				});
@@ -717,7 +707,7 @@
 				}
 			} catch (err) {
 				console.error(err);
-                renderApp(); // Redraw UI elements regardless to show local updates
+                renderApp();
 				alert('Failed to save to GitHub database: ' + err.message + '\n\nDon\'t panic! Your changes are completely safe in this browser session and will be cached offline.');
 			}
 		}
@@ -1025,6 +1015,11 @@
                         if (oldQty !== qty) changesMade.push(`stock adjusted from ${oldQty} to ${qty}`);
                         if (oldItem.category !== category) changesMade.push(`category updated to "${category}"`);
                         
+                        // Check if a new image file was selected and uploaded during this edit session
+                        if (selectedImageFileRaw) {
+                            changesMade.push(`uploaded image`);
+                        }
+
                         const logNotes = changesMade.length > 0 
                             ? `Modified attributes: ${changesMade.join(', ')}.`
                             : "Saved item without changes.";
