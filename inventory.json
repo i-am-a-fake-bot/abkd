@@ -609,14 +609,15 @@
     },
     {
       "id": "id_vgz6jj51m",
-      "name": "UFC Ketchup",
+      "name": "UFC Ketchup - Baon Pack",
       "category": "Pantry",
       "cost": 10.75,
       "units": 1,
       "markup": 12,
       "qty": 0,
       "price": 12,
-      "expiry": ""
+      "expiry": "",
+      "imagePath": null
     },
     {
       "id": "id_9x6r36r6h",
