@@ -292,5 +292,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Saved item without changes."
+  },
+  {
+    "time": 1781684354610,
+    "name": "555 Tuna - Mechado",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: uploaded image."
   }
 ]
