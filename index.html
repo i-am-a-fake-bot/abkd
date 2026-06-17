@@ -12,340 +12,329 @@
 
     <nav class="bg-indigo-600 text-white p-4 shadow-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 id="app-store-title" class="text-xl font-bold tracking-tight">📦 ABKD Inventory</h1>
+            <h1 id=\"app-store-title\" class="text-xl font-bold tracking-tight">📦 ABKD Inventory</h1>
             <div class="space-x-2">
                 <button onclick="switchTab('dashboard')" class="px-3 py-1.5 rounded hover:bg-indigo-700 transition">Dashboard</button>
                 <button onclick="switchTab('inventory')" class="px-3 py-1.5 rounded hover:bg-indigo-700 transition">Items</button>
                 <button onclick="switchTab('history')" class="px-3 py-1.5 rounded hover:bg-indigo-700 transition">History</button>
-                <button onclick="switchTab('settings')" class="px-3 py-1.5 rounded hover:bg-indigo-700 transition">⚙️</button>
+                <button onclick="switchTab('settings')" class="px-3 py-1.5 rounded hover:bg-indigo-700 transition">Config</button>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto p-4 mt-4">
-        <div id="offline-fallback-alert" class="hidden bg-rose-50 border-l-4 border-rose-500 p-4 mb-6 rounded shadow-sm">
-            <p class="text-rose-700 font-medium">⚠️ Connection Lost: You are working completely offline. Structural changes are protected inside this device's browser memory layer but will need internet access to save to your GitHub Repository.</p>
+    <main class="max-w-6xl mx-auto p-4">
+        
+        <div id="setup-alert" class="hidden bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-2xl mb-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-xl">⚠️</span>
+                <div>
+                    <p class="font-bold">Database Credentials Required</p>
+                    <p class="text-sm text-amber-700">Please populate your Personal Access Token and Username inside the Configuration tab to initiate server data syncing streams.</p>
+                </div>
+            </div>
+            <button onclick="switchTab('settings')" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition">Configure Now</button>
         </div>
 
-        <div id="setup-alert" class="hidden bg-amber-50 border-l-4 border-amber-500 p-4 mb-6 rounded shadow-sm">
-            <p class="text-amber-700 font-medium">Action Required: Please head to the Settings tab (⚙️) to configure your GitHub Token and Repository details.</p>
+        <div id="offline-fallback-alert" class="hidden bg-rose-50 border border-rose-100 text-rose-800 p-3 rounded-2xl mb-4 flex items-center space-x-2 text-sm">
+            <span class="animate-pulse flex h-2 w-2 rounded-full bg-rose-600"></span>
+            <p class="font-semibold">Local Fallback Sandbox Sandbox Mode: Running directly out of local browser cache stores. Online modifications will defer synchronization.</p>
         </div>
 
-        <section id="tab-dashboard" class="tab-content bg-gradient-to-br from-indigo-50 via-white to-gray-50 p-6 rounded-3xl">
-            <h2 class="text-2xl font-black text-slate-800 mb-1">Dashboard Summary</h2>
-			<p class="text-sm text-gray-500 mb-6">Overview</p>
+        <section id="tab-dashboard" class="tab-content hidden space-y-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-3xl border border-slate-100 shadow-xs">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Inventory Assets Value</p>
+                    <p id="stat-retail-value" class="text-xl font-black text-slate-800 mt-1 font-mono">₱0.00</p>
+                </div>
+                <div class="bg-white p-4 rounded-3xl border border-slate-100 shadow-xs">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Estimated Acquisition Cost</p>
+                    <p id="stat-inventory-cost" class="text-xl font-black text-slate-700 mt-1 font-mono">₱0.00</p>
+                </div>
+                <div class="bg-white p-4 rounded-3xl border border-slate-100 shadow-xs">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Projected Gross Yield</p>
+                    <p id="stat-potential-profit" class="text-xl font-black text-emerald-600 mt-1 font-mono">₱0.00</p>
+                </div>
+                <div class="bg-white p-4 rounded-3xl border border-slate-100 shadow-xs">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Physical Items</p>
+                    <p id="stat-total-stock" class="text-xl font-black text-indigo-600 mt-1 font-mono">0</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="bg-slate-100/50 rounded-2xl p-3 flex justify-between items-center border border-slate-200/40">
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Catalog Lines</span>
+                    <span id="stat-total-items" class="font-black text-slate-700 font-mono">0</span>
+                </div>
+                <div class="bg-amber-50/60 rounded-2xl p-3 flex justify-between items-center border border-amber-100">
+                    <span class="text-xs font-bold text-amber-700 uppercase tracking-wide">Low Stock Alert (&lt;=<span id="lbl-low-threshold">5</span>)</span>
+                    <span id="stat-low-stock" class="font-black text-amber-700 font-mono">0</span>
+                </div>
+                <div class="bg-rose-50 rounded-2xl p-3 flex justify-between items-center border border-rose-100">
+                    <span class="text-xs font-bold text-rose-700 uppercase tracking-wide">Depleted Inventory Lines</span>
+                    <span id="stat-out-of-stock" class="font-black text-rose-700 font-mono">0</span>
+                </div>
+                <button id="btn-force-sync" onclick="forceSyncData()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-2xl p-3 flex justify-center items-center font-bold text-xs gap-1.5 transition border border-indigo-100 shadow-2xs">
+                    🔄 Refresh Live Server Database
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-3xl border border-slate-100 p-4 shadow-xs">
+                    <h3 class="font-black text-slate-800 text-sm uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <span class="h-2 w-2 rounded-full bg-rose-600 animate-ping"></span>
+                        🚨 Crucial Depleted Items (0 Qty)
+                    </h3>
+                    <div class="overflow-x-auto max-h-60 text-xs">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-400 font-bold uppercase border-b border-gray-100">
+                                    <th class="p-2">Item Name</th>
+                                    <th class="p-2">Status</th>
+                                    <th class="p-2 text-center">Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dash-outofstock-tbody">
+                                <tr><td colspan="3" class="p-4 text-center text-slate-400 italic">Excellent! No out of stock items registered.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl border border-slate-100 p-4 shadow-xs">
+                    <h3 class="font-black text-slate-800 text-sm uppercase tracking-wider mb-3 text-amber-600">
+                        ⚠️ Low Running Stock Streams
+                    </h3>
+                    <div class="overflow-x-auto max-h-60 text-xs">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-400 font-bold uppercase border-b border-gray-100">
+                                    <th class="p-2">Item Name</th>
+                                    <th class="p-2">Category</th>
+                                    <th class="p-2 text-center">Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dash-lowstock-tbody">
+                                <tr><td colspan="3" class="p-4 text-center text-slate-400 italic">No low stock items detected. All products clear!</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl border border-slate-100 p-4 shadow-xs">
+                    <h3 class="font-black text-slate-800 text-sm uppercase tracking-wider mb-3 text-indigo-600">
+                        ⏳ Upcoming Expiry Monitor (30 Days)
+                    </h3>
+                    <div class="overflow-x-auto max-h-60 text-xs">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-400 font-bold uppercase border-b border-gray-100">
+                                    <th class="p-2">Item Name</th>
+                                    <th class="p-2">Category</th>
+                                    <th class="p-2">Date</th>
+                                    <th class="p-2 text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dash-expiry-tbody">
+                                <tr><td colspan="4" class="p-4 text-center text-slate-400 italic">No upcoming product expirations to monitor.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-inventory" class="tab-content hidden space-y-4">
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
-				<div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
-					<div>
-						<p class="text-xs font-semibold text-gray-400 uppercase">Retail Value</p>
-						<p id="stat-retail-value" class="text-2xl font-black text-slate-800 mt-2">₱0.00</p>
-					</div>
-					<div class="text-2xl">💰</div>
-				</div>
-				<div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
-					<div>
-						<p class="text-xs font-semibold text-gray-400 uppercase">Inventory Cost</p>
-						<p id="stat-inventory-cost" class="text-2xl font-black text-blue-600 mt-2">₱0.00</p>
-					</div>
-					<div class="text-2xl">📦</div>
-				</div>
-				<div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition">
-					<div>
-						<p class="text-xs font-semibold text-gray-400 uppercase">Potential Profit</p>
-						<p id="stat-potential-profit" class="text-2xl font-black text-emerald-600 mt-2">₱0.00</p>
-					</div>
-					<div class="text-2xl">📈</div>
-				</div>
-            </div>
+            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-xs flex flex-col md:flex-row gap-3 items-center justify-between">
+                <div class="relative w-full md:w-80">
+                    <input type="text" id="inventory-search" oninput="handleSearchInput()" placeholder="Search item title or category..." class="w-full pl-3 pr-10 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-indigo-500 focus:bg-white font-medium">
+                    <button id="search-clear-btn" onclick="clearSearch()" class="hidden absolute right-2.5 top-2 text-slate-400 hover:text-slate-600 text-sm font-bold">✕</button>
+                </div>
 
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 mb-6">
-                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2 mb-4">📦 Stock Metrics</p>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div>
-                        <p class="text-xs font-medium text-gray-500">Total Items</p>
-                        <p id="stat-total-items" class="text-xl font-black text-indigo-600 mt-1">0</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-medium text-gray-500">Total Stock</p>
-                        <p id="stat-total-stock" class="text-xl font-black text-slate-700 mt-1">0</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-medium text-gray-500">Low Stock (&le; <span id="lbl-low-threshold">5</span>)</p>
-                        <p id="stat-low-stock" class="text-xl font-black text-amber-500 mt-1">0</p>
-                    </div>
-                    <div>
-                        <p class="text-xs font-medium text-gray-500">Out of Stock</p>
-                        <p id="stat-out-of-stock" class="text-xl font-black text-rose-600 mt-1">0</p>
-                    </div>
+                <div class="flex gap-2 w-full md:w-auto items-center justify-end">
+                    <select id="sort-picker" onchange="handleSortPickerChange()" class="bg-slate-50 border border-slate-200 text-xs font-bold text-slate-600 p-2 rounded-xl focus:outline-hidden">
+                        <option value="name-asc">Sort Name: A-Z</option>
+                        <option value="name-desc">Sort Name: Z-A</option>
+                        <option value="qty-desc">Stock: High to Low</option>
+                        <option value="qty-asc">Stock: Low to High</option>
+                        <option value="price-desc">Retail: High to Low</option>
+                        <option value="price-asc">Retail: Low to High</option>
+                        <option value="expiry-asc">Expiry Lines: Soonest</option>
+                    </select>
+
+                    <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black px-4 py-2 text-xs rounded-xl shadow-xs transition flex items-center gap-1">
+                        ➕ Add New Entry
+                    </button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-                    <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⚠️ Low Stock Items</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse text-sm">
-                            <thead>
-                                <tr class="border-b border-gray-100 text-gray-500 font-semibold bg-gray-50">
-                                    <th class="p-3">Item Name</th>
-                                    <th class="p-3">Category</th>
-                                    <th class="p-3 text-center">Stock</th>
-                                </tr>
-                            </thead>
-                            <tbody id="dash-lowstock-tbody" class="divide-y divide-gray-50 text-gray-700">
-                                <tr>
-                                    <td colspan="3" class="p-4 text-center text-gray-400 italic">No low stock items detected. All products clear!</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <div id="inventory-card-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5">
                 </div>
+        </section>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-                    <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">🚨 Out of Stock Items</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse text-sm">
-                            <thead>
-                                <tr class="border-b border-gray-100 text-gray-500 font-semibold bg-gray-50">
-                                    <th class="p-3">Item Name</th>
-                                    <th class="p-3">Category</th>
-                                    <th class="p-3 text-center">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="dash-outofstock-tbody" class="divide-y divide-gray-50 text-gray-700">
-                                <tr>
-                                    <td colspan="3" class="p-4 text-center text-gray-400 italic">Excellent! No out of stock items registered.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        <section id="tab-history" class="tab-content hidden space-y-4">
+            <div class="bg-white rounded-3xl border border-slate-100 shadow-xs overflow-hidden">
+                <div class="p-4 bg-slate-50/50 border-b border-slate-100 flex justify-between items-center">
+                    <h2 class="font-black text-slate-800 text-sm uppercase tracking-wider">Historical System Activity Registry Log</h2>
+                    <span class="text-xs text-slate-400 font-bold">Tracks session mutations instantly</span>
                 </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-                <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">⏳ Expiring Soon (Next 30 Days)</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-sm">
+                <div class="overflow-x-auto text-sm">
+                    <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="border-b border-gray-100 text-gray-500 font-semibold bg-gray-50">
-                                <th class="p-3">Item Name</th>
-                                <th class="p-3">Category</th>
-                                <th class="p-3">Expiration Date</th>
-                                <th class="p-3 text-center">Status</th>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-slate-400 font-bold uppercase text-xs">
+                                <th class="p-4">Timestamp Mapping</th>
+                                <th class="p-4">Item Catalog Entity</th>
+                                <th class="p-4">Action Signature</th>
+                                <th class="p-4">Qty Delta</th>
+                                <th class="p-4">Ledger Footnotes / Description</th>
                             </tr>
                         </thead>
-                        <tbody id="dash-expiry-tbody" class="divide-y divide-gray-700 text-gray-700">
-                            <tr>
-                                <td colspan="4" class="p-4 text-center text-gray-400 italic">No upcoming product expirations to monitor.</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="history-table-body">
+                            </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
-		<section id="tab-inventory" class="tab-content hidden">
-			<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-				<div>
-					<h2 class="text-3xl font-black text-slate-800 tracking-tight">Inventory</h2>
-					<p class="text-slate-500 text-sm mt-1">Manage products, stock, and pricing</p>
-				</div>
-				<button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-sm transition w-full md:w-auto">+ Add Item</button>
-			</div>
-
-			<div class="bg-white border border-slate-200 rounded-3xl p-4 mb-6 shadow-sm">
-				<div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
-					<div class="relative flex-1">
-						<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍︎</span>
-						<input type="text" id="inventory-search" oninput="handleSearchInput()" placeholder="Search items..." class="w-full pl-11 pr-10 py-3 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none bg-slate-50 text-sm">
-						<button id="search-clear-btn" onclick="clearSearch()" class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">✖️</button>
-					</div>
-
-					<div class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-4 py-3 rounded-2xl">
-						<span class="text-xs font-semibold text-slate-500">Sort</span>
-						<select id="sort-picker" onchange="handleSortPickerChange()" class="bg-transparent text-sm font-medium outline-none cursor-pointer">
-							<option value="name-asc">Name (A–Z)</option>
-							<option value="name-desc">Name (Z–A)</option>
-							<option value="stock-asc">Stock (Low)</option>
-							<option value="stock-desc">Stock (High)</option>
-							<option value="expiry-asc">Expiry</option>
-						</select>
-					</div>
-				</div>
-			</div>
-
-			<div id="inventory-card-grid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5"></div>
-		</section>
-
-        <section id="tab-history" class="tab-content hidden">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Transaction History</h2>
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
-                <table class="w-full text-left border-collapse min-w-[600px]">
-                    <thead>
-                        <tr class="bg-gray-50 border-b border-gray-100 text-gray-600 font-semibold text-sm">
-                            <th class="p-4">Timestamp</th>
-                            <th class="p-4">Item</th>
-                            <th class="p-4">Type</th>
-                            <th class="p-4">Quantity Change</th>
-                            <th class="p-4">Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody id="history-table-body" class="divide-y divide-gray-50 text-gray-600 text-sm"></tbody>
-                </table>
+        <section id="tab-settings" class="tab-content hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xs space-y-4">
+                <h2 class="font-black text-slate-800 text-base uppercase tracking-wider border-b border-slate-100 pb-2">GitHub Base Pipeline Sync Profile</h2>
+                <form onsubmit="saveSettings(e); return false;" id="settings-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-black uppercase text-slate-400 tracking-wider mb-1.5">Personal Security Pipeline Key Token</label>
+                        <input type="password" id="cfg-token" required placeholder="ghp_************************************" class="w-full border p-2.5 rounded-xl font-mono text-sm bg-slate-50 focus:outline-hidden focus:border-indigo-500 focus:bg-white">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-black uppercase text-slate-400 tracking-wider mb-1.5">GitHub Username</label>
+                            <input type="text" id="cfg-username" required placeholder="User account string" class="w-full border p-2.5 rounded-xl text-sm bg-slate-50 focus:outline-hidden focus:border-indigo-500 focus:bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black uppercase text-slate-400 tracking-wider mb-1.5">Repository Location</label>
+                            <input type="text" id="cfg-repo" required placeholder="abkd" class="w-full border p-2.5 rounded-xl text-sm bg-slate-50 focus:outline-hidden focus:border-indigo-500 focus:bg-white">
+                        </div>
+                    </div>
+                    <button type="button" onclick="saveSettings(event)" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider py-3 rounded-xl shadow-xs transition">
+                        🔒 Apply Protocol Access Tokens
+                    </button>
+                </form>
             </div>
-        </section>
 
-        <section id="tab-settings" class="tab-content hidden">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Application Settings</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h3 class="text-base font-bold text-slate-800 border-b border-slate-50 pb-2 mb-4">🔗 GitHub Database Configuration</h3>
-                    <form id="settings-form" onsubmit="saveSettings(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">GitHub Personal Access Token</label>
-                            <input type="password" id="cfg-token" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">GitHub Username</label>
-                            <input type="text" id="cfg-username" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Repository Name</label>
-                            <input type="text" id="cfg-repo" value="abkd" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                        </div>
-                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded font-medium transition shadow">
-                            Save Data Connections
-                        </button>
-                    </form>
-                </div>
-
-                <div class="space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h3 class="text-base font-bold text-slate-800 border-b border-slate-50 pb-2 mb-4">🎨 Store Branding & Thresholds</h3>
-                        <form id="app-config-form" onsubmit="saveAppPreferences(event)" class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Store Display Name</label>
-                                <input type="text" id="cfg-store-name" placeholder="📦 ABKD Inventory" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Low Stock Alert Level (Units)</label>
-                                <input type="number" id="cfg-low-threshold" min="1" max="100" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                                <p class="text-[11px] text-gray-400 mt-1">Products with stock volumes less than or equal to this limit appear automatically inside the low alert matrix.</p>
-                            </div>
-                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded font-medium transition shadow">
-                                Apply View Adjustments
-                            </button>
-                        </form>
+            <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xs space-y-4">
+                <h2 class="font-black text-slate-800 text-base uppercase tracking-wider border-b border-slate-100 pb-2">Client Brand & Sandbox Configurations</h2>
+                <form onsubmit="saveAppPreferences(e); return false;" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-black uppercase text-slate-400 tracking-wider mb-1.5">Custom Storefront Header Title</label>
+                        <input type="text" id="cfg-store-name" required class="w-full border p-2.5 rounded-xl text-sm bg-slate-50 focus:outline-hidden focus:border-indigo-500 focus:bg-white">
                     </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 bg-gradient-to-br from-white to-indigo-50/20">
-                        <h3 class="text-base font-bold text-slate-800 border-b border-slate-100 pb-2 mb-3">💾 Local Storage Backup & Restore</h3>
-                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">Download physical backups directly to your local file storage or manually load local data sets back into memory if your connection to GitHub fails.</p>
-                        
-                        <div class="grid grid-cols-2 gap-3 mb-4">
-                            <button onclick="backupData()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 p-2.5 rounded-lg font-semibold text-xs transition shadow-sm text-center">
-                                📥 Create Backups
-                            </button>
-                            <label class="bg-emerald-600 hover:bg-emerald-700 text-white p-2.5 rounded-lg font-semibold text-xs transition shadow-sm text-center cursor-pointer">
-                                📤 Restore Backup File
-                                <input type="file" id="restore-file-input" accept=".json" onchange="restoreData(this)" class="hidden">
-                            </label>
-                        </div>
-                        <p class="text-[10px] text-gray-400">Note: The restoration system reads your backup file profile and prompts you to choose whether to load just Inventory items, Image files, or transaction History.</p>
+                    <div>
+                        <label class="block text-xs font-black uppercase text-slate-400 tracking-wider mb-1.5">Low Stock Alarm Metric Ceiling Level</label>
+                        <input type="number" id="cfg-low-threshold" min="1" max="100" required class="w-full border p-2.5 rounded-xl font-mono text-sm bg-slate-50 focus:outline-hidden focus:border-indigo-500 focus:bg-white">
                     </div>
+                    <button type="button" onclick="saveAppPreferences(event)" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-black text-xs uppercase tracking-wider py-3 rounded-xl shadow-xs transition">
+                        ⚙️ Save Global Theme Preferences
+                    </button>
+                </form>
 
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-rose-100 bg-gradient-to-br from-white to-rose-50/20">
-                        <h3 class="text-base font-bold text-rose-800 border-b border-rose-100/50 pb-2 mb-2">🔄 Manual Live Sync</h3>
-                        <p class="text-xs text-gray-500 mb-4 leading-relaxed">If updates saved from another mobile device or window are not appearing immediately, tap below to force clear local memory and stream the fresh repository matrix instantly.</p>
-                        <button onclick="forceSyncData()" id="btn-force-sync" class="w-full bg-white hover:bg-rose-50 text-rose-600 border border-rose-300 p-2.5 rounded-lg font-semibold tracking-wide text-sm transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
-                            ⚡ Force Sync Database
+                <div class="pt-4 border-t border-slate-100 space-y-2.5">
+                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider">Local Disaster Recovery Storage Layers</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="backupData()" class="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 font-bold text-xs py-2.5 rounded-xl transition flex justify-center items-center gap-1.5">
+                            📥 Download Backups
                         </button>
+                        <label class="bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 font-bold text-xs py-2.5 rounded-xl transition flex justify-center items-center gap-1.5 cursor-pointer text-center">
+                            📤 Upload Recovery
+                            <input type="file" accept=".json" onchange="restoreData(this)" class="hidden">
+                        </label>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <div id="item-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto">
-        <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 my-8">
-            <h3 id="modal-title" class="text-xl font-bold text-gray-800 mb-4">Add New Item</h3>
-            <form id="item-form" onsubmit="saveItem(event)" class="space-y-4">
+    <div id="item-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-5 shadow-2xl border border-slate-100 flex flex-col max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
+                <h3 id="modal-title" class="text-base font-black text-slate-800 uppercase tracking-wider">Add New Item</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-sm p-1">✕</button>
+            </div>
+
+            <form id="item-form" onsubmit="saveItem(event)" class="space-y-4 text-xs">
                 <input type="hidden" id="item-id">
                 <input type="hidden" id="item-image-base64">
                 <input type="hidden" id="item-original-name">
-                
-                <div class="bg-gray-50 border border-dashed border-gray-300 rounded-lg p-3 text-center">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Item Image (Optional)</label>
-                    <div class="flex items-center justify-center gap-4">
-                        <div id="image-preview-container" class="w-16 h-16 bg-gray-200 border rounded overflow-hidden flex items-center justify-center text-gray-400 text-xs">
-                            No Img
-                        </div>
-                        <input type="file" id="item-image-input" accept="image/*" onchange="processImageUpload(this)" class="text-xs text-gray-600 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Item Name</label>
-                        <input type="text" id="item-name" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                        <input type="text" id="item-category" placeholder="e.g. Snacks, Drinks" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                    </div>
-                </div>
 
                 <div class="grid grid-cols-3 gap-3">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Supplier Cost (₱)</label>
-                        <input type="number" id="item-cost" step="0.01" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required min="0" oninput="calculateSRP(false)">
+                    <div class="col-span-2">
+                        <label class="block text-[10px] font-black uppercase text-slate-400 tracking-wider mb-1">Product Title</label>
+                        <input type="text" id="item-name" required class="w-full border p-2 rounded-xl bg-slate-50 focus:outline-hidden focus:border-indigo-500 font-semibold text-slate-700">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Units in Pack</label>
-                        <input type="number" id="item-units" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="1" required min="1" oninput="calculateSRP(false)">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-emerald-700 font-semibold mb-1">Unit Cost</label>
-                        <input type="text" id="item-unit-cost" class="w-full p-2 border border-emerald-200 rounded bg-emerald-50/50 font-mono font-bold text-emerald-700 text-sm" readonly value="₱0.00">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Mark Up (%)</label>
-                        <input type="number" id="item-markup" step="0.1" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" value="12" required min="0" oninput="calculateSRP(false)">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-500 mb-1">Recommended Price</label>
-                        <input type="text" id="item-rec-price" class="w-full p-2 border border-gray-200 rounded bg-gray-50 font-mono font-bold text-gray-600" readonly value="0.00">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-3 gap-3">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Current Stock</label>
-                        <input type="number" id="item-qty" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none" required min="0">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-indigo-700 mb-1">Price (SRP)</label>
-                        <input type="number" id="item-price" step="0.01" class="w-full p-2 border border-indigo-300 rounded font-bold text-indigo-700 outline-none focus:ring-indigo-400" required min="0" oninput="calculateSRP(true)">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-teal-700 mb-1">Profit / Piece</label>
-                        <input type="text" id="item-unit-profit" class="w-full p-2 border border-teal-200 rounded bg-teal-50/60 font-mono font-bold text-teal-700 text-sm" readonly value="₱0.00">
+                        <label class="block text-[10px] font-black uppercase text-slate-400 tracking-wider mb-1">Category Group</label>
+                        <input type="text" id="item-category" required placeholder="e.g. Food" class="w-full border p-2 rounded-xl bg-slate-50 focus:outline-hidden focus:border-indigo-500 font-semibold text-slate-700">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Expiration Date (Leave blank for N/A)</label>
-                    <input type="date" id="item-expiry" class="w-full p-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                    <label class="block text-[10px] font-black uppercase text-slate-400 tracking-wider mb-1">Product Display Image</label>
+                    <div class="flex items-center space-x-3">
+                        <div id="image-preview-container" class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden flex items-center justify-center text-[10px] font-black text-slate-300 uppercase tracking-tight">No Img</div>
+                        <input type="file" accept="image/*" onchange="processImageUpload(this)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer">
+                    </div>
                 </div>
 
-                <div class="flex justify-end space-x-2 pt-2">
-                    <button type="button" onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded transition">Save</button>
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200/50 space-y-3">
+                    <h4 class="font-black text-slate-400 uppercase text-[9px] tracking-widest border-b border-slate-200/40 pb-1">Cost & Yield Calculator Engine</h4>
+                    
+                    <div class="grid grid-cols-3 gap-2.5">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 mb-0.5">Bulk Acquisition Cost</label>
+                            <input type="number" step="0.01" id="item-cost" oninput="calculateSRP()" required class="w-full border p-1.5 rounded-lg bg-white font-mono font-bold text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 mb-0.5">Pieces / Case Unit</label>
+                            <input type="number" id="item-units" oninput="calculateSRP()" required value="1" min="1" class="w-full border p-1.5 rounded-lg bg-white font-mono font-bold text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 mb-0.5">Calculated Unit Cost</label>
+                            <input type="text" id="item-unit-cost" readonly class="w-full border p-1.5 rounded-lg bg-slate-100 font-mono text-slate-400 font-bold">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-2.5 pt-1.5">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 mb-0.5">Desired Markup %</label>
+                            <input type="number" step="0.1" id="item-markup" oninput="calculateSRP()" value="0" class="w-full border p-1.5 rounded-lg bg-white font-mono font-bold text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 mb-0.5">Suggested SRP</label>
+                            <input type="text" id="item-rec-price" readonly class="w-full border p-1.5 rounded-lg bg-indigo-50 text-indigo-700 font-mono font-black">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-indigo-600 mb-0.5">Actual Tag Price</label>
+                            <input type="number" step="0.01" id="item-price" oninput="calculateSRP(true)" required class="w-full border p-1.5 rounded-lg bg-white ring-2 ring-indigo-600/20 font-mono font-black text-slate-800">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 mb-0.5">Net Profit/Piece</label>
+                            <input type="text" id="item-unit-profit" readonly class="w-full border p-1.5 rounded-lg bg-emerald-50 text-emerald-700 font-mono font-bold">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-slate-400 tracking-wider mb-1">Current Stock Qty</label>
+                        <input type="number" id="item-qty" required class="w-full border p-2 rounded-xl bg-slate-50 focus:outline-hidden focus:border-indigo-500 font-mono font-bold text-slate-700">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-slate-400 tracking-wider mb-1">Expiration Line Date</label>
+                        <input type="date" id="item-expiry" class="w-full border p-2 rounded-xl bg-slate-50 focus:outline-hidden focus:border-indigo-500 font-mono font-bold text-slate-700">
+                    </div>
+                </div>
+
+                <div class="flex space-x-2 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="closeModal()" class="w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-black py-2.5 rounded-xl transition">Cancel</button>
+                    <button type="submit" class="w-2/3 bg-indigo-600 hover:bg-indigo-700 text-white font-black py-2.5 rounded-xl shadow-xs transition uppercase tracking-wider">Commit Records</button>
                 </div>
             </form>
         </div>
@@ -362,6 +351,7 @@
         };
         
         let dbImages = {};
+
         let currentSortColumn = 'name'; 
         let currentSortDirection = 'asc'; 
 
@@ -389,6 +379,7 @@
                 fetchDataFromGitHub();
             }
             
+            // Setup listener for PWA framework components to catch offline events
             window.addEventListener('online', updateOnlineStatus);
             window.addEventListener('offline', updateOnlineStatus);
             updateOnlineStatus();
@@ -458,9 +449,11 @@
 		function safeEncodeBase64(unicodeString) {
 			const bytes = new TextEncoder().encode(unicodeString);
 			let binaryString = '';
+
 			for (let i = 0; i < bytes.length; i++) {
 				binaryString += String.fromCharCode(bytes[i]);
 			}
+
 			return btoa(binaryString);
 		}
 
@@ -472,7 +465,7 @@
             const imagesUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images.json${cacheBuster}`;
             
             try {
-                // 1. Fetch Inventory & Config
+                // 1. Fetch Inventory & Config details
                 const invRes = await fetch(inventoryUrl, {
                     headers: { 'Authorization': `token ${creds.token}` }
                 });
@@ -492,7 +485,7 @@
                     db.config = { storeName: "📦 ABKD Inventory", lowThreshold: 5 };
                 }
 
-                // 2. Fetch History Logs
+                // 2. Fetch separate transaction logs
                 const histRes = await fetch(historyUrl, {
                     headers: { 'Authorization': `token ${creds.token}` }
                 });
@@ -504,7 +497,7 @@
                     if (!Array.isArray(db.history)) db.history = [];
                 }
 
-                // 3. Fetch separated images lookup path maps
+                // 3. Fetch separated images index map file
                 const imgRes = await fetch(imagesUrl, {
                     headers: { 'Authorization': `token ${creds.token}` }
                 });
@@ -516,6 +509,7 @@
                     dbImages = {};
                 }
                 
+                // Synchronize network values out to the local fallback layer
                 localStorage.setItem('offline_db_cache', JSON.stringify(db));
                 localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
 
@@ -523,6 +517,7 @@
                 renderApp();
             } catch (err) {
                 console.warn('Network acquisition rejected. Shifting to localStorage data...', err);
+                
                 const cachedDbRaw = localStorage.getItem('offline_db_cache');
                 const cachedImagesRaw = localStorage.getItem('offline_images_cache');
                 
@@ -534,7 +529,7 @@
                     applyDatabasePreferences();
                     renderApp();
                 } else {
-                    alert('Offline mode warning: No cached data discovered in this browser window.');
+                    alert('Offline mode warning: No cached historical dataset discovered inside this browser node.');
                 }
             }
         }
@@ -559,13 +554,14 @@
             }, 500);
         }
 
-		async function pushDataToGitHub(commitMessage = "Inventory state updated", rawNewImageBase64 = null, targetItemId = null) {
+		async function pushDataToGitHub(commitMessage = "Inventory state updated", rawNewImageBase64 = null, updatedItemId = null) {
 			if (!db || !Array.isArray(db.inventory) || !Array.isArray(db.history)) {
 				console.error("Sync blocked: Database structure is invalid.");
 				alert("Database error: Synchronization was halted because the database structure is invalid.");
 				return;
 			}
 
+            // Immediately save state changes locally first to protect current mutations
             localStorage.setItem('offline_db_cache', JSON.stringify(db));
             localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
 
@@ -575,124 +571,135 @@
 			const imagesUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images.json`;
 
 			try {
-                // If a new image file needs to be pushed up to repo independently
-                if (rawNewImageBase64 && targetItemId) {
-                    const actualCleanBase64 = rawNewImageBase64.split(',')[1] || rawNewImageBase64;
-                    const specificImgUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images/${targetItemId}.jpg`;
-                    
-                    let assetSha = null;
-                    const assetGet = await fetch(specificImgUrl, { headers: { 'Authorization': `token ${creds.token}` } });
-                    if (assetGet.ok) {
-                        const assetData = await assetGet.json();
-                        assetSha = assetData.sha;
+                // If a new image data payload is provided, sync the physical file to GitHub first
+                if (rawNewImageBase64 && updatedItemId) {
+                    const physicalImgUrl = `https://api.github.com/repos/${creds.user}/${creds.repo}/contents/images/${updatedItemId}.jpg`;
+                    const imgFileGetRes = await fetch(physicalImgUrl, { headers: { 'Authorization': `token ${creds.token}` } });
+                    let imgFileSha = null;
+                    if (imgFileGetRes.ok) {
+                        const imgFileData = await imgFileGetRes.json();
+                        imgFileSha = imgFileData.sha;
                     }
-
-                    const assetPayload = {
-                        message: "Media binary source upload: " + targetItemId,
-                        content: actualCleanBase64
+                    
+                    const pureBase64 = rawNewImageBase64.split(',')[1] || rawNewImageBase64;
+                    const imgFilePayload = {
+                        message: "Upload physical image asset: " + updatedItemId,
+                        content: pureBase64
                     };
-                    if (assetSha) assetPayload.sha = assetSha;
-
-                    await fetch(specificImgUrl, {
+                    if (imgFileSha) imgFilePayload.sha = imgFileSha;
+                    
+                    await fetch(physicalImgUrl, {
                         method: 'PUT',
                         headers: { 'Authorization': `token ${creds.token}`, 'Content-Type': 'application/json' },
-                        body: JSON.stringify(assetPayload)
+                        body: JSON.stringify(imgFilePayload)
                     });
 
-                    // Add mapping reference link to mapping layer
-                    dbImages[targetItemId] = `images/${targetItemId}.jpg`;
+                    // Update local maps to reflect the standalone file index route
+                    dbImages[updatedItemId] = `images/${updatedItemId}.jpg`;
                     localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
                 }
 
-                // --- STEP 1: SAVE INVENTORY FILE ---
-                const invGetRes = await fetch(inventoryUrl, { headers: { 'Authorization': `token ${creds.token}` } });
-                let invSha = null;
-                if (invGetRes.ok) {
-                    const currentFileData = await invGetRes.json();
-                    invSha = currentFileData.sha;
-                }
+				// --- STEP 1: SAVE LIGHTWEIGHT INVENTORY FILE ---
+				const invGetRes = await fetch(inventoryUrl, { headers: { 'Authorization': `token ${creds.token}` } });
+				let invSha = null;
+				if (invGetRes.ok) {
+					const currentFileData = await invGetRes.json();
+					invSha = currentFileData.sha;
+				}
 
-                // Ensure items don't store inline base64 blobs inside inventory data array
-                const sanitizedInventoryArray = db.inventory.map(item => {
-                    const cleanItem = Object.assign({}, item);
-                    delete cleanItem.image; 
-                    return cleanItem;
-                });
+				const sanitizedInventoryArray = db.inventory.map(item => {
+					const cleanItem = Object.assign({}, item);
+					delete cleanItem.image; // Keep core records totally light
+					return cleanItem;
+				});
 
-                const inventoryPayloadObj = { inventory: sanitizedInventoryArray, config: db.config };
-                const invJsonString = JSON.stringify(inventoryPayloadObj, null, 2);
+				const inventoryPayloadObj = { inventory: sanitizedInventoryArray, config: db.config };
+				const invJsonString = JSON.stringify(inventoryPayloadObj, null, 2);
 
-                const invPayload = {
-                    message: commitMessage,
-                    content: safeEncodeBase64(invJsonString),
-                };
-                if (invSha) invPayload.sha = invSha;
+				if (!invJsonString || invJsonString === "{}" || invJsonString === "[]") {
+					throw new Error("Generated item payload is completely empty.");
+				}
 
-                const invRes = await fetch(inventoryUrl, {
-                    method: 'PUT',
-                    headers: { 'Authorization': `token ${creds.token}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify(invPayload)
-                });
+				const invPayload = {
+					message: commitMessage,
+					content: safeEncodeBase64(invJsonString),
+				};
+				if (invSha) invPayload.sha = invSha;
 
-                // --- STEP 2: SAVE DECOUPLED HISTORY LOG FILE ---
-                const histGetRes = await fetch(historyUrl, { headers: { 'Authorization': `token ${creds.token}` } });
-                let histSha = null;
-                if (histGetRes.ok) {
-                    const currentFileData = await histGetRes.json();
-                    histSha = currentFileData.sha;
-                }
-                const histJsonString = JSON.stringify(db.history, null, 2);
-                const histPayload = {
-                    message: "Log transaction tracks: " + commitMessage,
-                    content: safeEncodeBase64(histJsonString),
-                };
-                if (histSha) histPayload.sha = histSha;
-                await fetch(historyUrl, {
-                    method: 'PUT',
-                    headers: { 'Authorization': `token ${creds.token}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify(histPayload)
-                });
+				const invRes = await fetch(inventoryUrl, {
+					method: 'PUT',
+					headers: { 'Authorization': `token ${creds.token}`, 'Content-Type': 'application/json' },
+					body: JSON.stringify(invPayload)
+				});
 
-                // --- STEP 3: SAVE IMAGES LOOKUP REGISTRY MAP FILE ---
-                const imgGetRes = await fetch(imagesUrl, { headers: { 'Authorization': `token ${creds.token}` } });
-                let imgSha = null;
-                if (imgGetRes.ok) {
-                    const currentFileData = await imgGetRes.json();
-                    imgSha = currentFileData.sha;
-                }
-                const imgJsonString = JSON.stringify(dbImages, null, 2);
-                const imgPayload = {
-                    message: "Sync media directory maps: " + commitMessage,
-                    content: safeEncodeBase64(imgJsonString),
-                };
-                if (imgSha) imgPayload.sha = imgSha;
-                await fetch(imagesUrl, {
-                    method: 'PUT',
-                    headers: { 'Authorization': `token ${creds.token}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify(imgPayload)
-                });
+				// --- STEP 2: SAVE DECOUPLED HISTORY LOG FILE ---
+				const histGetRes = await fetch(historyUrl, { headers: { 'Authorization': `token ${creds.token}` } });
+				let histSha = null;
+				if (histGetRes.ok) {
+					const currentFileData = await histGetRes.json();
+					histSha = currentFileData.sha;
+				}
 
-                if (invRes.ok) {
-                    console.log("Successfully synced all light core database files!");
-                    renderApp();
-                } else {
-                    const errorData = await invRes.json();
-                    throw new Error(errorData.message || "GitHub rejected data synchronization operation.");
-                }
+				const histJsonString = JSON.stringify(db.history, null, 2);
+				const histPayload = {
+					message: "Log transaction tracks: " + commitMessage,
+					content: safeEncodeBase64(histJsonString),
+				};
+				if (histSha) histPayload.sha = histSha;
+
+				await fetch(historyUrl, {
+					method: 'PUT',
+					headers: { 'Authorization': `token ${creds.token}`, 'Content-Type': 'application/json' },
+					body: JSON.stringify(histPayload)
+				});
+
+				// --- STEP 3: SAVE DECOUPLED IMAGES MAP INDEX FILE ---
+				const imgGetRes = await fetch(imagesUrl, { headers: { 'Authorization': `token ${creds.token}` } });
+				let imgSha = null;
+				if (imgGetRes.ok) {
+					const currentFileData = await imgGetRes.json();
+					imgSha = currentFileData.sha;
+				}
+
+				const imgJsonString = JSON.stringify(dbImages, null, 2);
+				const imgPayload = {
+					message: "Sync media asset routes: " + commitMessage,
+					content: safeEncodeBase64(imgJsonString),
+				};
+				if (imgSha) imgPayload.sha = imgSha;
+
+				await fetch(imagesUrl, {
+					method: 'PUT',
+					headers: { 'Authorization': `token ${creds.token}`, 'Content-Type': 'application/json' },
+					body: JSON.stringify(imgPayload)
+				});
+
+				if (invRes.ok) {
+					console.log("Successfully synced all decoupled core, history, and lightweight index mappings!");
+					renderApp();
+				} else {
+					const errorData = await invRes.json();
+					throw new Error(errorData.message || "GitHub rejected the data injection save.");
+				}
 			} catch (err) {
 				console.error(err);
 				renderApp();
-				alert('Failed to save to GitHub database: ' + err.message + '\n\nDon\'t panic! Your changes are safe in browser memory cache layers.');
+				alert('Failed to save to GitHub database: ' + err.message + '\n\nDon\'t panic! Your changes are completely safe in this browser session and will be cached offline.');
 			}
 		}
 
         function backupData() {
             if (!db || !Array.isArray(db.inventory)) {
-                alert("No valid internal inventory datasets found to export.");
+                alert("No valid internal inventory data sets found to export.");
                 return;
             }
+            const strippedInventory = db.inventory.map(item => {
+                const cleanItem = Object.assign({}, item);
+                delete cleanItem.image;
+                return cleanItem;
+            });
             const datasets = [
-                { filename: "abkd_inventory_backup.json", data: { inventory: db.inventory, config: db.config } },
+                { filename: "abkd_inventory_backup.json", data: { inventory: strippedInventory, config: db.config } },
                 { filename: "abkd_images_backup.json", data: dbImages || {} },
                 { filename: "abkd_history_backup.json", data: db.history || [] }
             ];
@@ -708,7 +715,7 @@
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
             });
-            alert("Local storage download completed!\nCheck your system downloads for 3 backup files.");
+            alert("Local storage download completed!\nCheck your download history for 3 discrete backup files.");
         }
 
         function restoreData(inputElement) {
@@ -722,33 +729,53 @@
                     const isInventoryFile = parsedData && typeof parsedData === 'object' && ('inventory' in parsedData);
                     const isImageFile = parsedData && typeof parsedData === 'object' && !('inventory' in parsedData) && !Array.isArray(parsedData);
                     
-                    let instruction = "Choose data restoration module rules:\n\n";
-                    if (isInventoryFile) instruction += "👉 Type '1' to restore Inventory Catalog Data & settings.\n";
-                    if (isImageFile) instruction += "👉 Type '2' to restore Image Folder Mappings.\n";
-                    if (isHistoryFile) instruction += "👉 Type '3' to restore Logs Ledger Tracks.\n";
-                    
-                    const selection = prompt(instruction, "1")?.trim();
+                    let instruction = "We analyzed the file layer properties. Choose how you want to restore this data:\n\n";
+                    if (isInventoryFile) instruction += "👉 Type '1' to restore Inventory Catalog Data & preferences.\n";
+                    if (isImageFile) instruction += "👉 Type '2' to restore Image Map Reference Indexes.\n";
+                    if (isHistoryFile) instruction += "👉 Type '3' to restore Transaction Logs Sequence.\n";
+                    instruction += "Type 'ALL' to execute auto-parse mode rules.";
+
+                    const selection = prompt(instruction, "1")?.trim().toUpperCase();
                     if (!selection) { inputElement.value = ''; return; }
 
-                    if (selection === '1' && isInventoryFile) {
+                    let statusMessage = "";
+                    if (selection === '1' || (selection === 'ALL' && isInventoryFile)) {
+                        if (!isInventoryFile && !Array.isArray(parsedData.inventory)) {
+                            throw new Error("Uploaded content signature does not match an inventory structural array schema.");
+                        }
                         db.inventory = parsedData.inventory;
                         if (parsedData.config) db.config = parsedData.config;
-                    } else if (selection === '2' && isImageFile) {
+                        statusMessage = "Inventory lines and preferences successfully updated locally!";
+                    } else if (selection === '2' || (selection === 'ALL' && isImageFile)) {
+                        if (typeof parsedData !== 'object' || Array.isArray(parsedData)) {
+                            throw new Error("Uploaded content signature does not match an image mapping schema.");
+                        }
                         dbImages = Object.assign({}, dbImages, parsedData);
-                    } else if (selection === '3' && isHistoryFile) {
+                        statusMessage = "Image index paths stitched back into active rows successfully!";
+                    } else if (selection === '3' || (selection === 'ALL' && isHistoryFile)) {
+                        if (!Array.isArray(parsedData)) {
+                            throw new Error("Uploaded content signature does not match a linear ledger trace array.");
+                        }
                         db.history = parsedData;
+                        statusMessage = "Transaction logs registry replaced locally!";
                     } else {
-                        alert("Restoration matched target properties filter incorrectly.");
+                        alert("Restoration canceled or unsupported selection rule matching typed key.");
                         inputElement.value = '';
                         return;
                     }
-                    
-                    localStorage.setItem('offline_db_cache', JSON.stringify(db));
-                    localStorage.setItem('offline_images_cache', JSON.stringify(dbImages));
+
+                    applyDatabasePreferences();
                     renderApp();
-                    alert("Local modifications loaded successfully! Sync with GitHub when connection is stable.");
-                } catch (err) {
-                    alert("Corrupted file payload pattern structural layout format rejection: " + err.message);
+                    
+                    const creds = getGitHubCredentials();
+                    if (creds.token && creds.user && navigator.onLine) {
+                        if (confirm("Would you like to sync this restored data segment straight up to your live GitHub repository node right now?")) {
+                            pushDataToGitHub("Restored backup segment from file node");
+                        }
+                    }
+                    alert(statusMessage);
+                } catch(err) {
+                    alert("Backup Execution Failure: " + err.message);
                 }
                 inputElement.value = '';
             };
@@ -756,100 +783,106 @@
         }
 
         function handleSearchInput() {
-            const clearBtn = document.getElementById('search-clear-btn');
             const searchVal = document.getElementById('inventory-search').value.trim();
+            const clearBtn = document.getElementById('search-clear-btn');
             if (searchVal.length > 0) {
                 clearBtn.classList.remove('hidden');
             } else {
                 clearBtn.classList.add('hidden');
             }
-            renderInventoryGrid();
+            renderApp();
         }
 
         function clearSearch() {
-            document.getElementById('inventory-search').value = '';
+            document.getElementById('inventory-search').value = "";
             document.getElementById('search-clear-btn').classList.add('hidden');
-            renderInventoryGrid();
+            renderApp();
         }
 
         function handleSortPickerChange() {
-            const pickerValue = document.getElementById('sort-picker').value;
-            const parts = pickerValue.split('-');
+            const val = document.getElementById('sort-picker').value;
+            const parts = val.split('-');
             currentSortColumn = parts[0];
-            currentSortDirection = parts[1] || 'asc';
-            renderInventoryGrid();
+            currentSortDirection = parts[1];
+            renderApp();
         }
 
-        function processImageUpload(input) {
-            const file = input.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('item-image-base64').value = e.target.result;
-                const container = document.getElementById('image-preview-container');
-                container.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
-            };
-            reader.readAsDataURL(file);
+        function calculateSRP(manualSRPTriggered = false) {
+            const cost = parseFloat(document.getElementById('item-cost').value) || 0;
+            const units = parseInt(document.getElementById('item-units').value) || 1;
+            const markup = parseFloat(document.getElementById('item-markup').value) || 0;
+            
+            const unitCost = cost / units;
+            document.getElementById('item-unit-cost').value = `₱${unitCost.toFixed(2)}`;
+
+            const recommendedPrice = unitCost * (1 + (markup / 100));
+            document.getElementById('item-rec-price').value = recommendedPrice.toFixed(2);
+
+            if (!manualSRPTriggered) {
+                document.getElementById('item-price').value = recommendedPrice.toFixed(2);
+            }
+
+            const currentPrice = parseFloat(document.getElementById('item-price').value) || 0;
+            const profitPerPiece = currentPrice - unitCost;
+            document.getElementById('item-unit-profit').value = `₱${profitPerPiece.toFixed(2)}`;
         }
 
-        function openModal(existingItem = null) {
+        function openModal(itemIndex = null) {
+            const modal = document.getElementById('item-modal');
             const form = document.getElementById('item-form');
             form.reset();
+            
             document.getElementById('item-id').value = '';
             document.getElementById('item-image-base64').value = '';
             document.getElementById('item-original-name').value = '';
-            document.getElementById('image-preview-container').innerHTML = "No Img";
-            
-            if (existingItem) {
-                document.getElementById('modal-title').innerText = "Edit Product Item";
-                document.getElementById('item-id').value = existingItem.id;
-                document.getElementById('item-name').value = existingItem.name;
-                document.getElementById('item-original-name').value = existingItem.name;
-                document.getElementById('item-category').value = existingItem.category || '';
-                document.getElementById('item-cost').value = existingItem.cost || 0;
-                document.getElementById('item-units').value = existingItem.units || 1;
-                document.getElementById('item-markup').value = existingItem.markup || 12;
-                document.getElementById('item-qty').value = existingItem.qty || 0;
-                document.getElementById('item-price').value = existingItem.price || 0;
-                document.getElementById('item-expiry').value = existingItem.expiry || '';
+            document.getElementById('image-preview-container').innerHTML = 'No Img';
 
-                const creds = getGitHubCredentials();
-                const relativeImgPath = dbImages[existingItem.id];
-                if (relativeImgPath) {
-                    const fullImgUrl = `https://raw.githubusercontent.com/${creds.user}/${creds.repo}/main/${relativeImgPath}?t=${Date.now()}`;
-                    document.getElementById('image-preview-container').innerHTML = `<img src="${fullImgUrl}" class="w-full h-full object-cover">`;
+            if (itemIndex !== null) {
+                document.getElementById('modal-title').innerText = "Edit Existing Product";
+                const item = db.inventory[itemIndex];
+                
+                document.getElementById('item-id').value = item.id || '';
+                document.getElementById('item-original-name').value = item.name || '';
+                document.getElementById('item-name').value = item.name || '';
+                document.getElementById('item-category').value = item.category || '';
+                document.getElementById('item-cost').value = item.cost || 0;
+                document.getElementById('item-units').value = item.units || 1;
+                document.getElementById('item-markup').value = item.markup || 0;
+                document.getElementById('item-qty').value = item.qty || 0;
+                document.getElementById('item-price').value = item.price || 0;
+                document.getElementById('item-expiry').value = item.expiry || '';
+
+                const imgSource = dbImages[item.id];
+                if (imgSource) {
+                    const resolvedImgUrl = (imgSource.startsWith('data:') || imgSource.startsWith('http')) 
+                        ? imgSource 
+                        : `https://raw.githubusercontent.com/${getGitHubCredentials().user}/${getGitHubCredentials().repo}/main/${imgSource}`;
+                    
+                    document.getElementById('image-preview-container').innerHTML = `<img src="${resolvedImgUrl}" class="w-full h-full object-cover">`;
                 }
-                calculateSRP(true);
             } else {
-                document.getElementById('modal-title').innerText = "Add New Product Item";
-                calculateSRP(false);
+                document.getElementById('modal-title').innerText = "Add New Item";
             }
-            document.getElementById('item-modal').classList.remove('hidden');
+
+            calculateSRP(true);
+            modal.classList.remove('hidden');
         }
 
         function closeModal() {
             document.getElementById('item-modal').classList.add('hidden');
         }
 
-        function calculateSRP(useManualPrice = false) {
-            const cost = parseFloat(document.getElementById('item-cost').value) || 0;
-            const units = parseInt(document.getElementById('item-units').value) || 1;
-            const markup = parseFloat(document.getElementById('item-markup').value) || 0;
-            
-            const unitCost = cost / units;
-            document.getElementById('item-unit-cost').value = "₱" + unitCost.toFixed(2);
-            
-            const recPrice = unitCost * (1 + (markup / 100));
-            document.getElementById('item-rec-price').value = recPrice.toFixed(2);
-            
-            let finalPrice = parseFloat(document.getElementById('item-price').value) || 0;
-            if (!useManualPrice) {
-                finalPrice = recPrice;
-                document.getElementById('item-price').value = finalPrice.toFixed(2);
-            }
-            
-            const unitProfit = finalPrice - unitCost;
-            document.getElementById('item-unit-profit').value = "₱" + unitProfit.toFixed(2);
+        function processImageUpload(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Str = e.target.result;
+                document.getElementById('item-image-base64').value = base64Str;
+                document.getElementById('image-preview-container').innerHTML = `<img src="${base64Str}" class="w-full h-full object-cover">`;
+            };
+            reader.readAsDataURL(file);
         }
 
         function saveItem(e) {
@@ -857,237 +890,158 @@
             
             const id = document.getElementById('item-id').value || 'id_' + Date.now();
             const name = document.getElementById('item-name').value.trim();
+            const originalName = document.getElementById('item-original-name').value;
             const category = document.getElementById('item-category').value.trim();
             const cost = parseFloat(document.getElementById('item-cost').value) || 0;
             const units = parseInt(document.getElementById('item-units').value) || 1;
             const markup = parseFloat(document.getElementById('item-markup').value) || 0;
             const qty = parseInt(document.getElementById('item-qty').value) || 0;
             const price = parseFloat(document.getElementById('item-price').value) || 0;
-            const expiry = document.getElementById('item-expiry').value || "";
-            
-            const rawImgBase64 = document.getElementById('item-image-base64').value;
-            const isNewItem = !document.getElementById('item-id').value;
-            const originalName = document.getElementById('item-original-name').value;
+            const expiry = document.getElementById('item-expiry').value;
+            const newImageBase64 = document.getElementById('item-image-base64').value;
+
+            const existingIndex = db.inventory.findIndex(item => item.id === id);
+            let logType = 'Addition';
+            let logChange = qty;
+            let noteMsg = `Initial load injection of item: [${name}]`;
 
             const newItemObj = { id, name, category, cost, units, markup, qty, price, expiry };
-            
-            let commitMsg = "";
-            if (isNewItem) {
-                db.inventory.push(newItemObj);
-                db.history.unshift({
-                    time: new Date().toISOString(),
-                    name: name,
-                    type: "New Product",
-                    change: qty,
-                    notes: "Initial inventory tracking registration launch"
-                });
-                commitMsg = `Created product item ${name}`;
-            } else {
-                const idx = db.inventory.findIndex(item => item.id === id);
-                if (idx !== -1) {
-                    const oldQty = db.inventory[idx].qty;
-                    db.inventory[idx] = newItemObj;
-                    
-                    if (oldQty !== qty) {
-                        const delta = qty - oldQty;
-                        db.history.unshift({
-                            time: new Date().toISOString(),
-                            name: name,
-                            type: delta > 0 ? "Addition" : "Destock",
-                            change: delta,
-                            notes: "Manual product catalog modifications update panel change trace record"
-                        });
-                    }
+
+            if (existingIndex > -1) {
+                const oldItem = db.inventory[existingIndex];
+                const deltaQty = qty - oldItem.qty;
+                logType = 'Product Update';
+                logChange = deltaQty;
+                noteMsg = `Modified fields for product record node: [${name}].`;
+                
+                if (deltaQty > 0) {
+                    logType = 'Restock';
+                    noteMsg = `Injected stock replenish bulk count: +${deltaQty} units.`;
+                } else if (deltaQty < 0) {
+                    logType = 'Sale / Usage';
+                    noteMsg = `Dispensed or processed stock load items: ${deltaQty} units.`;
                 }
-                commitMsg = `Modified catalog details for ${name}`;
+                db.inventory[existingIndex] = newItemObj;
+            } else {
+                db.inventory.push(newItemObj);
             }
 
+            db.history.unshift({
+                time: new Date().toISOString(),
+                name: name,
+                type: logType,
+                change: logChange,
+                notes: noteMsg
+            });
+
             closeModal();
-            pushDataToGitHub(commitMsg, rawImgBase64, id);
+            
+            if (newImageBase64) {
+                pushDataToGitHub(`Saved changes for item context: ${name}`, newImageBase64, id);
+            } else {
+                pushDataToGitHub(`Saved changes for item context: ${name}`);
+            }
         }
 
-        function adjustStockQuick(itemId, changeAmount) {
-            const idx = db.inventory.findIndex(item => item.id === itemId);
-            if (idx === -1) return;
+        function changeStockQuick(id, changeAmount) {
+            const index = db.inventory.findIndex(i => i.id === id);
+            if (index === -1) return;
 
-            const targetItem = db.inventory[idx];
-            const oldQty = targetItem.qty;
-            const newQty = Math.max(0, oldQty + changeAmount);
-            
+            const item = db.inventory[index];
+            const oldQty = item.qty;
+            let newQty = oldQty + changeAmount;
+            if (newQty < 0) newQty = 0;
+
             if (oldQty === newQty) return;
 
-            targetItem.qty = newQty;
-            db.history.unshift({
-                time: new Date().toISOString(),
-                name: targetItem.name,
-                type: changeAmount > 0 ? "Restock" : "Sale / Usage",
-                change: newQty - oldQty,
-                notes: "Quick actions adjustments metric touchpoint"
-            });
-
-            pushDataToGitHub(`Stock count update for ${targetItem.name} (${newQty - oldQty})`);
-        }
-
-        function deleteItemPrompt(itemId) {
-            const idx = db.inventory.findIndex(item => item.id === itemId);
-            if (idx === -1) return;
-            
-            const pName = db.inventory[idx].name;
-            if (!confirm(`Are you sure you want to permanently delete "${pName}" from database records?`)) return;
+            const finalDelta = newQty - oldQty;
+            item.qty = newQty;
 
             db.history.unshift({
                 time: new Date().toISOString(),
-                name: pName,
-                type: "Deletion",
-                change: -db.inventory[idx].qty,
-                notes: "Purged product row entry trace completely from database repository structure"
+                name: item.name,
+                type: finalDelta > 0 ? 'Restock' : 'Sale / Usage',
+                change: finalDelta,
+                notes: finalDelta > 0 ? `Quick stock increase update (+${finalDelta}).` : `Quick stock sale/usage decrease update (${finalDelta}).`
             });
 
-            db.inventory.splice(idx, 1);
-            delete dbImages[itemId];
-
-            pushDataToGitHub(`Purged item row line entry: ${pName}`);
+            pushDataToGitHub(`Stock quick counter adjustments compiled for context: [${item.name}]`);
         }
 
-        function cloneItemRow(itemId) {
-            const idx = db.inventory.findIndex(item => item.id === itemId);
-            if (idx === -1) return;
+        function deleteItem(id) {
+            const index = db.inventory.findIndex(i => i.id === id);
+            if (index === -1) return;
 
-            const source = db.inventory[idx];
+            if (!confirm(`Are you absolutely sure you want to completely remove "${db.inventory[index].name}" from your records?`)) return;
+
+            const item = db.inventory[index];
+            db.history.unshift({
+                time: new Date().toISOString(),
+                name: item.name,
+                type: 'Deletion',
+                change: -item.qty,
+                notes: `Removed product record mapping from live catalog nodes totally.`
+            });
+
+            db.inventory.splice(index, 1);
+            if (dbImages[id]) delete dbImages[id];
+
+            pushDataToGitHub(`Purged item entity mappings securely from database logs: [${item.name}]`);
+        }
+
+        function cloneItem(id) {
+            const index = db.inventory.findIndex(i => i.id === id);
+            if (index === -1) return;
+
+            const original = db.inventory[index];
             const cloneId = 'id_' + Date.now();
-            const cloneName = source.name + " (Copy)";
+            const cloneName = `${original.name} (Copy)`;
 
-            const clonedObj = Object.assign({}, source, {
+            const clonedItem = Object.assign({}, original, {
                 id: cloneId,
                 name: cloneName,
                 qty: 0
             });
 
-            db.inventory.push(clonedObj);
+            db.inventory.push(clonedItem);
             
-            // Check if there's a mapped image path to carry over reference connection mapping 
-            if (dbImages[itemId]) {
-                dbImages[cloneId] = dbImages[itemId];
+            if (dbImages[id]) {
+                dbImages[cloneId] = dbImages[id];
             }
 
             db.history.unshift({
                 time: new Date().toISOString(),
                 name: cloneName,
-                type: "Clone / Copy",
+                type: 'Clone / Copy',
                 change: 0,
-                notes: `Cloned line specs properties tracking from core base row parent: ${source.name}`
+                notes: `Cloned parameters directly out of parental source template: [${original.name}]`
             });
 
-            pushDataToGitHub(`Cloned product catalog instance item entry for ${cloneName}`);
+            pushDataToGitHub(`Injected cloned copy entity map into sequence: [${cloneName}]`);
         }
 
         function renderApp() {
-            renderDashboardMetrics();
-            renderInventoryGrid();
-            renderHistoryTable();
-        }
+            const query = document.getElementById('inventory-search').value.toLowerCase().trim();
+            const lowStockLimit = db.config?.lowThreshold || 5;
 
-        function renderDashboardMetrics() {
-            let retailValue = 0;
-            let inventoryCost = 0;
-            let totalItems = db.inventory.length;
-            let totalStock = 0;
-            let lowStockCount = 0;
-            let outOfStockCount = 0;
-
-            const thresh = (db.config && db.config.lowThreshold) ? db.config.lowThreshold : 5;
-            
-            const lowStockRows = [];
-            const outOfStockRows = [];
-            const expiryRows = [];
-            
-            const nowTime = new Date();
-            const thirtyDaysAhead = new Date().setDate(nowTime.getDate() + 30);
-
-            db.inventory.forEach(item => {
-                const itemQty = parseInt(item.qty) || 0;
-                const itemPrice = parseFloat(item.price) || 0;
-                const itemCostVal = parseFloat(item.cost) || 0;
-                const itemUnits = parseInt(item.units) || 1;
-
-                totalStock += itemQty;
-                retailValue += itemQty * itemPrice;
-                inventoryCost += itemQty * (itemCostVal / itemUnits);
-
-                if (itemQty === 0) {
-                    outOfStockCount++;
-                    outOfStockRows.push(`
-                        <tr class="border-b border-gray-50 hover:bg-rose-50/40">
-                            <td class="p-3 font-semibold text-gray-800">${item.name}</td>
-                            <td class="p-3 text-xs text-gray-400 uppercase font-mono">${item.category || 'General'}</td>
-                            <td class="p-3 text-center"><span class="bg-rose-100 text-rose-700 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Empty</span></td>
-                        </tr>
-                    `);
-                } else if (itemQty <= thresh) {
-                    lowStockCount++;
-                    lowStockRows.push(`
-                        <tr class="border-b border-gray-50 hover:bg-amber-50/40">
-                            <td class="p-3 font-semibold text-gray-800">${item.name}</td>
-                            <td class="p-3 text-xs text-gray-400 uppercase font-mono">${item.category || 'General'}</td>
-                            <td class="p-3 text-center font-bold text-amber-600 font-mono">${itemQty}</td>
-                        </tr>
-                    `);
-                }
-
-                if (item.expiry) {
-                    const expDate = new Date(item.expiry);
-                    if (expDate >= nowTime && expDate <= thirtyDaysAhead) {
-                        const daysLeft = Math.ceil((expDate - nowTime) / (1000 * 60 * 60 * 24));
-                        expiryRows.push(`
-                            <tr class="border-b border-gray-50 hover:bg-yellow-50/30">
-                                <td class="p-3 font-semibold text-gray-800">${item.name}</td>
-                                <td class="p-3 text-xs text-gray-400 uppercase font-mono">${item.category || 'General'}</td>
-                                <td class="p-3 text-xs font-mono font-bold text-gray-600">${new Date(item.expiry).toLocaleDateString()}</td>
-                                <td class="p-3 text-center"><span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded">Expires in ${daysLeft}d</span></td>
-                            </tr>
-                        `);
-                    }
-                }
+            let filtered = db.inventory.filter(item => {
+                return (item.name || '').toLowerCase().includes(query) || 
+                       (item.category || '').toLowerCase().includes(query);
             });
 
-            document.getElementById('stat-retail-value').innerText = "₱" + retailValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('stat-inventory-cost').innerText = "₱" + inventoryCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('stat-potential-profit').innerText = "₱" + (retailValue - inventoryCost).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            
-            document.getElementById('stat-total-items').innerText = totalItems;
-            document.getElementById('stat-total-stock').innerText = totalStock;
-            document.getElementById('stat-low-stock').innerText = lowStockCount;
-            document.getElementById('stat-out-of-stock').innerText = outOfStockCount;
-
-            document.getElementById('dash-lowstock-tbody').innerHTML = lowStockRows.length > 0 ? lowStockRows.join('') : `<tr><td colspan="3" class="p-4 text-center text-gray-400 italic">No low stock items detected. All products clear!</td></tr>`;
-            document.getElementById('dash-outofstock-tbody').innerHTML = outOfStockRows.length > 0 ? outOfStockRows.join('') : `<tr><td colspan="3" class="p-4 text-center text-gray-400 italic">Excellent! No out of stock items registered.</td></tr>`;
-            document.getElementById('dash-expiry-tbody').innerHTML = expiryRows.length > 0 ? expiryRows.join('') : `<tr><td colspan="4" class="p-4 text-center text-gray-400 italic">No upcoming product expirations to monitor.</td></tr>`;
-        }
-
-        function renderInventoryGrid() {
-            const grid = document.getElementById('inventory-card-grid');
-            const searchVal = document.getElementById('inventory-search').value.toLowerCase().trim();
-            const creds = getGitHubCredentials();
-
-            let items = [...db.inventory];
-
-            if (searchVal) {
-                items = items.filter(i => i.name.toLowerCase().includes(searchVal) || (i.category && i.category.toLowerCase().includes(searchVal)));
-            }
-
-            items.sort((a, b) => {
+            filtered.sort((a, b) => {
                 let valA = a[currentSortColumn];
                 let valB = b[currentSortColumn];
 
-                if (currentSortColumn === 'name') {
-                    valA = (valA || '').toLowerCase();
-                    valB = (valB || '').toLowerCase();
-                } else if (currentSortColumn === 'stock') {
-                    valA = parseInt(a.qty) || 0;
-                    valB = parseInt(b.qty) || 0;
+                if (currentSortColumn === 'name' || currentSortColumn === 'category') {
+                    valA = (valA || '').toString().toLowerCase();
+                    valB = (valB || '').toString().toLowerCase();
                 } else if (currentSortColumn === 'expiry') {
-                    valA = a.expiry ? new Date(a.expiry).getTime() : Infinity;
-                    valB = b.expiry ? new Date(b.expiry).getTime() : Infinity;
+                    valA = valA ? new Date(valA).getTime() : 9999999999999;
+                    valB = valB ? new Date(valB).getTime() : 9999999999999;
+                } else {
+                    valA = parseFloat(valA) || 0;
+                    valB = parseFloat(valB) || 0;
                 }
 
                 if (valA < valB) return currentSortDirection === 'asc' ? -1 : 1;
@@ -1095,92 +1049,190 @@
                 return 0;
             });
 
-            if (items.length === 0) {
-                grid.innerHTML = `<div class="col-span-full p-12 text-center text-slate-400 italic bg-white border rounded-3xl">No products found matching target conditions filters.</div>`;
-                return;
-            }
+            // --- CALCULATE SUMMARY METRICS ---
+            let totalRetailValue = 0;
+            let totalInventoryCost = 0;
+            let totalStockUnits = 0;
+            let lowStockCount = 0;
+            let outOfStockCount = 0;
 
-            grid.innerHTML = items.map(item => {
+            let lowStockRowsHtml = '';
+            let outOfStockRowsHtml = '';
+            let expiryRowsHtml = '';
+
+            const today = new Date();
+            const thirtyDaysFromNow = new Date();
+            thirtyDaysFromNow.setDate(today.getDate() + 30);
+
+            db.inventory.forEach(item => {
                 const qty = parseInt(item.qty) || 0;
-                const unitCost = (parseFloat(item.cost) || 0) / (parseInt(item.units) || 1);
-                const alertThresh = (db.config && db.config.lowThreshold) ? db.config.lowThreshold : 5;
-                
-                let stockBadgeColor = "bg-slate-100 text-slate-700";
-                if (qty === 0) stockBadgeColor = "bg-rose-100 text-rose-700 font-bold animate-pulse";
-                else if (qty <= alertThresh) stockBadgeColor = "bg-amber-100 text-amber-700 font-bold";
+                const price = parseFloat(item.price) || 0;
+                const cost = parseFloat(item.cost) || 0;
+                const units = parseInt(item.units) || 1;
 
-                // Generate raw image file URL targeting the repo images path directly
-                let imgEl = `<div class="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300 text-3xl font-bold select-none">📦</div>`;
-                const relativeImgPath = dbImages[item.id];
-                if (relativeImgPath) {
-                    const fullImgUrl = `https://raw.githubusercontent.com/${creds.user}/${creds.repo}/main/${relativeImgPath}?t=${Date.now()}`;
-                    imgEl = `<img src="${fullImgUrl}" class="w-full h-full object-cover select-none pointer-events-none" loading="lazy" onerror="this.parentElement.innerHTML='📦'">`;
+                const unitCost = cost / units;
+                
+                totalStockUnits += qty;
+                totalRetailValue += (qty * price);
+                totalInventoryCost += (qty * unitCost);
+
+                if (qty === 0) {
+                    outOfStockCount++;
+                    outOfStockRowsHtml += `
+                        <tr class="border-b border-gray-50">
+                            <td class="p-3 font-medium">${item.name}</td>
+                            <td class="p-3"><span class="bg-rose-50 text-rose-600 px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider">Out of Stock</span></td>
+                            <td class="p-3 text-center font-mono text-rose-600 font-bold">0</td>
+                        </tr>`;
+                } else if (qty <= lowStockLimit) {
+                    lowStockCount++;
+                    lowStockRowsHtml += `
+                        <tr class="border-b border-gray-50">
+                            <td class="p-3 font-medium">${item.name}</td>
+                            <td class="p-3 text-gray-500 text-xs">${item.category}</td>
+                            <td class="p-3 text-center font-mono text-amber-600 font-bold">${qty}</td>
+                        </tr>`;
                 }
 
-                return `
-                    <div class="bg-white border border-slate-150 rounded-3xl overflow-hidden shadow-xs hover:shadow-md transition flex flex-col group">
-                        <div class="h-32 bg-slate-50 relative border-b border-slate-50 overflow-hidden flex items-center justify-center">
-                            ${imgEl}
-                            <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] uppercase font-black font-mono tracking-wider shadow-xs ${stockBadgeColor}">
-                                ${qty === 0 ? 'Out of stock' : 'Stock: ' + qty}
-                            </span>
-                            ${item.category ? `<span class="absolute bottom-2 left-2 bg-black/40 text-white backdrop-blur-xs font-mono font-bold tracking-wide text-[9px] px-2 py-0.5 rounded-md uppercase">${item.category}</span>` : ''}
-                        </div>
-                        <div class="p-3.5 flex-1 flex flex-col justify-between">
-                            <div>
-                                <h4 class="font-black text-slate-800 text-sm leading-snug group-hover:text-indigo-600 transition truncate" title="${item.name}">${item.name}</h4>
-                                <div class="flex items-baseline gap-1.5 mt-1.5">
-                                    <span class="text-base font-black text-slate-900 font-mono">₱${(parseFloat(item.price) || 0).toFixed(2)}</span>
-                                    <span class="text-[10px] text-slate-400 font-medium">Cost: ₱${unitCost.toFixed(2)}</span>
-                                </div>
-                                ${item.expiry ? `
-                                    <div class="mt-2 flex items-center gap-1 text-[10px] font-bold ${new Date(item.expiry) <= new Date() ? 'text-rose-600' : 'text-slate-400'}">
-                                        ⏳ <span class="font-mono">${new Date(item.expiry).toLocaleDateString()}</span>
-                                    </div>
-                                ` : ''}
-                            </div>
-                            <div class="mt-4 pt-3 border-t border-slate-100/60">
-                                <div class="grid grid-cols-2 gap-1.5 mb-2.5">
-                                    <button onclick="adjustStockQuick('${item.id}', -1)" class="bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-600 font-black py-1.5 rounded-xl text-xs transition border border-slate-200/60 shadow-2xs active:scale-95">-1 Sell</button>
-                                    <button onclick="adjustStockQuick('${item.id}', 1)" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-black py-1.5 rounded-xl text-xs transition border border-indigo-100 shadow-2xs active:scale-95">+1 Stock</button>
-                                </div>
-                                <div class="flex items-center justify-between gap-1 text-slate-400 text-xs">
-                                    <button onclick='openModal(${JSON.stringify(item).replace(/'/g, "\\'")})' class="hover:text-indigo-600 p-1 font-medium transition">✏️ Edit</button>
-                                    <button onclick="cloneItemRow('${item.id}')" class="hover:text-sky-600 p-1 font-medium transition" title="Clone Item">📋 Copy</button>
-                                    <button onclick="deleteItemPrompt('${item.id}')" class="hover:text-rose-600 p-1 font-medium transition">🗑️ Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
+                if (item.expiry) {
+                    const expDate = new Date(item.expiry);
+                    if (expDate >= today && expDate <= thirtyDaysFromNow) {
+                        const daysLeft = Math.ceil((expDate - today) / (1000 * 60 * 60 * 24));
+                        expiryRowsHtml += `
+                            <tr class="border-b border-gray-50">
+                                <td class="p-3 font-medium">${item.name}</td>
+                                <td class="p-3 text-gray-500 text-xs">${item.category}</td>
+                                <td class="p-3 text-xs font-mono font-semibold text-rose-600">${expDate.toLocaleDateString()}</td>
+                                <td class="p-3 text-center"><span class="bg-amber-50 text-amber-700 font-bold text-[10px] px-1.5 py-0.5 rounded uppercase tracking-wide">Expiring in ${daysLeft} Days</span></td>
+                            </tr>`;
+                    }
+                }
+            });
 
-        function renderHistoryTable() {
-            const tbody = document.getElementById('history-table-body');
-            if (!db.history || db.history.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-gray-400 italic">No inventory audit history tracing found.</td></tr>`;
-                return;
-            }
+            document.getElementById('stat-retail-value').innerText = `₱${totalRetailValue.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+            document.getElementById('stat-inventory-cost').innerText = `₱${totalInventoryCost.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+            document.getElementById('stat-potential-profit').innerText = `₱${(totalRetailValue - totalInventoryCost).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+            
+            document.getElementById('stat-total-items').innerText = db.inventory.length;
+            document.getElementById('stat-total-stock').innerText = totalStockUnits;
+            document.getElementById('stat-low-stock').innerText = lowStockCount;
+            document.getElementById('stat-out-of-stock').innerText = outOfStockCount;
 
-            tbody.innerHTML = db.history.map(log => {
+            if (lowStockRowsHtml) document.getElementById('dash-lowstock-tbody').innerHTML = lowStockRowsHtml;
+            else document.getElementById('dash-lowstock-tbody').innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-400 italic">No low stock items detected. All products clear!</td></tr>`;
+
+            if (outOfStockRowsHtml) document.getElementById('dash-outofstock-tbody').innerHTML = outOfStockRowsHtml;
+            else document.getElementById('dash-outofstock-tbody').innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-400 italic">Excellent! No out of stock items registered.</td></tr>`;
+
+            if (expiryRowsHtml) document.getElementById('dash-expiry-tbody').innerHTML = expiryRowsHtml;
+            else document.getElementById('dash-expiry-tbody').innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-400 italic">No upcoming product expirations to monitor.</td></tr>`;
+
+            // --- BUILD THE CARDS GRID LAYOUT LAYER ---
+            let gridHtml = '';
+            filtered.forEach((item, idx) => {
+                const qty = parseInt(item.qty) || 0;
+                let borderTheme = "border-slate-100";
+                let badgeHtml = `<span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider">${item.category}</span>`;
+
+                if (qty === 0) {
+                    borderTheme = "border-rose-200 ring-1 ring-rose-100 bg-rose-50/10";
+                    badgeHtml = `<span class="bg-rose-100 text-rose-700 px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider">Out of Stock</span>`;
+                } else if (qty <= lowStockLimit) {
+                    borderTheme = "border-amber-200 ring-1 ring-amber-100 bg-amber-50/10";
+                    badgeHtml = `<span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider">Low Stock</span>`;
+                }
+
+                let imgContainerInner = `
+                    <div class="w-full h-full bg-slate-100 flex flex-col items-center justify-center text-slate-300">
+                        <span class="text-2xl">📦</span>
+                        <span class="text-[10px] uppercase tracking-widest font-bold mt-1 text-slate-400">No Image</span>
+                    </div>`;
+
+                const imgSource = dbImages[item.id];
+                if (imgSource) {
+                    const resolvedImgUrl = (imgSource.startsWith('data:') || imgSource.startsWith('http')) 
+                        ? imgSource 
+                        : `https://raw.githubusercontent.com/${getGitHubCredentials().user}/${getGitHubCredentials().repo}/main/${imgSource}`;
+                    
+                    imgContainerInner = `<img src="${resolvedImgUrl}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">`;
+                }
+
+                let expiryBadge = '';
+                if (item.expiry) {
+                    const isExp = new Date(item.expiry) <= today;
+                    expiryBadge = `<p class="text-[10px] font-semibold mt-1 ${isExp ? 'text-rose-600 font-bold animate-pulse' : 'text-slate-400'}">⏳ Expiry: ${item.expiry}</p>`;
+                }
+
+                gridHtml += `
+                    <div class="group bg-white rounded-3xl border ${borderTheme} overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between p-3 relative">
+                        <div>
+                            <div class="w-full aspect-square rounded-2xl overflow-hidden mb-3 relative bg-slate-50 border border-slate-100">
+                                ${imgContainerInner}
+                                <div class="absolute top-2 left-2 flex flex-col gap-1 z-10">
+                                    ${badgeHtml}
+                                </div>
+                                <div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-xs text-white px-2 py-1 rounded-xl text-xs font-mono font-black tracking-tight">
+                                    ₱${parseFloat(item.price).toFixed(2)}
+                                </div>
+                            </div>
+
+                            <div class="px-1">
+                                <h4 class="font-black text-slate-800 text-sm leading-tight tracking-tight truncate">${item.name}</h4>
+                                <p class="text-[11px] font-semibold text-slate-400 mt-0.5 uppercase tracking-wider">${item.category}</p>
+                                ${expiryBadge}
+                            </div>
+                        </div>
+
+                        <div class="mt-4 bg-slate-50/80 rounded-2xl p-2 border border-slate-100/50">
+                            <div class="flex justify-between items-center mb-2.5 px-1">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Stock Count</span>
+                                <span class="font-mono font-black text-sm text-slate-700">${qty}</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-1.5 mb-2">
+                                <button onclick="changeStockQuick('${item.id}', -1)" class="bg-white border border-slate-200 active:bg-slate-100 text-slate-600 font-black text-xs py-2 rounded-xl transition shadow-xs">− 1</button>
+                                <button onclick="changeStockQuick('${item.id}', 1)" class="bg-indigo-600 active:bg-indigo-700 text-white font-black text-xs py-2 rounded-xl transition shadow-xs">+ 1</button>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-1 pt-1 border-t border-slate-200/40">
+                                <button onclick="openModal(${db.inventory.findIndex(i => i.id === item.id)})" class="text-[10px] font-bold text-slate-400 hover:text-indigo-600 py-1 transition text-center">Edit</button>
+                                <button onclick="cloneItem('${item.id}')" class="text-[10px] font-bold text-slate-400 hover:text-sky-600 py-1 transition text-center">Clone</button>
+                                <button onclick="deleteItem('${item.id}')" class="text-[10px] font-bold text-slate-400 hover:text-rose-600 py-1 transition text-center">Delete</button>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+
+            document.getElementById('inventory-card-grid').innerHTML = gridHtml || `
+                <div class="col-span-full bg-slate-50 border border-dashed border-slate-200 rounded-3xl p-12 text-center text-slate-400 italic text-sm">
+                    No matching products discovered inside this active viewing window context.
+                </div>`;
+
+            // --- RENDER TRANSACTION LOG TABLE ---
+            let historyHtml = '';
+            (db.history || []).forEach(log => {
                 let badgeColor = "text-amber-600";
+                
                 if (log.type === 'New Product' || log.type === 'Addition' || log.type === 'Restock') badgeColor = "text-emerald-600";
                 if (log.type === 'Deletion') badgeColor = "text-rose-600";
                 if (log.type === 'Copy' || log.type === 'Clone / Copy') badgeColor = "text-sky-600";
                 if (log.type === 'Modified' || log.type === 'Product Update') badgeColor = "text-indigo-600";
                 if (log.type === 'Destock' || log.type === 'Sale / Usage') badgeColor = "text-rose-500";
 
-                return `
-                    <tr class="border-b border-gray-50 hover:bg-gray-50/50 transition">
+                historyHtml += `
+                    <tr class="border-b border-gray-50">
                         <td class="p-4 text-xs font-mono text-gray-400">${log.time ? new Date(log.time).toLocaleString() : 'N/A'}</td>
-                        <td class="p-4 font-semibold text-gray-800">${log.name || 'Unknown'}</td>
-                        <td class="p-4"><span class="text-xs uppercase font-black tracking-wider ${badgeColor}">${log.type || 'Transaction'}</span></td>
-                        <td class="p-4 font-mono font-black text-sm">${(Number(log.change) || 0) > 0 ? '+' + log.change : log.change}</td>
-                        <td class="p-4 text-xs italic text-gray-500 max-w-xs truncate" title="${log.notes || ''}">${log.notes || '—'}</td>
-                    </tr>
-                `;
-            }).join('');
+                        <td class="p-4 font-medium">${log.name || 'Unknown'}</td>
+                        <td class="p-4"><span class="text-xs uppercase font-bold tracking-wider ${badgeColor}">${log.type || 'Transaction'}</span></td>
+                        <td class="p-4 font-mono font-bold">${(Number(log.change) || 0) > 0 ? '+' + log.change : log.change}</td>
+                        <td class="p-4 text-xs italic text-gray-500">${log.notes || ''}</td>
+                    </tr>`;
+            });
+
+            document.getElementById('history-table-body').innerHTML = historyHtml || `
+                <tr>
+                    <td colspan="5" class="p-8 text-center text-gray-400 italic">No transaction records logged in this session database layer.</td>
+                </tr>`;
         }
 
         window.onload = init;
