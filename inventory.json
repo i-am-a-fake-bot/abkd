@@ -1,8 +1,4 @@
 {
-  "config": {
-    "storeName": "ABKD Inventory",
-    "lowThreshold": 2
-  },
   "inventory": [
     {
       "id": "id_22ibp7oeh",
@@ -1038,5 +1034,9 @@
       "price": 15,
       "expiry": ""
     }
-  ]
+  ],
+  "config": {
+    "storeName": "ABKD Inventory",
+    "lowThreshold": 2
+  }
 }
