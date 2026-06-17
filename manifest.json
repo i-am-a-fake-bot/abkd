@@ -1,7 +1,7 @@
 {
   "name": "ABKD Inventory Control",
   "short_name": "ABKD v2",
-  "start_url": "./index.html", 
+  "start_url": "index.html?v=2.0.1",
   "display": "standalone",
   "background_color": "#4f46e5",
   "theme_color": "#4f46e5",
