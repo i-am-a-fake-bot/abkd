@@ -271,14 +271,15 @@
     },
     {
       "id": "id_dt5c40014",
-      "name": "Potchii - 3 for ₱5",
+      "name": "Potchi - 3 for ₱5",
       "category": "Meryenda",
       "cost": 34.75,
       "units": 24,
       "markup": 12,
       "qty": 0,
       "price": 2,
-      "expiry": ""
+      "expiry": "",
+      "imagePath": "images/potchi___3_for__5_1781693488752.jpg"
     },
     {
       "id": "id_l44wlocwy",
