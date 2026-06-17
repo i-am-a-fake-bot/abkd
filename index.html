@@ -250,7 +250,7 @@
 
                 <div class="space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h3 class="text-base font-bold text-slate-800 border-b border-slate-50 pb-2 mb-4">🎨 Store Branding & Thresholds</h3>
+                        <h3 class="text-base font-bold text-slate-800 border-b border-slate-100 pb-2 mb-4">🎨 Store Branding & Thresholds</h3>
                         <form id="app-config-form" onsubmit="saveAppPreferences(event)" class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Store Display Name</label>
@@ -1296,7 +1296,7 @@
                 cardGrid.className = "block text-center p-12 bg-white rounded-xl border border-dashed text-gray-400 italic";
                 cardGrid.innerHTML = "No matching items found inside your catalog matching your active filters.";
             } else {
-                cardGrid.className = "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4";
+                cardGrid.className = "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5";
 				cardGrid.innerHTML = displayItems.map(item => {
 					const itemId = item.id;
 					const qtyVal = Number(item.qty) || 0;
@@ -1318,57 +1318,58 @@
 					}
 
 					return `
-					<div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition group relative">
-                        
-                        ${isOOS ? `
-                            <div class="absolute inset-0 flex items-center justify-center bg-white/40 pointer-events-none z-20 select-none">
-                                <div class="border-4 border-double border-red-600 text-red-600 text-xs font-black tracking-widest uppercase px-3 py-1 rounded transform -rotate-12 mix-blend-multiply bg-white/90 shadow-sm border-opacity-90 font-sans">
-                                    OUT OF STOCK
+					<div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition group relative flex flex-col justify-between">
+                        <div class="relative w-full">
+                            ${isOOS ? `
+                                <div class="absolute inset-0 flex items-center justify-center bg-white/40 pointer-events-none z-20 select-none">
+                                    <div class="border-4 border-double border-red-600 text-red-600 text-xs font-black tracking-widest uppercase px-3 py-1 rounded transform -rotate-12 mix-blend-multiply bg-white/90 shadow-sm border-opacity-90 font-sans">
+                                        OUT OF STOCK
+                                    </div>
+                                </div>
+                            ` : ''}
+
+                            ${imgHtml}
+
+                            <div class="p-4 relative">
+                                <div class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2.5 py-1 rounded-full">
+                                    ${item.category || 'Uncategorized'}
+                                </div>
+
+                                ${isOOS ? `
+                                    <div class="absolute top-2 right-2 z-10">
+                                        <span class="bg-red-100 text-red-600 text-[10px] font-black px-2 py-0.5 rounded border border-red-200">
+                                            OOS
+                                        </span>
+                                    </div>
+                                ` : ''}
+
+                                <h3 class="font-bold text-slate-800 text-base line-clamp-2 mt-2">
+                                    ${item.name || 'Unnamed Item'}
+                                </h3>
+
+                                <div class="flex items-center justify-between mt-3">
+                                    <span class="text-indigo-600 font-black text-lg sm:text-xl">
+                                        ₱${(Number(item.price) || 0).toFixed(2)}
+                                    </span>
+
+                                    <span class="text-xs font-bold px-2 py-1 rounded-full ${
+                                        isOOS ? 'bg-red-100 text-red-700'
+                                        : qtyVal <= 5 ? 'bg-amber-100 text-amber-700'
+                                        : 'bg-emerald-100 text-emerald-700'
+                                    }">
+                                        ${qtyVal} pcs
+                                    </span>
+                                </div>
+                                
+                                <div class="mt-2 flex items-center justify-between text-[11px]">
+                                    <span class="${getExpiryBadgeStyle(item.expiry)}">
+                                        ⏳ ${formatExpiryDisplay(item.expiry)}
+                                    </span>
                                 </div>
                             </div>
-                        ` : ''}
+                        </div>
 
-						${imgHtml}
-
-						<div class="p-4 relative">
-							<div class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2.5 py-1 rounded-full">
-								${item.category || 'Uncategorized'}
-							</div>
-
-							${isOOS ? `
-								<div class="absolute top-2 right-2 z-10">
-									<span class="bg-red-100 text-red-600 text-[10px] font-black px-2 py-0.5 rounded border border-red-200">
-										OOS
-									</span>
-								</div>
-							` : ''}
-
-							<h3 class="font-bold text-slate-800 text-base line-clamp-2 mt-2">
-								${item.name || 'Unnamed Item'}
-							</h3>
-
-							<div class="flex items-center justify-between mt-3">
-								<span class="text-indigo-600 font-black text-lg sm:text-xl">
-									₱${(Number(item.price) || 0).toFixed(2)}
-								</span>
-
-								<span class="text-xs font-bold px-2 py-1 rounded-full ${
-									isOOS ? 'bg-red-100 text-red-700'
-									: qtyVal <= 5 ? 'bg-amber-100 text-amber-700'
-									: 'bg-emerald-100 text-emerald-700'
-								}">
-									${qtyVal} pcs
-								</span>
-							</div>
-							
-							<div class="mt-2 flex items-center justify-between text-[11px]">
-								<span class="${getExpiryBadgeStyle(item.expiry)}">
-									⏳ ${formatExpiryDisplay(item.expiry)}
-								</span>
-							</div>
-						</div>
-
-						<div class="grid grid-cols-5 border-t border-slate-100 text-xs font-semibold">
+						<div class="grid grid-cols-5 border-t border-slate-100 text-xs font-semibold mt-auto bg-slate-50/50">
 						  <button onclick="handleStockAdjust('${itemId}', 'restock')"
 							class="py-3 text-emerald-700 hover:bg-emerald-50 text-center">
 							ADD
