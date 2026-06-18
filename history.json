@@ -985,5 +985,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: uploaded image."
+  },
+  {
+    "time": 1781771675209,
+    "name": "Red Horse 1Liter",
+    "type": "New Product",
+    "change": 5,
+    "notes": "Initial stock addition under category: Beverage. Expiry: N/A."
   }
 ]
