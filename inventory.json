@@ -1125,6 +1125,18 @@
       "price": 15,
       "expiry": "",
       "imagePath": "images/colgate___ibang_flavor_1781686434862.jpg"
+    },
+    {
+      "id": "id_r7vusf8p4",
+      "name": "Red Horse 1Liter",
+      "category": "Beverage",
+      "cost": 680,
+      "units": 6,
+      "markup": 12,
+      "qty": 5,
+      "price": 130,
+      "expiry": "",
+      "imagePath": "images/red_horse_1liter_1781771673473.jpg"
     }
   ],
   "config": {
