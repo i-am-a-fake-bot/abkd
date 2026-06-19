@@ -992,5 +992,12 @@
     "type": "New Product",
     "change": 5,
     "notes": "Initial stock addition under category: Beverage. Expiry: N/A."
+  },
+  {
+    "time": 1781913478164,
+    "name": "Kopiko - Blanca",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Saved item without changes."
   }
 ]
