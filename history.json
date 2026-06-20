@@ -1174,5 +1174,12 @@
     "type": "Copy",
     "change": 4,
     "notes": "Copied the metrics of Bioderm - Pink"
+  },
+  {
+    "time": 1781917882443,
+    "name": "Energen",
+    "type": "Copy",
+    "change": 3,
+    "notes": "Copied the metrics of Milo"
   }
 ]
