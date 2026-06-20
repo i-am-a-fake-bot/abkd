@@ -1090,5 +1090,12 @@
     "type": "Copy",
     "change": 49,
     "notes": "Copied the metrics of Potchi - 3 for ₱5"
+  },
+  {
+    "time": 1781915523942,
+    "name": "V Fresh - 3 for ₱5",
+    "type": "Restock",
+    "change": 5,
+    "notes": "Bulk restock transaction."
   }
 ]
