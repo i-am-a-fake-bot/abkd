@@ -1104,5 +1104,12 @@
     "type": "Modified",
     "change": 2,
     "notes": "Modified attributes: stock adjusted from 0 to 2."
+  },
+  {
+    "time": 1781915959329,
+    "name": "Sisters Napkin Non Wings",
+    "type": "Copy",
+    "change": 12,
+    "notes": "Copied the metrics of Charmee - Wings"
   }
 ]
