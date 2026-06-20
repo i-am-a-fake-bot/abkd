@@ -1027,5 +1027,12 @@
     "type": "Copy",
     "change": 0,
     "notes": "Copied the metrics of Marlboro - Red"
+  },
+  {
+    "time": 1781914061158,
+    "name": "Marlboro - Blue",
+    "type": "Modified",
+    "change": 18,
+    "notes": "Modified attributes: stock adjusted from 0 to 18."
   }
 ]
