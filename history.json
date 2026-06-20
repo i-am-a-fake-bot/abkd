@@ -1034,5 +1034,12 @@
     "type": "Modified",
     "change": 18,
     "notes": "Modified attributes: stock adjusted from 0 to 18."
+  },
+  {
+    "time": 1781914132174,
+    "name": "V-Cut Chips",
+    "type": "Copy",
+    "change": 2,
+    "notes": "Copied the metrics of Marty's - Plain Salted"
   }
 ]
