@@ -1167,5 +1167,12 @@
     "type": "Copy",
     "change": 3,
     "notes": "Copied the metrics of Bioderm - Blue"
+  },
+  {
+    "time": 1781917663963,
+    "name": "Irish Spring",
+    "type": "Copy",
+    "change": 4,
+    "notes": "Copied the metrics of Bioderm - Pink"
   }
 ]
