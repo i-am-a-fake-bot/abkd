@@ -1137,6 +1137,18 @@
       "price": 130,
       "expiry": "",
       "imagePath": "images/red_horse_1liter_1781771673473.jpg"
+    },
+    {
+      "id": "id_8ro1xn1xq",
+      "name": "Marlboro - Blue",
+      "category": "Yosi",
+      "cost": 178,
+      "units": 20,
+      "markup": 12,
+      "qty": 0,
+      "price": 11,
+      "expiry": "",
+      "imagePath": null
     }
   ],
   "config": {
