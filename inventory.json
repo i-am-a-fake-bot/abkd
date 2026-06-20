@@ -1209,6 +1209,18 @@
       "price": 5,
       "expiry": "",
       "imagePath": "images/sisters_napkin_non_wings_1781915956728.jpg"
+    },
+    {
+      "id": "id_68yb2zxw0",
+      "name": "Those Days (All Nights) - With Wings",
+      "category": "Personal Care",
+      "cost": 27,
+      "units": 8,
+      "markup": 12,
+      "qty": 8,
+      "price": 7,
+      "expiry": "",
+      "imagePath": "images/those_days__all_nights____with_wings_1781916092066.jpg"
     }
   ],
   "config": {
