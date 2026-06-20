@@ -1118,5 +1118,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: renamed to \"Sisters - Non Wings\"."
+  },
+  {
+    "time": 1781916094626,
+    "name": "Those Days (All Nights) - With Wings",
+    "type": "Copy",
+    "change": 8,
+    "notes": "Copied the metrics of Sisters - Non Wings"
   }
 ]
