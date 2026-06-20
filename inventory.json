@@ -1245,6 +1245,18 @@
       "price": 20,
       "expiry": "",
       "imagePath": "images/irish_spring_1781917661487.jpg"
+    },
+    {
+      "id": "id_612j1pnss",
+      "name": "Energen",
+      "category": "Beverage",
+      "cost": 120,
+      "units": 12,
+      "markup": 12,
+      "qty": 3,
+      "price": 12,
+      "expiry": "",
+      "imagePath": "images/energen_1781917880264.jpg"
     }
   ],
   "config": {
