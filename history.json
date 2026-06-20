@@ -1097,5 +1097,12 @@
     "type": "Restock",
     "change": 5,
     "notes": "Bulk restock transaction."
+  },
+  {
+    "time": 1781915569412,
+    "name": "Kopiko - Brown",
+    "type": "Modified",
+    "change": 2,
+    "notes": "Modified attributes: stock adjusted from 0 to 2."
   }
 ]
