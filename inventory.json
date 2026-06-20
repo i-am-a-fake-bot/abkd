@@ -1185,6 +1185,18 @@
       "price": 10,
       "expiry": "",
       "imagePath": "images/snacku_1781914862397.jpg"
+    },
+    {
+      "id": "id_xq88a2yu7",
+      "name": "Snowbear - 3 for ₱5",
+      "category": "Meryenda",
+      "cost": 46,
+      "units": 50,
+      "markup": 12,
+      "qty": 49,
+      "price": 2,
+      "expiry": "",
+      "imagePath": "images/snowbear___3_for__5_1781915419853.jpg"
     }
   ],
   "config": {
