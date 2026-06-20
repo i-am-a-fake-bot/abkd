@@ -1176,7 +1176,7 @@
     },
     {
       "id": "id_jw7qcijvt",
-      "name": "Snaku",
+      "name": "Snacku",
       "category": "Meryenda",
       "cost": 9,
       "units": 1,
@@ -1184,7 +1184,7 @@
       "qty": 2,
       "price": 10,
       "expiry": "",
-      "imagePath": null
+      "imagePath": "images/snacku_1781914862397.jpg"
     }
   ],
   "config": {
