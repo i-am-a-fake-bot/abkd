@@ -1160,5 +1160,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: renamed to \"Bioderm - Blue\"."
+  },
+  {
+    "time": 1781917452966,
+    "name": "Bioderm - Pink",
+    "type": "Copy",
+    "change": 3,
+    "notes": "Copied the metrics of Bioderm - Blue"
   }
 ]
