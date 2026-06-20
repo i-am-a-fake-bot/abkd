@@ -1111,5 +1111,12 @@
     "type": "Copy",
     "change": 12,
     "notes": "Copied the metrics of Charmee - Wings"
+  },
+  {
+    "time": 1781915986297,
+    "name": "Sisters - Non Wings",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: renamed to \"Sisters - Non Wings\"."
   }
 ]
