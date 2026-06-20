@@ -1197,6 +1197,18 @@
       "price": 2,
       "expiry": "",
       "imagePath": "images/snowbear___3_for__5_1781915419853.jpg"
+    },
+    {
+      "id": "id_x5phgxlrg",
+      "name": "Sisters Napkin Non Wings",
+      "category": "Personal Care",
+      "cost": 37,
+      "units": 12,
+      "markup": 12,
+      "qty": 12,
+      "price": 5,
+      "expiry": "",
+      "imagePath": "images/sisters_napkin_non_wings_1781915956728.jpg"
     }
   ],
   "config": {
