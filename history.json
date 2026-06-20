@@ -1083,5 +1083,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: uploaded image."
+  },
+  {
+    "time": 1781915421589,
+    "name": "Snowbear - 3 for ₱5",
+    "type": "Copy",
+    "change": 49,
+    "notes": "Copied the metrics of Potchi - 3 for ₱5"
   }
 ]
