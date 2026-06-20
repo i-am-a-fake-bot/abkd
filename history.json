@@ -1181,5 +1181,12 @@
     "type": "Copy",
     "change": 3,
     "notes": "Copied the metrics of Milo"
+  },
+  {
+    "time": 1781918450327,
+    "name": "Milo",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: uploaded image."
   }
 ]
