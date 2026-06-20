@@ -1125,5 +1125,12 @@
     "type": "Copy",
     "change": 8,
     "notes": "Copied the metrics of Sisters - Non Wings"
+  },
+  {
+    "time": 1781916332318,
+    "name": "V-Cut Chips",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: uploaded image."
   }
 ]
