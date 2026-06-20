@@ -1149,6 +1149,18 @@
       "price": 11,
       "expiry": "",
       "imagePath": null
+    },
+    {
+      "id": "id_jldv2u6sa",
+      "name": "V-Cut Chips",
+      "category": "Meryenda",
+      "cost": 16,
+      "units": 1,
+      "markup": 12,
+      "qty": 2,
+      "price": 18,
+      "expiry": "",
+      "imagePath": null
     }
   ],
   "config": {
