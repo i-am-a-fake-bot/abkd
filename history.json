@@ -1020,5 +1020,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Saved item without changes."
+  },
+  {
+    "time": 1781914039129,
+    "name": "Marlboro - Blue",
+    "type": "Copy",
+    "change": 0,
+    "notes": "Copied the metrics of Marlboro - Red"
   }
 ]
