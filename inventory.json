@@ -1233,6 +1233,18 @@
       "price": 20,
       "expiry": "",
       "imagePath": "images/bioderm___pink_1781917450430.jpg"
+    },
+    {
+      "id": "id_hn9b8px6t",
+      "name": "Irish Spring",
+      "category": "Personal Care",
+      "cost": 17,
+      "units": 1,
+      "markup": 12,
+      "qty": 4,
+      "price": 20,
+      "expiry": "",
+      "imagePath": "images/irish_spring_1781917661487.jpg"
     }
   ],
   "config": {
