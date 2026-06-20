@@ -1161,6 +1161,18 @@
       "price": 18,
       "expiry": "",
       "imagePath": null
+    },
+    {
+      "id": "id_f2w8kpju9",
+      "name": "Mang Juan",
+      "category": "Meryenda",
+      "cost": 8,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 10,
+      "expiry": "",
+      "imagePath": null
     }
   ],
   "config": {
