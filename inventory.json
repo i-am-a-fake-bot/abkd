@@ -1221,6 +1221,18 @@
       "price": 7,
       "expiry": "",
       "imagePath": "images/those_days__all_nights____with_wings_1781916092066.jpg"
+    },
+    {
+      "id": "id_05rjdjtet",
+      "name": "Bioderm - Pink",
+      "category": "Personal Care",
+      "cost": 17,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 20,
+      "expiry": "",
+      "imagePath": "images/bioderm___pink_1781917450430.jpg"
     }
   ],
   "config": {
