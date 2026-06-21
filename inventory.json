@@ -1261,6 +1261,7 @@
   ],
   "config": {
     "storeName": "📦 Inventory",
-    "lowThreshold": 2
+    "lowThreshold": 2,
+    "theme": "dark"
   }
 }
