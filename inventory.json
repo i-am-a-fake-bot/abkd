@@ -1260,7 +1260,7 @@
     }
   ],
   "config": {
-    "storeName": "ABKD Inventory",
+    "storeName": "📦 Inventory",
     "lowThreshold": 2
   }
 }
