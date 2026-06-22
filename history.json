@@ -1244,5 +1244,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: renamed to \"Bawang\", uploaded image."
+  },
+  {
+    "time": 1782122203281,
+    "name": "Coco Mama - Gata",
+    "type": "Restock",
+    "change": 3,
+    "notes": "Bulk restock transaction."
   }
 ]
