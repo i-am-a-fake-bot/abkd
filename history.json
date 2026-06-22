@@ -1230,5 +1230,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: uploaded image."
+  },
+  {
+    "time": 1782122132348,
+    "name": "Sibuyas",
+    "type": "New Product",
+    "change": 10,
+    "notes": "Initial stock addition under category: Pantry. Expiry: N/A."
   }
 ]
