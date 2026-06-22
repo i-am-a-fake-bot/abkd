@@ -1259,6 +1259,18 @@
       "price": 12,
       "expiry": "",
       "imagePath": "images/energen_1781917880264.jpg"
+    },
+    {
+      "id": "id_q50d25k0x",
+      "name": "Sibuyas",
+      "category": "Pantry",
+      "cost": 75,
+      "units": 10,
+      "markup": 12,
+      "qty": 10,
+      "price": 10,
+      "expiry": "",
+      "imagePath": null
     }
   ],
   "config": {
