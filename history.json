@@ -1251,5 +1251,12 @@
     "type": "Restock",
     "change": 3,
     "notes": "Bulk restock transaction."
+  },
+  {
+    "time": 1782122279049,
+    "name": "Sibuyas",
+    "type": "Copy",
+    "change": 35,
+    "notes": "Copied the metrics of Bawang"
   }
 ]
