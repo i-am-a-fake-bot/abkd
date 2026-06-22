@@ -1237,5 +1237,12 @@
     "type": "New Product",
     "change": 10,
     "notes": "Initial stock addition under category: Pantry. Expiry: N/A."
+  },
+  {
+    "time": 1782122172964,
+    "name": "Bawang",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: renamed to \"Bawang\", uploaded image."
   }
 ]
