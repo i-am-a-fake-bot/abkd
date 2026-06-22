@@ -1262,7 +1262,7 @@
     },
     {
       "id": "id_q50d25k0x",
-      "name": "Sibuyas",
+      "name": "Bawang",
       "category": "Pantry",
       "cost": 75,
       "units": 10,
@@ -1270,7 +1270,7 @@
       "qty": 10,
       "price": 10,
       "expiry": "",
-      "imagePath": null
+      "imagePath": "images/bawang_1782122170734.jpg"
     }
   ],
   "config": {
