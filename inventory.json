@@ -1271,6 +1271,18 @@
       "price": 10,
       "expiry": "",
       "imagePath": "images/bawang_1782122170734.jpg"
+    },
+    {
+      "id": "id_d2l0s0bu7",
+      "name": "Sibuyas",
+      "category": "Pantry",
+      "cost": 75,
+      "units": 35,
+      "markup": 12,
+      "qty": 35,
+      "price": 5,
+      "expiry": "",
+      "imagePath": "images/sibuyas_1782122276952.jpg"
     }
   ],
   "config": {
