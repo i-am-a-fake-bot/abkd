@@ -1314,5 +1314,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱28.00."
+  },
+  {
+    "time": 1782201214231,
+    "name": "Pillows Choco-Filled",
+    "type": "Copy",
+    "change": 0,
+    "notes": "Copied the metrics of Piattos - Sour Cream & Onion"
   }
 ]
