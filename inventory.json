@@ -1458,9 +1458,9 @@
       "category": "Household",
       "cost": 36,
       "units": 3,
-      "markup": 3,
-      "qty": 0,
-      "price": 12.36,
+      "markup": 12,
+      "qty": 3,
+      "price": 15,
       "expiry": "",
       "imagePath": "images/lablast_laundry_bar_1782206438465.jpg"
     }
