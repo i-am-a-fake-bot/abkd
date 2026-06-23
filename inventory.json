@@ -1439,6 +1439,18 @@
       "price": 10,
       "expiry": "",
       "imagePath": "images/twist_o_super___apple_1782205955811.jpg"
+    },
+    {
+      "id": "id_tii2dm1dq",
+      "name": "Surf Powder",
+      "category": "Household",
+      "cost": 40.2,
+      "units": 6,
+      "markup": 12,
+      "qty": 6,
+      "price": 8,
+      "expiry": "",
+      "imagePath": "images/surf_powder_1782206196375.jpg"
     }
   ],
   "config": {
