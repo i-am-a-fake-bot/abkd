@@ -1356,5 +1356,12 @@
     "type": "Copy",
     "change": 8,
     "notes": "Copied the metrics of Birch Tree - Choco"
+  },
+  {
+    "time": 1782201705725,
+    "name": "Magic Flakes Crackers",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: uploaded image."
   }
 ]
