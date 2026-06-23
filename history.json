@@ -1552,5 +1552,12 @@
     "type": "Modified",
     "change": -3,
     "notes": "Modified attributes: stock adjusted from 5 to 2."
+  },
+  {
+    "time": 1782208653903,
+    "name": "Victoria - Segunda - 1/2",
+    "type": "Modified",
+    "change": 6,
+    "notes": "Modified attributes: price updated to ₱40.00, stock adjusted from 0 to 6."
   }
 ]
