@@ -1496,5 +1496,12 @@
     "type": "Copy",
     "change": 10,
     "notes": "Copied the metrics of Silver Swan - Toyo"
+  },
+  {
+    "time": 1782205916934,
+    "name": "Twist-O Super - Orange",
+    "type": "New Product",
+    "change": 10,
+    "notes": "Initial stock addition under category: Beverage. Expiry: N/A."
   }
 ]
