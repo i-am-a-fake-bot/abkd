@@ -1319,6 +1319,18 @@
       "price": 10,
       "expiry": "",
       "imagePath": "images/birch_tree_powdered_milk_1782201739254.jpg"
+    },
+    {
+      "id": "id_oxxew54ax",
+      "name": "Sunflower Strawberry Cream Crackers",
+      "category": "Meryenda",
+      "cost": 41.75,
+      "units": 7,
+      "markup": 12,
+      "qty": 7,
+      "price": 7,
+      "expiry": "",
+      "imagePath": null
     }
   ],
   "config": {
