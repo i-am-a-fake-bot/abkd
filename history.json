@@ -1342,5 +1342,12 @@
     "type": "Copy",
     "change": 10,
     "notes": "Copied the metrics of Skyflakes - Crackers"
+  },
+  {
+    "time": 1782201475930,
+    "name": "Fita - Crackers",
+    "type": "Modified",
+    "change": 2,
+    "notes": "Modified attributes: stock adjusted from 8 to 10."
   }
 ]
