@@ -1343,6 +1343,18 @@
       "price": 16,
       "expiry": "",
       "imagePath": "images/lucky_me___pancit_canton___chilimansi_1782204166207.jpg"
+    },
+    {
+      "id": "id_7y8q6f9xp",
+      "name": "Lucky Me - Pancit Canton - Sweet n Spicy",
+      "category": "Pantry",
+      "cost": 86.7,
+      "units": 6,
+      "markup": 12,
+      "qty": 6,
+      "price": 16,
+      "expiry": "2046-08-18",
+      "imagePath": "images/lucky_me___pancit_canton___sweet_n_spicy_1782204350479.jpg"
     }
   ],
   "config": {
