@@ -1489,5 +1489,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱18.00."
+  },
+  {
+    "time": 1782205628781,
+    "name": "Datu Puti - Suka",
+    "type": "Copy",
+    "change": 10,
+    "notes": "Copied the metrics of Silver Swan - Toyo"
   }
 ]
