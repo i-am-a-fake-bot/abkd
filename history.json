@@ -1377,5 +1377,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱12.00."
+  },
+  {
+    "time": 1782201858770,
+    "name": "Sunflower Strawberry Cream Crackers",
+    "type": "Copy",
+    "change": 7,
+    "notes": "Copied the metrics of Magic Flakes Crackers"
   }
 ]
