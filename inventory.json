@@ -1355,6 +1355,18 @@
       "price": 16,
       "expiry": "2046-08-18",
       "imagePath": "images/lucky_me___pancit_canton___sweet_n_spicy_1782204350479.jpg"
+    },
+    {
+      "id": "id_3qs3fjdzb",
+      "name": "Vcut Chips - Bbq",
+      "category": "Meryenda",
+      "cost": 16,
+      "units": 1,
+      "markup": 12,
+      "qty": 5,
+      "price": 18,
+      "expiry": "",
+      "imagePath": "images/vcut_chips___bbq_1782204614246.jpg"
     }
   ],
   "config": {
