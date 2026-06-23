@@ -1482,5 +1482,12 @@
     "type": "Copy",
     "change": 5,
     "notes": "Copied the metrics of Piattos - Sour Cream & Onion"
+  },
+  {
+    "time": 1782205506479,
+    "name": "Piattos - Sour Cream & Onion",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱18.00."
   }
 ]
