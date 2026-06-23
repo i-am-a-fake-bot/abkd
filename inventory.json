@@ -1427,6 +1427,18 @@
       "price": 10,
       "expiry": "",
       "imagePath": "images/twist_o_super___orange_1782205914282.jpg"
+    },
+    {
+      "id": "id_n9xj90tme",
+      "name": "Twist-O Super - Apple",
+      "category": "Beverage",
+      "cost": 75,
+      "units": 10,
+      "markup": 12,
+      "qty": 0,
+      "price": 10,
+      "expiry": "",
+      "imagePath": "images/twist_o_super___apple_1782205955811.jpg"
     }
   ],
   "config": {
