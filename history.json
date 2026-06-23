@@ -1461,5 +1461,12 @@
     "type": "Copy",
     "change": 5,
     "notes": "Copied the metrics of Vcut Chips - Cheese"
+  },
+  {
+    "time": 1782204962052,
+    "name": "Nova",
+    "type": "Copy",
+    "change": 5,
+    "notes": "Copied the metrics of Clover - Cheese"
   }
 ]
