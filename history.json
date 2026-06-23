@@ -1419,5 +1419,12 @@
     "type": "Modified",
     "change": 3,
     "notes": "Modified attributes: price updated to ₱16.00, stock adjusted from 3 to 6."
+  },
+  {
+    "time": 1782204353383,
+    "name": "Lucky Me - Pancit Canton - Sweet n Spicy",
+    "type": "Copy",
+    "change": 6,
+    "notes": "Copied the metrics of Lucky Me - Pancit Canton - Extra HOT"
   }
 ]
