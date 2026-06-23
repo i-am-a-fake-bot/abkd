@@ -1391,6 +1391,18 @@
       "price": 18,
       "expiry": "",
       "imagePath": "images/nova_1782205039020.jpg"
+    },
+    {
+      "id": "id_2w7t9z7r1",
+      "name": "Piattos - Cheese",
+      "category": "Meryenda",
+      "cost": 15.75,
+      "units": 1,
+      "markup": 12,
+      "qty": 5,
+      "price": 18,
+      "expiry": "",
+      "imagePath": "images/piattos___cheese_1782205492304.jpg"
     }
   ],
   "config": {
