@@ -1426,5 +1426,12 @@
     "type": "Copy",
     "change": 6,
     "notes": "Copied the metrics of Lucky Me - Pancit Canton - Extra HOT"
+  },
+  {
+    "time": 1782204389279,
+    "name": "Lucky Me - Pancit Canton - Extra HOT",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱16.18."
   }
 ]
