@@ -1475,5 +1475,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: uploaded image."
+  },
+  {
+    "time": 1782205495048,
+    "name": "Piattos - Cheese",
+    "type": "Copy",
+    "change": 5,
+    "notes": "Copied the metrics of Piattos - Sour Cream & Onion"
   }
 ]
