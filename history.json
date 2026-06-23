@@ -1510,5 +1510,12 @@
     "type": "Copy",
     "change": 0,
     "notes": "Copied the metrics of Twist-O Super - Orange"
+  },
+  {
+    "time": 1782205977410,
+    "name": "Twist-O Super - Apple",
+    "type": "Modified",
+    "change": 10,
+    "notes": "Modified attributes: stock adjusted from 0 to 10."
   }
 ]
