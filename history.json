@@ -1335,5 +1335,12 @@
     "type": "Modified",
     "change": 20,
     "notes": "Modified attributes: stock adjusted from 0 to 20."
+  },
+  {
+    "time": 1782201438376,
+    "name": "Magic Flakes Crackers",
+    "type": "Copy",
+    "change": 10,
+    "notes": "Copied the metrics of Skyflakes - Crackers"
   }
 ]
