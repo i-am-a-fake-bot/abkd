@@ -1391,5 +1391,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: uploaded image."
+  },
+  {
+    "time": 1782203910305,
+    "name": "Argentina - Corned beef",
+    "type": "Restock",
+    "change": 1,
+    "notes": "Bulk restock transaction."
   }
 ]
