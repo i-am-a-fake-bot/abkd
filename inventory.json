@@ -1451,6 +1451,18 @@
       "price": 8,
       "expiry": "",
       "imagePath": "images/surf_powder_1782206196375.jpg"
+    },
+    {
+      "id": "id_meu7ka2qh",
+      "name": "Lablast Laundry Bar",
+      "category": "Household",
+      "cost": 36,
+      "units": 3,
+      "markup": 3,
+      "qty": 0,
+      "price": 12.36,
+      "expiry": "",
+      "imagePath": "images/lablast_laundry_bar_1782206438465.jpg"
     }
   ],
   "config": {
