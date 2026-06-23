@@ -1412,5 +1412,12 @@
     "type": "Copy",
     "change": 6,
     "notes": "Copied the metrics of Lucky Me - Pancit Canton - Calamansi"
+  },
+  {
+    "time": 1782204253022,
+    "name": "Lucky Me - Pancit Canton - Calamansi",
+    "type": "Modified",
+    "change": 3,
+    "notes": "Modified attributes: price updated to ₱16.00, stock adjusted from 3 to 6."
   }
 ]
