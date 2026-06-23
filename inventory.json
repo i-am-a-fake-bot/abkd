@@ -1463,6 +1463,18 @@
       "price": 15,
       "expiry": "",
       "imagePath": "images/lablast_laundry_bar_1782206438465.jpg"
+    },
+    {
+      "id": "id_0zwzp07rh",
+      "name": "Alfonso - Light",
+      "category": "Beverage",
+      "cost": 270,
+      "units": 1,
+      "markup": 12,
+      "qty": 3,
+      "price": 300,
+      "expiry": "",
+      "imagePath": "images/alfonso___light_1782214980354.jpg"
     }
   ],
   "config": {
