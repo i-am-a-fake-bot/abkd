@@ -1295,6 +1295,18 @@
       "price": 10,
       "expiry": "",
       "imagePath": "images/pillows_choco_filled_1782201278418.jpg"
+    },
+    {
+      "id": "id_3droohue3",
+      "name": "Magic Flakes Crackers",
+      "category": "Meryenda",
+      "cost": 53.75,
+      "units": 10,
+      "markup": 12,
+      "qty": 10,
+      "price": 8,
+      "expiry": "",
+      "imagePath": null
     }
   ],
   "config": {
