@@ -1503,5 +1503,12 @@
     "type": "New Product",
     "change": 10,
     "notes": "Initial stock addition under category: Beverage. Expiry: N/A."
+  },
+  {
+    "time": 1782205958099,
+    "name": "Twist-O Super - Apple",
+    "type": "Copy",
+    "change": 0,
+    "notes": "Copied the metrics of Twist-O Super - Orange"
   }
 ]
