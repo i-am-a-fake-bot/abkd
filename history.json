@@ -1286,5 +1286,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱42.00."
+  },
+  {
+    "time": 1782200894691,
+    "name": "San Marino - Red",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱42.00."
   }
 ]
