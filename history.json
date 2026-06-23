@@ -1678,5 +1678,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: uploaded image."
+  },
+  {
+    "time": 1782214983131,
+    "name": "Alfonso - Light",
+    "type": "Copy",
+    "change": 3,
+    "notes": "Copied the metrics of Red Horse 1Liter"
   }
 ]
