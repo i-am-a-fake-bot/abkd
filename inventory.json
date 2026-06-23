@@ -1403,6 +1403,18 @@
       "price": 18,
       "expiry": "",
       "imagePath": "images/piattos___cheese_1782205492304.jpg"
+    },
+    {
+      "id": "id_nkiruqwj6",
+      "name": "Datu Puti - Suka",
+      "category": "Pantry",
+      "cost": 82.5,
+      "units": 10,
+      "markup": 12,
+      "qty": 10,
+      "price": 10,
+      "expiry": "",
+      "imagePath": "images/datu_puti___suka_1782205626147.jpg"
     }
   ],
   "config": {
