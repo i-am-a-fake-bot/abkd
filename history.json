@@ -1405,5 +1405,12 @@
     "type": "Restock",
     "change": 1,
     "notes": "Bulk restock transaction."
+  },
+  {
+    "time": 1782204170294,
+    "name": "Lucky Me - Pancit Canton - Chilimansi",
+    "type": "Copy",
+    "change": 6,
+    "notes": "Copied the metrics of Lucky Me - Pancit Canton - Calamansi"
   }
 ]
