@@ -1291,10 +1291,10 @@
       "cost": 85,
       "units": 10,
       "markup": 12,
-      "qty": 0,
+      "qty": 10,
       "price": 10,
       "expiry": "",
-      "imagePath": null
+      "imagePath": "images/pillows_choco_filled_1782201278418.jpg"
     }
   ],
   "config": {
