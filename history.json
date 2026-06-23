@@ -1370,5 +1370,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱10.00, uploaded image."
+  },
+  {
+    "time": 1782201768049,
+    "name": "Birch Tree - Choco",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱12.00."
   }
 ]
