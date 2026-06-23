@@ -1384,5 +1384,12 @@
     "type": "Copy",
     "change": 7,
     "notes": "Copied the metrics of Magic Flakes Crackers"
+  },
+  {
+    "time": 1782201877345,
+    "name": "Sunflower Strawberry Cream Crackers",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: uploaded image."
   }
 ]
