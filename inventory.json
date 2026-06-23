@@ -1307,6 +1307,18 @@
       "price": 8,
       "expiry": "",
       "imagePath": null
+    },
+    {
+      "id": "id_4770fkai8",
+      "name": "Birch Tree Powdered Milk",
+      "category": "Beverage",
+      "cost": 9,
+      "units": 1,
+      "markup": 12,
+      "qty": 8,
+      "price": 12,
+      "expiry": "",
+      "imagePath": null
     }
   ],
   "config": {
