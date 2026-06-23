@@ -1349,5 +1349,12 @@
     "type": "Modified",
     "change": 2,
     "notes": "Modified attributes: stock adjusted from 8 to 10."
+  },
+  {
+    "time": 1782201525873,
+    "name": "Birch Tree Powdered Milk",
+    "type": "Copy",
+    "change": 8,
+    "notes": "Copied the metrics of Birch Tree - Choco"
   }
 ]
