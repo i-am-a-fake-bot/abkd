@@ -1415,6 +1415,18 @@
       "price": 10,
       "expiry": "",
       "imagePath": "images/datu_puti___suka_1782205626147.jpg"
+    },
+    {
+      "id": "id_0s8yk0ihy",
+      "name": "Twist-O Super - Orange",
+      "category": "Beverage",
+      "cost": 75,
+      "units": 10,
+      "markup": 12,
+      "qty": 10,
+      "price": 10,
+      "expiry": "",
+      "imagePath": "images/twist_o_super___orange_1782205914282.jpg"
     }
   ],
   "config": {
