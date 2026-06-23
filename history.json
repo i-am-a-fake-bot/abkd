@@ -1559,5 +1559,12 @@
     "type": "Modified",
     "change": 6,
     "notes": "Modified attributes: price updated to ₱40.00, stock adjusted from 0 to 6."
+  },
+  {
+    "time": 1782208794617,
+    "name": "Mantika - 1 Bote",
+    "type": "Modified",
+    "change": 11,
+    "notes": "Modified attributes: price updated to ₱35.00, stock adjusted from 1 to 12."
   }
 ]
