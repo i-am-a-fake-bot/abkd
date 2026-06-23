@@ -1279,5 +1279,12 @@
     "type": "Restock",
     "change": 1,
     "notes": "Bulk restock transaction."
+  },
+  {
+    "time": 1782200812086,
+    "name": "San Marino - Chili",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱42.00."
   }
 ]
