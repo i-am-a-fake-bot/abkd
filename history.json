@@ -1258,5 +1258,12 @@
     "type": "Copy",
     "change": 35,
     "notes": "Copied the metrics of Bawang"
+  },
+  {
+    "time": 1782200549708,
+    "name": "Century Tuna - Spicy",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱42.00."
   }
 ]
