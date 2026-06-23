@@ -1293,5 +1293,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱42.00."
+  },
+  {
+    "time": 1782200921951,
+    "name": "Argentina - Corned beef",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱42.00."
   }
 ]
