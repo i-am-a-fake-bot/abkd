@@ -1545,5 +1545,12 @@
     "type": "Modified",
     "change": 3,
     "notes": "Modified attributes: stock adjusted from 2 to 5."
+  },
+  {
+    "time": 1782206544812,
+    "name": "Vcut Chips - Cheese",
+    "type": "Modified",
+    "change": -3,
+    "notes": "Modified attributes: stock adjusted from 5 to 2."
   }
 ]
