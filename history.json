@@ -1447,5 +1447,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: renamed to \"Vcut Chips - Cheese\"."
+  },
+  {
+    "time": 1782204616963,
+    "name": "Vcut Chips - Bbq",
+    "type": "Copy",
+    "change": 5,
+    "notes": "Copied the metrics of Vcut Chips - Cheese"
   }
 ]
