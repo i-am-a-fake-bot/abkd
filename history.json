@@ -1433,5 +1433,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱16.18."
+  },
+  {
+    "time": 1782204421767,
+    "name": "Lucky Me - Pancit Canton - Kalamansi",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: renamed to \"Lucky Me - Pancit Canton - Kalamansi\"."
   }
 ]
