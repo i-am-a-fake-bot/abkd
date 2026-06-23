@@ -1367,6 +1367,18 @@
       "price": 18,
       "expiry": "",
       "imagePath": "images/vcut_chips___bbq_1782204614246.jpg"
+    },
+    {
+      "id": "id_gxxu5372g",
+      "name": "Clover - Cheese",
+      "category": "Meryenda",
+      "cost": 7.5,
+      "units": 1,
+      "markup": 12,
+      "qty": 5,
+      "price": 10,
+      "expiry": "",
+      "imagePath": "images/clover___cheese_1782204807527.jpg"
     }
   ],
   "config": {
