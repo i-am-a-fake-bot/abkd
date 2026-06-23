@@ -1300,5 +1300,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱42.00."
+  },
+  {
+    "time": 1782201060079,
+    "name": "Mega Sardines - Green",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱28.00."
   }
 ]
