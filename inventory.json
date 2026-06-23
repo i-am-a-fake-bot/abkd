@@ -1379,6 +1379,18 @@
       "price": 10,
       "expiry": "",
       "imagePath": "images/clover___cheese_1782204807527.jpg"
+    },
+    {
+      "id": "id_vv1ek5ksv",
+      "name": "Nova",
+      "category": "Meryenda",
+      "cost": 15.75,
+      "units": 1,
+      "markup": 12,
+      "qty": 5,
+      "price": 18,
+      "expiry": "",
+      "imagePath": null
     }
   ],
   "config": {
