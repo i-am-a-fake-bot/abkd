@@ -1331,6 +1331,18 @@
       "price": 7,
       "expiry": "",
       "imagePath": "images/sunflower_strawberry_cream_crackers_1782201875060.jpg"
+    },
+    {
+      "id": "id_jx1qctrx6",
+      "name": "Lucky Me - Pancit Canton - Chilimansi",
+      "category": "Pantry",
+      "cost": 86.7,
+      "units": 6,
+      "markup": 12,
+      "qty": 6,
+      "price": 16,
+      "expiry": "",
+      "imagePath": "images/lucky_me___pancit_canton___chilimansi_1782204166207.jpg"
     }
   ],
   "config": {
