@@ -1265,5 +1265,19 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱42.00."
+  },
+  {
+    "time": 1782200735657,
+    "name": "Century Tuna - Spicy",
+    "type": "Restock",
+    "change": 1,
+    "notes": "Bulk restock transaction."
+  },
+  {
+    "time": 1782200742269,
+    "name": "Century Tuna - Spicy",
+    "type": "Restock",
+    "change": 1,
+    "notes": "Bulk restock transaction."
   }
 ]
