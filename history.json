@@ -1699,5 +1699,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: uploaded image."
+  },
+  {
+    "time": 1782297695098,
+    "name": "Bawang",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱9.00."
   }
 ]
