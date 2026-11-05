@@ -1706,5 +1706,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱9.00."
+  },
+  {
+    "time": 1793878600506,
+    "name": "Ligo Sardines - Green",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱28.00."
   }
 ]
