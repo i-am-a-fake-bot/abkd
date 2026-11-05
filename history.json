@@ -1720,5 +1720,12 @@
     "type": "Modified",
     "change": 0,
     "notes": "Modified attributes: price updated to ₱28.00."
+  },
+  {
+    "time": 1793878743463,
+    "name": "Red Horse 1Liter",
+    "type": "Modified",
+    "change": 0,
+    "notes": "Modified attributes: price updated to ₱135.00."
   }
 ]
